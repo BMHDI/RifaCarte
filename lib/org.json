@@ -1,0 +1,256 @@
+[{
+  "id": "org_11",
+  "name": "Francophonie Albertaine Plurielle (FRAP)",
+  "category": "Immigration",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "info@frap.ca",
+    "phone": "7805408682",
+    "website": "https://frap.ca"
+  },
+  "services": [
+    "accueil des nouveaux arrivants",
+    "aide à l'établissement",
+    "orientation communautaire",
+    "référencement vers services"
+  ],
+  "keywords": [
+    "immigration",
+    "nouveaux arrivants",
+    "installation",
+    "documents",
+    "services francophones"
+  ],
+  "audience": [
+    "immigrants",
+    "réfugiés",
+    "travailleurs qualifiés"
+  ],
+  "chatbotTriggers": [
+    "je viens d'arriver au canada",
+    "aide pour s'installer",
+    "services pour immigrants",
+    "où aller en arrivant"
+  ],
+  "map": {
+    "lat": 53.5194,
+    "lng": -113.4689
+  }
+}
+,
+{
+  "id": "org_12",
+  "name": "Réseau Santé Albertain (RSA)",
+  "category": "Santé",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "info@rsa-ab.ca",
+    "phone": "7804669816",
+    "website": "https://rsa-ab.ca"
+  },
+  "services": [
+    "orientation vers services de santé en français",
+    "sensibilisation",
+    "réseautage communautaire",
+    "information santé"
+  ],
+  "keywords": [
+    "médecin en français",
+    "clinique",
+    "santé mentale",
+    "soins",
+    "hôpital"
+  ],
+  "audience": [
+    "francophones",
+    "familles",
+    "aînés"
+  ],
+  "chatbotTriggers": [
+    "je cherche un médecin en français",
+    "besoin d'un docteur",
+    "services de santé en français",
+    "aide santé"
+  ],
+  "map": {
+    "lat": 53.5201,
+    "lng": -113.4702
+  }
+}
+,
+{
+  "id": "org_13",
+  "name": "Coalition des femmes de l’Alberta",
+  "category": "Femmes",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "infos@coalitionfemmesab.ca",
+    "phone": "7804682288",
+    "website": "https://coalitionfemmesab.ca"
+  },
+  "services": [
+    "ateliers de développement personnel",
+    "mentorat",
+    "réseautage professionnel",
+    "soutien communautaire"
+  ],
+  "keywords": [
+    "femmes",
+    "mentorat",
+    "violence",
+    "leadership",
+    "intégration"
+  ],
+  "audience": [
+    "femmes francophones",
+    "nouvelles arrivantes"
+  ],
+  "chatbotTriggers": [
+    "services pour femmes",
+    "aide pour femmes",
+    "groupes de soutien femmes",
+    "mentorat pour femmes"
+  ],
+  "map": {
+    "lat": 53.5179,
+    "lng": -113.4628
+  }
+}
+,
+{
+  "id": "org_14",
+  "name": "Association des juristes d’expression française de l’Alberta (AJEFA)",
+  "category": "Justice",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "bureau@ajefa.ca",
+    "phone": "7804502443",
+    "website": "https://ajefa.ca"
+  },
+  "services": [
+    "information juridique en français",
+    "référencement vers avocats",
+    "cliniques juridiques",
+    "ateliers d'information"
+  ],
+  "keywords": [
+    "avocat",
+    "droits",
+    "immigration",
+    "famille",
+    "justice en français"
+  ],
+  "audience": [
+    "francophones",
+    "nouveaux arrivants",
+    "familles"
+  ],
+  "chatbotTriggers": [
+    "j'ai besoin d'un avocat",
+    "aide juridique en français",
+    "problème légal",
+    "droits des immigrants"
+  ],
+  "map": {
+    "lat": 53.5187,
+    "lng": -113.4695
+  }
+}
+,
+{
+  "id": "org_15",
+  "name": "Regroupement artistique francophone de l’Alberta (RAFA)",
+  "category": "Culture",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "info@lerafa.ca",
+    "phone": "7804620502",
+    "website": "https://lerafa.ca"
+  },
+  "services": [
+    "soutien aux artistes",
+    "diffusion culturelle",
+    "organisation d'événements",
+    "formation artistique"
+  ],
+  "keywords": [
+    "arts",
+    "spectacles",
+    "musique",
+    "théâtre",
+    "culture francophone"
+  ],
+  "audience": [
+    "artistes",
+    "grand public",
+    "jeunes"
+  ],
+  "chatbotTriggers": [
+    "événements culturels",
+    "spectacles en français",
+    "arts francophones",
+    "activités culturelles"
+  ],
+  "map": {
+    "lat": 53.5168,
+    "lng": -113.4683
+  }
+}
+,
+{
+  "id": "org_16",
+  "name": "Fédération des aînés franco-albertains (FAFA)",
+  "category": "Aînés",
+  "location": {
+    "city": "Edmonton",
+    "province": "AB"
+  },
+  "contacts": {
+    "email": "fafa@fafalta.ca",
+    "phone": "7804658965",
+    "website": "https://fafalta.ca"
+  },
+  "services": [
+    "activités sociales",
+    "information et soutien",
+    "programmes de bien-être",
+    "représentation des aînés"
+  ],
+  "keywords": [
+    "aînés",
+    "personnes âgées",
+    "isolement",
+    "activités sociales",
+    "soutien"
+  ],
+  "audience": [
+    "aînés francophones",
+    "proches aidants"
+  ],
+  "chatbotTriggers": [
+    "services pour personnes âgées",
+    "activités pour aînés",
+    "aide pour parents âgés",
+    "soutien aux aînés"
+  ],
+  "map": {
+    "lat": 53.5198,
+    "lng": -113.4711
+  }
+}
+]
