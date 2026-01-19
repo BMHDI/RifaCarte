@@ -26,17 +26,8 @@ export default function RootLayout({
 
         <SidebarProvider>
           <AppSidebar />
- <SidebarTrigger
-            className="
-    fixed z-50
-    bottom-16 right-8     
-    md:top-8 md:left-8 
-  "
-          />
           {/* MAIN CONTENT */}
           <SidebarInset>{children}</SidebarInset>
-
-         
         </SidebarProvider>
       </body>
     </html>

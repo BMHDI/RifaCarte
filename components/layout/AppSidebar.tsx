@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Home, Search, Heart } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -18,7 +18,6 @@ import { OrgSearch } from "../filters/OrgSearch";
 
 const items = [
   { title: "Chatbot", url: "#", icon: Home },
-  { title: "Search", url: "#", icon: Search },
   { title: "Saved", url: "#", icon: Heart },
 ];
 
@@ -32,17 +31,16 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="md:w-160">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel> Trouve un service </SidebarGroupLabel>
-
           {/* Trigger toggles the sidebar open/collapsed */}
           {isMobile ? (
             <SidebarTrigger>Close</SidebarTrigger>
           ) : (
             <SidebarTrigger onClick={toggleSidebar} />
           )}
+          <SidebarGroupLabel> Trouve un service </SidebarGroupLabel>
 
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu  >
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
