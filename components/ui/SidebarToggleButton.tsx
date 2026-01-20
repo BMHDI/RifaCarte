@@ -1,21 +1,34 @@
+"use client"
+
 import { Button } from "./button"
 import { useSidebar } from "./sidebar"
+import { Search, X } from "lucide-react"
+
 export function SidebarToggleButton() {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, state } = useSidebar()
+
+  const isCollapsed = state === "collapsed"
 
   return (
     <Button
       onClick={toggleSidebar}
+      size="icon"
       className="
-        fixed bottom-6 right-6 z-50
-        w-16 h-16 rounded-full
-        bg-blue-600 text-white shadow-xl
-        flex justify-center items-center
-        hover:bg-blue-700 transform hover:scale-105 transition-transform duration-200
-        md:hidden
+        absolute
+        top-2
+        -right-12
+        z-50
+        h-10 w-10 rounded-full
+        shadow-lg
+        hidden md:flex
       "
+      aria-label={isCollapsed ? "Ouvrir" : "Fermer"}
     >
-      ☰
+      {isCollapsed ? (
+        <Search className="h-5 w-5" />
+      ) : (
+        <X className="h-5 w-5" />
+      )}
     </Button>
   )
 }

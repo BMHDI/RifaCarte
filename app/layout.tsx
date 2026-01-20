@@ -22,12 +22,13 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="h-svh w-svw overflow-hidden ">
-        <Header />
+      <Header />
 
         <SidebarProvider>
           <AppSidebar />
           {/* MAIN CONTENT */}
-          <SidebarInset>{children}</SidebarInset>
+          <SidebarInset className=" ">       
+{children}</SidebarInset>
         </SidebarProvider>
       </body>
     </html>

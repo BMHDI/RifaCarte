@@ -7,15 +7,15 @@ import {
   NavigationMenuLink,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
+import Logo from "@/public/assets/logo.svg"
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo / Title */}
-        <h1 className="text-xl font-bold text-gray-900">
-          Alberta Organizations Directory
-        </h1>
+   LOGO
+       
 
         {/* Navigation Menu */}
         <NavigationMenu>

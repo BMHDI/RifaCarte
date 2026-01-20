@@ -10,12 +10,10 @@ import { MapPin } from 'lucide-react';
 export function MapView() {
   const [viewState, setViewState] = useState({
     longitude:-113.4711,
-    
     latitude:   53.5198,
     zoom: 14,
   })
-
-  const [selectedOrg, setSelectedOrg] = useState<any>(null) // will create a ty
+  const [selectedOrg, setSelectedOrg] = useState<any>(null) // will create a type
 
   return (
     <div style={{ width: "100vw", height: "100%" }}>
@@ -40,7 +38,7 @@ export function MapView() {
               setSelectedOrg(org)
             }}
           >
-          <MapPin/>
+          <MapPin size={40}/>
           </Marker>
         ))}
 

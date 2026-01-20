@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Search, Heart } from "lucide-react";
+import { Home, Heart, Bot, List } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Sidebar,
@@ -15,46 +15,57 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { OrgSearch } from "../filters/OrgSearch";
-
-const items = [
-  { title: "Chatbot", url: "#", icon: Home },
-  { title: "Saved", url: "#", icon: Heart },
-];
+import { SidebarToggleButton } from "../ui/SidebarToggleButton";
+import { AIConversationMock } from "../ui/AIConversationMock";
+import { useState } from "react";
 
 export function AppSidebar() {
   const isMobile = useIsMobile();
+  const { state } = useSidebar();
 
-  // 🔥 Get sidebar context
-  const { state, open, toggleSidebar } = useSidebar();
+  // Track active menu content
+  const [activeTab, setActiveTab] = useState<"search" | "ai">("search");
+
+  const menuItems = [
+    { title: "List des organismes", key: "search", icon: List },
+    { title: "Conversation AI", key: "ai", icon: Bot },
+  ];
 
   return (
-    <Sidebar collapsible="icon" className="md:w-160">
+    <Sidebar collapsible="icon" className="md:w-160 relative">
+      {isMobile ? <SidebarTrigger /> : <SidebarToggleButton />}
+
       <SidebarContent>
         <SidebarGroup>
-          {/* Trigger toggles the sidebar open/collapsed */}
-          {isMobile ? (
-            <SidebarTrigger>Close</SidebarTrigger>
-          ) : (
-            <SidebarTrigger onClick={toggleSidebar} />
-          )}
-          <SidebarGroupLabel> Trouve un service </SidebarGroupLabel>
-
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu  >
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+            <SidebarMenu >
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.key}>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={() => setActiveTab(item.key as "search" | "ai")}
+                  >
+                    <button
+                      className={`flex items-center gap-2 w-full text-left ${
+                        activeTab === item.key ? "font-bold text-red-800" : ""
+                      }`}
+                    >
                       <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+                      {item.title}
+                    </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
 
-            {/* Render OrgSearch only if sidebar is expanded */}
-            {state === "expanded" && <OrgSearch />}
+            {/* Render the content of the selected menu item */}
+            {(state === "expanded" || isMobile) && (
+              <div className="mt-4">
+                {activeTab === "search" && <OrgSearch />}
+                {activeTab === "ai" && <AIConversationMock />}
+              </div>
+            )}
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
