@@ -10,6 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 
 import { Check, ChevronDown } from "lucide-react";
+import { Badge } from "../ui/badge";
 
 // normalisation : minuscules + enlever accents
 const normalize = (text: string) =>
@@ -60,54 +61,39 @@ export function OrgSearch() {
     setSelectedCities((prev) =>
       prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
     );
-  }
+  };
 
-    // 🔹 SAME LOGIC + category filter added
-    const filteredOrgs = organizations.filter((org) => {
-      // ----- text logic (UNCHANGED) -----
-      let textMatch = true;
+  // 🔹 SAME LOGIC + category filter added
+  const filteredOrgs = organizations.filter((org) => {
+    // ----- text logic (UNCHANGED) -----
+    let textMatch = true;
 
-      if (query) {
-        const queryWords = normalize(query)
-          .split(/\s+/)
-          .filter((w) => w && !stopWords.includes(w));
+    if (query) {
+      const queryWords = normalize(query)
+        .split(/\s+/)
+        .filter((w) => w && !stopWords.includes(w));
 
-        if (queryWords.length === 0) return false;
+      if (queryWords.length === 0) return false;
 
-        textMatch = queryWords.some((word) =>
-          org.keywords.some((k) => normalize(k).includes(word)),
-        );
-      }
+      textMatch = queryWords.some((word) =>
+        org.keywords.some((k) => normalize(k).includes(word)),
+      );
+    }
 
-      // ----- category filter (UNCHANGED) -----
-      const categoryMatch =
-        selectedCategories.length === 0 ||
-        selectedCategories.includes(org.category);
+    // ----- category filter (UNCHANGED) -----
+    const categoryMatch =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(org.category);
 
-      // ----- city filter (UNCHANGED) -----
-      const cityMatch =
-        selectedCities.length === 0 ||
-        selectedCities.includes(org.location.city);
+    // ----- city filter (UNCHANGED) -----
+    const cityMatch =
+      selectedCities.length === 0 || selectedCities.includes(org.location.city);
 
-      return textMatch && categoryMatch && cityMatch;
+    return textMatch && categoryMatch && cityMatch;
+  });
 
-      // ----- category filter (NEW) -----
-      // const categoryMatch =
-      //   selectedCategories.length === 0 ||
-      //   selectedCategories.includes(org.category);
-
-      // // ----- city filter (NEW) -----
-      // const cityMatch =
-      //   selectedCities.length === 0 ||
-      //   selectedCities.includes(org.location.city);
-    
-
-      // return textMatch && categoryMatch  && cityMatch;
-    });
-    
-  
-
-    return (
+  return (
+    <div>
       <div className="flex flex-col h-[70vh] border rounded-md p-2 bg-gray-50">
         <div className="flex-1 overflow-y-auto mb-2 space-y-2">
           {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
@@ -182,22 +168,56 @@ export function OrgSearch() {
             </PopoverContent>
           </Popover>
         </div>
-        {/* optional: show selected */}
-        <div className="mt-2">
-          {selectedCategories.length > 0 && (
-            <p className="text-sm text-muted-foreground">
-              Categories choisies : {selectedCategories.join(", ")}
-            </p>
-          )}
-        </div>
-         <div className="mt-2">
-          {selectedCities.length > 0 && (
-            <p className="text-sm text-muted-foreground">
-              Villes choisies : {selectedCities.join(", ")}
-            </p>
-          )}
-        </div>
       </div>
-    )
-  }
 
+      {/* ✅ SAME STYLING — button becomes dropdown */}
+      <div className="m-6 flex flex-col flex-wrap items-start gap-2 ">
+        {selectedCategories.length > 0 || selectedCities.length > 0 ? (
+          <>
+            {selectedCategories.length > 0 && (
+              <>
+                <div className="flex flex-row flex-wrap items-start gap-2 ">
+                  <span className="text-sm font-medium">
+                    Catégories choisies:
+                  </span>
+                  {selectedCategories.map((c) => (
+                    <Badge
+                      key={`cat-${c}`}
+                      variant="secondary"
+                      className="rounded-full cursor-pointer"
+                      onClick={() => toggleCategory(c)}
+                    >
+                      {c} ✕
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {selectedCities.length > 0 && (
+              <>
+                <div className="flex flex-row flex-wrap items-start gap-2 ">
+                  <span className="text-sm font-medium">Villes choisies:</span>
+                  {selectedCities.map((c) => (
+                    <Badge
+                      key={`city-${c}`}
+                      variant="secondary"
+                      className="rounded-full cursor-pointer"
+                      onClick={() => toggleCity(c)}
+                    >
+                      {c} ✕
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <p className="text-md text-gray-900 m-2">
+            Utilisez le bouton filtres pour choisir la ville ou la catégorie
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
