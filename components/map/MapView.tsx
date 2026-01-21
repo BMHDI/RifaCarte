@@ -1,6 +1,6 @@
 "use client"
 
-import Map, { NavigationControl, Marker, Popup, Source, Layer } from "react-map-gl/mapbox"
+import Map, { NavigationControl, Marker, Popup, Source, Layer, LayerProps } from "react-map-gl/mapbox"
 import "mapbox-gl/dist/mapbox-gl.css"
 import { useState } from "react"
 import organizations from "@/lib/org.json"
@@ -10,7 +10,7 @@ import { MapPin } from 'lucide-react'
 import francophoneRegions from "@/lib/francophone-regions.json"
 
 // ✅ Layer styles
-const regionFill: Layer = {
+const regionFill: LayerProps = {
   id: "regions-fill",
   type: "fill",
   paint: {
@@ -19,7 +19,7 @@ const regionFill: Layer = {
   }
 }
 
-const regionBorder: Layer = {
+const regionBorder: LayerProps = {
   id: "regions-border",
   type: "line",
   paint: {
@@ -27,7 +27,7 @@ const regionBorder: Layer = {
     "line-width": 2
   }
 }
-const regionLabels: Layer = {
+const regionLabels: LayerProps = {
   id: "regions-label",
   type: "symbol",
   layout: {
@@ -63,7 +63,7 @@ export function MapView() {
         <NavigationControl position="top-right" />
 
         {/* ✅ Add the Francophone regions */}
-        <Source id="francophone-regions" type="geojson" data={francophoneRegions}>
+        <Source id="francophone-regions" type="geojson" data={{ type: "FeatureCollection", features: francophoneRegions.features }}>
           <Layer {...regionFill} />
           <Layer {...regionBorder} />
           <Layer {...regionLabels} />
