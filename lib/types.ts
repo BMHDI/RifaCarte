@@ -4,6 +4,7 @@ declare module 'react-map-gl' {
     type: string;
     paint?: Record<string, any>;
     layout?: Record<string, any>;
-    // Add other properties as needed
+    data?: any;
+
   }
 }

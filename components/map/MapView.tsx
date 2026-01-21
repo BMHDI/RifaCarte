@@ -63,7 +63,7 @@ export function MapView() {
         <NavigationControl position="top-right" />
 
         {/* ✅ Add the Francophone regions */}
-        <Source id="francophone-regions" type="geojson" data={{ type: "FeatureCollection", features: francophoneRegions.features }}>
+        <Source id="francophone-regions" type="geojson" data={{ type: "FeatureCollection", features: francophoneRegions.features as any[] }}>
           <Layer {...regionFill} />
           <Layer {...regionBorder} />
           <Layer {...regionLabels} />
