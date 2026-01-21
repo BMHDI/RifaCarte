@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "FrancoSud",
+        "description": "Southern Alberta: Calgary, Lethbridge, Brooks, Medicine Hat"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-120.0, 49.0],
+          [-110.0, 49.0],
+          [-110.0, 51.2],
+          [-120.0, 51.2],
+          [-120.0, 49.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Centre-Nord",
+        "description": "Central Alberta: Edmonton, Red Deer, St. Albert"
+      },
+      "geometry": {
+        "type": "Polygon",
+         "coordinates": [[
+      [-120.0, 51.2],
+      [-115.0, 51.2],
+      [-115.0, 53.8],
+      [-120.0, 53.8],
+      [-120.0, 51.2]
+    ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Centre-Est",
+        "description": "East Alberta: St. Paul, Bonnyville, Cold Lake, Lac La Biche"
+      },
+      "geometry": {
+        "type": "Polygon",
+       "coordinates": [[
+      [-115.0, 51.2],
+      [-110.0, 51.2],
+      [-110.0, 53.8], 
+      [-115.0, 53.8],
+      [-115.0, 51.2]
+    ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nord-Ouest",
+        "description": "Northern Alberta: Grande Prairie, Peace River, Falher"
+      },
+      "geometry": {
+        "type": "Polygon",
+         "coordinates": [[
+      [-120.0, 53.8], 
+      [-110.0, 53.8],
+      [-110.0, 60.0],
+      [-120.0, 60.0],
+      [-120.0, 53.8]
+    ]]
+      }
+    }
+  ]
+}
