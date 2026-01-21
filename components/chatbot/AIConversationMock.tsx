@@ -43,14 +43,15 @@ export function AIConversationMock() {
       </div>
 
       {/* Input area */}
-      <div className="flex gap-2">
+      <div className="flex">
         <Input
+                      className="rounded-r-none"
           placeholder="Écrivez votre message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
-        <Button onClick={sendMessage}>Envoyer</Button>
+          <Button variant="default" className="rounded-l-none" onClick={sendMessage}>Envoyer</Button>
       </div>
     </div>
   )

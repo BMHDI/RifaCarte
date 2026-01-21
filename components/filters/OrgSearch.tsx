@@ -1,62 +1,203 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import organizations from "@/lib/org.json"
+import { useState, useMemo } from "react";
+import organizations from "@/lib/org.json";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+
+import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
+
+import { Check, ChevronDown } from "lucide-react";
 
 // normalisation : minuscules + enlever accents
 const normalize = (text: string) =>
   text
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u0300-\u036f]/g, "");
 
-const stopWords = ["pour", "les", "de", "du", "des", "la", "le", "un", "une", "et"]
+const stopWords = [
+  "pour",
+  "les",
+  "de",
+  "du",
+  "des",
+  "la",
+  "le",
+  "un",
+  "une",
+  "et",
+];
 
 export function OrgSearch() {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+  const [open, setOpen] = useState(false);
 
-  // 🔹 Filtrage OR logique
-  const filteredOrgs = organizations.filter((org) => {
-    if (!query) return true
+  // ✅ unique categories
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    organizations.forEach((o) => set.add(o.category));
+    return Array.from(set).sort();
+  }, []);
 
-    // Découpe la query en mots, supprime les stopwords
-    const queryWords = normalize(query)
-      .split(/\s+/)
-  .filter((w) => w && !stopWords.includes(w)) // remove empty strings + stopwords
+  // ✅ unique cities
+  const cities = useMemo(() => {
+    const set = new Set<string>();
+    organizations.forEach((o) => set.add(o.location.city));
+    return Array.from(set).sort();
+  }, []);
 
-    if (queryWords.length === 0) return false
+  const toggleCategory = (cat: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
+    );
+  };
+  const toggleCity = (city: string) => {
+    setSelectedCities((prev) =>
+      prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
+    );
+  }
 
-    // ✅ Retourne vrai si AU MOINS un mot de la query est inclus dans les keywords
-    return queryWords.some((word) =>
-      org.keywords.some((k) => normalize(k).includes(word))
-    )
-  })
+    // 🔹 SAME LOGIC + category filter added
+    const filteredOrgs = organizations.filter((org) => {
+      // ----- text logic (UNCHANGED) -----
+      let textMatch = true;
 
-  return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h2 className="text-lg font-semibold mb-2">Rechercher un organisme par mot-clé</h2>
+      if (query) {
+        const queryWords = normalize(query)
+          .split(/\s+/)
+          .filter((w) => w && !stopWords.includes(w));
 
-      <input
-        type="text"
-        value={query}
-        placeholder="Tapez un mot-clé, ex: santé, emploi..."
-        onChange={(e) => setQuery(e.target.value)}
-        className="border rounded p-2 w-full mb-4"
-      />
+        if (queryWords.length === 0) return false;
 
-      {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
+        textMatch = queryWords.some((word) =>
+          org.keywords.some((k) => normalize(k).includes(word)),
+        );
+      }
 
-      <ul>
-        {filteredOrgs.map((org) => (
-          <li key={org.id} className="border-b py-2">
-            <p className="font-medium">{org.name}</p>
-            <p className="text-sm text-gray-600">{org.category}</p>
-            <p className="text-sm">
-              Mots-clés : {org.keywords.join(", ")}
+      // ----- category filter (UNCHANGED) -----
+      const categoryMatch =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(org.category);
+
+      // ----- city filter (UNCHANGED) -----
+      const cityMatch =
+        selectedCities.length === 0 ||
+        selectedCities.includes(org.location.city);
+
+      return textMatch && categoryMatch && cityMatch;
+
+      // ----- category filter (NEW) -----
+      // const categoryMatch =
+      //   selectedCategories.length === 0 ||
+      //   selectedCategories.includes(org.category);
+
+      // // ----- city filter (NEW) -----
+      // const cityMatch =
+      //   selectedCities.length === 0 ||
+      //   selectedCities.includes(org.location.city);
+    
+
+      // return textMatch && categoryMatch  && cityMatch;
+    });
+    
+  
+
+    return (
+      <div className="flex flex-col h-[70vh] border rounded-md p-2 bg-gray-50">
+        <div className="flex-1 overflow-y-auto mb-2 space-y-2">
+          {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
+
+          <ul>
+            {filteredOrgs.map((org) => (
+              <li key={org.id} className="border-b py-2">
+                <p className="font-medium">{org.name}</p>
+                <p className="text-sm text-gray-600">{org.category}</p>
+                <p className="text-sm">Mots-clés : {org.keywords.join(", ")}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ✅ SAME STYLING — button becomes dropdown */}
+        <div className="flex">
+          <Input
+            className="rounded-r-none"
+            value={query}
+            placeholder="Chercher un organisme..."
+            onChange={(e) => setQuery(e.target.value)}
+          />
+
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button variant="default" className="rounded-l-none flex gap-1">
+                filtres
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-[220px] p-0" align="end">
+              <Command>
+                Categories:
+                <CommandList>
+                  <CommandGroup>
+                    {categories.map((cat) => (
+                      <CommandItem
+                        key={cat}
+                        onSelect={() => toggleCategory(cat)}
+                        className="flex items-center justify-between"
+                      >
+                        <span>{cat}</span>
+                        {selectedCategories.includes(cat) && (
+                          <Check className="h-4 w-4" />
+                        )}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+              <Command>
+                Villes:
+                <CommandList>
+                  <CommandGroup>
+                    {cities.map((city) => (
+                      <CommandItem
+                        key={city}
+                        onSelect={() => toggleCity(city)}
+                        className="flex items-center justify-between"
+                      >
+                        <span>{city}</span>
+                        {selectedCities.includes(city) && (
+                          <Check className="h-4 w-4" />
+                        )}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+        {/* optional: show selected */}
+        <div className="mt-2">
+          {selectedCategories.length > 0 && (
+            <p className="text-sm text-muted-foreground">
+              Categories choisies : {selectedCategories.join(", ")}
             </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+          )}
+        </div>
+         <div className="mt-2">
+          {selectedCities.length > 0 && (
+            <p className="text-sm text-muted-foreground">
+              Villes choisies : {selectedCities.join(", ")}
+            </p>
+          )}
+        </div>
+      </div>
+    )
+  }
+

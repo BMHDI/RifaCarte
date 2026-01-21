@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import { OrgSearch } from "../filters/OrgSearch";
 import { SidebarToggleButton } from "../ui/SidebarToggleButton";
-import { AIConversationMock } from "../ui/AIConversationMock";
+import { AIConversationMock } from "../chatbot/AIConversationMock";
 import { useState } from "react";
 
 export function AppSidebar() {
@@ -37,7 +37,6 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu >
               {menuItems.map((item) => (

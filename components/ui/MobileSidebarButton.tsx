@@ -21,7 +21,7 @@ export function MobileSidebarButton() {
       className="
         fixed bottom-6 right-6
         z-50
-        h-10 w-10 rounded-full
+        h-15 w-15 rounded-full
         shadow-lg
         flex md:hidden
         
