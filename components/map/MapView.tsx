@@ -1,57 +1,28 @@
-"use client"
+"use client";
 
-import Map, { NavigationControl, Marker, Popup, Source, Layer, LayerProps } from "react-map-gl/mapbox"
-import "mapbox-gl/dist/mapbox-gl.css"
-import { useState } from "react"
-import organizations from "@/lib/org.json"
-import { MapPin } from 'lucide-react'
-import francophoneRegions from "@/lib/francophone-regions.json"
-
-// ✅ Layer styles
-const regionFill: LayerProps = {
-  id: "regions-fill",
-  type: "fill",
-  paint: {
-    "fill-color": "#16b1f9", 
-    "fill-opacity": 0.2
-  }
-}
-
-const regionBorder: LayerProps = {
-  id: "regions-border",
-  type: "line",
-  paint: {
-    "line-color": "#1b053b",
-    "line-width": 2
-  }
-}
-const regionLabels: LayerProps = {
-  id: "regions-label",
-  type: "symbol",
-  layout: {
-    "text-field": ["get", "name"], // Use the 'name' property from GeoJSON
-    "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
-    "text-size": 16,
-    "text-anchor": "center"
-  },
-  paint: {
-    "text-color": "#c60d07",
-    "text-halo-color": "#ffffff",
-    "text-halo-width": 2
-  }
-}
-
-
+import Map, {
+  NavigationControl,
+  Marker,
+  Popup,
+  Source,
+  Layer,
+} from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useState } from "react";
+import organizations from "@/lib/org.json";
+import { MapPin } from "lucide-react";
+import francophoneRegions from "@/lib/francophone-regions.json";
+import { regionFill, regionLabels, regionBorder } from "@/lib/mapstyles";
 
 export function MapView() {
-  const [mapLoaded, setMapLoaded] = useState(false)
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const [viewState, setViewState] = useState({
     longitude: -113.4711,
     latitude: 53.5198,
     zoom: 5, // zoom out to see multiple regions
-  })
-  const [selectedOrg, setSelectedOrg] = useState<any>(null)
+  });
+  const [selectedOrg, setSelectedOrg] = useState<any>(null);
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -61,22 +32,22 @@ export function MapView() {
         mapStyle="mapbox://styles/bmhdi/cmkoaod33000k01r83dx855i3"
         style={{ width: "100%", height: "100%" }}
         onMove={(e) => setViewState(e.viewState)}
-         onLoad={() => setMapLoaded(true)}
+        onLoad={() => setMapLoaded(true)}
       >
         <NavigationControl position="top-right" />
 
         {/* ✅ Add the Francophone regions */}
-       {mapLoaded && (
-  <Source
-    id="francophone-regions"
-    type="geojson"
-    data={francophoneRegions as any}
-  >
-    <Layer {...regionFill} />
-    <Layer {...regionBorder} />
-    <Layer {...regionLabels} />
-  </Source>
-)}
+        {mapLoaded && (
+          <Source
+            id="francophone-regions"
+            type="geojson"
+            data={francophoneRegions as any}
+          >
+            <Layer {...regionFill} />
+            <Layer {...regionBorder} />
+            <Layer {...regionLabels} />
+          </Source>
+        )}
 
         {/* ✅ MARKERS */}
         {organizations.map((org) => (
@@ -86,11 +57,11 @@ export function MapView() {
             latitude={org.map.lat}
             anchor="bottom"
             onClick={(e) => {
-              e.originalEvent.stopPropagation()
-              setSelectedOrg(org)
+              e.originalEvent.stopPropagation();
+              setSelectedOrg(org);
             }}
           >
-            <MapPin size={40}/>
+            <MapPin size={40} />
           </Marker>
         ))}
 
@@ -103,12 +74,10 @@ export function MapView() {
             onClose={() => setSelectedOrg(null)}
             closeOnClick={false}
           >
-            <div className="text-sm font-medium">
-              {selectedOrg.name}
-            </div>
+            <div className="text-sm font-medium">{selectedOrg.name}</div>
           </Popup>
         )}
       </Map>
     </div>
-  )
+  );
 }

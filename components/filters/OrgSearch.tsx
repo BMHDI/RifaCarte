@@ -11,6 +11,7 @@ import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 
 import { Check, ChevronDown } from "lucide-react";
 import { Badge } from "../ui/badge";
+import { OrgCard } from "../ui/OrgCard";
 
 // normalisation : minuscules + enlever accents
 const normalize = (text: string) =>
@@ -95,18 +96,31 @@ export function OrgSearch() {
   return (
     <div>
       <div className="flex flex-col h-[70vh] border rounded-md p-2 bg-gray-50">
-        <div className="flex-1 overflow-y-auto mb-2 space-y-2">
+        <div
+          className="
+          h-full
+    grid
+    gap-3
+    mb-2
+    overflow-y-auto
+    [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]
+  "
+        >
           {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
 
-          <ul>
-            {filteredOrgs.map((org) => (
-              <li key={org.id} className="border-b py-2">
-                <p className="font-medium">{org.name}</p>
-                <p className="text-sm text-gray-600">{org.category}</p>
-                <p className="text-sm">Mots-clés : {org.keywords.join(", ")}</p>
-              </li>
-            ))}
-          </ul>
+          {filteredOrgs.map((org) => (
+            <OrgCard
+              key={org.id}
+              {...org}
+              onDetails={() => {}}
+              onShare={() => {}}
+              onMap={() => {}}
+              name={org.name}
+              logo={org.logo}
+              phone={org.contacts.phone}
+              address={org.location.city}
+            />
+          ))}
         </div>
 
         {/* ✅ SAME STYLING — button becomes dropdown */}
