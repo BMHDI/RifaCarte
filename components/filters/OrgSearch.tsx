@@ -95,16 +95,14 @@ export function OrgSearch() {
 
   return (
     <div>
-      <div className="flex flex-col h-[70vh] border rounded-md p-2 bg-gray-50">
+      <div className="flex flex-col h-[70vh] bg-gray-60  ">
         <div
-          className="
-          h-full
-    grid
-    gap-3
-    mb-2
-    overflow-y-auto
-    [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]
-  "
+          className="h-full
+         grid
+          gap-2
+         mb-2
+          overflow-y-auto
+         [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
         >
           {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
 
@@ -124,7 +122,7 @@ export function OrgSearch() {
         </div>
 
         {/* ✅ SAME STYLING — button becomes dropdown */}
-        <div className="flex">
+        <div className="flex w-full p-4 ">
           <Input
             className="rounded-r-none"
             value={query}
@@ -197,7 +195,7 @@ export function OrgSearch() {
                   {selectedCategories.map((c) => (
                     <Badge
                       key={`cat-${c}`}
-                      variant="secondary"
+                      variant="default"
                       className="rounded-full cursor-pointer"
                       onClick={() => toggleCategory(c)}
                     >
@@ -215,7 +213,7 @@ export function OrgSearch() {
                   {selectedCities.map((c) => (
                     <Badge
                       key={`city-${c}`}
-                      variant="secondary"
+                      variant="default"
                       className="rounded-full cursor-pointer"
                       onClick={() => toggleCity(c)}
                     >
