@@ -21,14 +21,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
+      <meta charSet="utf-8" />
       <body className="h-svh w-svw overflow-hidden ">
-      <Header />
-
+        <Header />
         <SidebarProvider>
           <AppSidebar />
           {/* MAIN CONTENT */}
-          <SidebarInset className=" ">       
-{children}</SidebarInset>
+          <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>
       </body>
     </html>

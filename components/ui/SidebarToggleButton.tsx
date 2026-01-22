@@ -12,6 +12,7 @@ export function SidebarToggleButton() {
   return (
     <Button
       onClick={toggleSidebar}
+      variant={"outline"}
       size="icon"
       className="
         absolute
