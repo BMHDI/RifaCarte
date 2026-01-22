@@ -42,34 +42,35 @@ export function OrgCard({
         alt={`${name} logo`}
         className="relative  rounded-t-xl z-10 aspect-video h-40 w-full object-cover brightness-90 "
       />
- {category && (
-          <CardAction className="p-2">
-            <Badge variant="secondary">{category}</Badge>
-          </CardAction>
-        )}
+      {category && (
+        <CardAction className="p-2">
+          <Badge variant="secondary">{category}</Badge>
+        </CardAction>
+      )}
       <CardHeader className="h-32">
         <CardTitle className="text-lg">{name}</CardTitle>
-        <CardDescription >
-          <p className="text-sm flex gap-2"><Phone size={15}/> {phone}</p>
-          <p className="text-sm  flex gap-2"><Locate size={15}/> {address}</p>
-          
+        <CardDescription>
+          <p className="text-sm flex gap-2">
+            <Phone size={15} /> {phone}
+          </p>
+          <p className="text-sm  flex gap-2">
+            <Locate size={15} /> {address}
+          </p>
         </CardDescription>
-        
       </CardHeader>
 
       <CardFooter className="flex gap-2 flex-wrap m-2">
-        
         <Button size="sm" variant="default" onClick={onDetails}>
-           Voir plus 
+          Voir plus
         </Button>
         <Button size="sm" variant="outline" onClick={onShare}>
-          <Share/>
+          <Share />
         </Button>
         <Button size="sm" variant="outline" onClick={onMap}>
-        <Map/>
+          <Map />
         </Button>
         <Button size="sm" variant="outline" onClick={onMap}>
-        <Heart fill=""/>
+          <Heart fill="" />
         </Button>
       </CardFooter>
     </Card>

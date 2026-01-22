@@ -3,7 +3,6 @@ import "./globals.css";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
@@ -20,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="overflow-hidden" >
       <meta charSet="utf-8" />
       <body className="h-svh w-svw overflow-hidden ">
         <Header />
