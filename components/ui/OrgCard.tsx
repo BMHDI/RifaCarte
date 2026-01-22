@@ -34,7 +34,7 @@ export function OrgCard({
   onMap,
 }: OrgCardProps) {
   return (
-    <Card className="w-[280px] h-[450px]">
+    <Card className="md:w-[280px] md:h-[450px]">
       {/* Optional overlay if needed */}
       <img
         src="https://www.theglobeandmail.com/resizer/v2/65SAIIIB2BGD3ATQ247G2T343U.JPG?auth=b1e9ced577046f6fd03cac067a6618c0a7da134ad8278b8b93a4157930c28383&width=600&quality=80"
