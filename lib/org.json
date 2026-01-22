@@ -1,6 +1,7 @@
 [{
   "id": "org_11",
   "name": "Francophonie Albertaine Plurielle (FRAP)",
+  "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
   "category": "Immigration",
   "location": {
     "city": "Edmonton",
@@ -44,6 +45,8 @@
 {
   "id": "org_12",
   "name": "Réseau Santé Albertain (RSA)",
+    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
+
   "category": "Santé",
   "location": {
     "city": "Edmonton",
@@ -87,6 +90,8 @@
 {
   "id": "org_13",
   "name": "Coalition des femmes de l’Alberta",
+    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
+
   "category": "Femmes",
   "location": {
     "city": "Edmonton",
@@ -129,6 +134,8 @@
 {
   "id": "org_14",
   "name": "Association des juristes d’expression française de l’Alberta (AJEFA)",
+    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
+
   "category": "Justice",
   "location": {
     "city": "Edmonton",
@@ -172,6 +179,8 @@
 {
   "id": "org_15",
   "name": "Regroupement artistique francophone de l’Alberta (RAFA)",
+    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
+
   "category": "Culture",
   "location": {
     "city": "Calgary",
@@ -215,6 +224,8 @@
 {
   "id": "org_16",
   "name": "Fédération des aînés franco-albertains (FAFA)",
+    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
+
   "category": "Aînés",
   "location": {
     "city": "Edmonton",
