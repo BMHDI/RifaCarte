@@ -69,7 +69,7 @@ export function OrgCard({
         <Map/>
         </Button>
         <Button size="sm" variant="outline" onClick={onMap}>
-        <Heart fill/>
+        <Heart fill=""/>
         </Button>
       </CardFooter>
     </Card>
