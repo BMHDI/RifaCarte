@@ -49,9 +49,11 @@ export function OrgSearch() {
   // ✅ unique cities
   const cities = useMemo(() => {
     const set = new Set<string>();
-    organizations.forEach((o) => set.add(o.location.city));
+    organizations.forEach((o) =>
+      o.locations.forEach((loc) => set.add(loc.city)),
+    );
     return Array.from(set).sort();
-  }, []);
+  }, [organizations]);
 
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
@@ -70,14 +72,14 @@ export function OrgSearch() {
     let textMatch = true;
 
     if (query) {
-      const queryWords = normalize(query)
+      const services = normalize(query)
         .split(/\s+/)
         .filter((w) => w && !stopWords.includes(w));
 
-      if (queryWords.length === 0) return false;
+      if (services.length === 0) return false;
 
-      textMatch = queryWords.some((word) =>
-        org.keywords.some((k) => normalize(k).includes(word)),
+      textMatch = services.some((word) =>
+        org.services.some((k) => normalize(k).includes(word)),
       );
     }
 
@@ -88,7 +90,8 @@ export function OrgSearch() {
 
     // ----- city filter (UNCHANGED) -----
     const cityMatch =
-      selectedCities.length === 0 || selectedCities.includes(org.location.city);
+      selectedCities.length === 0 ||
+      selectedCities.includes(org.locations[0].city);
 
     return textMatch && categoryMatch && cityMatch;
   });
@@ -114,9 +117,9 @@ export function OrgSearch() {
               onShare={() => {}}
               onMap={() => {}}
               name={org.name}
-              logo={org.logo}
-              phone={org.contacts.phone}
-              address={org.location.city}
+              logo={org.logo ?? ""} // fallback if logo is missing
+              phone={org.contact?.phone ?? ""} // fallback if phone is missing
+              address={org.locations[0].address}
             />
           ))}
         </div>
@@ -183,7 +186,7 @@ export function OrgSearch() {
       </div>
 
       {/* ✅ SAME STYLING — button becomes dropdown */}
-      <div className="m-6 flex flex-col flex-wrap items-start gap-2 ">
+      <div className="mx-6 flex flex-col flex-wrap items-start gap-2 ">
         {selectedCategories.length > 0 || selectedCities.length > 0 ? (
           <>
             {selectedCategories.length > 0 && (

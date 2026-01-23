@@ -49,32 +49,41 @@ export function MapView() {
           </Source>
         )}
 
-        {/* ✅ MARKERS */}
-        {organizations.map((org) => (
-          <Marker
-            key={org.id}
-            longitude={org.map.lng}
-            latitude={org.map.lat}
-            anchor="bottom"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              setSelectedOrg(org);
-            }}
-          >
-            <MapPin size={40} />
-          </Marker>
-        ))}
+        {/* ✅ MARKERS & POPUP */}
+        {organizations.map((org) =>
+          org.locations
+            .filter((loc) => loc.lat != null && loc.lng != null) // only valid coords
+            .map((loc, index) => (
+              <Marker
+                key={`${org.id}-${index}`}
+                longitude={loc.lng!} // safe because of filter
+                latitude={loc.lat!}
+                anchor="bottom"
+                onClick={(e) => {
+                  e.originalEvent.stopPropagation();
+                  setSelectedOrg({ org, location: loc }); // store org + clicked location
+                }}
+              >
+                <MapPin size={40} fill="red" />
+              </Marker>
+            )),
+        )}
 
         {/* ✅ POPUP */}
-        {selectedOrg && (
+        {selectedOrg?.location && (
           <Popup
-            longitude={selectedOrg.map.lng}
-            latitude={selectedOrg.map.lat}
+            longitude={selectedOrg.location.lng!}
+            latitude={selectedOrg.location.lat!}
             anchor="top"
             onClose={() => setSelectedOrg(null)}
             closeOnClick={false}
           >
-            <div className="text-sm font-medium">{selectedOrg.name}</div>
+            <div className="text-sm font-medium">{selectedOrg.org.name}</div>
+            {selectedOrg.location.address && (
+              <div className="text-xs text-gray-500">
+                {selectedOrg.location.address}
+              </div>
+            )}
           </Popup>
         )}
       </Map>

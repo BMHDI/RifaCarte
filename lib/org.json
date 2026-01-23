@@ -1,267 +1,1222 @@
-[{
-  "id": "org_11",
-  "name": "Francophonie Albertaine Plurielle (FRAP)",
-  "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
-  "category": "Immigration",
-  "location": {
-    "city": "Edmonton",
-    "province": "AB"
+[
+  {
+    "id": "fafa",
+    "name": "Fédération des aînés franco-albertains (FAFA)",
+    "category": "Aînés / Services communautaires",
+    "description": "Organisme provincial visant à améliorer la qualité de vie des aînés francophones en Alberta, favoriser leur engagement communautaire et lutter contre l’isolement.",
+    "foundedYear": 1991,
+    "director": {
+      "name": "David Caron",
+      "title": "Directeur"
+    },
+    "services": [
+      "Défense des droits des aînés",
+      "Ateliers de mieux-être",
+      "Activités culturelles et intergénérationnelles",
+      "Lutte contre l’isolement",
+      "Conférences et forums",
+      "Soutien aux clubs d’aînés",
+      "Information et bulletins en français",
+      "Service d’aide et de visite aux aînés (SAVA)"
+    ],
+    "audience": "Francophones et francophiles de 50 ans et plus",
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Campus Saint-Jean, 8406 Rue Marie-Anne Gaboury, Edmonton, AB",
+        "lat": 53.5197,
+        "lng": -113.4576
+      },
+      {
+        "city": "Calgary",
+        "address": "Centre d'accueil francophone, 1006 2 Ave SW, Calgary, AB",
+        "lat": 51.051,
+        "lng": -114.0853
+      },
+      {
+        "city": "Lethbridge",
+        "address": "Centre La Cité des Prairies, Lethbridge, AB",
+        "lat": 49.6956,
+        "lng": -112.8451
+      },
+      {
+        "city": "Red Deer",
+        "address": "Downtown Red Deer, Red Deer, AB",
+        "lat": 52.2681,
+        "lng": -113.8112
+      },
+      {
+        "city": "Wood Buffalo (Fort McMurray)",
+        "address": "Downtown Fort McMurray, AB",
+        "lat": 56.7267,
+        "lng": -111.381
+      }
+    ],
+    "contact": {
+      "phone": "780-465-8965",
+      "email": "fafa@fafa.ab.ca",
+      "website": "https://www.fafalta.ca"
+    },
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"]
   },
-  "contacts": {
-    "email": "info@frap.ca",
-    "phone": "7805408682",
-    "website": "https://frap.ca"
+  {
+    "id": "fmi",
+    "name": "Femme Moderne Influente (FMI)",
+    "category": "Femmes / Autonomisation / Entrepreneuriat",
+    "description": "Organisation dédiée à l’autonomisation des femmes francophones afin de surmonter les obstacles et réaliser leur plein potentiel, en favorisant le leadership, l’entrepreneuriat et l’engagement communautaire.",
+    "foundedYear": null,
+    "director": {
+      "name": "Safia Bella Moke",
+      "title": "Fondatrice et directrice"
+    },
+    "services": [
+      "Entrepreneuriat et développement des affaires",
+      "Développement professionnel et avancement de carrière",
+      "Développement personnel et bien-être",
+      "Autonomisation et réseautage communautaire",
+      "Mentorat entrepreneurial",
+      "Ateliers pratiques et formations"
+    ],
+    "audience": "Femmes francophones (entrepreneures, professionnelles et femmes engagées)",
+    "projects": [
+      {
+        "name": "Affaires de Femmes",
+        "description": "Programme dédié au leadership et à l’entrepreneuriat des femmes noires francophones offrant ateliers, mentorat, ressources et réseautage pour structurer, lancer ou développer des projets d’affaires."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Downtown Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "Calgary",
+        "address": "Downtown Calgary, AB",
+        "lat": 51.0447,
+        "lng": -114.0719
+      }
+    ],
+    "contact": {
+      "phone": "780-708-1024",
+      "email": "info@femmemoderneinfluente.ca",
+      "website": "https://femmemoderneinfluente.ca"
+    },
+    "tags": [
+      "femmes",
+      "entrepreneuriat",
+      "leadership",
+      "santé mentale",
+      "réseautage",
+      "francophone"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "fpfa",
+    "name": "Fédération des parents francophones de l’Alberta (FPFA)",
+    "category": "Éducation / Parents / Francophonie",
+    "description": "Organisme qui soutient les parents francophones de l’Alberta en les représentant, outillant et rassemblant pour favoriser l’épanouissement des enfants francophones.",
+    "foundedYear": null,
+    "director": {
+      "name": "Mireille Péloquin",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Soutien aux conseils d’école et sociétés de parents francophones",
+      "Services de garde éducatifs francophones",
+      "Ateliers et formations pour les parents",
+      "Programme “Bienvenue Bébé !”",
+      "Représentation gouvernementale"
+    ],
+    "audience": "Parents francophones, conseils d’école, comités de parents, enfants francophones",
+    "projects": [
+      {
+        "name": "Réseau d’intervenant.es en petite enfance (RIPE)",
+        "description": "Projet pilote de trois ans en Alberta pour augmenter le nombre et la qualité des services de garde francophones, encourager la collaboration et optimiser l’efficacité des services."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Bureau provincial FPFA, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      }
+    ],
+    "contact": {
+      "phone": "780-468-6934",
+      "email": "info@fpfa.ab.ca",
+      "website": "https://fpfa.ab.ca"
+    },
+    "tags": [
+      "parents",
+      "éducation",
+      "francophonie",
+      "services de garde",
+      "ateliers",
+      "familles"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "fja",
+    "name": "Francophonie Jeunesse de l’Alberta (FJA)",
+    "category": "Jeunesse / Leadership / Francophonie",
+    "description": "Organisme qui représente et rassemble la jeunesse d’expression française en Alberta pour renforcer l’engagement et l’épanouissement de ses membres et assurer la persévérance de la francophonie.",
+    "foundedYear": 1972,
+    "director": {
+      "name": "Julianna Damer",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Cours de leadership AAA",
+      "Programmes CÉFORT pour conseils étudiants",
+      "Équipe Alberta - JeuxFC",
+      "Projets communautaires pour jeunes",
+      "Service d’animation pour événements communautaires"
+    ],
+    "audience": "Jeunes francophones de 14 à 25 ans en Alberta",
+    "projects": [
+      {
+        "name": "Parlement jeunesse de l’Alberta (PJA)",
+        "description": "Simulation parlementaire annuelle pour les jeunes de 16 à 25 ans afin de débattre de projets de loi PAR ET POUR les jeunes à la Législature albertaine."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Cité francophone, Edmonton, AB",
+        "lat": 53.5222,
+        "lng": -113.4923
+      }
+    ],
+    "contact": {
+      "phone": "780-469-1344",
+      "email": "fja@fja.ab.ca",
+      "website": "https://fjalberta.ca"
+    },
+    "tags": [
+      "jeunesse",
+      "leadership",
+      "francophonie",
+      "éducation",
+      "arts",
+      "sports",
+      "engagement"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "iglf",
+    "name": "Institut Guy-Lacombe de la Famille (IGLF)",
+    "category": "Famille / Éducation / Francophonie",
+    "description": "Organisme francophone soutenant les familles francophones et francophiles d’Edmonton et du nord de l’Alberta, offrant des services pour le développement des enfants, adolescents et parents, le bien-être familial et l’inclusion sociale.",
+    "foundedYear": 1998,
+    "director": {
+      "name": "Rihab Alaya",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Bibliothèque et joujouthèque francophones",
+      "Service de garde après-école et journées pédagogiques",
+      "Camp d’été Franco-Chouette pour enfants",
+      "Camp d’été Ados pour 12-15 ans",
+      "Activités familiales et fêtes d’anniversaire en français",
+      "Location de salles communautaires",
+      "Accompagnement parental et développement familial"
+    ],
+    "audience": "Familles francophones et francophiles, enfants 0-18 ans, parents",
+    "projects": [
+      {
+        "name": "Groupe adolescents 12-17 ans",
+        "description": "En partenariat avec Éduc-Franco Santé, groupe mensuel pour jeunes visant le bien-être, le développement personnel et la création de liens sociaux."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Institut Guy-Lacombe de la Famille, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "Grande Prairie",
+        "address": "Services étendus pour le nord de l’Alberta, Grande Prairie, AB",
+        "lat": 55.17,
+        "lng": -118.7882
+      }
+    ],
+    "contact": {
+      "phone": "780-468-4882",
+      "email": "info@iglf.ca",
+      "website": "https://institutguylacombe.ca"
+    },
+    "tags": [
+      "famille",
+      "enfants",
+      "adolescents",
+      "éducation",
+      "francophonie",
+      "développement familial"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "mcg",
+    "name": "MCG Careers",
+    "category": "Emploi / Formation / Développement de carrière",
+    "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
+    "foundedYear": 1989,
+    "director": {
+      "name": "Shannon Mervold",
+      "title": "Directrice générale et propriétaire"
+    },
+    "services": [
+      "Accompagnement personnalisé pour recherche d’emploi",
+      "Rédaction de CV et lettres de motivation",
+      "Préparation aux entrevues",
+      "Orientation vers ressources adaptées",
+      "Programmes spécialisés : Anchor Point, Constructing Success, Experience Counts, Rapid Employment Services",
+      "Formations et ateliers professionnels",
+      "Support aux employeurs : salons de l’emploi, diffusion d’offres et ressources",
+      "Outils et espaces en ligne pour faciliter la recherche d’emploi"
+    ],
+    "audience": "Albertains de 18 ans et plus, chercheurs d’emploi, travailleurs expérimentés, jeunes adultes, personnes en reconversion professionnelle ou avec obstacles à l’emploi",
+    "projects": [
+      {
+        "name": "Skill Build",
+        "description": "Programme novateur pour préparer les participants à des carrières dans les métiers de la construction, combinant formation technique, certification en sécurité et mentorat, ciblant jeunes, Premières Nations et groupes sous-représentés."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "MCG Careers, Calgary, AB",
+        "lat": 51.0447,
+        "lng": -114.0719
+      },
+      {
+        "city": "Edmonton",
+        "address": "MCG Careers, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "High River",
+        "address": "MCG Careers, High River, AB",
+        "lat": 50.565,
+        "lng": -113.8636
+      },
+      {
+        "city": "Okotoks",
+        "address": "MCG Careers, Okotoks, AB",
+        "lat": 50.7233,
+        "lng": -113.9754
+      },
+      {
+        "city": "Red Deer",
+        "address": "MCG Careers, Red Deer, AB",
+        "lat": 52.2681,
+        "lng": -113.8112
+      }
+    ],
+    "contact": {
+      "phone": "780-448-1380",
+      "email": "edmmcg@mcgcareers.com",
+      "website": "https://www.mcgcareers.com"
+    },
+    "tags": [
+      "emploi",
+      "formation",
+      "développement professionnel",
+      "jeunes adultes",
+      "inclusion",
+      "mentorats"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "parallele",
+    "name": "Parallèle Alberta",
+    "category": "Entrepreneuriat / Emploi / Développement économique",
+    "description": "Organisme dédié au développement économique des francophones en Alberta, soutenant les entrepreneurs, chercheurs d’emploi et professionnels grâce à des services adaptés, formations et opportunités de réseautage.",
+    "foundedYear": null,
+    "director": {
+      "name": "Étienne Alary",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Accompagnement entrepreneurial personnalisé",
+      "Orientation vers des sources de financement",
+      "Formations continues (ateliers, webinaires, sessions de formation)",
+      "Réseautage professionnel",
+      "Soutien à l’employabilité"
+    ],
+    "audience": "Entrepreneurs, chercheurs d’emploi et communauté d’affaires francophone de l’Alberta",
+    "projects": [
+      {
+        "name": "Rendez-vous d’affaires (RVA)",
+        "description": "Événement économique annuel offrant ateliers, conférences et sessions de réseautage pour le développement des entreprises francophones."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Parallèle Alberta, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "Calgary",
+        "address": "Parallèle Alberta, Calgary, AB",
+        "lat": 51.0447,
+        "lng": -114.0719
+      }
+    ],
+    "contact": {
+      "phone": "Edmonton: 780-490-6975, Calgary: 403-802-0880 poste 120",
+      "email": "info@parallele-ab.ca",
+      "website": "https://parallele-ab.ca"
+    },
+    "tags": [
+      "entrepreneuriat",
+      "emploi",
+      "développement économique",
+      "francophonie",
+      "formation",
+      "réseautage"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "pcb",
+    "name": "Pont Cultural Bridge (PCB)",
+    "category": "Immigration / Intégration / Culture",
+    "description": "Organisme à but non lucratif favorisant l’intégration des immigrants francophones et la cohésion interculturelle en Alberta à travers des initiatives culturelles, sportives et sociales.",
+    "foundedYear": 2017,
+    "director": {
+      "name": "Mohamed Kourouma",
+      "title": "Cofondateur et Directeur général"
+    },
+    "services": [
+      "Programmes culturels et artistiques (événements, concours, PCB Awards)",
+      "Activités sportives pour l’intégration communautaire",
+      "Économie sociale et soutien aux entreprises locales",
+      "Événements communautaires et festivals",
+      "Soutien aux familles à faible revenu"
+    ],
+    "audience": "Nouveaux arrivants francophones, communautés culturelles francophones, société albertaine en général",
+    "projects": [
+      {
+        "name": "Programme de bénévoles en Administration",
+        "description": "Permet aux participants d’acquérir une expérience canadienne en milieu de travail."
+      },
+      {
+        "name": "Services de garde lors des journées pédagogiques",
+        "description": "Offre de gardes à tarif communautaire pour soutenir les familles."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Pont Cultural Bridge, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "Calgary",
+        "address": "Pont Cultural Bridge, Calgary, AB",
+        "lat": 51.0447,
+        "lng": -114.0719
+      }
+    ],
+    "contact": {
+      "phone": "587-520-8833",
+      "email": "contact@pontculturalbridge.ca",
+      "website": "https://pontculturalbridge.ca/fr"
+    },
+    "tags": [
+      "immigration",
+      "intégration",
+      "culture",
+      "sport",
+      "économie sociale",
+      "communauté",
+      "diversité"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "prospect",
+    "name": "Prospect Human Services",
+    "category": "Emploi / Formation / Services communautaires",
+    "description": "Organisme bilingue à but non lucratif aidant les chercheurs d’emploi à surmonter les obstacles à l’emploi et soutenant les employeurs dans le recrutement, avec des services gratuits pour les résidents de l’Alberta.",
+    "foundedYear": null,
+    "director": {
+      "name": "Kevin McNichol",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Soutien à l'emploi pour les personnes handicapées",
+      "Services pour les anciens combattants",
+      "Formation en milieu de travail",
+      "Ateliers et soutien pour chercheurs d’emploi (CV, entrevues, recherche d’emploi)",
+      "Services pour les employeurs (recrutement, formation, rétention d’employés)"
+    ],
+    "audience": "Personnes en recherche d’emploi (jeunes travailleurs, immigrants récents, personnes en reconversion professionnelle), employeurs et entreprises diversifiées",
+    "projects": [
+      {
+        "name": "Bootcamp Francophone",
+        "description": "Programme pour clarifier sa recherche d’emploi et son plan de carrière, et prochainement sur l’utilisation des outils digitaux."
+      },
+      {
+        "name": "Événement Networking en Français",
+        "description": "Rencontre pour les chercheurs d’emploi et entrepreneurs francophones, en partenariat avec Parallèle Alberta."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Airdrie",
+        "address": "Prospect Human Services, Airdrie, AB",
+        "lat": 51.2917,
+        "lng": -114.0144
+      },
+      {
+        "city": "Calgary",
+        "address": "Prospect Human Services, Calgary Northeast, AB",
+        "lat": 51.083,
+        "lng": -114.071
+      },
+      {
+        "city": "Calgary",
+        "address": "Prospect Human Services, Studio C, Calgary, AB",
+        "lat": 51.0447,
+        "lng": -114.0719
+      },
+      {
+        "city": "Cochrane",
+        "address": "Prospect Human Services, Cochrane, AB",
+        "lat": 51.1836,
+        "lng": -114.4676
+      },
+      {
+        "city": "Edmonton",
+        "address": "Prospect Human Services, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      },
+      {
+        "city": "Strathmore",
+        "address": "Prospect Human Services, Strathmore, AB",
+        "lat": 51.036,
+        "lng": -113.3853
+      }
+    ],
+    "contact": {
+      "phone": "1-877-483-2562",
+      "email": "info@prospectnow.ca",
+      "website": "https://www.prospectnow.ca"
+    },
+    "tags": [
+      "emploi",
+      "formation",
+      "recherche d’emploi",
+      "inclusion",
+      "diversité",
+      "jeunes adultes",
+      "immigrants"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "rafa",
+    "name": "Regroupement Artistique Francophone de l’Alberta (RAFA)",
+    "category": "Arts / Culture / Francophonie",
+    "description": "Organisme représentant les artistes et organismes culturels francophones en Alberta, soutenant la création, la production, la diffusion et la promotion des œuvres, tout en offrant des services de formation et de représentation professionnelle.",
+    "foundedYear": 2001,
+    "director": {
+      "name": "Raphaël Freynet",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Soutien aux artistes et organismes culturels (accompagnement, mentorat, développement de carrière)",
+      "Promotion et diffusion des œuvres francophones",
+      "Reconnaissance artistique (Prix Martin-Lavoie, Prix Envol, Prix Lumière)",
+      "Formation professionnelle pour artistes",
+      "Plaidoyer et représentation auprès des instances politiques et communautaires"
+    ],
+    "audience": "Artistes et organismes culturels francophones de l’Alberta dans les domaines de la musique, théâtre, danse, arts visuels, littérature et médias",
+    "projects": [
+      {
+        "name": "Forum annuel des arts et de la culture",
+        "description": "Événement réunissant les artistes et partenaires pour renforcer les liens, discuter des enjeux du milieu et célébrer les arts francophones en Alberta, normalement en juin."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "La Cité francophone, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      }
+    ],
+    "contact": {
+      "phone": "780-462-0502",
+      "email": "info@lerafa.ca",
+      "website": "https://www.lerafa.ca"
+    },
+    "tags": [
+      "arts",
+      "culture",
+      "francophonie",
+      "formation",
+      "promotion",
+      "représentation",
+      "artistique"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+    "id": "rsa",
+    "name": "Réseau santé Alberta (RSA)",
+    "category": "Santé / Services sociaux / Francophonie",
+    "description": "Organisme chef de file en santé en Alberta, visant à renforcer l'accès aux services de santé en français, promouvoir le mieux-être et faciliter la concertation entre les acteurs de la santé et les communautés francophones.",
+    "foundedYear": 2004,
+    "director": {
+      "name": "Marie-Claude Coté",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Appui, sensibilisation, concertation et mobilisation pour améliorer l’accès aux services de santé en français",
+      "Développement des capacités des groupes de santé, professionnels francophones et organismes/institutions francophones",
+      "Renforcement des liens avec les intervenants du domaine de la santé",
+      "Promotion de l’offre et de la demande active de services de santé en français (répertoires, sensibilisation, mobilisation)"
+    ],
+    "audience": "Francophones de l’Alberta (familles, aînés, nouveaux arrivants, populations rurales, groupes vulnérables), professionnels de la santé, institutions et étudiants en santé, décideurs politiques et gestionnaires des services de santé",
+    "projects": [
+      {
+        "name": "Réseautage et partage d’information",
+        "description": "Sessions régulières pour connecter les communautés francophones et les acteurs de la santé."
+      },
+      {
+        "name": "Études sur la santé",
+        "description": "Études menées à Calgary et dans la région Nord-Ouest pour évaluer les besoins et les services disponibles."
+      },
+      {
+        "name": "Café de Paris",
+        "description": "Rencontres et échanges sur la santé francophone avec différents partenaires et communautés."
+      },
+      {
+        "name": "Projets en partenariat",
+        "description": "Collaborations avec Éduc-Franco Santé, CBEP, Campus Saint-Jean, Petite Enfance en santé et Clinique mobile Saint-Thomas."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Siège social, Edmonton, AB",
+        "lat": 53.5461,
+        "lng": -113.4938
+      }
+    ],
+    "contact": {
+      "phone": "780-466-9816",
+      "email": "info@rsa-ab.ca",
+      "website": "https://rsa-ab.ca"
+    },
+    "tags": [
+      "santé",
+      "services sociaux",
+      "francophonie",
+      "communauté",
+      "professionnels de santé",
+      "mobilisation"
+    ],
+    "memberOf": ["RIFA"]
+  },
+  {
+  "id": "shfa",
+  "name": "Société historique francophone de l’Alberta",
+  "category": "Patrimoine / Culture / Francophonie",
+  "description": "Organisme provincial à but non lucratif dédié à la protection, au rayonnement et à la représentation du patrimoine et de l’histoire franco-albertaine, avec des initiatives pédagogiques et numériques pour valoriser l’histoire de la francophonie en Alberta.",
+  "foundedYear": 2012,
+  "director": {
+    "name": "Denis Perreaux",
+    "title": "Directeur général"
   },
   "services": [
-    "accueil des nouveaux arrivants",
-    "aide à l'établissement",
-    "orientation communautaire",
-    "référencement vers services"
+    "Service de référencement historique pour guider les chercheurs",
+    "Ressources pédagogiques pour enseignants et élèves",
+    "Numérisation et préservation d’archives historiques",
+    "Organisation d’événements (conférences, expositions, ateliers)",
+    "Collaboration avec des partenaires pour promouvoir le patrimoine francophone"
   ],
-  "keywords": [
-    "immigration",
-    "nouveaux arrivants",
-    "installation",
-    "documents",
-    "services francophones"
+  "audience": "Francophones et francophiles intéressés par le patrimoine historique, chercheurs, étudiants, enseignants, et toute personne souhaitant découvrir l’histoire francophone de l’Alberta",
+  "projects": [
+    {
+      "name": "La Place : balados et récits franco-albertains",
+      "description": "Série de balados introduisant l’histoire et la culture francophone de l’Alberta, primée au Canadian Podcast Awards en 2021, visant à familiariser nouveaux arrivants et public avec le patrimoine local."
+    }
   ],
-  "audience": [
-    "immigrants",
-    "réfugiés",
-    "travailleurs qualifiés"
+  "locations": [
+    {
+      "city": "Edmonton",
+      "address": "Siège social, Edmonton, AB",
+      "lat": 53.5461,
+      "lng": -113.4938
+    }
   ],
-  "chatbotTriggers": [
-    "je viens d'arriver au canada",
-    "aide pour s'installer",
-    "services pour immigrants",
-    "où aller en arrivant"
-  ],
-  "map": {
-    "lat": 53.5194,
-    "lng": -113.4689
-  }
+  "contact": {
+    "phone": "587-986-2342",
+    "email": "info@shfa.ca",
+    "website": "https://histoireab.ca"
+  },
+  "tags": ["patrimoine", "culture", "francophonie", "histoire", "archives", "éducation"],
+  "memberOf": ["RIFA"]
 }
 ,
 {
-  "id": "org_12",
-  "name": "Réseau Santé Albertain (RSA)",
-    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
-
-  "category": "Santé",
-  "location": {
-    "city": "Edmonton",
-    "province": "AB"
-  },
-  "contacts": {
-    "email": "info@rsa-ab.ca",
-    "phone": "7804669816",
-    "website": "https://rsa-ab.ca"
+  "id": "wcg",
+  "name": "WCG Services",
+  "category": "Emploi / Formation / Francophonie",
+  "description": "Entreprise spécialisée dans les services d'emploi et de formation professionnelle, offrant un accompagnement personnalisé aux chercheurs d’emploi et aux employeurs, incluant réhabilitation professionnelle et soutien aux populations vulnérables.",
+  "foundedYear": 2016,
+  "director": {
+    "name": "Tania Bennett",
+    "title": "Directrice générale"
   },
   "services": [
-    "orientation vers services de santé en français",
-    "sensibilisation",
-    "réseautage communautaire",
-    "information santé"
+    "Accompagnement à l’emploi : coaching, rédaction CV/lettres, préparation aux entretiens, plan de carrière",
+    "Programmes spécialisés : WorkBC, WorkConnect, orientation professionnelle, soutien post-placement",
+    "Réhabilitation professionnelle : services pour anciens combattants et personnes avec difficultés de santé ou juridiques",
+    "Support employeurs : présélection de candidats, jumelage selon postes, subventions salariales, recrutement inclusif"
   ],
-  "keywords": [
-    "médecin en français",
-    "clinique",
-    "santé mentale",
-    "soins",
-    "hôpital"
+  "audience": "Personnes faisant face à des défis d’emploi ou de réinsertion (nouveaux arrivants, réfugiés, personnes handicapées, jeunes avec obstacles à l’emploi, Autochtones, parents seuls, bénéficiaires d’aide sociale), ainsi que les employeurs et partenaires locaux",
+  "projects": [],
+  "locations": [
+    {
+      "city": "Calgary",
+      "address": "Bureaux régionaux, Calgary, AB",
+      "lat": 51.0447,
+      "lng": -114.0719
+    },
+    {
+      "city": "Edmonton",
+      "address": "Bureaux régionaux, Edmonton, AB",
+      "lat": 53.5461,
+      "lng": -113.4938
+    }
   ],
-  "audience": [
-    "francophones",
-    "familles",
-    "aînés"
+  "contact": {
+    "phone": "1-888-354-7540",
+    "email": "info@wcgservices.com",
+    "website": "https://www.wcgservices.com"
+  },
+  "tags": ["emploi", "formation", "réhabilitation", "francophonie", "inclusion", "coaching", "jeunes", "anciens combattants"],
+  "memberOf": ["RIFA"]
+},
+{
+  "id": "cinemagine",
+  "name": "Cinémagine",
+  "category": "Culture / Cinéma / Francophonie",
+  "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
+  "foundedYear": 2023,
+  "director": {
+    "name": "Lionel Vialaneix",
+    "title": "Directeur général"
+  },
+  "services": [
+    "Le Film du Mois : projection mensuelle de films francophones pour ados/adultes",
+    "Ciné Saison : films familiaux projetés dans plusieurs villes selon les saisons",
+    "Ciné Bout’chou : ateliers de création de films en stop motion pour enfants 6-11 ans",
+    "Ciné Camp : stage d’une semaine pour ados (12-17 ans) avec réalisation de court métrage",
+    "Ciné Academy : ateliers scolaires interactifs sur le cinéma",
+    "Festival Coup de Projecteur : festival annuel de premiers films francophones",
+    "Tournée Jeunesse : projections itinérantes de films francophones pour écoles"
   ],
-  "chatbotTriggers": [
-    "je cherche un médecin en français",
-    "besoin d'un docteur",
-    "services de santé en français",
-    "aide santé"
+  "audience": "Albertains francophones et francophiles de tous âges, incluant les jeunes anglophones apprenant le français",
+  "projects": [
+    {
+      "name": "Ciné Academy Tour",
+      "description": "Ateliers animés par des professionnels du cinéma pour les organismes communautaires, culturels et éducatifs, destinés aux participants de 14 à 30 ans."
+    }
   ],
-  "map": {
-    "lat": 53.5201,
-    "lng": -113.4702
-  }
+  "locations": [
+    {
+      "city": "Calgary",
+      "address": "Présence dans plusieurs villes, Calgary, AB",
+      "lat": 51.0447,
+      "lng": -114.0719
+    },
+    {
+      "city": "Edmonton",
+      "address": "Présence dans plusieurs villes, Edmonton, AB",
+      "lat": 53.5461,
+      "lng": -113.4938
+    },
+    {
+      "city": "Lethbridge",
+      "address": "Présence dans plusieurs villes, Lethbridge, AB",
+      "lat": 49.6956,
+      "lng": -112.8418
+    },
+    {
+      "city": "Medicine Hat",
+      "address": "Présence dans plusieurs villes, Medicine Hat, AB",
+      "lat": 50.0405,
+      "lng": -110.6766
+    },
+    {
+      "city": "Red Deer",
+      "address": "Présence dans plusieurs villes, Red Deer, AB",
+      "lat": 52.2681,
+      "lng": -113.8112
+    }
+  ],
+  "contact": {
+    "phone": "403-320-7638",
+    "email": "info@cinemagine.net",
+    "website": "https://cinemagine.net"
+  },
+  "tags": ["cinéma", "francophonie", "culture", "jeunes", "atelier", "festival", "projection", "éducation"],
+  "memberOf": ["RIFA"]
 }
 ,
 {
-  "id": "org_13",
-  "name": "Coalition des femmes de l’Alberta",
-    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
-
-  "category": "Femmes",
-  "location": {
-    "city": "Edmonton",
-    "province": "AB"
-  },
-  "contacts": {
-    "email": "infos@coalitionfemmesab.ca",
-    "phone": "7804682288",
-    "website": "https://coalitionfemmesab.ca"
+  "id": "acfa",
+  "name": "ACFA",
+  "category": "Francophonie / Défense des droits linguistiques",
+  "description": "Organisme porte-parole de la francophonie albertaine, actif dans la défense des droits linguistiques, la promotion de la culture francophone et le soutien aux initiatives communautaires à travers l'Alberta.",
+  "foundedYear": 1926,
+  "director": {
+    "name": "Isabelle Laurin",
+    "title": "Directrice générale"
   },
   "services": [
-    "ateliers de développement personnel",
-    "mentorat",
-    "réseautage professionnel",
-    "soutien communautaire"
+    "Coordination provinciale et mobilisation des partenaires : animation de forums communautaires et tables de concertation",
+    "Appui à l’intégration et au sentiment d’appartenance des nouveaux arrivants",
+    "Représentation auprès des autorités provinciales et fédérales pour la défense des droits linguistiques et le financement des services en français",
+    "Production d’analyses, de données et d’outils stratégiques pour soutenir les organismes et informer les décideurs",
+    "Soutien aux campagnes de sensibilisation et de promotion pour accroître la visibilité des services en français",
+    "Renforcement des capacités communautaires : accompagnement en gouvernance et professionnalisation du secteur francophone",
+    "Leadership dans la mise en œuvre d’initiatives provinciales majeures : Mois de la francophonie, Semaine de l’immigration francophone, Mois de l’histoire des Noirs, Mois de la Fierté, Mois de l’histoire autochtone"
   ],
-  "keywords": [
-    "femmes",
-    "mentorat",
-    "violence",
-    "leadership",
-    "intégration"
+  "audience": "ACFA régionales, organismes et institutions desservant les communautés francophones en Alberta, partenaires d’intérêts communs",
+  "projects": [
+    {
+      "name": "Centenaire de l’ACFA",
+      "description": "Célébration des 100 ans de présence et d’engagement de la francophonie albertaine avec activités, projets artistiques et initiatives communautaires pour renforcer le sentiment d’appartenance et la visibilité de la communauté."
+    }
   ],
-  "audience": [
-    "femmes francophones",
-    "nouvelles arrivantes"
+  "locations": [
+    {
+      "city": "Alberta",
+      "address": "Présence dans toute la province",
+      "lat": null,
+      "lng": null
+    }
   ],
-  "chatbotTriggers": [
-    "services pour femmes",
-    "aide pour femmes",
-    "groupes de soutien femmes",
-    "mentorat pour femmes"
-  ],
-  "map": {
-    "lat": 53.5179,
-    "lng": -113.4628
-  }
-}
-,
-{
-  "id": "org_14",
-  "name": "Association des juristes d’expression française de l’Alberta (AJEFA)",
-    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
-
-  "category": "Justice",
-  "location": {
-    "city": "Edmonton",
-    "province": "AB"
+  "contact": {
+    "email": "acfa@acfa.ab.ca",
+    "website": "https://acfa.ab.ca"
   },
-  "contacts": {
+  "tags": ["francophonie", "culture", "droits linguistiques", "communauté", "coordination", "promotion", "intégration"],
+  "memberOf": ["RIFA"]
+},
+{
+  "id": "acfa_calgary",
+  "name": "ACFA Régionale de Calgary",
+  "category": "Francophonie régionale / Vie culturelle",
+  "description": "Organisme représentant la communauté francophone de Calgary et ses environs. Défend les intérêts de la francophonie locale, favorise l'expansion régionale et encourage l'usage et la valorisation de la langue française.",
+  "foundedYear": 1983,
+  "director": {
+    "name": "Marie-Thérèse Nickel",
+    "title": "Directrice régionale"
+  },
+  "services": [
+    "Promotion de la francophonie et vie culturelle : gestion des communications de la Francophonie à Calgary, promotion des services en français et des événements",
+    "Support communautaire : accès à des ressources et événements pour favoriser le réseautage et l'engagement social",
+    "Bénévolat : programme BBBV Calgary offrant des opportunités de bénévolat pour impliquer les nouveaux arrivants dans la communauté francophone"
+  ],
+  "audience": "Francophones et francophiles de Calgary et ses environs, intervenants communautaires et institutions francophones et d'immersion",
+  "projects": [
+    {
+      "name": "GALA de la Francophonie de Calgary",
+      "description": "Événement bisannuel visant à honorer les personnes contribuant au développement de la communauté francophone de Calgary. La 9ème édition aura lieu en novembre 2027."
+    },
+    {
+      "name": "Festival d’hiver francophone",
+      "description": "Festival annuel célébrant les traditions culturelles francophones et la diversité culturelle de l'Ouest canadien. La prochaine édition aura lieu les 13 et 14 mars 2026."
+    }
+  ],
+  "locations": [
+    {
+      "city": "Calgary",
+      "address": "122 17 Ave SE #124, Calgary, AB T2G 1H2",
+      "lat": 51.0437,
+      "lng": -114.0598
+    }
+  ],
+  "contact": {
+    "email": "directriceregionale.calgary@acfa.ab.ca",
+    "phone": "(403) 361-0042",
+    "website": "https://calgary.acfa.ab.ca/"
+  },
+  "tags": ["francophonie", "culture", "communauté", "événements", "bénévolat", "nouveaux arrivants"],
+  "memberOf": ["RIFA", "CLIF du Sud"]
+},
+{
+  "id": "acfa_grande_prairie",
+  "name": "ACFA Régionale de Grande Prairie",
+  "category": "Francophonie régionale / Vie culturelle",
+  "description": "Organisme représentant la communauté francophone de Grande Prairie et ses environs. Défend les intérêts de la francophonie locale, favorise le développement de la vie en français et collabore avec les écoles et organismes de la région.",
+  "foundedYear": 1936,
+  "director": {
+    "name": "Hélène Lavigne-Casteran",
+    "title": "Directrice régionale"
+  },
+  "services": [
+    "Valorisation et dynamisation de la vie francophone par des activités culturelles et services communautaires",
+    "Création de liens sociaux, célébration des identités francophones, soutien à l'épanouissement de la communauté",
+    "Promotion des activités et initiatives francophones auprès des familles, jeunes, nouveaux arrivants et personnes âgées"
+  ],
+  "audience": "Francophones et francophiles de Grande Prairie et ses environs, incluant familles, jeunes, nouveaux arrivants et aînés",
+  "projects": [],
+  "locations": [
+    {
+      "city": "Grande Prairie",
+      "address": "9928 111 Ave, Grande Prairie, AB T8V 4C3",
+      "lat": 55.1706,
+      "lng": -118.7962
+    }
+  ],
+  "contact": {
+    "email": "direction.grandeprairie@acfa.ab.ca",
+    "phone": null,
+    "website": "https://grandeprairie.acfa.ab.ca/"
+  },
+  "tags": ["francophonie", "culture", "communauté", "services communautaires", "nouveaux arrivants"],
+  "memberOf": ["RIFA", "CLIF du Nord"]
+},
+{
+  "id": "acfa_red_deer",
+  "name": "ACFA Régionale de Red Deer",
+  "category": "Francophonie régionale / Vie culturelle",
+  "description": "Organisme dont le but est de promouvoir le bien-être intellectuel, culturel et social des francophones de la région et d’encourager l'utilisation du français par le biais d'activités culturelles et sociales.",
+  "foundedYear": null,
+  "director": {
+    "name": "Nathalie Belkhiter",
+    "title": "Directrice"
+  },
+  "services": [
+    "Orientation et information : aide à la découverte des ressources locales (logement, transport, écoles, etc.) pour faciliter l’installation des nouveaux arrivants",
+    "Soutien à l’intégration : assistance pour s’adapter à la vie au Canada, informations sur les services de santé, l’éducation et les opportunités d’emploi",
+    "Ateliers d’intégration : sessions d’information sur les démarches administratives, la reconnaissance des diplômes et les services offerts par d’autres organisations locales",
+    "Réseautage : organisation d’événements communautaires pour rencontrer d’autres membres de la communauté et créer un réseau social et professionnel"
+  ],
+  "audience": "Francophones et francophiles de la région, notamment familles, jeunes, nouveaux arrivants et personnes âgées",
+  "projects": [
+    {
+      "name": "Garderie LumiKids",
+      "description": "Création et gestion de la garderie pour enfants francophones"
+    },
+    {
+      "name": "Camp d’été Chevreuil Aventurier",
+      "description": "Gestion du camp d’été pour enfants afin de favoriser le développement culturel et social"
+    }
+  ],
+  "locations": [
+    {
+      "city": "Red Deer",
+      "address": "4617 62 St, Red Deer, AB T4N 2R4",
+      "lat": 52.2684,
+      "lng": -113.8112
+    }
+  ],
+  "contact": {
+    "email": "direction.reddeer@acfa.ab.ca",
+    "phone": null,
+    "website": "https://reddeer.acfa.ab.ca/"
+  },
+  "tags": ["francophonie", "culture", "communauté", "services communautaires", "nouveaux arrivants", "jeunesse"],
+  "memberOf": ["RIFA", "CLIF du Nord"]
+},{
+  "id": "acfa_wood_buffalo",
+  "name": "ACFA Régionale de Wood Buffalo",
+  "category": "Francophonie régionale / Vie culturelle",
+  "description": "Organisme créé en 1980 visant à promouvoir le bien-être culturel, intellectuel, social et économique des francophones de la région et encourager l'utilisation du français par des activités culturelles et sociales. Défend les intérêts de ses membres et permet à la communauté francophone et francophile de vivre fièrement en français.",
+  "foundedYear": 1980,
+  "director": {
+    "name": "Maryse Champagne",
+    "title": "Directrice générale"
+  },
+  "services": [
+    "Accueil des nouveaux arrivants : services d'appui et d'intégration pour les nouveaux arrivants provenant d’ailleurs au Canada et de l'étranger",
+    "Activités culturelles et sociales : organisation d'événements culturels, conférences, formations, activités sportives, spectacles et rencontres communautaires",
+    "Services de garde et petite enfance : encadrement francophone de qualité pour enfants de 0 à 12 ans avec la Garderie Chez Madame Piccolo et la halte-scolaire, programmes éducatifs approuvés par Alberta Child Care Services",
+    "Soutien aux familles et jeunes : activités et programmes éducatifs pour les familles et jeunes francophones",
+    "Bénévolat : opportunités pour s'impliquer et créer des liens dans la communauté francophone"
+  ],
+  "audience": "Francophones et francophiles de la région, incluant familles, jeunes, nouveaux arrivants, personnes âgées et partenaires communautaires",
+  "projects": [
+    {
+      "name": "Garderie Chez Madame Piccolo",
+      "description": "Projet phare offrant encadrement francophone pour enfants de 0 à 12 ans avec 67 places, incluant garderie et halte-scolaire, favorisant l'éducation en français et la vitalité de la communauté"
+    }
+  ],
+  "locations": [
+    {
+      "city": "Fort McMurray",
+      "address": "312 Abasand Dr #100, Fort McMurray, AB T9J 1B2",
+      "lat": 56.7291,
+      "lng": -111.3790
+    }
+  ],
+  "contact": {
+    "email": "administration.woodbuffalo@acfa.ab.ca",
+    "phone": null,
+    "website": "https://woodbuffalo.acfa.ab.ca/"
+  },
+  "tags": ["francophonie", "culture", "communauté", "services communautaires", "garderie", "nouveaux arrivants", "jeunesse", "familles"],
+  "memberOf": ["RIFA", "CLIF du Nord"]
+},
+{
+  "id": "acfa_edmonton",
+  "name": "ACFA Régionale d’Edmonton",
+  "category": "Francophonie régionale / Vie culturelle",
+  "description": "Depuis 1977, l'ACFA Régionale d’Edmonton s'engage à représenter, défendre et promouvoir les intérêts des francophones de la région. Elle œuvre pour le développement culturel, social et économique de la communauté francophone et propose divers services et activités pour renforcer la vitalité de la francophonie à Edmonton.",
+  "foundedYear": 1977,
+  "director": {
+    "name": "Josée Côté",
+    "title": "Directrice"
+  },
+  "services": [
+    "Accueil et intégration des nouveaux arrivants : orientation, conseils, ateliers et soutien dans les démarches administratives",
+    "Événements communautaires et culturels : ateliers, concerts, célébrations culturelles pour rassembler la communauté francophone",
+    "Ateliers de formation et de développement personnel : sessions pour renforcer les compétences des francophones dans divers domaines",
+    "Engagement communautaire et bénévolat : opportunités pour soutenir les initiatives de l'ACFA et s'intégrer davantage dans la communauté"
+  ],
+  "audience": "Francophones et francophiles de la région d’Edmonton et villes avoisinantes, incluant familles, jeunes, nouveaux arrivants et personnes âgées",
+  "projects": [
+    {
+      "name": "Camp Soleil",
+      "description": "Camp de jour francophone, seul camp de vacances francophone de l’Alberta"
+    },
+    {
+      "name": "Camp Lusson",
+      "description": "Camp francophone existant depuis 1981 pour enfants"
+    },
+    {
+      "name": "Festival Edmonton Chante",
+      "description": "Festival mettant en valeur des artistes locaux et internationaux francophones"
+    },
+    {
+      "name": "Cabane à sucre communautaire",
+      "description": "Événement culturel et communautaire pour la francophonie locale"
+    }
+  ],
+  "locations": [
+    {
+      "city": "Edmonton",
+      "address": "8627 rue Marie-Anne-Gaboury, 91 St #303, Edmonton, AB T6C 3N1",
+      "lat": 53.5225,
+      "lng": -113.4872
+    }
+  ],
+  "contact": {
+    "email": "direction@acfaedmonton.ab.ca",
+    "phone": null,
+    "website": "https://edmonton.acfa.ab.ca/"
+  },
+  "tags": ["francophonie", "culture", "communauté", "services communautaires", "camp de jour", "festival", "nouveaux arrivants", "jeunesse", "familles"],
+  "memberOf": ["RIFA", "CLIF du Nord"]
+},{
+  "id": "ajefa",
+  "name": "Association des Juristes d’Expression Française de l’Alberta",
+  "category": "Services juridiques / Francophonie",
+  "description": "Fondée en 1990, l’AJEFA facilite l’accès du public aux services juridiques en français et promeut l’utilisation de la langue française dans l’administration de la justice en Alberta.",
+  "foundedYear": 1990,
+  "director": {
+    "name": "Maria Vigneault",
+    "title": "Directrice générale"
+  },
+  "services": [
+    "Centre albertain d’information juridique : informations gratuites et confidentielles en français ou en anglais, service de commissaire à l’assermentation et notaire public gratuit",
+    "Ressources juridiques : guides, documents et vidéos informatifs couvrant tous les domaines juridiques",
+    "Éducation juridique : ateliers et programmes de sensibilisation pour le grand public, écoles, aînés, jeunes et nouveaux arrivants",
+    "Droits et justice en français : promotion de l’égalité linguistique devant les tribunaux et accès à la justice en français",
+    "Bourses d’études : soutien financier pour étudiants en droit francophones ou bilingues en Alberta et au Canada",
+    "Partenariats juridiques : collaboration avec cliniques juridiques, répertoire d’avocats bilingues et autres acteurs du milieu juridique"
+  ],
+  "audience": "Grand public francophone de l’Alberta, étudiants en droit francophones ou bilingues, juristes francophones, jeunes et milieu scolaire",
+  "projects": [
+    {
+      "name": "Centre albertain d’information juridique",
+      "description": "Centre offrant ressources et services gratuits et confidentiels d’information, orientation et accompagnement juridique, disponibles en français et anglais, en personne ou à distance"
+    }
+  ],
+  "locations": [
+    {
+      "city": "Edmonton",
+      "address": "La Cité francophone, 314, 8627 rue Marie-Anne-Gaboury, 91 St, Edmonton, AB T6C 3L5",
+      "lat": 53.5225,
+      "lng": -113.4872
+    },
+    {
+      "city": "Calgary",
+      "address": "Centre albertain d’information juridique - Calgary",
+      "lat": 51.0447,
+      "lng": -114.0719
+    }
+  ],
+  "contact": {
     "email": "bureau@ajefa.ca",
-    "phone": "7804502443",
-    "website": "https://ajefa.ca"
+    "phone": "780-450-2443",
+    "tollFree": "1-844-266-5822",
+    "website": "https://www.ajefa.ca"
+  },
+  "tags": ["justice", "juridique", "francophonie", "éducation juridique", "ressources juridiques", "centre d’information", "nouveaux arrivants", "étudiants en droit"],
+  "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"]
+},{
+  "id": "ajfas",
+  "name": "Alliance Jeunesse-Famille de l’Alberta Society",
+  "category": "Services communautaires / Francophonie",
+  "description": "Fondée en décembre 1999, l’AJFAS est un organisme francophone à but non lucratif dédié à la prévention de la criminalité auprès des jeunes et des familles francophones d’origine immigrante et à leur intégration socio-professionnelle en Alberta. L’organisme promeut l’harmonie, la sécurité, la cohésion sociale et l’appréciation de la diversité.",
+  "foundedYear": 1999,
+  "director": {
+    "name": "Luketa M’Pindou",
+    "title": "Fondateur et Directeur général"
   },
   "services": [
-    "information juridique en français",
-    "référencement vers avocats",
-    "cliniques juridiques",
-    "ateliers d'information"
+    "Programmes de mentorat : Jeunes Ambassadeurs Itinérants (JAMIT) pour former des jeunes ambassadeurs de paix et de justice sociale",
+    "Soutien aux femmes (Honneur & Respect) : ateliers et forums pour femmes francophones d’origine immigrante",
+    "Prévention de la violence familiale : programmes tels que Déjeuners des hommes et Causeries entre femmes",
+    "Services d’interprétation et de traduction",
+    "Activités communautaires, sportives et culturelles : sorties, célébrations, rencontres sportives et émissions radiophoniques comme le 'Café du Savoir'",
+    "Programmes pour les jeunes en conflit avec la loi : Caravan Youth Justice pour la réhabilitation des 12-17 ans",
+    "Agir contre le racisme : promouvoir le respect des différences et le mieux-vivre ensemble",
+    "Promotion de l’interculturalité et du dialogue des cultures",
+    "Programme de Résilience Familiale : soutien psychologique, éducatif et santé mentale pour enfants et familles de 9-17 ans",
+    "Cuisine Communautaire : socialisation et apprentissage pour familles",
+    "Jardin Communautaire : programme saisonnier pour briser l’isolement",
+    "Programme Échange Jeunesse Canada : exploration et partage pour les 12-17 ans",
+    "Camp Enfance et Leadership en Action (ELA) : camp thématique sur le leadership et la diversité pour les 6-12 ans",
+    "Aide à l’autonomisation par l’entreprenariat : coopérative de couture et réseau de jeunes entrepreneurs noirs"
   ],
-  "keywords": [
-    "avocat",
-    "droits",
-    "immigration",
-    "famille",
-    "justice en français"
+  "audience": "Jeunes, femmes et familles francophones d’origine immigrante résidant en Alberta",
+  "projects": [
+    {
+      "name": "Camp Enfance et Leadership en Action (ELA)",
+      "description": "Camp pendant les grandes vacances pour enfants de 6 à 12 ans, centré sur le leadership et la diversité"
+    },
+    {
+      "name": "Programmes JAMIT",
+      "description": "Programme de mentorat pour former des jeunes ambassadeurs de paix et de justice sociale"
+    }
   ],
-  "audience": [
-    "francophones",
-    "nouveaux arrivants",
-    "familles"
+  "locations": [
+    {
+      "city": "Edmonton",
+      "address": "8925 Whyte Ave NW #100, Edmonton, AB T6C 0Z2",
+      "lat": 53.5220,
+      "lng": -113.4900
+    }
   ],
-  "chatbotTriggers": [
-    "j'ai besoin d'un avocat",
-    "aide juridique en français",
-    "problème légal",
-    "droits des immigrants"
+  "contact": {
+    "email": "info@ajfas.ca",
+    "phone": "780-440-2621",
+    "website": "https://ajfas.ca"
+  },
+  "tags": ["jeunesse", "familles", "francophonie", "prévention", "diversité", "communauté", "mentorat", "leadership", "éducation"],
+  "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"]
+},{
+  "id": "campus_saint_jean",
+  "name": "Campus Saint-Jean",
+  "category": "Éducation / Francophonie",
+  "description": "Campus multidisciplinaire francophone de l’Université de l’Alberta, établi en 1908 à Edmonton, offrant des programmes universitaires de premier cycle et des cycles supérieurs en français.",
+  "foundedYear": 1908,
+  "director": {
+    "name": "Pr Jason Carey",
+    "title": "Doyen"
+  },
+  "services": [
+    "Services étudiants – La Centrale : santé, bien-être, réussite académique, orientation, services internationaux, résidence",
+    "Conseil académique : accompagnement pédagogique, bourses, formulaires, soutien aux examens",
+    "Bibliothèque Saint-Jean : collections francophones, ressources éducatives, accès aux bibliothèques de l’Université de l’Alberta",
+    "Vie sur le campus : cafétéria, résidence francophone, navette gratuite avec le campus Nord, services TI, réservation de salles",
+    "Santé et bien-être : services de santé mentale, activités de bien-être, jardin communautaire",
+    "Vie associative et culturelle : associations étudiantes, chorale, théâtre, événements communautaires",
+    "Programmes éducatifs : baccalauréats, diplômes collégiaux, cours de langue, micro-certificats, formation à distance, études supérieures (Maîtrise et Doctorat en sciences de l’éducation)",
+    "Recherche et rayonnement : instituts de recherche francophones, patrimoine et culture, participation à des projets communautaires et scientifiques"
   ],
-  "map": {
-    "lat": 53.5187,
-    "lng": -113.4695
-  }
+  "audience": "Étudiants francophones et francophiles de l’Alberta et d’ailleurs, futurs enseignants, chercheurs et professionnels francophones, ainsi que la communauté locale souhaitant étudier, travailler ou participer à la vie culturelle francophone",
+  "projects": [],
+  "locations": [
+    {
+      "city": "Edmonton",
+      "address": "8406 Rue Marie-Anne Gaboury, Edmonton, Alberta, Canada T6C 4G9",
+      "lat": 53.5225,
+      "lng": -113.4855
+    },
+    {
+      "city": "Calgary",
+      "address": "Campus Saint-Jean, Calgary, Alberta, Canada",
+      "lat": 51.0447,
+      "lng": -114.0719
+    }
+  ],
+  "contact": {
+    "email": "saintjean@ualberta.ca",
+    "phone": "780-465-8700",
+    "website": "https://www.ualberta.ca/fr/campus-saint-jean"
+  },
+  "tags": ["éducation", "université", "francophonie", "étudiants", "recherche", "culture", "services étudiants"],
+  "memberOf": ["RIFA", "Groupe Sectoriel Éducation"]
+},{
+  "id": "canada_in_progress",
+  "name": "Canada In Progress",
+  "category": "Services communautaires / Francophonie",
+  "description": "Société à but non lucratif fondée en 2017 à Grande Prairie, Canada In Progress a pour mandat d’éduquer et sensibiliser la communauté francophone locale, notamment à travers des activités et formations favorisant l’engagement civique, social et culturel, la diversité et l’inclusion.",
+  "foundedYear": 2017,
+  "director": {
+    "name": "Paul Rovin",
+    "title": "Directeur général"
+  },
+  "services": [
+    "Déclaration d’impôt pour les personnes à faible revenu (PCBMI)",
+    "Aide à l’intégration et à la connexion communautaire",
+    "Référencements pour les services de logement, emploi, finance, éducation et vie communautaire",
+    "Activités culturelles dans les écoles et dans les communautés"
+  ],
+  "audience": "Immigrants et nouveaux arrivants francophones de Grande Prairie et ses environs, incluant jeunes, familles et communautés multiculturelles",
+  "projects": [
+    {
+      "name": "Promotion de la diversité et inclusion sociale",
+      "description": "Facilitation de l’intégration des immigrants francophones en situation minoritaire à Grande Prairie à travers des activités culturelles, artistiques, éducatives et intergénérationnelles"
+    },
+    {
+      "name": "Lutte contre le racisme, la haine et la discrimination",
+      "description": "Programmes et initiatives visant à sensibiliser et à promouvoir l’équité et le respect des différences"
+    }
+  ],
+  "locations": [
+    {
+      "city": "Grande Prairie",
+      "address": "10029 97 Ave, Grande Prairie, AB T8V 0N3",
+      "lat": 55.1706,
+      "lng": -118.7962
+    }
+  ],
+  "contact": {
+    "email": "canadinpro@gmail.com",
+    "phone": "+1 587-408-3458",
+    "website": "https://canadainprogress.ca/"
+  },
+  "tags": ["francophonie", "communauté", "immigrants", "intégration", "diversité", "inclusion", "culture", "jeunesse", "familles"],
+  "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"]
 }
-,
-{
-  "id": "org_15",
-  "name": "Regroupement artistique francophone de l’Alberta (RAFA)",
-    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
 
-  "category": "Culture",
-  "location": {
-    "city": "Calgary",
-    "province": "AB"
-  },
-  "contacts": {
-    "email": "info@lerafa.ca",
-    "phone": "7804620502",
-    "website": "https://lerafa.ca"
-  },
-  "services": [
-    "soutien aux artistes",
-    "diffusion culturelle",
-    "organisation d'événements",
-    "formation artistique"
-  ],
-  "keywords": [
-    "arts",
-    "spectacles",
-    "musique",
-    "théâtre",
-    "culture francophone"
-  ],
-  "audience": [
-    "artistes",
-    "grand public",
-    "jeunes"
-  ],
-  "chatbotTriggers": [
-    "événements culturels",
-    "spectacles en français",
-    "arts francophones",
-    "activités culturelles"
-  ],
-  "map": {
-    "lat": 53.5168,
-    "lng": -113.4683
-  }
-}
-,
-{
-  "id": "org_16",
-  "name": "Fédération des aînés franco-albertains (FAFA)",
-    "logo": "https://frap.ca/wp-content/uploads/2022/08/FRAP-logo-2022.png",
-
-  "category": "Aînés",
-  "location": {
-    "city": "Edmonton",
-    "province": "AB"
-  },
-  "contacts": {
-    "email": "fafa@fafalta.ca",
-    "phone": "7804658965",
-    "website": "https://fafalta.ca"
-  },
-  "services": [
-    "activités sociales",
-    "information et soutien",
-    "programmes de bien-être",
-    "représentation des aînés"
-  ],
-  "keywords": [
-    "aînés",
-    "personnes âgées",
-    "isolement",
-    "activités sociales",
-    "soutien"
-  ],
-  "audience": [
-    "aînés francophones",
-    "proches aidants"
-  ],
-  "chatbotTriggers": [
-    "services pour personnes âgées",
-    "activités pour aînés",
-    "aide pour parents âgés",
-    "soutien aux aînés"
-  ],
-  "map": {
-    "lat": 53.5198,
-    "lng": -113.4711
-  }
-}
 ]
