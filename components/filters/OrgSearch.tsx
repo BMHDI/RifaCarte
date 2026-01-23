@@ -68,7 +68,6 @@ export function OrgSearch() {
 
   // 🔹 SAME LOGIC + category filter added
   const filteredOrgs = organizations.filter((org) => {
-    // ----- text logic (UNCHANGED) -----
     let textMatch = true;
 
     if (query) {
@@ -78,9 +77,21 @@ export function OrgSearch() {
 
       if (services.length === 0) return false;
 
-      textMatch = services.some((word) =>
-        org.services.some((k) => normalize(k).includes(word)),
-      );
+      textMatch = services.some((word) => {
+        // Check in services
+        const inServices = org.services.some((s: string) =>
+          normalize(s).includes(word),
+        );
+
+        // Check in projects (both name and description)
+        const inProjects = org.projects?.some(
+          (p: { name: string; description: string }) =>
+            normalize(p.name).includes(word) ||
+            normalize(p.description).includes(word),
+        );
+
+        return inServices || inProjects;
+      });
     }
 
     // ----- category filter (UNCHANGED) -----
@@ -98,7 +109,7 @@ export function OrgSearch() {
 
   return (
     <div>
-      <div className="flex flex-col h-[70vh] bg-gray-60  ">
+      <div className="flex flex-col h-[72vh] bg-gray-60">
         <div
           className="h-full
          grid
@@ -186,20 +197,21 @@ export function OrgSearch() {
       </div>
 
       {/* ✅ SAME STYLING — button becomes dropdown */}
-      <div className="mx-6 flex flex-col flex-wrap items-start gap-2 ">
+      <div className="mx-4 flex flex-col  ">
         {selectedCategories.length > 0 || selectedCities.length > 0 ? (
           <>
             {selectedCategories.length > 0 && (
               <>
-                <div className="flex flex-row flex-wrap items-start gap-2 ">
-                  <span className="text-sm font-medium">
-                    Catégories choisies:
-                  </span>
+                <span className="text-sm font-medium flex-shrink-0">
+                  Catégories:
+                </span>
+
+                <div className="flex items-center gap-1 overflow-x-auto whitespace-nowrap ">
                   {selectedCategories.map((c) => (
                     <Badge
                       key={`cat-${c}`}
                       variant="default"
-                      className="rounded-full cursor-pointer"
+                      className="rounded-full cursor-pointer flex-shrink-0"
                       onClick={() => toggleCategory(c)}
                     >
                       {c} ✕
@@ -211,13 +223,15 @@ export function OrgSearch() {
 
             {selectedCities.length > 0 && (
               <>
-                <div className="flex flex-row flex-wrap items-start gap-2 ">
-                  <span className="text-sm font-medium">Villes choisies:</span>
+                <span className="text-sm font-medium flex-shrink-0">
+                  Villes :
+                </span>
+                <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap ">
                   {selectedCities.map((c) => (
                     <Badge
                       key={`city-${c}`}
                       variant="default"
-                      className="rounded-full cursor-pointer"
+                      className="rounded-full cursor-pointer flex-shrink-0"
                       onClick={() => toggleCity(c)}
                     >
                       {c} ✕

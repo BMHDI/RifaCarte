@@ -32,13 +32,13 @@ export function AppSidebar() {
   ];
 
   return (
-    <Sidebar collapsible="icon" className="md:w-160 relative">
+    <Sidebar collapsible="icon" className="md:w-160 mt-17 ">
       {isMobile ? <SidebarTrigger /> : <SidebarToggleButton />}
 
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu >
+            <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.key}>
                   <SidebarMenuButton

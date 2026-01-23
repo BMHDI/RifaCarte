@@ -37,11 +37,24 @@ export function OrgCard({
   return (
     <Card className="md:w-[297px] pb-4 ">
       {/* Optional overlay if needed */}
-      <img
-        src="https://www.theglobeandmail.com/resizer/v2/65SAIIIB2BGD3ATQ247G2T343U.JPG?auth=b1e9ced577046f6fd03cac067a6618c0a7da134ad8278b8b93a4157930c28383&width=600&quality=80"
-        alt={`${name} logo`}
-        className="relative  rounded-t-xl z-10 aspect-video h-40 w-full object-cover brightness-90 "
-      />
+      <div className="relative w-full h-40 rounded-t-xl overflow-hidden">
+        {/* Blurred background */}
+        <img
+          src="https://citedesrocheuses.com/wp-content/uploads/2026/01/cdr-rgb-v3.png"
+          alt={`${name} background`}
+          className="absolute inset-0 w-full h-full object-cover filter blur-md brightness-75"
+        />
+
+        {/* Actual logo */}
+        <div className="relative flex items-center justify-center w-full h-full">
+          <img
+            src="https://citedesrocheuses.com/wp-content/uploads/2026/01/cdr-rgb-v3.png"
+            alt={`${name} logo`}
+            className="max-h-25 max-w-[80%] object-contain"
+          />
+        </div>
+      </div>
+
       {category && (
         <CardAction className="p-2">
           <Badge variant="secondary">{category}</Badge>

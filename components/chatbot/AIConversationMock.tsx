@@ -30,7 +30,7 @@ export function AIConversationMock() {
 
   return (
     <>
-      <div className="flex flex-col h-[70vh] border rounded-md p-2 bg-gray-50">
+      <div className="flex flex-col h-[72vh] border rounded-md  bg-gray-50">
         {/* Messages display */}
         <div className="flex-1 overflow-y-auto mb-2 space-y-2">
           {messages.map((msg, idx) => (
@@ -48,7 +48,7 @@ export function AIConversationMock() {
         </div>
 
         {/* Input area margin bottom 4 to match the search input */}
-        <div className="flex ">
+       <div className="flex w-full p-4 ">
           <Input
             className="rounded-r-none"
             placeholder="Écrivez votre message..."
@@ -65,7 +65,7 @@ export function AIConversationMock() {
           </Button>
         </div>
       </div>
-      <div className="  m-6">
+       <div className="mx-6 flex flex-col flex-wrap items-start gap-2 ">
         <p className="text-md text-gray-900 m-2">
           Ce chatbot est utilisé pour illustrer la fonctionnalité de recherche.
           Les résultats peuvent varier en fonction de la recherche effectuée.
