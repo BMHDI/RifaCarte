@@ -14,7 +14,7 @@ import { Heart, Locate, Map, Phone, Share } from "lucide-react";
 import Image from "next/image";
 
 interface OrgCardProps {
-  logo: string;
+  // logo: string;
   name: string;
   phone: string;
   address: string;

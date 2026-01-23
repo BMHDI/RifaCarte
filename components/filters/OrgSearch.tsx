@@ -117,7 +117,7 @@ export function OrgSearch() {
               onShare={() => {}}
               onMap={() => {}}
               name={org.name}
-              logo={org.logo ?? ""} // fallback if logo is missing
+              // logo={org.logo ?? ""} // fallback if logo is missing
               phone={org.contact?.phone ?? ""} // fallback if phone is missing
               address={org.locations[0].address}
             />
