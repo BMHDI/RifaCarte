@@ -11,7 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ExternalLink, Heart, Locate, MapPin, MapPinned, Phone } from "lucide-react";
+import {
+  ExternalLink,
+  Heart,
+  Locate,
+  MapPin,
+  MapPinned,
+  Phone,
+} from "lucide-react";
 import Image from "next/image";
 
 interface OrgCardProps {
@@ -39,13 +46,18 @@ export function OrgCard({
     <Card className="md:w-[297px] pb-4 bg-gray-100 ">
       {/* Optional overlay if needed */}
       {/* IMAGE HEADER */}
-      
+
       <div className="relative h-24 w-full overflow-hidden rounded-t-md">
-          <Button size="icon" variant="ghost" onClick={onMap} className="absolute top-0 right-0" >
-<Heart className="text-rose-600 z-10" />        </Button>
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={onMap}
+          className="absolute top-0 right-0"
+        >
+          <Heart className="text-rose-600 z-10" />{" "}
+        </Button>
         <img
-          
-            src="https://canmore-banff.acfa.ab.ca/wp-content/uploads/2022/12/Logo-Fondation-Franco-Albertaine-1024x338.png"
+          src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
           alt={`${name} background`}
           className="absolute inset-0 h-full w-full object-cover blur-md brightness-90 scale-110"
         />
@@ -53,9 +65,8 @@ export function OrgCard({
         {/* LOGO */}
         <div className="relative z-10 flex h-full items-end justify-center pb-2">
           <img
-          
             alt={name}
-            src="https://canmore-banff.acfa.ab.ca/wp-content/uploads/2022/12/Logo-Fondation-Franco-Albertaine-1024x338.png"
+            src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
             className="h-22  object-contain rounded-xl p-1"
           />
         </div>

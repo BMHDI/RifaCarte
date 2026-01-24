@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import organizations from "@/lib/org.json";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useOrg } from "@/app/context/OrgContext";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
@@ -18,7 +19,11 @@ const normalize = (text: string) =>
   text
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "") // remove accents
+    .replace(/['’`-]/g, " ") // remove apostrophes and hyphens
+    .replace(/[^\w\s]/g, " ") // replace other punctuation with space
+    .replace(/\s+/g, " ") // collapse multiple spaces
+    .trim(); // remove leading/trailing spaces
 
 const stopWords = [
   "pour",
@@ -38,6 +43,7 @@ export function OrgSearch() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
+  const { setSelectedOrg } = useOrg();
 
   // ✅ unique categories
   const categories = useMemo(() => {
@@ -71,27 +77,45 @@ export function OrgSearch() {
     let textMatch = true;
 
     if (query) {
-      const services = normalize(query)
+      const normalizedQuery = normalize(query);
+      const queryWords = normalizedQuery
         .split(/\s+/)
         .filter((w) => w && !stopWords.includes(w));
 
-      if (services.length === 0) return false;
+      if (queryWords.length === 0) return false;
 
-      textMatch = services.some((word) => {
-        // Check in services
-        const inServices = org.services.some((s: string) =>
-          normalize(s).includes(word),
-        );
+      // 🔹 Phrase match first (whole query)
+      const phraseInServices = org.services.some((s: string) =>
+        normalize(s).includes(normalizedQuery),
+      );
 
-        // Check in projects (both name and description)
-        const inProjects = org.projects?.some(
-          (p: { name: string; description: string }) =>
-            normalize(p.name).includes(word) ||
-            normalize(p.description).includes(word),
-        );
+      const phraseInProjects = org.projects?.some(
+        (p: { name: string; description: string }) =>
+          normalize(p.name).includes(normalizedQuery) ||
+          normalize(p.description).includes(normalizedQuery),
+      );
 
-        return inServices || inProjects;
+      // 🔹 Word-based AND match if phrase not found
+      const wordsInServices = org.services.some((s: string) => {
+        const normalizedService = normalize(s);
+        return queryWords.every((word) => normalizedService.includes(word));
       });
+
+      const wordsInProjects = org.projects?.some((p) => {
+        const normalizedName = normalize(p.name);
+        const normalizedDesc = normalize(p.description);
+        return queryWords.every(
+          (word) =>
+            normalizedName.includes(word) || normalizedDesc.includes(word),
+        );
+      });
+
+      textMatch =
+        (phraseInServices ||
+          phraseInProjects ||
+          wordsInServices ||
+          wordsInProjects) ??
+        false;
     }
 
     // ----- category filter (UNCHANGED) -----
@@ -106,17 +130,11 @@ export function OrgSearch() {
 
     return textMatch && categoryMatch && cityMatch;
   });
+
   return (
     <div>
       <div className="flex flex-col h-[80vh] bg-gray-60">
-        <div
-          className="h-full
-         grid
-          gap-2
-         mb-2
-          overflow-y-auto
-         [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
-        >
+        <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
           {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
 
           {filteredOrgs.map((org) => (
@@ -125,11 +143,15 @@ export function OrgSearch() {
               {...org}
               onDetails={() => {}}
               onShare={() => {}}
-              onMap={() => {}}
+               onMap={() =>
+    setSelectedOrg({
+      org,
+      location: org.locations.find((loc) => loc.lat != null && loc.lng != null),
+    })
+  }
               name={org.name}
-              // logo={org.logo ?? ""} // fallback if logo is missing
-              phone={org.contact?.phone ?? ""} // fallback if phone is missing
-              address={org.locations[0].address}
+              phone={org.contact?.phone ?? ""}
+              address={org.locations[0]?.address}
             />
           ))}
         </div>
