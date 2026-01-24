@@ -31,7 +31,7 @@ export function AppSidebar() {
   ];
 
   return (
-    <Sidebar collapsible="icon" className="md:w-170 mt-17 ">
+    <Sidebar collapsible="icon" className="md:w-170 mt-19 ">
       {isMobile ? <SidebarTrigger /> : <SidebarToggleButton />}
 
       <SidebarContent>

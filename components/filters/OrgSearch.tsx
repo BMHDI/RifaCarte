@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 
-import { Check, ChevronDown } from "lucide-react";
+import { ArrowBigDown, Check, ChevronDown } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
 
@@ -106,10 +106,9 @@ export function OrgSearch() {
 
     return textMatch && categoryMatch && cityMatch;
   });
-
   return (
     <div>
-      <div className="flex flex-col h-[72vh] bg-gray-60">
+      <div className="flex flex-col h-[80vh] bg-gray-60">
         <div
           className="h-full
          grid
@@ -134,7 +133,60 @@ export function OrgSearch() {
             />
           ))}
         </div>
+        {/* ✅ SAME STYLING — button becomes dropdown */}
+        <div className="mx-4 flex flex-col  ">
+          {selectedCategories.length > 0 || selectedCities.length > 0 ? (
+            <>
+              {selectedCategories.length > 0 && (
+                <>
+                  <span className="text-sm font-medium flex-shrink-0">
+                    Catégories:
+                  </span>
 
+                  <div className="flex flex-wrap items-center gap-1">
+                    {selectedCategories.map((c) => (
+                      <Badge
+                        key={`cat-${c}`}
+                        variant="default"
+                        className="rounded-full cursor-pointer flex-shrink-0"
+                        onClick={() => toggleCategory(c)}
+                      >
+                        {c} ✕
+                      </Badge>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {selectedCities.length > 0 && (
+                <>
+                  <span className="text-sm font-medium flex-shrink-0">
+                    Villes :
+                  </span>
+                  <div className="flex flex-wrap items-center gap-1">
+                    {selectedCities.map((c) => (
+                      <Badge
+                        key={`city-${c}`}
+                        variant="default"
+                        className="rounded-full cursor-pointer flex-shrink-0"
+                        onClick={() => toggleCity(c)}
+                      >
+                        {c} ✕
+                      </Badge>
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <div className="flex flex-row justify-end items-end ">
+              <p className="text-xs font-medium text-gray-900 flex ">
+                Utilisez le bouton filtres pour choisir la ville ou la catégorie
+              </p>
+              <ArrowBigDown className="h-5" fill="#e6425f" />
+            </div>
+          )}
+        </div>
         {/* ✅ SAME STYLING — button becomes dropdown */}
         <div className="flex w-full p-4 ">
           <Input
@@ -194,58 +246,6 @@ export function OrgSearch() {
             </PopoverContent>
           </Popover>
         </div>
-      </div>
-
-      {/* ✅ SAME STYLING — button becomes dropdown */}
-      <div className="mx-4 flex flex-col  ">
-        {selectedCategories.length > 0 || selectedCities.length > 0 ? (
-          <>
-            {selectedCategories.length > 0 && (
-              <>
-                <span className="text-sm font-medium flex-shrink-0">
-                  Catégories:
-                </span>
-
-                <div className="flex items-center gap-1 overflow-x-auto whitespace-nowrap ">
-                  {selectedCategories.map((c) => (
-                    <Badge
-                      key={`cat-${c}`}
-                      variant="default"
-                      className="rounded-full cursor-pointer flex-shrink-0"
-                      onClick={() => toggleCategory(c)}
-                    >
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {selectedCities.length > 0 && (
-              <>
-                <span className="text-sm font-medium flex-shrink-0">
-                  Villes :
-                </span>
-                <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap ">
-                  {selectedCities.map((c) => (
-                    <Badge
-                      key={`city-${c}`}
-                      variant="default"
-                      className="rounded-full cursor-pointer flex-shrink-0"
-                      onClick={() => toggleCity(c)}
-                    >
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          <p className="text-md text-gray-900 m-2">
-            Utilisez le bouton filtres pour choisir la ville ou la catégorie
-          </p>
-        )}
       </div>
     </div>
   );
