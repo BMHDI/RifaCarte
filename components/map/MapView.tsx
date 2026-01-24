@@ -65,7 +65,7 @@ const markers = selectedOrg
         )}
 
         {/* Markers */}
-        {markers.map((loc: any, index: number) => (
+        {markers?.map((loc: any, index: number) => (
           <Marker
             key={`${loc.org?.id || "org"}-${index}`}
             longitude={loc.lng}
