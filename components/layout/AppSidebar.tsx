@@ -1,13 +1,12 @@
 "use client";
 
-import { Home, Heart, Bot, List } from "lucide-react";
+import {  Bot, List } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -32,7 +31,7 @@ export function AppSidebar() {
   ];
 
   return (
-    <Sidebar collapsible="icon" className="md:w-160 mt-17 ">
+    <Sidebar collapsible="icon" className="md:w-170 mt-17 ">
       {isMobile ? <SidebarTrigger /> : <SidebarToggleButton />}
 
       <SidebarContent>

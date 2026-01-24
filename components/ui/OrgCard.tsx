@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Heart, Locate, Map, Phone, Share } from "lucide-react";
+import { ExternalLink, Heart, Locate, MapPin, MapPinned, Phone } from "lucide-react";
 import Image from "next/image";
 
 interface OrgCardProps {
@@ -35,22 +36,27 @@ export function OrgCard({
   onMap,
 }: OrgCardProps) {
   return (
-    <Card className="md:w-[297px] pb-4 ">
+    <Card className="md:w-[297px] pb-4 bg-gray-100 ">
       {/* Optional overlay if needed */}
-      <div className="relative w-full h-40 rounded-t-xl overflow-hidden">
-        {/* Blurred background */}
+      {/* IMAGE HEADER */}
+      
+      <div className="relative h-24 w-full overflow-hidden rounded-t-md">
+          <Button size="icon" variant="ghost" onClick={onMap} className="absolute top-0 right-0" >
+<Heart className="text-rose-600 z-10" />        </Button>
         <img
-          src="https://citedesrocheuses.com/wp-content/uploads/2026/01/cdr-rgb-v3.png"
+          
+            src="https://canmore-banff.acfa.ab.ca/wp-content/uploads/2022/12/Logo-Fondation-Franco-Albertaine-1024x338.png"
           alt={`${name} background`}
-          className="absolute inset-0 w-full h-full object-cover filter blur-md brightness-75"
+          className="absolute inset-0 h-full w-full object-cover blur-md brightness-90 scale-110"
         />
 
-        {/* Actual logo */}
-        <div className="relative flex items-center justify-center w-full h-full">
+        {/* LOGO */}
+        <div className="relative z-10 flex h-full items-end justify-center pb-2">
           <img
-            src="https://citedesrocheuses.com/wp-content/uploads/2026/01/cdr-rgb-v3.png"
-            alt={`${name} logo`}
-            className="max-h-25 max-w-[80%] object-contain"
+          
+            alt={name}
+            src="https://canmore-banff.acfa.ab.ca/wp-content/uploads/2022/12/Logo-Fondation-Franco-Albertaine-1024x338.png"
+            className="h-22  object-contain rounded-xl p-1"
           />
         </div>
       </div>
@@ -60,30 +66,30 @@ export function OrgCard({
           <Badge variant="secondary">{category}</Badge>
         </CardAction>
       )}
-      <CardHeader className="h-32">
-        <CardTitle className="text-lg">{name}</CardTitle>
-        <CardDescription>
-          <p className="text-sm flex gap-2">
-            <Phone size={15} /> {phone}
-          </p>
-          <p className="text-sm  flex gap-2">
-            <Locate size={15} /> {address}
-          </p>
-        </CardDescription>
-      </CardHeader>
+      {/* CONTENT */}
+      <CardContent className="space-y-2 pt-3">
+        <h3 className=" font-semibold text-base">{name}</h3>
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Phone className="h-4 w-4" />
+          <span>{phone}</span>
+        </div>
+
+        <div className="flex items-start gap-2 text-sm text-muted-foreground">
+          <MapPin className="h-4 w-4 mt-0.5" />
+          <span>{address}</span>
+        </div>
+      </CardContent>
 
       <CardFooter className="flex gap-2 flex-wrap m-2">
         <Button size="sm" variant="default" onClick={onDetails}>
           Voir plus
         </Button>
         <Button size="sm" variant="outline" onClick={onShare}>
-          <Share />
+          <ExternalLink />
         </Button>
         <Button size="sm" variant="outline" onClick={onMap}>
-          <Map />
-        </Button>
-        <Button size="sm" variant="outline" onClick={onMap}>
-          <Heart fill="" />
+          <MapPinned />
         </Button>
       </CardFooter>
     </Card>
