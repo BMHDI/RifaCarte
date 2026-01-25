@@ -6,31 +6,10 @@ import {
   Card,
   CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import {
-  ExternalLink,
-  Heart,
-  Locate,
-  MapPin,
-  MapPinned,
-  Phone,
-} from "lucide-react";
-import Image from "next/image";
-
-interface OrgCardProps {
-  // logo: string;
-  name: string;
-  phone: string;
-  address: string;
-  category?: string;
-  onDetails?: () => void;
-  onShare?: () => void;
-  onMap?: () => void;
-}
+import { ExternalLink, Heart, MapPin, MapPinned, Phone } from "lucide-react";
+import { OrgCardProps } from "@/types/types";
 
 export function OrgCard({
   // logo,

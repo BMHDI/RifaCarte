@@ -5,46 +5,36 @@ import organizations from "@/lib/org.json";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useOrg } from "@/app/context/OrgContext";
-
+import { filterOrgs } from "@/lib/orgFilter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
-
+import { useSidebar } from "../ui/sidebar";
 import { ArrowBigDown, Check, ChevronDown } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
-
-// normalisation : minuscules + enlever accents
-const normalize = (text: string) =>
-  text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") // remove accents
-    .replace(/['’`-]/g, " ") // remove apostrophes and hyphens
-    .replace(/[^\w\s]/g, " ") // replace other punctuation with space
-    .replace(/\s+/g, " ") // collapse multiple spaces
-    .trim(); // remove leading/trailing spaces
-
-const stopWords = [
-  "pour",
-  "les",
-  "de",
-  "du",
-  "des",
-  "la",
-  "le",
-  "un",
-  "une",
-  "et",
-];
+import { Org } from "@/types/types";
 
 export function OrgSearch() {
-  const [query, setQuery] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+  const {
+    query,
+    setQuery,
+    selectedCategories,
+    setSelectedCategories,
+    selectedCities,
+    setSelectedCities,
+    setSelectedOrg,
+  } = useOrg();
+  const filteredOrgs: Org[] = filterOrgs(
+    organizations,
+    query,
+    selectedCategories,
+    selectedCities,
+  );
+  const { toggleSidebar } = useSidebar();
+  const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
-  const { setSelectedOrg } = useOrg();
-
   // ✅ unique categories
   const categories = useMemo(() => {
     const set = new Set<string>();
@@ -59,7 +49,7 @@ export function OrgSearch() {
       o.locations.forEach((loc) => set.add(loc.city)),
     );
     return Array.from(set).sort();
-  }, [organizations]);
+  }, []);
 
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
@@ -73,63 +63,6 @@ export function OrgSearch() {
   };
 
   // 🔹 SAME LOGIC + category filter added
-  const filteredOrgs = organizations.filter((org) => {
-    let textMatch = true;
-
-    if (query) {
-      const normalizedQuery = normalize(query);
-      const queryWords = normalizedQuery
-        .split(/\s+/)
-        .filter((w) => w && !stopWords.includes(w));
-
-      if (queryWords.length === 0) return false;
-
-      // 🔹 Phrase match first (whole query)
-      const phraseInServices = org.services.some((s: string) =>
-        normalize(s).includes(normalizedQuery),
-      );
-
-      const phraseInProjects = org.projects?.some(
-        (p: { name: string; description: string }) =>
-          normalize(p.name).includes(normalizedQuery) ||
-          normalize(p.description).includes(normalizedQuery),
-      );
-
-      // 🔹 Word-based AND match if phrase not found
-      const wordsInServices = org.services.some((s: string) => {
-        const normalizedService = normalize(s);
-        return queryWords.every((word) => normalizedService.includes(word));
-      });
-
-      const wordsInProjects = org.projects?.some((p) => {
-        const normalizedName = normalize(p.name);
-        const normalizedDesc = normalize(p.description);
-        return queryWords.every(
-          (word) =>
-            normalizedName.includes(word) || normalizedDesc.includes(word),
-        );
-      });
-
-      textMatch =
-        (phraseInServices ||
-          phraseInProjects ||
-          wordsInServices ||
-          wordsInProjects) ??
-        false;
-    }
-
-    // ----- category filter (UNCHANGED) -----
-    const categoryMatch =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(org.category);
-
-    // ----- city filter (UNCHANGED) -----
-    const cityMatch =
-      selectedCities.length === 0 ||
-      selectedCities.includes(org.locations[0].city);
-
-    return textMatch && categoryMatch && cityMatch;
-  });
 
   return (
     <div>
@@ -139,19 +72,35 @@ export function OrgSearch() {
 
           {filteredOrgs.map((org) => (
             <OrgCard
+              logo=""
               key={org.id}
-              {...org}
-              onDetails={() => {}}
-              onShare={() => {}}
-               onMap={() =>
-    setSelectedOrg({
-      org,
-      location: org.locations.find((loc) => loc.lat != null && loc.lng != null),
-    })
-  }
               name={org.name}
               phone={org.contact?.phone ?? ""}
-              address={org.locations[0]?.address}
+              address={org.locations[0]?.address ?? ""}
+              category={org.category}
+              onDetails={() => {}}
+              onShare={() => {}}
+              onMap={() => {
+                if (org.locations.length === 1) {
+                  // single location → select directly
+                  setSelectedOrg({
+                    org,
+                    location: org.locations[0] as {
+                      lat: number;
+                      lng: number;
+                      city?: string | undefined;
+                      address?: string | undefined;
+                    },
+                  });
+                } else {
+                  // multiple locations → show all markers, no flying yet
+                 setSelectedOrg({ org, locations: org.locations.map(location => ({ lat: location.lat ?? 0,lng: location.lng ?? 0, city: location.city, address: location.address })) });
+                }  if (isMobile) toggleSidebar();
+
+
+              } 
+              
+             }
             />
           ))}
         </div>

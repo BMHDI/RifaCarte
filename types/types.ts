@@ -8,6 +8,12 @@ export interface OrgCardProps {
   onMap?: () => void;
 }
 // types for an Org
+export type OrgLocation = {
+  city?: string;
+  address?: string;
+  lat: number | null;
+  lng: number | null;
+};
 export interface Org {
   id: string;
   name: string;
@@ -23,12 +29,7 @@ export interface Org {
     name: string;
     description?: string;
   }[];
-  locations: {
-    city?: string;
-    address?: string;
-    lat: number | null; // allow null
-    lng: number | null; // allow null
-  }[];
+locations: OrgLocation[];
 contact?: {
   email?: string;
   phone?: string | null; // allow null
@@ -38,20 +39,57 @@ contact?: {
   memberOf?: string[];
 }
 export interface SelectedOrg {
-  
   org?: Org;
   location?: {
     lat: number;
     lng: number;
     city?: string;
     address?: string;
-  };
+  }; // the currently selected location for flying / popup
+  locations?: { lat: number; lng: number; city?: string; address?: string }[]; // all locations for org
 }
 
+export interface GeoJSONFeatureCollection {
+  type: string;
+  features: GeoJSONFeature[];
+}
+
+export interface GeoJSONFeature {
+  type: string;
+  properties: {
+    name: string;
+  };
+  geometry: GeoJSONGeometry;
+}
+
+
+export interface GeoJSONGeometry {
+  type: string;
+  coordinates: number[][];
+}
 // context value type
-export interface OrgContextType {
-  selectedOrg: SelectedOrg | null;
-  setSelectedOrg: (org: SelectedOrg | null) => void;
-  savedOrgs: Org[];
-  addOrg: (org: Org) => void;
+export type OrgContextType = {
+ selectedOrg: SelectedOrg | null;
+setSelectedOrg: (org: SelectedOrg | null) => void;
+
+
+  query: string;
+  setQuery: (v: string) => void;
+
+  selectedCategories: string[];
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedCities: string[];
+  setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
+};
+//orgCard props
+export interface OrgCardProps {
+  // logo: string;
+  name: string;
+  phone: string;
+  address: string;
+  category?: string;
+  onDetails?: () => void;
+  onShare?: () => void;
+  onMap?: () => void;
 }
