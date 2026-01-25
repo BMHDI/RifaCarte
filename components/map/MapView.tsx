@@ -16,6 +16,7 @@ import { regionFill, regionLabels, regionBorder } from "@/lib/mapstyles";
 import { useOrg } from "@/app/context/OrgContext";
 import { useSidebar } from "../ui/sidebar";
 import { MapRef } from "react-map-gl/mapbox";
+import { OrgCard } from "../ui/OrgCard";
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
@@ -138,9 +139,14 @@ export function MapView() {
         ) : (
           // default: all orgs
           organizations
-            .flatMap((org) => org.locations.map((loc) => ({ ...loc, org ,lat: loc.lat !== null ? loc.lat : 0, // Provide a default value of 0 if lat is null
-    lng: loc.lng !== null ? loc.lng : 0, // Provide a default value of 0 if lng is null 
-    })))
+            .flatMap((org) =>
+              org.locations.map((loc) => ({
+                ...loc,
+                org,
+                lat: loc.lat !== null ? loc.lat : 0, // Provide a default value of 0 if lat is null
+                lng: loc.lng !== null ? loc.lng : 0, // Provide a default value of 0 if lng is null
+              })),
+            )
             .map((loc, index) => (
               <Marker
                 key={index}
@@ -160,29 +166,40 @@ export function MapView() {
         {/* Popup */}
         {selectedOrg?.location && (
           <Popup
+            key={selectedOrg.location.lng + selectedOrg.location.lat}
             longitude={selectedOrg.location.lng}
             latitude={selectedOrg.location.lat}
             anchor="top"
-            onClose={() => {
-              if (selectedOrg) {
-                setSelectedOrg(null);
-                // reset zoom (and optionally center)
-                mapRef.current?.flyTo({
-                  zoom: 10,
-                  essential: true,
-                });
-              }
-            }}
             closeOnClick={false}
+            onClose={() => {
+              setSelectedOrg(null);
+              mapRef.current?.flyTo({
+                zoom: 10,
+                essential: true,
+              });
+            }}
+           
           >
-            <div className="text-sm font-medium">
-              {selectedOrg?.org?.name ?? "Unknown"}
-            </div>
-            {selectedOrg.location.address && (
-              <div className="text-xs text-gray-500">
-                {selectedOrg.location.address}
+           
+              {" "}
+              {/* constrain popup width */}
+              <div className="max-w-md rounded-lg shadow-lg bg-white overflow-hidden mapboxgl-popup-content">
+
+              <OrgCard
+                logo=""
+                name={selectedOrg.org?.name ?? "Unknown"}
+                phone={selectedOrg.org?.contact?.phone ?? ""}
+                address={selectedOrg.location.address ?? ""}
+                category={selectedOrg.org?.category}
+                onDetails={() => {
+                  // maybe open sidebar or a modal
+                  console.log("Voir plus", selectedOrg.org?.name);
+                }}
+                onShare={() => {
+                  console.log("Partager", selectedOrg.org?.name);
+                }}
+              />
               </div>
-            )}
           </Popup>
         )}
       </Map>
