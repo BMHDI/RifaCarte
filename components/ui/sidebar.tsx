@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import {  X } from "lucide-react";
+import { X } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -187,7 +187,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-full p-0 [&>button]:hidden rounded-t-lg" // full width
+          className="bg-sidebar text-sidebar-foreground h-full w-full p-0 [&>button]:hidden rounded-t-lg" // full width
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -457,7 +457,7 @@ function SidebarGroupContent({
 }
 
 function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
-  const { state } = useSidebar() // "collapsed" | "expanded"
+  const { state } = useSidebar(); // "collapsed" | "expanded"
   return (
     <ul
       data-slot="sidebar-menu"
@@ -465,11 +465,11 @@ function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
       className={cn(
         "flex w-full min-w-0 gap-1 transition-transform ",
         state === "expanded" ? "flex-row" : "flex-col",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  );
 }
 
 function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {

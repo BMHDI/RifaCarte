@@ -29,7 +29,7 @@ export function AppSidebar() {
   );
 
   const menuItems = [
-    { title: "List des organismes", key: "search", icon: List },
+    { title: "Rechercher ", key: "search", icon: List },
     { title: "Conversation AI", key: "ai", icon: Bot },
     { title: "Mes favoris", key: "Favorites", icon: Heart },
   ];
@@ -51,13 +51,10 @@ export function AppSidebar() {
                     }
                   >
                     <button
-                      className={`flex items-center gap-2 w-full text-left
-    
-    ${activeTab === item.key ? "font-extrabold text-primary border-t  border-black/20 rounded-t-md  " : ""}
-  `}
+                      className={`items-center  text-left ${activeTab === item.key ? "font-bold text-primary  border-black/20 rounded-t-md" : ""}`}
                     >
                       <item.icon />
-                      {item.title}
+                      {!isMobile ? <span > {item.title} </span> : null}
                     </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
