@@ -54,7 +54,7 @@ export function AppSidebar() {
                       className={`items-center  text-left ${activeTab === item.key ? "font-bold text-primary  border-black/20 rounded-t-md" : ""}`}
                     >
                       <item.icon />
-                      {!isMobile ? <span > {item.title} </span> : null}
+                       <span > {item.title} </span> 
                     </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
