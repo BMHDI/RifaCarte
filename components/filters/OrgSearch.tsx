@@ -25,6 +25,8 @@ export function OrgSearch() {
     selectedCities,
     setSelectedCities,
     setSelectedOrg,
+    toggleSavedOrg,
+    isSaved,
   } = useOrg();
   const filteredOrgs: Org[] = filterOrgs(
     organizations,
@@ -94,13 +96,20 @@ export function OrgSearch() {
                   });
                 } else {
                   // multiple locations → show all markers, no flying yet
-                 setSelectedOrg({ org, locations: org.locations.map(location => ({ lat: location.lat ?? 0,lng: location.lng ?? 0, city: location.city, address: location.address })) });
-                }  if (isMobile) toggleSidebar();
-
-
-              } 
-              
-             }
+                  setSelectedOrg({
+                    org,
+                    locations: org.locations.map((location) => ({
+                      lat: location.lat ?? 0,
+                      lng: location.lng ?? 0,
+                      city: location.city,
+                      address: location.address,
+                    })),
+                  });
+                }
+                if (isMobile) toggleSidebar();
+              }}
+              onSave={() => toggleSavedOrg(org)} // toggle instead of just add
+              isSaved={isSaved(org.id)} // pass the boolean to OrgCard for UI
             />
           ))}
         </div>

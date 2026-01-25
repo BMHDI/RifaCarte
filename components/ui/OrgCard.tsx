@@ -8,7 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { ExternalLink, Heart, MapPin, MapPinned, Phone } from "lucide-react";
+import { ExternalLink, Heart, Map, MapPin, Phone } from "lucide-react";
 import { OrgCardProps } from "@/types/types";
 
 export function OrgCard({
@@ -20,20 +20,26 @@ export function OrgCard({
   onDetails,
   onShare,
   onMap,
+  onSave,
+  isSaved,
 }: OrgCardProps) {
   return (
-    <Card className="md:w-[297px] pb-4 bg-gray-100 ">
+    <Card className="md:w-[297px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
       {/* IMAGE HEADER */}
 
-      <div className="relative h-24 w-full overflow-hidden rounded-t-md">
+      <div className="relative  h-24 w-full overflow-hidden rounded-t-md">
         <Button
           size="icon"
-          variant="ghost"
-          onClick={onMap}
-          className="absolute top-0 right-0"
+          variant="link"
+          onClick={onSave}
+          className="absolute top-0 right-0 z-20"
         >
-          <Heart className="text-rose-600 z-10" />{" "}
+          {isSaved ? (
+            <Heart stroke="red" fill="red" />
+          ) : (
+            <Heart stroke="red" />
+          )}{" "}
         </Button>
         <img
           src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
@@ -57,7 +63,7 @@ export function OrgCard({
         </CardAction>
       )}
       {/* CONTENT */}
-      <CardContent className="space-y-2 pt-3">
+      <CardContent className="space-y-2 pt-3 ">
         <h3 className=" font-semibold text-base">{name}</h3>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -79,7 +85,7 @@ export function OrgCard({
           <ExternalLink />
         </Button>
         <Button size="sm" variant="outline" onClick={onMap}>
-          <MapPinned />
+          <Map />
         </Button>
       </CardFooter>
     </Card>

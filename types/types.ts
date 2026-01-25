@@ -6,6 +6,8 @@ export interface OrgCardProps {
   onDetails?: () => void;
   onShare?: () => void;
   onMap?: () => void;
+  onSave?: () => void;
+  isSaved?: boolean;
 }
 // types for an Org
 export type OrgLocation = {
@@ -29,12 +31,12 @@ export interface Org {
     name: string;
     description?: string;
   }[];
-locations: OrgLocation[];
-contact?: {
-  email?: string;
-  phone?: string | null; // allow null
-  website?: string;
-};
+  locations: OrgLocation[];
+  contact?: {
+    email?: string;
+    phone?: string | null; // allow null
+    website?: string;
+  };
   tags?: string[];
   memberOf?: string[];
 }
@@ -62,25 +64,23 @@ export interface GeoJSONFeature {
   geometry: GeoJSONGeometry;
 }
 
-
 export interface GeoJSONGeometry {
   type: string;
   coordinates: number[][];
 }
 // context value type
 export type OrgContextType = {
- selectedOrg: SelectedOrg | null;
-setSelectedOrg: (org: SelectedOrg | null) => void;
-
-
+  selectedOrg: SelectedOrg | null;
+  setSelectedOrg: (org: SelectedOrg | null) => void;
   query: string;
   setQuery: (v: string) => void;
-
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-
   selectedCities: string[];
   setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
+  savedOrgs: Org[];
+  toggleSavedOrg: (org: Org) => void;
+  isSaved: (orgId: string) => boolean;
 };
 //orgCard props
 export interface OrgCardProps {
