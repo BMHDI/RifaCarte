@@ -8,7 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { ExternalLink, Heart, Map, MapPin, Phone } from "lucide-react";
+import { ExternalLink, Ghost, Heart, Map, MapPin, Phone } from "lucide-react";
 import { OrgCardProps } from "@/types/types";
 
 export function OrgCard({
@@ -27,20 +27,13 @@ export function OrgCard({
     <Card className="md:w-[297px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
       {/* IMAGE HEADER */}
-
       <div className="relative  h-24 w-full overflow-hidden rounded-t-md">
-        <Button
-          size="icon"
-          variant="link"
+        <Heart
           onClick={onSave}
-          className="absolute top-0 right-0 z-20"
-        >
-          {isSaved ? (
-            <Heart stroke="red" fill="red" />
-          ) : (
-            <Heart stroke="red" />
-          )}{" "}
-        </Button>
+          className="  absolute m-2 top-0 right-0 rounded-full z-20"
+          stroke="red"
+          fill={isSaved ? "red" : "none"}
+        />
         <img
           src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
           alt={`${name} background`}

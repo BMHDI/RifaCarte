@@ -1,6 +1,6 @@
 "use client";
 
-import {  Bot, List } from "lucide-react";
+import { Bot, Heart, List } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Sidebar,
@@ -17,17 +17,21 @@ import { OrgSearch } from "../filters/OrgSearch";
 import { SidebarToggleButton } from "../ui/SidebarToggleButton";
 import { AIConversationMock } from "../chatbot/AIConversationMock";
 import { useState } from "react";
+import FavoritesPage from "../Favorite";
 
 export function AppSidebar() {
   const isMobile = useIsMobile();
   const { state } = useSidebar();
 
   // Track active menu content
-  const [activeTab, setActiveTab] = useState<"search" | "ai">("search");
+  const [activeTab, setActiveTab] = useState<"search" | "ai" | "Favorites">(
+    "search",
+  );
 
   const menuItems = [
     { title: "List des organismes", key: "search", icon: List },
     { title: "Conversation AI", key: "ai", icon: Bot },
+    { title: "Mes favoris", key: "Favorites", icon: Heart },
   ];
 
   return (
@@ -42,12 +46,15 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.key}>
                   <SidebarMenuButton
                     asChild
-                    onClick={() => setActiveTab(item.key as "search" | "ai")}
+                    onClick={() =>
+                      setActiveTab(item.key as "search" | "ai" | "Favorites")
+                    }
                   >
                     <button
-                      className={`flex items-center gap-2 w-full text-left ${
-                        activeTab === item.key ? "font-bold text-red-800" : ""
-                      }`}
+                      className={`flex items-center gap-2 w-full text-left
+    
+    ${activeTab === item.key ? "font-extrabold text-primary border-t  border-black/20 rounded-t-md  " : ""}
+  `}
                     >
                       <item.icon />
                       {item.title}
@@ -62,6 +69,7 @@ export function AppSidebar() {
               <div className="mt-4">
                 {activeTab === "search" && <OrgSearch />}
                 {activeTab === "ai" && <AIConversationMock />}
+                {activeTab === "Favorites" && <FavoritesPage />}
               </div>
             )}
           </SidebarGroupContent>

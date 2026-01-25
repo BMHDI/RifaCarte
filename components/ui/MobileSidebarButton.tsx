@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { Button } from "./button";
 import { useSidebar } from "./sidebar";
-import { Search, X } from "lucide-react";
+import { List, Search, X } from "lucide-react";
 
 export function MobileSidebarButton() {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar , state } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -26,7 +26,7 @@ export function MobileSidebarButton() {
       "
       aria-label={isOpen ? "Close sidebar" : "Open search"}
     >
-      {isOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
+      {isOpen && state === "collapsed"  ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
     </Button>
   );
 }
