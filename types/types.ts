@@ -13,8 +13,8 @@ export interface OrgCardProps {
 export type OrgLocation = {
   city?: string;
   address?: string;
-  lat: number | null;
-  lng: number | null;
+  lat: number ;
+  lng: number ;
 };
 export interface Org {
   id: string;
