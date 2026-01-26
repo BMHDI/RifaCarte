@@ -24,32 +24,32 @@
       {
         "city": "Edmonton",
         "address": "Campus Saint-Jean, 8406 Rue Marie-Anne Gaboury, Edmonton, AB",
-        "lat": 53.5197,
-        "lng": -113.4576
+        "lat": 53.5215554,
+        "lng": -113.469015
       },
       {
         "city": "Calgary",
         "address": "Centre d'accueil francophone, 1006 2 Ave SW, Calgary, AB",
-        "lat": 51.051,
-        "lng": -114.0853
+        "lat": 51.0517091,
+        "lng": -114.0794171
       },
       {
         "city": "Lethbridge",
         "address": "Centre La Cité des Prairies, Lethbridge, AB",
-        "lat": 49.6956,
-        "lng": -112.8451
+        "lat": 49.6910003,
+        "lng": -112.8107661
       },
       {
         "city": "Red Deer",
         "address": "Downtown Red Deer, Red Deer, AB",
-        "lat": 52.2681,
-        "lng": -113.8112
+        "lat": 52.2696584,
+        "lng": -113.8138416
       },
       {
         "city": "Wood Buffalo (Fort McMurray)",
         "address": "Downtown Fort McMurray, AB",
-        "lat": 56.7267,
-        "lng": -111.381
+        "lat": 56.72476,
+        "lng": -111.37742
       }
     ],
     "contact": {
@@ -57,8 +57,16 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
-    "memberOf": ["RIFA"]
+    "tags": [
+      "ainés",
+      "francophone",
+      "soutien",
+      "communautaire",
+      "santé"
+    ],
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "fmi",
@@ -89,14 +97,14 @@
       {
         "city": "Edmonton",
         "address": "Downtown Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5409352,
+        "lng": -113.508449
       },
       {
         "city": "Calgary",
         "address": "Downtown Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.0478108,
+        "lng": -114.0592619
       }
     ],
     "contact": {
@@ -112,7 +120,9 @@
       "réseautage",
       "francophone"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "fpfa",
@@ -142,8 +152,8 @@
       {
         "city": "Edmonton",
         "address": "Bureau provincial FPFA, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.52248909999999,
+        "lng": -113.4663782
       }
     ],
     "contact": {
@@ -159,7 +169,9 @@
       "ateliers",
       "familles"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "fja",
@@ -189,8 +201,8 @@
       {
         "city": "Edmonton",
         "address": "Cité francophone, Edmonton, AB",
-        "lat": 53.5222,
-        "lng": -113.4923
+        "lat": 53.522441,
+        "lng": -113.4663024
       }
     ],
     "contact": {
@@ -207,7 +219,9 @@
       "sports",
       "engagement"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "iglf",
@@ -239,14 +253,14 @@
       {
         "city": "Edmonton",
         "address": "Institut Guy-Lacombe de la Famille, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5224248,
+        "lng": -113.4665363
       },
       {
         "city": "Grande Prairie",
         "address": "Services étendus pour le nord de l’Alberta, Grande Prairie, AB",
-        "lat": 55.17,
-        "lng": -118.7882
+        "lat": 55.170691,
+        "lng": -118.7884808
       }
     ],
     "contact": {
@@ -262,7 +276,9 @@
       "francophonie",
       "développement familial"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "mcg",
@@ -295,32 +311,32 @@
       {
         "city": "Calgary",
         "address": "MCG Careers, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 50.9550019,
+        "lng": -114.0700603
       },
       {
         "city": "Edmonton",
         "address": "MCG Careers, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5414521,
+        "lng": -113.502472
       },
       {
         "city": "High River",
         "address": "MCG Careers, High River, AB",
-        "lat": 50.565,
-        "lng": -113.8636
+        "lat": 50.5723672,
+        "lng": -113.8712357
       },
       {
         "city": "Okotoks",
         "address": "MCG Careers, Okotoks, AB",
-        "lat": 50.7233,
-        "lng": -113.9754
+        "lat": 50.7255247,
+        "lng": -113.9803384
       },
       {
         "city": "Red Deer",
         "address": "MCG Careers, Red Deer, AB",
-        "lat": 52.2681,
-        "lng": -113.8112
+        "lat": 52.26754039999999,
+        "lng": -113.8136765
       }
     ],
     "contact": {
@@ -336,7 +352,9 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "parallele",
@@ -366,14 +384,14 @@
       {
         "city": "Edmonton",
         "address": "Parallèle Alberta, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5221962,
+        "lng": -113.467437
       },
       {
         "city": "Calgary",
         "address": "Parallèle Alberta, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.0411562,
+        "lng": -114.0629964
       }
     ],
     "contact": {
@@ -389,7 +407,9 @@
       "formation",
       "réseautage"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "pcb",
@@ -423,14 +443,14 @@
       {
         "city": "Edmonton",
         "address": "Pont Cultural Bridge, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.51776,
+        "lng": -113.46488
       },
       {
         "city": "Calgary",
         "address": "Pont Cultural Bridge, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.0509985,
+        "lng": -114.0847612
       }
     ],
     "contact": {
@@ -447,7 +467,9 @@
       "communauté",
       "diversité"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "prospect",
@@ -481,38 +503,38 @@
       {
         "city": "Airdrie",
         "address": "Prospect Human Services, Airdrie, AB",
-        "lat": 51.2917,
-        "lng": -114.0144
+        "lat": 51.290336,
+        "lng": -114.0147014
       },
       {
         "city": "Calgary",
         "address": "Prospect Human Services, Calgary Northeast, AB",
-        "lat": 51.083,
-        "lng": -114.071
+        "lat": 51.06035929999999,
+        "lng": -113.9866775
       },
       {
         "city": "Calgary",
         "address": "Prospect Human Services, Studio C, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.0273727,
+        "lng": -114.1007071
       },
       {
         "city": "Cochrane",
         "address": "Prospect Human Services, Cochrane, AB",
-        "lat": 51.1836,
-        "lng": -114.4676
+        "lat": 51.185091,
+        "lng": -114.4754661
       },
       {
         "city": "Edmonton",
         "address": "Prospect Human Services, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5629121,
+        "lng": -113.5064321
       },
       {
         "city": "Strathmore",
         "address": "Prospect Human Services, Strathmore, AB",
-        "lat": 51.036,
-        "lng": -113.3853
+        "lat": 51.04248699999999,
+        "lng": -113.395689
       }
     ],
     "contact": {
@@ -529,7 +551,9 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "rafa",
@@ -559,8 +583,8 @@
       {
         "city": "Edmonton",
         "address": "La Cité francophone, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.522441,
+        "lng": -113.4663024
       }
     ],
     "contact": {
@@ -577,7 +601,9 @@
       "représentation",
       "artistique"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "rsa",
@@ -618,8 +644,8 @@
       {
         "city": "Edmonton",
         "address": "Siège social, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.59923629999999,
+        "lng": -113.6562626
       }
     ],
     "contact": {
@@ -635,7 +661,9 @@
       "professionnels de santé",
       "mobilisation"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "shfa",
@@ -665,8 +693,8 @@
       {
         "city": "Edmonton",
         "address": "Siège social, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.59923629999999,
+        "lng": -113.6562626
       }
     ],
     "contact": {
@@ -682,7 +710,9 @@
       "archives",
       "éducation"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "wcg",
@@ -706,14 +736,14 @@
       {
         "city": "Calgary",
         "address": "Bureaux régionaux, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.04473309999999,
+        "lng": -114.0718831
       },
       {
         "city": "Edmonton",
         "address": "Bureaux régionaux, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5461663,
+        "lng": -113.4937355
       }
     ],
     "contact": {
@@ -731,7 +761,9 @@
       "jeunes",
       "anciens combattants"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "cinemagine",
@@ -763,32 +795,32 @@
       {
         "city": "Calgary",
         "address": "Présence dans plusieurs villes, Calgary, AB",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.04473309999999,
+        "lng": -114.0718831
       },
       {
         "city": "Edmonton",
         "address": "Présence dans plusieurs villes, Edmonton, AB",
-        "lat": 53.5461,
-        "lng": -113.4938
+        "lat": 53.5938196,
+        "lng": -113.5168647
       },
       {
         "city": "Lethbridge",
         "address": "Présence dans plusieurs villes, Lethbridge, AB",
-        "lat": 49.6956,
-        "lng": -112.8418
+        "lat": 49.6956181,
+        "lng": -112.8451067
       },
       {
         "city": "Medicine Hat",
         "address": "Présence dans plusieurs villes, Medicine Hat, AB",
-        "lat": 50.0405,
-        "lng": -110.6766
+        "lat": 50.0290218,
+        "lng": -110.7031976
       },
       {
         "city": "Red Deer",
         "address": "Présence dans plusieurs villes, Red Deer, AB",
-        "lat": 52.2681,
-        "lng": -113.8112
+        "lat": 52.2690328,
+        "lng": -113.8114955
       }
     ],
     "contact": {
@@ -806,7 +838,9 @@
       "projection",
       "éducation"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "acfa",
@@ -838,8 +872,8 @@
       {
         "city": "Alberta",
         "address": "Présence dans toute la province",
-        "lat": null,
-        "lng": null
+        "lat": 53.9332706,
+        "lng": -116.5765035
       }
     ],
     "contact": {
@@ -855,7 +889,9 @@
       "promotion",
       "intégration"
     ],
-    "memberOf": ["RIFA"]
+    "memberOf": [
+      "RIFA"
+    ]
   },
   {
     "id": "acfa_calgary",
@@ -887,8 +923,8 @@
       {
         "city": "Calgary",
         "address": "122 17 Ave SE #124, Calgary, AB T2G 1H2",
-        "lat": 51.0437,
-        "lng": -114.0598
+        "lat": 51.0380011,
+        "lng": -114.0622897
       }
     ],
     "contact": {
@@ -904,7 +940,10 @@
       "bénévolat",
       "nouveaux arrivants"
     ],
-    "memberOf": ["RIFA", "CLIF du Sud"]
+    "memberOf": [
+      "RIFA",
+      "CLIF du Sud"
+    ]
   },
   {
     "id": "acfa_grande_prairie",
@@ -927,8 +966,8 @@
       {
         "city": "Grande Prairie",
         "address": "9928 111 Ave, Grande Prairie, AB T8V 4C3",
-        "lat": 55.1706,
-        "lng": -118.7962
+        "lat": 55.1804113,
+        "lng": -118.7932575
       }
     ],
     "contact": {
@@ -943,7 +982,10 @@
       "services communautaires",
       "nouveaux arrivants"
     ],
-    "memberOf": ["RIFA", "CLIF du Nord"]
+    "memberOf": [
+      "RIFA",
+      "CLIF du Nord"
+    ]
   },
   {
     "id": "acfa_red_deer",
@@ -976,8 +1018,8 @@
       {
         "city": "Red Deer",
         "address": "4617 62 St, Red Deer, AB T4N 2R4",
-        "lat": 52.2684,
-        "lng": -113.8112
+        "lat": 52.2844574,
+        "lng": -113.8047692
       }
     ],
     "contact": {
@@ -993,7 +1035,10 @@
       "nouveaux arrivants",
       "jeunesse"
     ],
-    "memberOf": ["RIFA", "CLIF du Nord"]
+    "memberOf": [
+      "RIFA",
+      "CLIF du Nord"
+    ]
   },
   {
     "id": "acfa_wood_buffalo",
@@ -1023,8 +1068,8 @@
       {
         "city": "Fort McMurray",
         "address": "312 Abasand Dr #100, Fort McMurray, AB T9J 1B2",
-        "lat": 56.7291,
-        "lng": -111.379
+        "lat": 56.7116401,
+        "lng": -111.3797422
       }
     ],
     "contact": {
@@ -1042,7 +1087,10 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": ["RIFA", "CLIF du Nord"]
+    "memberOf": [
+      "RIFA",
+      "CLIF du Nord"
+    ]
   },
   {
     "id": "acfa_edmonton",
@@ -1083,8 +1131,8 @@
       {
         "city": "Edmonton",
         "address": "8627 rue Marie-Anne-Gaboury, 91 St #303, Edmonton, AB T6C 3N1",
-        "lat": 53.5225,
-        "lng": -113.4872
+        "lat": 53.522441,
+        "lng": -113.4663024
       }
     ],
     "contact": {
@@ -1103,7 +1151,10 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": ["RIFA", "CLIF du Nord"]
+    "memberOf": [
+      "RIFA",
+      "CLIF du Nord"
+    ]
   },
   {
     "id": "ajefa",
@@ -1134,14 +1185,14 @@
       {
         "city": "Edmonton",
         "address": "La Cité francophone, 314, 8627 rue Marie-Anne-Gaboury, 91 St, Edmonton, AB T6C 3L5",
-        "lat": 53.5225,
-        "lng": -113.4872
+        "lat": 53.522441,
+        "lng": -113.4663024
       },
       {
         "city": "Calgary",
         "address": "Centre albertain d’information juridique - Calgary",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.04473309999999,
+        "lng": -114.0718831
       }
     ],
     "contact": {
@@ -1160,7 +1211,10 @@
       "nouveaux arrivants",
       "étudiants en droit"
     ],
-    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"]
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Santé et Services Sociaux"
+    ]
   },
   {
     "id": "ajfas",
@@ -1203,8 +1257,8 @@
       {
         "city": "Edmonton",
         "address": "8925 Whyte Ave NW #100, Edmonton, AB T6C 0Z2",
-        "lat": 53.522,
-        "lng": -113.49
+        "lat": 53.5178363,
+        "lng": -113.4649464
       }
     ],
     "contact": {
@@ -1223,7 +1277,10 @@
       "leadership",
       "éducation"
     ],
-    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"]
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Santé et Services Sociaux"
+    ]
   },
   {
     "id": "campus_saint_jean",
@@ -1251,14 +1308,14 @@
       {
         "city": "Edmonton",
         "address": "8406 Rue Marie-Anne Gaboury, Edmonton, Alberta, Canada T6C 4G9",
-        "lat": 53.5225,
-        "lng": -113.4855
+        "lat": 53.521459,
+        "lng": -113.4688688
       },
       {
         "city": "Calgary",
         "address": "Campus Saint-Jean, Calgary, Alberta, Canada",
-        "lat": 51.0447,
-        "lng": -114.0719
+        "lat": 51.0450393,
+        "lng": -114.0652795
       }
     ],
     "contact": {
@@ -1275,7 +1332,10 @@
       "culture",
       "services étudiants"
     ],
-    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"]
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
   },
   {
     "id": "canada_in_progress",
@@ -1308,8 +1368,8 @@
       {
         "city": "Grande Prairie",
         "address": "10029 97 Ave, Grande Prairie, AB T8V 0N3",
-        "lat": 55.1706,
-        "lng": -118.7962
+        "lat": 55.16779930000001,
+        "lng": -118.7971213
       }
     ],
     "contact": {
@@ -1328,1064 +1388,1114 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"]
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement"
+    ]
   },
   {
-  "id": "canaf",
-  "name": "CANAF",
-  "category": "Services communautaires / Accueil et établissement",
-  "description": "Le CANAF soutient les nouveaux arrivants francophones en les orientant vers les services et programmes nécessaires à leur établissement. Il favorise le rapprochement communautaire pour une francophonie multiculturelle et inclusive, et promeut des activités culturelles et sociales pour célébrer la diversité au sein de la communauté francophone de Calgary et du sud de l’Alberta.", 
-  "foundedYear": null,
-  "director": {
-    "name": "Esdras Ngenzi",
-    "title": "Directeur général"
-  },
-  "services": [
-    "Analyse des besoins et évaluation personnalisée",
-    "Information et orientation sur la vie au Canada",
-    "Connexion communautaire et activités d’intégration",
-    "Accompagnement à la recherche d’emploi et à l’entrepreneuriat",
-    "Traduction et interprétation, références vers cours LINC/ESL",
-    "Aide à la recherche de logement et transport en commun",
-    "Orientation vers ressources alimentaires et meubles",
-    "Ateliers d’information sur l’établissement",
-    "Informations sur les services juridiques en français",
-    "Clinique des impôts",
-    "Camps de vacances pour jeunes",
-    "Centre de ressources (ordinateur, Internet, imprimante, téléphone)",
-    "Soutien au système scolaire"
-  ],
-  "audience": "Résidents permanents récents, réfugiés acceptés, personnes en attente de statut, ainsi que francophones et francophiles ayant des besoins d’accueil, d’établissement et d’intégration (étudiants, demandeurs d’asile, permis vacances-travail).",
-  "projects": [
-    {
-      "name": "Programme d’intégration innovant pour nouveaux arrivants",
-      "description": "Programme favorisant l’accès aux services essentiels et le développement communautaire pour les nouveaux arrivants francophones dans le sud de l’Alberta."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "727 7 Ave SW suite 1560, Calgary, AB T2P 1H4, Canada",
-      "lat": 51.0468168,
-      "lng": -114.078222
-    }
-  ],
-  "contact": {
-    "email": "info@canaf.ca",
-    "phone": "+1 403-532-6334",
-    "website": "https://www.canaf.ca/"
-  },
-  "tags": [
-    "francophonie",
-    "nouveaux arrivants",
-    "intégration",
-    "accueil",
-    "emploi",
-    "logement",
-    "jeunesse",
-    "diversité",
-    "services sociaux"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Accueil et Établissement",
-    "Groupe Sectoriel Emploi et Entrepreneuriat",
-    "Groupe Sectoriel Santé et Services Sociaux"
-  ]
-},
-{
-  "id": "centre_appui_familial_sud_alberta",
-  "name": "Centre d’Appui Familial du Sud de l’Alberta",
-  "category": "Services communautaires / Soutien familial",
-  "description": "Le Centre d’Appui Familial du Sud de l’Alberta soutient les familles francophones et exogames du sud de l’Alberta en offrant des services en français axés sur le développement des enfants, le soutien parental et le bien-être familial.", 
-  "foundedYear": 2018,
-  "director": {
-    "name": "Mouna Gasmi",
-    "title": "Directrice générale"
-  },
-  "services": [
-    "Soutien parental : ateliers éducatifs, groupes de discussion et ressources",
-    "Développement de l’enfant : programmes pour enfants de 0 à 18 ans",
-    "Prévention et intervention précoce",
-    "Bibliothèque francophone (prêt de livres, jeux éducatifs)",
-    "Bibliothèque mobile pour accès itinérant aux ressources",
-    "Ateliers thématiques pour familles",
-    "Événements culturels et rassemblements communautaires",
-    "Camps de vacances éducatifs et récréatifs"
-  ],
-  "audience": "Familles francophones, francophiles et exogames avec enfants de 0 à 18 ans dans le sud de l’Alberta.",
-  "projects": [
-    {
-      "name": "Bibliothèque mobile francophone",
-      "description": "Projet qui desservit les écoles francophones du Calgary et de la région en offrant un accès facilité à des livres en français, des ressources éducatives et des activités culturelles afin de promouvoir la lecture et renforcer le lien communautaire."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "1921 10 Ave SW, Calgary, AB T3C 0K3, Canada",
-      "lat": 51.0444022,
-      "lng": -114.1055294
+    "id": "canaf",
+    "name": "CANAF",
+    "category": "Services communautaires / Accueil et établissement",
+    "description": "Le CANAF soutient les nouveaux arrivants francophones en les orientant vers les services et programmes nécessaires à leur établissement. Il favorise le rapprochement communautaire pour une francophonie multiculturelle et inclusive, et promeut des activités culturelles et sociales pour célébrer la diversité au sein de la communauté francophone de Calgary et du sud de l’Alberta.",
+    "foundedYear": null,
+    "director": {
+      "name": "Esdras Ngenzi",
+      "title": "Directeur général"
     },
-    {
-      "city": "Lethbridge",
-      "address": "La Cité des Prairies, 2104 6 Ave S, Lethbridge, AB T1J 1C3, Canada",
-      "lat": 49.701251,
-      "lng": -112.838153
+    "services": [
+      "Analyse des besoins et évaluation personnalisée",
+      "Information et orientation sur la vie au Canada",
+      "Connexion communautaire et activités d’intégration",
+      "Accompagnement à la recherche d’emploi et à l’entrepreneuriat",
+      "Traduction et interprétation, références vers cours LINC/ESL",
+      "Aide à la recherche de logement et transport en commun",
+      "Orientation vers ressources alimentaires et meubles",
+      "Ateliers d’information sur l’établissement",
+      "Informations sur les services juridiques en français",
+      "Clinique des impôts",
+      "Camps de vacances pour jeunes",
+      "Centre de ressources (ordinateur, Internet, imprimante, téléphone)",
+      "Soutien au système scolaire"
+    ],
+    "audience": "Résidents permanents récents, réfugiés acceptés, personnes en attente de statut, ainsi que francophones et francophiles ayant des besoins d’accueil, d’établissement et d’intégration (étudiants, demandeurs d’asile, permis vacances-travail).",
+    "projects": [
+      {
+        "name": "Programme d’intégration innovant pour nouveaux arrivants",
+        "description": "Programme favorisant l’accès aux services essentiels et le développement communautaire pour les nouveaux arrivants francophones dans le sud de l’Alberta."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "727 7 Ave SW suite 1560, Calgary, AB T2P 1H4, Canada",
+        "lat": 51.04681679999999,
+        "lng": -114.078222
+      }
+    ],
+    "contact": {
+      "email": "info@canaf.ca",
+      "phone": "+1 403-532-6334",
+      "website": "https://www.canaf.ca/"
     },
-    {
-      "city": "Canmore",
-      "address": "ACFA régionale de Canmore – Banff, 820 8th Street, Suite 201B, Canmore, AB T1W 2B7, Canada",
-      "lat": 51.0898,
-      "lng": -115.3590
-    }
-  ],
-  "contact": {
-    "email": "info@cdafsa.ca",
-    "phone": "+1 403-249-0525",
-    "website": "https://centredappuifamilial.ca/"
+    "tags": [
+      "francophonie",
+      "nouveaux arrivants",
+      "intégration",
+      "accueil",
+      "emploi",
+      "logement",
+      "jeunesse",
+      "diversité",
+      "services sociaux"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement",
+      "Groupe Sectoriel Emploi et Entrepreneuriat",
+      "Groupe Sectoriel Santé et Services Sociaux"
+    ]
   },
-  "tags": [
-    "familles",
-    "francophonie",
-    "soutien parental",
-    "développement de l’enfant",
-    "bibliothèque",
-    "ressources éducatives",
-    "communauté",
-    "sud de l’Alberta"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "centre_pour_nouveaux_arrivants_grande_prairie",
-  "name": "Centre pour les Nouveaux Arrivants de Grande Prairie",
-  "category": "Services communautaires / Accueil et établissement",
-  "description": "Le Centre pour les Nouveaux Arrivants de Grande Prairie (GPCN) est un organisme communautaire dédié à l’accueil et à l’accompagnement des nouveaux arrivants et résidents temporaires dans leur établissement et intégration à Grande Prairie et ses environs, offrant des services en anglais et en français.", 
-  "foundedYear": 2011,
-  "director": {
-    "name": "Donat Mpunga",
-    "title": "Directeur"
-  },
-  "services": [
-    "Services de réinstallation : aide à l’installation, logement temporaire et permanent",
-    "Information et orientation vers services en éducation, santé, finances et vie communautaire",
-    "Soutien scolaire et linguistique : tutorat, club de conversation",
-    "Activités d’intégration : ateliers thématiques, camps pour enfants",
-    "Soutien administratif : cliniques fiscales et aide à la documentation",
-    "Programmes spécifiques financés pour nouveaux arrivants et résidents temporaires"
-  ],
-  "audience": "Résidents permanents, réfugiés, résidents temporaires (travailleurs étrangers, étudiants internationaux, demandeurs d’asile) et Canadiens naturalisés dans la région de Grande Prairie et ses environs.",
-  "projects": [
-    {
-      "name": "Programme de réinstallation des réfugiés",
-      "description": "Programme lancé en 2022 pour assister plus de 400 réfugiés dans leur processus de réinstallation à Grande Prairie."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Grande Prairie",
-      "address": "10014 99 St #505, Grande Prairie, AB T8V 3N4, Canada",
-      "lat": 55.171426,
-      "lng": -118.791995
-    }
-  ],
-  "contact": {
-    "email": "info@gpcn.ca",
-    "phone": "+1 780-538-4452",
-    "website": "https://www.gpcn.ca/"
-  },
-  "tags": [
-    "nouveaux arrivants",
-    "intégration",
-    "réinstallation",
-    "services communautaires",
-    "Grande Prairie",
-    "bi-lingue",
-    "éducation",
-    "emploi",
-    "soutien administratif"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Accueil et Établissement"
-  ]
-},{
-  "id": "conseil_scolaire_du_nord_ouest",
-  "name": "Conseil scolaire du Nord-Ouest",
-  "category": "Éducation / Autorité scolaire francophone",
-  "description": "Le Conseil scolaire du Nord-Ouest (CSNO) est une autorité scolaire francophone publique en Alberta, fondée en 1994 et basée à St-Isidore. Il vise à offrir une programmation francophone complète de qualité, incluant l’enseignement de la prématernelle à la 12e année, des services d’appui et des activités parascolaires, tout en soutenant une communauté scolaire inclusive et animée par la culture francophone.", 
-  "foundedYear": 1994,
-  "director": {
-    "name": "Denis Fontaine",
-    "title": "Directeur général"
-  },
-  "services": [
-    "Programmation éducative à temps plein de la prématernelle à la 12e année",
-    "Services d’appui scolaire et bien-être (orientation scolaire, orthophonie, psychologie, etc.)",
-    "Activités parascolaires, sportives et culturelles",
-    "Services à la petite enfance, préscolaire et programmes de francisation"
-  ],
-  "audience": "Élèves francophones de la prématernelle à la 12e année et leurs familles dans le nord-ouest de l’Alberta répondant aux critères d’admissibilité pour l’éducation francophone.", 
-  "projects": [
-    {
-      "name": "Modernisation de l’École Héritage à Falher",
-      "description": "Projet de modernisation des installations de l’École Héritage pour offrir des espaces d’apprentissage modernes, sécuritaires et inspirants, comprenant la mise à jour des infrastructures et des technologies éducatives (2026)."
-    }
-  ],
-  "locations": [
-    {
-      "city": "St-Isidore",
-      "address": "4 Rue Bouchard, CP 1220, St-Isidore, AB T0H 3B0, Canada",
-      "lat": 56.204181399999996,
-      "lng": -117.10718179999999
-    }
-  ],
-  "contact": {
-    "email": "conseil@csno.ab.ca",
-    "phone": "+1 780-624-8855",
-    "website": "https://csno.ab.ca/"
-  },
-  "tags": [
-    "éducation francophone",
-    "enseignement",
-    "services scolaires",
-    "Alberta",
-    "prématernelle",
-    "primaire",
-    "secondaire",
-    "soutien scolaire"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "conseil_scolaire_francosud",
-  "name": "Conseil scolaire FrancoSud",
-  "category": "Éducation / Autorité scolaire francophone",
-  "description": "Le Conseil scolaire FrancoSud offre une éducation en français langue première, gratuite et financée par la province, opérant 19 écoles (15 publiques et 4 catholiques) à travers le sud de l’Alberta. Son mandat découle de l’article 23 de la Charte canadienne des droits et libertés, qui garantit aux ayants droit l’accès à l’éducation francophone.", 
-  "foundedYear": 2013,
-  "director": {
-    "name": "Monique Baker",
-    "title": "Directrice générale"
-  },
-  "services": [
-    "Éducation en français langue première de la maternelle à la 12e année",
-    "Soutien à l’apprentissage",
-    "Service de francisation pour les enfants à prédominance anglophone",
-    "Transport scolaire gratuit pour tous les élèves",
-    "Programme projet Appartenance : promotion de la santé mentale",
-    "Équipes sportives et activités parascolaires (arts, clubs, leadership)",
-    "Soutien aux nouveaux arrivants : aide à l’inscription, orientation, accompagnement",
-    "Programmes de garde, prématernelle et services de petite enfance",
-    "Bourses scolaires",
-    "Partenariats avec organismes locaux, provinciaux et nationaux"
-  ],
-  "audience": "Élèves éligibles à l’éducation francophone de la maternelle à la 12e année dans les communautés francophones du sud de l’Alberta (Calgary, Airdrie, Cochrane, Chestermere, Okotoks, Lethbridge, Medicine Hat, Brooks, Bellevue, Cardston, Canmore).",
-  "projects": [
-    {
-      "name": "Éducation francophone accessible et de qualité",
-      "description": "Offrir aux élèves francophones une éducation en français complète dans 19 écoles réparties dans le sud de l’Alberta, soutenant leur réussite académique, sociale et culturelle."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "6715 8 St NE Suite 295, Calgary, AB T2E 7H7, Canada",
-      "lat": 51.1131247,
-      "lng": -114.0452002
-    }
-  ],
-  "contact": {
-    "email": "infoconseil@francosud.ca",
-    "phone": "+1 403-686-6998",
-    "website": "https://francosud.ca/"
-  },
-  "tags": [
-    "éducation francophone",
-    "enseignement",
-    "sud de l’Alberta",
-    "maternelle à 12e",
-    "soutien aux élèves",
-    "services scolaires",
-    "transport scolaire",
-    "activité parascolaire"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "ecole_francophone_brooks",
-  "name": "École Francophone de Brooks (École Le Ruisseau)",
-  "category": "Éducation / École francophone",
-  "description": "École publique francophone à Brooks, Alberta, accueillant les élèves de la prématernelle à la 12e année. L’école fait partie du Conseil scolaire FrancoSud et offre un environnement d’apprentissage axé sur la réussite académique, le développement personnel et l’épanouissement culturel.", 
-  "foundedYear": 2013,
-  "director": {
-    "name": "Monique Ntep",
-    "title": "Directrice"
-  },
-  "services": [
-    "Programme complet préscolaire (garderie, prématernelle), primaire et secondaire jusqu’à la 12e année",
-    "Accompagnement scolaire : inclusion, bibliothèque, orientation, soutien santé mentale et suivi des apprentissages",
-    "Ressources aux familles : transport scolaire, prêt d’ordinateurs portables, communication et implication parentale"
-  ],
-  "audience": "Élèves francophones ou issus d’immersion française de la prématernelle à la 12e année, résidents de Brooks et des environs, ainsi que familles francophiles.",
-  "projects": [
-    {
-      "name": "Comité Vérité et Réconciliation",
-      "description": "Initiative visant le rapprochement avec les Premières Nations par l’organisation d’activités culturelles et éducatives."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Brooks",
-      "address": "400 10 St E, Brooks, AB T1R 0A2, Canada",
-      "lat": 50.5681,
-      "lng": -111.8973
-    }
-  ],
-  "contact": {
-    "email": "infoconseil@francosud.ca",
-    "phone": "+1 403-686-6998",
-    "tollFree": "+1 877-245-7686",
-    "website": "https://leruisseau.francosud.ca/"
-  },
-  "tags": [
-    "éducation francophone",
-    "FrancoSud",
-    "préscolaire",
-    "primaire",
-    "secondaire",
-    "Brooks",
-    "services aux familles",
-    "soutien scolaire",
-    "inclusion"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "conseil_scolaire_centre_est",
-  "name": "Conseil scolaire Centre-Est",
-  "category": "Éducation / Autorité scolaire francophone",
-  "description": "Le Conseil scolaire Centre-Est (CSCE) est une autorité scolaire francophone située à St. Paul, Alberta. Il offre une éducation francophone de qualité de la prématernelle à la 12e année et valorise le patrimoine culturel francophone dans un contexte bilingue.", 
-  "foundedYear": 1995,
-  "director": {
-    "name": "Dolorèse Nolette",
-    "title": "Directrice générale"
-  },
-  "services": [
-    "Éducation en français de la prématernelle à la 12e année",
-    "Services d’appui pédagogique et ressources pour élèves à besoins particuliers",
-    "Programmation culturelle pour renforcer l'identité francophone",
-    "Activités parascolaires : clubs, sports et événements culturels",
-    "Soutien aux parents : ressources et accompagnement"
-  ],
-  "audience": "Élèves francophones ou issus d’immersion française de la prématernelle à la 12e année dans le nord-est de l’Alberta.",
-  "projects": [
-    {
-      "name": "Promotion de l’identité francophone",
-      "description": "Activités et initiatives visant à renforcer l'identité francophone des élèves et leur engagement communautaire dans les écoles du CSCE."
-    }
-  ],
-  "locations": [
-    {
-      "city": "St. Paul",
-      "address": "4617 50 Avenue, St. Paul, AB T0A 3A3, Canada",
-      "lat": 53.9917,
-      "lng": -111.2806
-    }
-  ],
-  "schools": [
-    {
-      "name": "École Voyageur",
-      "city": "Cold Lake",
-      "address": "Cold Lake, AB"
+  {
+    "id": "centre_appui_familial_sud_alberta",
+    "name": "Centre d’Appui Familial du Sud de l’Alberta",
+    "category": "Services communautaires / Soutien familial",
+    "description": "Le Centre d’Appui Familial du Sud de l’Alberta soutient les familles francophones et exogames du sud de l’Alberta en offrant des services en français axés sur le développement des enfants, le soutien parental et le bien-être familial.",
+    "foundedYear": 2018,
+    "director": {
+      "name": "Mouna Gasmi",
+      "title": "Directrice générale"
     },
-    {
-      "name": "École des Beaux-Lacs",
-      "city": "Bonnyville",
-      "address": "Bonnyville, AB"
+    "services": [
+      "Soutien parental : ateliers éducatifs, groupes de discussion et ressources",
+      "Développement de l’enfant : programmes pour enfants de 0 à 18 ans",
+      "Prévention et intervention précoce",
+      "Bibliothèque francophone (prêt de livres, jeux éducatifs)",
+      "Bibliothèque mobile pour accès itinérant aux ressources",
+      "Ateliers thématiques pour familles",
+      "Événements culturels et rassemblements communautaires",
+      "Camps de vacances éducatifs et récréatifs"
+    ],
+    "audience": "Familles francophones, francophiles et exogames avec enfants de 0 à 18 ans dans le sud de l’Alberta.",
+    "projects": [
+      {
+        "name": "Bibliothèque mobile francophone",
+        "description": "Projet qui desservit les écoles francophones du Calgary et de la région en offrant un accès facilité à des livres en français, des ressources éducatives et des activités culturelles afin de promouvoir la lecture et renforcer le lien communautaire."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "1921 10 Ave SW, Calgary, AB T3C 0K3, Canada",
+        "lat": 51.0444022,
+        "lng": -114.1055294
+      },
+      {
+        "city": "Lethbridge",
+        "address": "La Cité des Prairies, 2104 6 Ave S, Lethbridge, AB T1J 1C3, Canada",
+        "lat": 49.6910003,
+        "lng": -112.8107661
+      },
+      {
+        "city": "Canmore",
+        "address": "ACFA régionale de Canmore – Banff, 820 8th Street, Suite 201B, Canmore, AB T1W 2B7, Canada",
+        "lat": 51.0894789,
+        "lng": -115.3618884
+      }
+    ],
+    "contact": {
+      "email": "info@cdafsa.ca",
+      "phone": "+1 403-249-0525",
+      "website": "https://centredappuifamilial.ca/"
     },
-    {
-      "name": "École du Sommet",
-      "city": "St-Paul",
-      "address": "St-Paul, AB"
+    "tags": [
+      "familles",
+      "francophonie",
+      "soutien parental",
+      "développement de l’enfant",
+      "bibliothèque",
+      "ressources éducatives",
+      "communauté",
+      "sud de l’Alberta"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
+  },
+  {
+    "id": "centre_pour_nouveaux_arrivants_grande_prairie",
+    "name": "Centre pour les Nouveaux Arrivants de Grande Prairie",
+    "category": "Services communautaires / Accueil et établissement",
+    "description": "Le Centre pour les Nouveaux Arrivants de Grande Prairie (GPCN) est un organisme communautaire dédié à l’accueil et à l’accompagnement des nouveaux arrivants et résidents temporaires dans leur établissement et intégration à Grande Prairie et ses environs, offrant des services en anglais et en français.",
+    "foundedYear": 2011,
+    "director": {
+      "name": "Donat Mpunga",
+      "title": "Directeur"
     },
-    {
-      "name": "École Beauséjour",
-      "city": "Plamondon",
-      "address": "Plamondon, AB"
+    "services": [
+      "Services de réinstallation : aide à l’installation, logement temporaire et permanent",
+      "Information et orientation vers services en éducation, santé, finances et vie communautaire",
+      "Soutien scolaire et linguistique : tutorat, club de conversation",
+      "Activités d’intégration : ateliers thématiques, camps pour enfants",
+      "Soutien administratif : cliniques fiscales et aide à la documentation",
+      "Programmes spécifiques financés pour nouveaux arrivants et résidents temporaires"
+    ],
+    "audience": "Résidents permanents, réfugiés, résidents temporaires (travailleurs étrangers, étudiants internationaux, demandeurs d’asile) et Canadiens naturalisés dans la région de Grande Prairie et ses environs.",
+    "projects": [
+      {
+        "name": "Programme de réinstallation des réfugiés",
+        "description": "Programme lancé en 2022 pour assister plus de 400 réfugiés dans leur processus de réinstallation à Grande Prairie."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Grande Prairie",
+        "address": "10014 99 St #505, Grande Prairie, AB T8V 3N4, Canada",
+        "lat": 55.171426,
+        "lng": -118.7919945
+      }
+    ],
+    "contact": {
+      "email": "info@gpcn.ca",
+      "phone": "+1 780-538-4452",
+      "website": "https://www.gpcn.ca/"
     },
-    {
-      "name": "École Sainte-Catherine",
-      "city": "Lac La Biche",
-      "address": "Lac La Biche, AB"
-    }
-  ],
-  "contact": {
-    "email": "centreest@centreest.ca",
-    "phone": "+1 780-645-3888",
-    "tollFree": "+1 866-645-9556",
-    "website": "https://www.centreest.ca/"
+    "tags": [
+      "nouveaux arrivants",
+      "intégration",
+      "réinstallation",
+      "services communautaires",
+      "Grande Prairie",
+      "bi-lingue",
+      "éducation",
+      "emploi",
+      "soutien administratif"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement"
+    ]
   },
-  "tags": [
-    "éducation francophone",
-    "prématernelle à 12e",
-    "services scolaires",
-    "Alberta nord-est",
-    "culture francophone",
-    "soutien pédagogique"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "communaute_francophone_accueillante_calgary",
-  "name": "Communauté Francophone Accueillante de Calgary",
-  "category": "Services communautaires / Francophonie",
-  "description": "Le projet Communauté Francophone Accueillante (CFA) a débuté en 2019 pour favoriser l’inclusion et l’intégration des nouveaux arrivants francophones à Calgary. Le CANAF agit comme agent fiduciaire local pour la mise en œuvre du projet.", 
-  "foundedYear": 2019,
-  "director": {
-    "name": "Miryam Ben Romdhane",
-    "title": "Coordonnatrice du projet CFA"
-  },
-  "services": [
-    "Volet communautaire : Fêtes de bienvenue, Fête du Canada, Fête de fin d’année",
-    "Volet jeunesse – Le Repaire des Jeunes : événements sportifs et culturels, camps de vacances, projets de leadership",
-    "Volet communication : guide numérique des services en français, carte interactive des démarches administratives"
-  ],
-  "audience": "Nouveaux arrivants francophones à Calgary, incluant enfants (6 à 11 ans), adolescents (12 à 17 ans) et familles francophones.",
-  "projects": [
-    {
-      "name": "Promotion de l’intégration francophone",
-      "description": "Projets visant l’accueil, l’inclusion et l’intégration des nouveaux arrivants francophones à Calgary à travers des activités communautaires, jeunesse et communication."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "727 7 Ave SW, Suite 1560, Calgary, AB T2P 1H4, Canada",
-      "lat": 51.0469,
-      "lng": -114.0719
-    }
-  ],
-  "contact": {
-    "email": "info@cfacalgary.ca",
-    "phone": "+1 403-532-6334",
-    "website": "https://www.cfacalgary.ca/"
-  },
-  "tags": [
-    "francophonie",
-    "immigrants",
-    "jeunesse",
-    "intégration",
-    "communauté",
-    "services aux nouveaux arrivants",
-    "Calgary"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
-  ]
-},{
-  "id": "conseil_scolaire_centre_nord",
-  "name": "Conseil scolaire Centre-Nord",
-  "category": "Éducation / Autorité scolaire francophone",
-  "description": "Le Conseil scolaire Centre-Nord (CSCN), fondé en 1994, dessert environ 3 700 élèves dans 19 écoles publiques et catholiques du centre et nord de l’Alberta. Il offre une éducation en français langue première tout en respectant les droits linguistiques et confessionnels des communautés francophones.", 
-  "foundedYear": 1994,
-  "director": {
-    "name": "Robert Lessard",
-    "title": "Directeur général"
-  },
-  "services": [
-    "Éducation en français langue première de la prématernelle à la 12e année",
-    "Soutien pédagogique et services d’orientation pour élèves à besoins particuliers",
-    "Programmes culturels et communautaires pour renforcer l’identité francophone et l’engagement communautaire",
-    "Partenariats avec des organismes communautaires pour offrir des services complémentaires aux familles"
-  ],
-  "audience": "Enfants et adolescents francophones ou issus d’immersion française, de la prématernelle à la 12e année dans le centre et nord de l’Alberta.",
-  "projects": [
-    {
-      "name": "Promotion de l’éducation francophone de qualité",
-      "description": "Initiatives et programmes visant à améliorer la réussite scolaire et renforcer l’identité francophone dans toutes les écoles du CSCN."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "9630 103A Avenue NW, Edmonton, AB T5H 0S7, Canada",
-      "lat": 53.5595,
-      "lng": -113.5033
-    }
-  ],
-  "schools": [
-    { "city": "Edmonton", "count": 5 },
-    { "city": "St. Albert", "count": 2 },
-    { "city": "Legal", "count": 1 },
-    { "city": "Jasper", "count": 1 },
-    { "city": "Fort McMurray", "count": 2 },
-    { "city": "Red Deer", "count": 2 },
-    { "city": "Lloydminster", "count": 1 },
-    { "city": "Wainwright", "count": 1 },
-    { "city": "Beaumont", "count": 1 },
-    { "city": "Camrose", "count": 1 },
-    { "city": "Sherwood Park", "count": 2 }
-  ],
-  "contact": {
-    "email": "conseil@centrenord.ab.ca",
-    "phone": "+1 780-468-6440",
-    "tollFree": "+1 800-248-6886",
-    "website": "https://centrenord.ab.ca"
-  },
-  "tags": [
-    "éducation francophone",
-    "prématernelle à 12e",
-    "centre-nord Alberta",
-    "services scolaires",
-    "soutien pédagogique",
-    "culture francophone"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation",
-    "Groupe Sectoriel Santé et Services Sociaux"
-  ]
-},{
-  "id": "edmonton_fusion_fc",
-  "name": "Edmonton Fusion FC",
-  "category": "Sports / Francophonie",
-  "description": "Fondé en 2018, l’Edmonton Fusion FC est un club de soccer bilingue (français-anglais) à but non lucratif basé à Edmonton. Il se distingue par son engagement communautaire, son accessibilité et son approche inclusive, offrant des programmes adaptés à tous les âges et niveaux.",
-  "foundedYear": 2018,
-  "director": {
-    "name": "Paul Addo",
-    "title": "Responsable du programme Pro Soccer Training"
-  },
-  "services": [
-    "Académie de soccer pour les jeunes de 5 à 15 ans avec pré-académie en français et programme avancé Pro Soccer Training",
-    "Entraînements combinant futsal (automne/hiver) et soccer (printemps/été)",
-    "Équipes compétitives masculines et féminines participant à des ligues locales et provinciales",
-    "Camp SoccArt : camp d’été combinant soccer et activités artistiques",
-    "Programme sport-études en partenariat avec l’École Alexandre-Taché",
-    "Activités d’intégration sociale pour les nouveaux arrivants, incluant bénévolat et réseautage"
-  ],
-  "audience": "Jeunes, familles, nouveaux arrivants francophones et toute personne souhaitant évoluer dans un environnement inclusif et culturellement riche à Edmonton.",
-  "projects": [
-    {
-      "name": "Développement inclusif du soccer francophone",
-      "description": "Programmes et activités visant à promouvoir l’intégration sociale, le développement sportif et l’inclusion culturelle des jeunes francophones à Edmonton."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "La Cité francophone & École Maurice-Lavallée, Edmonton, AB, Canada",
-      "lat": 53.5321,
-      "lng": -113.4900
-    }
-  ],
-  "contact": {
-    "email": "edmontonfusionfc@gmail.com",
-    "website": "https://edmontonfusionfc.com"
-  },
-  "tags": [
-    "soccer",
-    "jeunesse",
-    "intégration",
-    "sport inclusif",
-    "francophonie",
-    "familles",
-    "Alberta"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
-  ]
-},{
-  "id": "fcsfa",
-  "name": "Fédération des Conseils Scolaires Francophones de l’Alberta",
-  "category": "Éducation / Fédération",
-  "description": "La FCSFA regroupe les quatre conseils scolaires francophones de l’Alberta. Elle assure la concertation entre eux et veille à promouvoir, défendre et renforcer l’éducation en français langue première dans la province, tout en respectant l’autonomie de chaque conseil.",
-  "director": {
-    "name": "Gisèle Bourque",
-    "title": "Directrice exécutive"
-  },
-  "services": [
-    "Concertation des conseils scolaires pour partager ressources et harmoniser les pratiques",
-    "Représentation et défense des droits en matière d’éducation francophone",
-    "Soutien à l’excellence éducative : formation du personnel et qualité de l’enseignement",
-    "Sensibilisation des familles aux critères d’admissibilité et encouragement à l’inscription",
-    "Promotion de la langue et culture francophone à travers des projets et événements éducatifs",
-    "Accès à l’information et publications pour appuyer les conseils scolaires et informer les familles"
-  ],
-  "audience": "Élèves francophones, familles et communautés scolaires des quatre conseils scolaires francophones de l’Alberta.",
-  "projects": [
-    {
-      "name": "Renforcement de l’éducation francophone",
-      "description": "Projets et initiatives visant à soutenir la collaboration entre conseils scolaires et promouvoir l’enseignement en français langue première dans la province."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Saint-Isidore",
-      "address": "Saint-Isidore, Alberta, Canada",
-      "lat": 55.8300,
-      "lng": -118.2060
-    }
-  ],
-  "contact": {
-    "email": "info@fcsfa.ca",
-    "phone": "+1 780-468-6440",
-    "website": "https://fcsfa.ca"
-  },
-  "tags": [
-    "fédération scolaire",
-    "éducation francophone",
-    "collaboration",
-    "Alberta",
-    "promotion de la langue",
-    "soutien scolaire"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Éducation"
-  ]
-},{
-  "id": "frap",
-  "name": "Francophonie Albertaine Plurielle",
-  "category": "Services communautaires / Francophonie",
-  "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
-  "director": {
-    "name": "Alphonse Ndem Ahola",
-    "title": "Directeur général"
-  },
-  "services": [
-    "Services d’établissement : aide au logement, orientation vers services de garde, soutien aux démarches d’immigration",
-    "Services de soutien : traduction et interprétation, aide transport, préparation à la citoyenneté, assistance fiscale",
-    "Services éducatifs : accompagnement scolaire, ateliers éducatifs, camps d’été, cercles de conversation en anglais",
-    "Intégration communautaire : organisation d’événements multiculturels, mise en contact avec groupes locaux, prêt de matériel et ordinateurs portables"
-  ],
-  "audience": "Nouveaux arrivants francophones et francophiles en Alberta, ainsi que les organismes communautaires œuvrant dans l’accueil et l’intégration.",
-  "projects": [
-    {
-      "name": "Accompagnement et intégration des nouveaux arrivants",
-      "description": "Services pratiques et éducatifs pour favoriser l’intégration scolaire, sociale et communautaire des nouveaux arrivants francophones en Alberta."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "8627 91 St Suite 108, Edmonton, AB T6C 3L5",
-      "lat": 53.5105,
-      "lng": -113.4606
+  {
+    "id": "conseil_scolaire_du_nord_ouest",
+    "name": "Conseil scolaire du Nord-Ouest",
+    "category": "Éducation / Autorité scolaire francophone",
+    "description": "Le Conseil scolaire du Nord-Ouest (CSNO) est une autorité scolaire francophone publique en Alberta, fondée en 1994 et basée à St-Isidore. Il vise à offrir une programmation francophone complète de qualité, incluant l’enseignement de la prématernelle à la 12e année, des services d’appui et des activités parascolaires, tout en soutenant une communauté scolaire inclusive et animée par la culture francophone.",
+    "foundedYear": 1994,
+    "director": {
+      "name": "Denis Fontaine",
+      "title": "Directeur général"
     },
-    {
-      "city": "Red Deer",
-      "address": "Red Deer, Alberta, Canada",
-      "lat": 52.2681,
-      "lng": -113.8112
+    "services": [
+      "Programmation éducative à temps plein de la prématernelle à la 12e année",
+      "Services d’appui scolaire et bien-être (orientation scolaire, orthophonie, psychologie, etc.)",
+      "Activités parascolaires, sportives et culturelles",
+      "Services à la petite enfance, préscolaire et programmes de francisation"
+    ],
+    "audience": "Élèves francophones de la prématernelle à la 12e année et leurs familles dans le nord-ouest de l’Alberta répondant aux critères d’admissibilité pour l’éducation francophone.",
+    "projects": [
+      {
+        "name": "Modernisation de l’École Héritage à Falher",
+        "description": "Projet de modernisation des installations de l’École Héritage pour offrir des espaces d’apprentissage modernes, sécuritaires et inspirants, comprenant la mise à jour des infrastructures et des technologies éducatives (2026)."
+      }
+    ],
+    "locations": [
+      {
+        "city": "St-Isidore",
+        "address": "4 Rue Bouchard, CP 1220, St-Isidore, AB T0H 3B0, Canada",
+        "lat": 56.204993,
+        "lng": -117.1069457
+      }
+    ],
+    "contact": {
+      "email": "conseil@csno.ab.ca",
+      "phone": "+1 780-624-8855",
+      "website": "https://csno.ab.ca/"
     },
-    {
-      "city": "Fort McMurray",
-      "address": "Fort McMurray, Alberta, Canada",
-      "lat": 56.7267,
-      "lng": -111.3790
+    "tags": [
+      "éducation francophone",
+      "enseignement",
+      "services scolaires",
+      "Alberta",
+      "prématernelle",
+      "primaire",
+      "secondaire",
+      "soutien scolaire"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
+  },
+  {
+    "id": "conseil_scolaire_francosud",
+    "name": "Conseil scolaire FrancoSud",
+    "category": "Éducation / Autorité scolaire francophone",
+    "description": "Le Conseil scolaire FrancoSud offre une éducation en français langue première, gratuite et financée par la province, opérant 19 écoles (15 publiques et 4 catholiques) à travers le sud de l’Alberta. Son mandat découle de l’article 23 de la Charte canadienne des droits et libertés, qui garantit aux ayants droit l’accès à l’éducation francophone.",
+    "foundedYear": 2013,
+    "director": {
+      "name": "Monique Baker",
+      "title": "Directrice générale"
     },
-    {
-      "city": "Grande Prairie",
-      "address": "Grande Prairie, Alberta, Canada",
-      "lat": 55.1706,
-      "lng": -118.7962
+    "services": [
+      "Éducation en français langue première de la maternelle à la 12e année",
+      "Soutien à l’apprentissage",
+      "Service de francisation pour les enfants à prédominance anglophone",
+      "Transport scolaire gratuit pour tous les élèves",
+      "Programme projet Appartenance : promotion de la santé mentale",
+      "Équipes sportives et activités parascolaires (arts, clubs, leadership)",
+      "Soutien aux nouveaux arrivants : aide à l’inscription, orientation, accompagnement",
+      "Programmes de garde, prématernelle et services de petite enfance",
+      "Bourses scolaires",
+      "Partenariats avec organismes locaux, provinciaux et nationaux"
+    ],
+    "audience": "Élèves éligibles à l’éducation francophone de la maternelle à la 12e année dans les communautés francophones du sud de l’Alberta (Calgary, Airdrie, Cochrane, Chestermere, Okotoks, Lethbridge, Medicine Hat, Brooks, Bellevue, Cardston, Canmore).",
+    "projects": [
+      {
+        "name": "Éducation francophone accessible et de qualité",
+        "description": "Offrir aux élèves francophones une éducation en français complète dans 19 écoles réparties dans le sud de l’Alberta, soutenant leur réussite académique, sociale et culturelle."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "6715 8 St NE Suite 295, Calgary, AB T2E 7H7, Canada",
+        "lat": 51.1129939,
+        "lng": -114.0454613
+      }
+    ],
+    "contact": {
+      "email": "infoconseil@francosud.ca",
+      "phone": "+1 403-686-6998",
+      "website": "https://francosud.ca/"
     },
-    {
-      "city": "Lloydminster",
-      "address": "Lloydminster, Alberta, Canada",
-      "lat": 53.2770,
-      "lng": -110.0050
-    }
-  ],
-  "contact": {
-    "email": "info@frap.ca",
-    "phone": "+1 780-540-8682",
-    "website": "https://frap.ca"
+    "tags": [
+      "éducation francophone",
+      "enseignement",
+      "sud de l’Alberta",
+      "maternelle à 12e",
+      "soutien aux élèves",
+      "services scolaires",
+      "transport scolaire",
+      "activité parascolaire"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
   },
-  "tags": [
-    "francophonie",
-    "immigrants",
-    "intégration",
-    "services communautaires",
-    "éducation",
-    "jeunesse",
-    "familles"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupes Sectoriels Accueil et Établissement",
-    "Éducation",
-    "Emploi et Entrepreneuriat",
-    "Santé et Services Sociaux"
-  ]
-},{
-  "id": "kayanou",
-  "name": "Kayanou",
-  "category": "Culture / Francophonie",
-  "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
-  "director": {
-    "name": "Mireille Isidore",
-    "title": "Directrice générale"
-  },
-  "services": [
-    "Ateliers pour enfants : contes caribéens et africains pour les 6-12 ans, expression en français et transmission culturelle",
-    "Ateliers d’archivage communautaire : documentation et préservation de l’histoire et de la culture des communautés noires francophones",
-    "Événements culturels et sensibilisation publique : Mois de l’Histoire des Noirs, Salon interculturel du livre de l’Alberta (SILAB), films, ateliers et discussions"
-  ],
-  "audience": "Communautés noires francophones de l’Alberta, familles, jeunes et tout public intéressé par la culture et l’histoire afro-francophone.",
-  "projects": [
-    {
-      "name": "Documentation et valorisation du patrimoine",
-      "description": "Projets de recherche, archives et événements pour préserver et transmettre l’histoire et la culture des communautés noires francophones en Alberta."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "Alberta, Canada",
-      "lat": 53.5461,
-      "lng": -113.4938
+  {
+    "id": "ecole_francophone_brooks",
+    "name": "École Francophone de Brooks (École Le Ruisseau)",
+    "category": "Éducation / École francophone",
+    "description": "École publique francophone à Brooks, Alberta, accueillant les élèves de la prématernelle à la 12e année. L’école fait partie du Conseil scolaire FrancoSud et offre un environnement d’apprentissage axé sur la réussite académique, le développement personnel et l’épanouissement culturel.",
+    "foundedYear": 2013,
+    "director": {
+      "name": "Monique Ntep",
+      "title": "Directrice"
     },
-    {
-      "city": "Calgary",
-      "address": "Alberta, Canada",
-      "lat": 51.0447,
-      "lng": -114.0719
-    }
-  ],
-  "contact": {
-    "email": "info@kayanou.ca",
-    "phone": "+1 780-974-5821",
-    "website": "https://kayanou.ca"
+    "services": [
+      "Programme complet préscolaire (garderie, prématernelle), primaire et secondaire jusqu’à la 12e année",
+      "Accompagnement scolaire : inclusion, bibliothèque, orientation, soutien santé mentale et suivi des apprentissages",
+      "Ressources aux familles : transport scolaire, prêt d’ordinateurs portables, communication et implication parentale"
+    ],
+    "audience": "Élèves francophones ou issus d’immersion française de la prématernelle à la 12e année, résidents de Brooks et des environs, ainsi que familles francophiles.",
+    "projects": [
+      {
+        "name": "Comité Vérité et Réconciliation",
+        "description": "Initiative visant le rapprochement avec les Premières Nations par l’organisation d’activités culturelles et éducatives."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Brooks",
+        "address": "400 10 St E, Brooks, AB T1R 0A2, Canada",
+        "lat": 50.5635267,
+        "lng": -111.9090797
+      }
+    ],
+    "contact": {
+      "email": "infoconseil@francosud.ca",
+      "phone": "+1 403-686-6998",
+      "tollFree": "+1 877-245-7686",
+      "website": "https://leruisseau.francosud.ca/"
+    },
+    "tags": [
+      "éducation francophone",
+      "FrancoSud",
+      "préscolaire",
+      "primaire",
+      "secondaire",
+      "Brooks",
+      "services aux familles",
+      "soutien scolaire",
+      "inclusion"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
   },
-  "tags": [
-    "culture",
-    "francophonie",
-    "communauté noire",
-    "patrimoine",
-    "jeunesse",
-    "familles",
-    "éducation"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-  ]
-},{
-  "id": "pia",
-  "name": "Portail de l’Immigrant Association",
-  "category": "Accueil et Établissement / Francophonie",
-  "description": "Le Portail de l’Immigrant Association (PIA) est un organisme fondé en 2008 à Calgary par un groupe d’immigrants francophones. Il offre une gamme de services pour faciliter l’intégration sociale, économique et culturelle des immigrants francophones.",
-  "director": {
-    "name": "Evelyne Kemajou",
-    "title": "Fondatrice et Directrice"
+  {
+    "id": "conseil_scolaire_centre_est",
+    "name": "Conseil scolaire Centre-Est",
+    "category": "Éducation / Autorité scolaire francophone",
+    "description": "Le Conseil scolaire Centre-Est (CSCE) est une autorité scolaire francophone située à St. Paul, Alberta. Il offre une éducation francophone de qualité de la prématernelle à la 12e année et valorise le patrimoine culturel francophone dans un contexte bilingue.",
+    "foundedYear": 1995,
+    "director": {
+      "name": "Dolorèse Nolette",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Éducation en français de la prématernelle à la 12e année",
+      "Services d’appui pédagogique et ressources pour élèves à besoins particuliers",
+      "Programmation culturelle pour renforcer l'identité francophone",
+      "Activités parascolaires : clubs, sports et événements culturels",
+      "Soutien aux parents : ressources et accompagnement"
+    ],
+    "audience": "Élèves francophones ou issus d’immersion française de la prématernelle à la 12e année dans le nord-est de l’Alberta.",
+    "projects": [
+      {
+        "name": "Promotion de l’identité francophone",
+        "description": "Activités et initiatives visant à renforcer l'identité francophone des élèves et leur engagement communautaire dans les écoles du CSCE."
+      }
+    ],
+    "locations": [
+      {
+        "city": "St. Paul",
+        "address": "4617 50 Avenue, St. Paul, AB T0A 3A3, Canada",
+        "lat": 53.9904654,
+        "lng": -111.2861229
+      }
+    ],
+    "schools": [
+      {
+        "name": "École Voyageur",
+        "city": "Cold Lake",
+        "address": "Cold Lake, AB"
+      },
+      {
+        "name": "École des Beaux-Lacs",
+        "city": "Bonnyville",
+        "address": "Bonnyville, AB"
+      },
+      {
+        "name": "École du Sommet",
+        "city": "St-Paul",
+        "address": "St-Paul, AB"
+      },
+      {
+        "name": "École Beauséjour",
+        "city": "Plamondon",
+        "address": "Plamondon, AB"
+      },
+      {
+        "name": "École Sainte-Catherine",
+        "city": "Lac La Biche",
+        "address": "Lac La Biche, AB"
+      }
+    ],
+    "contact": {
+      "email": "centreest@centreest.ca",
+      "phone": "+1 780-645-3888",
+      "tollFree": "+1 866-645-9556",
+      "website": "https://www.centreest.ca/"
+    },
+    "tags": [
+      "éducation francophone",
+      "prématernelle à 12e",
+      "services scolaires",
+      "Alberta nord-est",
+      "culture francophone",
+      "soutien pédagogique"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
   },
-  "services": [
-    "Programmes jeunesse : soutien scolaire et aide aux devoirs, activités créatives et éducatives, mentorat et socialisation",
-    "Programmes pour femmes et familles : intégration des femmes immigrantes, programme HIPPY pour enfants d’âge préscolaire, ateliers éducatifs et récréatifs",
-    "Intégration communautaire : accompagnement via SWIS, connexion aux services locaux, activités sociales et inclusion communautaire",
-    "Services spécialisés : séances de counseling, clinique juridique gratuite mensuelle"
-  ],
-  "audience": "Nouveaux arrivants francophones et francophiles à Calgary et environs, incluant femmes, jeunes, familles et aînés.",
-  "projects": [
-    {
-      "name": "Programme HIPPY",
-      "description": "Soutien au développement des enfants d’âge préscolaire à travers la participation parentale et des activités éducatives à domicile."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "840 7 Ave SW #830, Calgary, AB T2P 3P7, Canada",
-      "lat": 51.0469943,
-      "lng": -114.080024
-    }
-  ],
-  "contact": {
-    "email": "info2@pia-calgary.ca",
-    "phone": "+1 403-668-0299",
-    "website": "https://pia-calgary.ca"
+  {
+    "id": "communaute_francophone_accueillante_calgary",
+    "name": "Communauté Francophone Accueillante de Calgary",
+    "category": "Services communautaires / Francophonie",
+    "description": "Le projet Communauté Francophone Accueillante (CFA) a débuté en 2019 pour favoriser l’inclusion et l’intégration des nouveaux arrivants francophones à Calgary. Le CANAF agit comme agent fiduciaire local pour la mise en œuvre du projet.",
+    "foundedYear": 2019,
+    "director": {
+      "name": "Miryam Ben Romdhane",
+      "title": "Coordonnatrice du projet CFA"
+    },
+    "services": [
+      "Volet communautaire : Fêtes de bienvenue, Fête du Canada, Fête de fin d’année",
+      "Volet jeunesse – Le Repaire des Jeunes : événements sportifs et culturels, camps de vacances, projets de leadership",
+      "Volet communication : guide numérique des services en français, carte interactive des démarches administratives"
+    ],
+    "audience": "Nouveaux arrivants francophones à Calgary, incluant enfants (6 à 11 ans), adolescents (12 à 17 ans) et familles francophones.",
+    "projects": [
+      {
+        "name": "Promotion de l’intégration francophone",
+        "description": "Projets visant l’accueil, l’inclusion et l’intégration des nouveaux arrivants francophones à Calgary à travers des activités communautaires, jeunesse et communication."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "727 7 Ave SW, Suite 1560, Calgary, AB T2P 1H4, Canada",
+        "lat": 51.04681679999999,
+        "lng": -114.078222
+      }
+    ],
+    "contact": {
+      "email": "info@cfacalgary.ca",
+      "phone": "+1 403-532-6334",
+      "website": "https://www.cfacalgary.ca/"
+    },
+    "tags": [
+      "francophonie",
+      "immigrants",
+      "jeunesse",
+      "intégration",
+      "communauté",
+      "services aux nouveaux arrivants",
+      "Calgary"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
+    ]
   },
-  "tags": [
-    "immigration",
-    "francophonie",
-    "nouveaux arrivants",
-    "jeunesse",
-    "familles",
-    "femmes",
-    "éducation",
-    "intégration"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupes sectoriels : Accueil et Établissement, Éducation, Santé et services sociaux"
-  ]
-},{
-  "id": "la_cite_des_rocheuses",
-  "name": "La Cité des Rocheuses",
-  "category": "Culture / Centre communautaire francophone",
-  "description": "La Cité des Rocheuses est un centre communautaire et culturel francophone fondé en 1996 à Calgary, Alberta. Son mandat est de promouvoir la culture et la langue française et de soutenir le développement de la communauté francophone dans le sud de la province.", 
-  "director": {
-    "name": "Hervé Stéclebout",
-    "title": "Directeur général"
+  {
+    "id": "conseil_scolaire_centre_nord",
+    "name": "Conseil scolaire Centre-Nord",
+    "category": "Éducation / Autorité scolaire francophone",
+    "description": "Le Conseil scolaire Centre-Nord (CSCN), fondé en 1994, dessert environ 3 700 élèves dans 19 écoles publiques et catholiques du centre et nord de l’Alberta. Il offre une éducation en français langue première tout en respectant les droits linguistiques et confessionnels des communautés francophones.",
+    "foundedYear": 1994,
+    "director": {
+      "name": "Robert Lessard",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Éducation en français langue première de la prématernelle à la 12e année",
+      "Soutien pédagogique et services d’orientation pour élèves à besoins particuliers",
+      "Programmes culturels et communautaires pour renforcer l’identité francophone et l’engagement communautaire",
+      "Partenariats avec des organismes communautaires pour offrir des services complémentaires aux familles"
+    ],
+    "audience": "Enfants et adolescents francophones ou issus d’immersion française, de la prématernelle à la 12e année dans le centre et nord de l’Alberta.",
+    "projects": [
+      {
+        "name": "Promotion de l’éducation francophone de qualité",
+        "description": "Initiatives et programmes visant à améliorer la réussite scolaire et renforcer l’identité francophone dans toutes les écoles du CSCN."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "9630 103A Avenue NW, Edmonton, AB T5H 0S7, Canada",
+        "lat": 53.5473197,
+        "lng": -113.4853684
+      }
+    ],
+    "schools": [
+      {
+        "city": "Edmonton",
+        "count": 5
+      },
+      {
+        "city": "St. Albert",
+        "count": 2
+      },
+      {
+        "city": "Legal",
+        "count": 1
+      },
+      {
+        "city": "Jasper",
+        "count": 1
+      },
+      {
+        "city": "Fort McMurray",
+        "count": 2
+      },
+      {
+        "city": "Red Deer",
+        "count": 2
+      },
+      {
+        "city": "Lloydminster",
+        "count": 1
+      },
+      {
+        "city": "Wainwright",
+        "count": 1
+      },
+      {
+        "city": "Beaumont",
+        "count": 1
+      },
+      {
+        "city": "Camrose",
+        "count": 1
+      },
+      {
+        "city": "Sherwood Park",
+        "count": 2
+      }
+    ],
+    "contact": {
+      "email": "conseil@centrenord.ab.ca",
+      "phone": "+1 780-468-6440",
+      "tollFree": "+1 800-248-6886",
+      "website": "https://centrenord.ab.ca"
+    },
+    "tags": [
+      "éducation francophone",
+      "prématernelle à 12e",
+      "centre-nord Alberta",
+      "services scolaires",
+      "soutien pédagogique",
+      "culture francophone"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation",
+      "Groupe Sectoriel Santé et Services Sociaux"
+    ]
   },
-  "services": [
-    "Services aux nouveaux arrivants : accompagnement personnalisé et orientation vers les ressources locales",
-    "Cours de langues : français (CLIC) et anglais (LINC)",
-    "Programmation culturelle et communautaire : spectacles, projections, conférences et festivals",
-    "Restaurant : Café‑Théâtre sur place",
-    "Location d’espaces : salles de réunion, théâtre et espaces événementiels"
-  ],
-  "audience": "Francophones, francophiles de la région de Calgary, jeunes, familles et nouveaux arrivants francophones.",
-  "projects": [
-    {
-      "name": "Théâtre de la Cité des Rocheuses",
-      "description": "Lieu central de programmation culturelle francophone avec spectacles, performances artistiques et événements communautaires."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Calgary",
-      "address": "4800 Richard Rd SW, Calgary, AB T3E 6L1, Canada",
-      "lat": 51.0110849,
-      "lng": -114.1228804
-    }
-  ],
-  "contact": {
-    "email": "info@citedesrocheuses.com",
-    "phone": "+1 403-249-1749",
-    "website": "https://citedesrocheuses.com/"
+  {
+    "id": "edmonton_fusion_fc",
+    "name": "Edmonton Fusion FC",
+    "category": "Sports / Francophonie",
+    "description": "Fondé en 2018, l’Edmonton Fusion FC est un club de soccer bilingue (français-anglais) à but non lucratif basé à Edmonton. Il se distingue par son engagement communautaire, son accessibilité et son approche inclusive, offrant des programmes adaptés à tous les âges et niveaux.",
+    "foundedYear": 2018,
+    "director": {
+      "name": "Paul Addo",
+      "title": "Responsable du programme Pro Soccer Training"
+    },
+    "services": [
+      "Académie de soccer pour les jeunes de 5 à 15 ans avec pré-académie en français et programme avancé Pro Soccer Training",
+      "Entraînements combinant futsal (automne/hiver) et soccer (printemps/été)",
+      "Équipes compétitives masculines et féminines participant à des ligues locales et provinciales",
+      "Camp SoccArt : camp d’été combinant soccer et activités artistiques",
+      "Programme sport-études en partenariat avec l’École Alexandre-Taché",
+      "Activités d’intégration sociale pour les nouveaux arrivants, incluant bénévolat et réseautage"
+    ],
+    "audience": "Jeunes, familles, nouveaux arrivants francophones et toute personne souhaitant évoluer dans un environnement inclusif et culturellement riche à Edmonton.",
+    "projects": [
+      {
+        "name": "Développement inclusif du soccer francophone",
+        "description": "Programmes et activités visant à promouvoir l’intégration sociale, le développement sportif et l’inclusion culturelle des jeunes francophones à Edmonton."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "La Cité francophone & École Maurice-Lavallée, Edmonton, AB, Canada",
+        "lat": 53.5244259,
+        "lng": -113.4733748
+      }
+    ],
+    "contact": {
+      "email": "edmontonfusionfc@gmail.com",
+      "website": "https://edmontonfusionfc.com"
+    },
+    "tags": [
+      "soccer",
+      "jeunesse",
+      "intégration",
+      "sport inclusif",
+      "francophonie",
+      "familles",
+      "Alberta"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
+    ]
   },
-  "tags": [
-    "culture",
-    "francophonie",
-    "communauté",
-    "événements",
-    "Calgary",
-    "spectacles",
-    "accueil nouveaux arrivants"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Accueil et Établissement",
-    "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-  ]
-},{
-  "id": "acfa_regionale_canmore_banff",
-  "name": "ACFA régionale de Canmore‑Banff",
-  "category": "Services communautaires / Francophonie",
-  "description": "Depuis 2006, l’ACFA régionale de Canmore‑Banff représente et défend les intérêts de la communauté francophone dans la région des Rocheuses canadiennes, desservant les francophones et francophiles des communautés de Banff, Canmore et des environs.", 
-  "director": {
-    "name": "Paul Rovin",
-    "title": "Directeur / Directrice régional(e)"
+  {
+    "id": "fcsfa",
+    "name": "Fédération des Conseils Scolaires Francophones de l’Alberta",
+    "category": "Éducation / Fédération",
+    "description": "La FCSFA regroupe les quatre conseils scolaires francophones de l’Alberta. Elle assure la concertation entre eux et veille à promouvoir, défendre et renforcer l’éducation en français langue première dans la province, tout en respectant l’autonomie de chaque conseil.",
+    "director": {
+      "name": "Gisèle Bourque",
+      "title": "Directrice exécutive"
+    },
+    "services": [
+      "Concertation des conseils scolaires pour partager ressources et harmoniser les pratiques",
+      "Représentation et défense des droits en matière d’éducation francophone",
+      "Soutien à l’excellence éducative : formation du personnel et qualité de l’enseignement",
+      "Sensibilisation des familles aux critères d’admissibilité et encouragement à l’inscription",
+      "Promotion de la langue et culture francophone à travers des projets et événements éducatifs",
+      "Accès à l’information et publications pour appuyer les conseils scolaires et informer les familles"
+    ],
+    "audience": "Élèves francophones, familles et communautés scolaires des quatre conseils scolaires francophones de l’Alberta.",
+    "projects": [
+      {
+        "name": "Renforcement de l’éducation francophone",
+        "description": "Projets et initiatives visant à soutenir la collaboration entre conseils scolaires et promouvoir l’enseignement en français langue première dans la province."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Saint-Isidore",
+        "address": "Saint-Isidore, Alberta, Canada",
+        "lat": 56.205906,
+        "lng": -117.109976
+      }
+    ],
+    "contact": {
+      "email": "info@fcsfa.ca",
+      "phone": "+1 780-468-6440",
+      "website": "https://fcsfa.ca"
+    },
+    "tags": [
+      "fédération scolaire",
+      "éducation francophone",
+      "collaboration",
+      "Alberta",
+      "promotion de la langue",
+      "soutien scolaire"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Éducation"
+    ]
   },
-  "services": [
-    "Accueil et établissement : orientation et information pour nouveaux arrivants francophones",
-    "Formation linguistique et culturelle pour renforcer les compétences en français",
-    "Support communautaire et aide à l’accès aux services locaux",
-    "Activités sociales et culturelles pour rassembler la communauté",
-    "Opportunités de bénévolat et engagement communautaire"
-  ],
-  "audience": "Francophones et francophiles de la région des Rocheuses canadiennes, incluant familles, jeunes, nouveaux arrivants et personnes âgées.",
-  "projects": [
-    {
-      "name": "Promotion de la vie francophone locale",
-      "description": "Organisation d’activités et événements culturels et sociaux qui renforcent la cohésion francophone dans la vallée de la Bow."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Canmore",
-      "address": "820 8 St #201B, Canmore, AB T1W 2B7, Canada",
-      "lat": 51.089478899999996,
-      "lng": -115.3618884
-    }
-  ],
-  "contact": {
-    "email": "direction.canmore-banff@acfa.ab.ca",
-    "phone": "+1 403-678-7582",
-    "website": "https://canmore-banff.acfa.ab.ca/"
+  {
+    "id": "frap",
+    "name": "Francophonie Albertaine Plurielle",
+    "category": "Services communautaires / Francophonie",
+    "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
+    "director": {
+      "name": "Alphonse Ndem Ahola",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Services d’établissement : aide au logement, orientation vers services de garde, soutien aux démarches d’immigration",
+      "Services de soutien : traduction et interprétation, aide transport, préparation à la citoyenneté, assistance fiscale",
+      "Services éducatifs : accompagnement scolaire, ateliers éducatifs, camps d’été, cercles de conversation en anglais",
+      "Intégration communautaire : organisation d’événements multiculturels, mise en contact avec groupes locaux, prêt de matériel et ordinateurs portables"
+    ],
+    "audience": "Nouveaux arrivants francophones et francophiles en Alberta, ainsi que les organismes communautaires œuvrant dans l’accueil et l’intégration.",
+    "projects": [
+      {
+        "name": "Accompagnement et intégration des nouveaux arrivants",
+        "description": "Services pratiques et éducatifs pour favoriser l’intégration scolaire, sociale et communautaire des nouveaux arrivants francophones en Alberta."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "8627 91 St Suite 108, Edmonton, AB T6C 3L5",
+        "lat": 53.5225284,
+        "lng": -113.466302
+      },
+      {
+        "city": "Red Deer",
+        "address": "Red Deer, Alberta, Canada",
+        "lat": 52.2690328,
+        "lng": -113.8114955
+      },
+      {
+        "city": "Fort McMurray",
+        "address": "Fort McMurray, Alberta, Canada",
+        "lat": 56.7266231,
+        "lng": -111.3790095
+      },
+      {
+        "city": "Grande Prairie",
+        "address": "Grande Prairie, Alberta, Canada",
+        "lat": 55.170691,
+        "lng": -118.7884808
+      },
+      {
+        "city": "Lloydminster",
+        "address": "Lloydminster, Alberta, Canada",
+        "lat": 53.2779625,
+        "lng": -110.0061451
+      }
+    ],
+    "contact": {
+      "email": "info@frap.ca",
+      "phone": "+1 780-540-8682",
+      "website": "https://frap.ca"
+    },
+    "tags": [
+      "francophonie",
+      "immigrants",
+      "intégration",
+      "services communautaires",
+      "éducation",
+      "jeunesse",
+      "familles"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupes Sectoriels Accueil et Établissement",
+      "Éducation",
+      "Emploi et Entrepreneuriat",
+      "Santé et Services Sociaux"
+    ]
   },
-  "tags": [
-    "francophonie",
-    "communauté",
-    "Canmore",
-    "Banff",
-    "services communautaires",
-    "culture",
-    "intégration"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Accueil et Établissement"
-  ]
-},{
-  "id": "association_francophone_brooks",
-  "name": "Association Francophone de Brooks",
-  "category": "Services communautaires / Francophonie",
-  "description": "L'Association Francophone de Brooks (AFB) est un organisme communautaire fondé le 22 juin 2004 pour promouvoir la langue et la culture françaises à Brooks, Alberta. Sa mission est de faciliter l'accès des nouveaux arrivants francophones aux services en français et de favoriser leur intégration réussie.",
-  "director": {
-    "name": "Sa Eva Katusevanako",
-    "title": "Directeur général"
+  {
+    "id": "kayanou",
+    "name": "Kayanou",
+    "category": "Culture / Francophonie",
+    "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
+    "director": {
+      "name": "Mireille Isidore",
+      "title": "Directrice générale"
+    },
+    "services": [
+      "Ateliers pour enfants : contes caribéens et africains pour les 6-12 ans, expression en français et transmission culturelle",
+      "Ateliers d’archivage communautaire : documentation et préservation de l’histoire et de la culture des communautés noires francophones",
+      "Événements culturels et sensibilisation publique : Mois de l’Histoire des Noirs, Salon interculturel du livre de l’Alberta (SILAB), films, ateliers et discussions"
+    ],
+    "audience": "Communautés noires francophones de l’Alberta, familles, jeunes et tout public intéressé par la culture et l’histoire afro-francophone.",
+    "projects": [
+      {
+        "name": "Documentation et valorisation du patrimoine",
+        "description": "Projets de recherche, archives et événements pour préserver et transmettre l’histoire et la culture des communautés noires francophones en Alberta."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "Alberta, Canada",
+        "lat": 53.5461663,
+        "lng": -113.4937355
+      },
+      {
+        "city": "Calgary",
+        "address": "Alberta, Canada",
+        "lat": 51.0377538,
+        "lng": -113.9657643
+      }
+    ],
+    "contact": {
+      "email": "info@kayanou.ca",
+      "phone": "+1 780-974-5821",
+      "website": "https://kayanou.ca"
+    },
+    "tags": [
+      "culture",
+      "francophonie",
+      "communauté noire",
+      "patrimoine",
+      "jeunesse",
+      "familles",
+      "éducation"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
+    ]
   },
-  "services": [
-    "Maison des jeunes : activités de club de devoirs, ateliers, gymnase, musique, danse, cuisine, couture",
-    "Programme d'intégration des jeunes : soutien à l'intégration des jeunes immigrants francophones",
-    "Programme antiracisme : renforcement des capacités des jeunes pour lutter contre le racisme",
-    "Bénévolat : encouragement à l'engagement communautaire des immigrants francophones",
-    "Sports et loisirs : activités sportives comme soccer, football et basketball",
-    "Franco Festival : célébration de la musique francophone et de la diversité"
-  ],
-  "audience": "Nouveaux arrivants et jeunes francophones ainsi que la communauté francophone locale de Brooks et du comté de Newell.",
-  "projects": [
-    {
-      "name": "Franco Festival",
-      "description": "Célébration annuelle de la musique francophone et de la diversité canadienne à travers divers événements culturels."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Brooks",
-      "address": "707 2 Ave E, Brooks, AB T1R 1L2, Canada",
-      "lat": 50.563058,
-      "lng": -111.886142
-    }
-  ],
-  "contact": {
-    "email": "info@afbrooks.ca",
-    "phone": "+1-403-362-0405",
-    "website": "https://afbrooks.ca/"
+  {
+    "id": "pia",
+    "name": "Portail de l’Immigrant Association",
+    "category": "Accueil et Établissement / Francophonie",
+    "description": "Le Portail de l’Immigrant Association (PIA) est un organisme fondé en 2008 à Calgary par un groupe d’immigrants francophones. Il offre une gamme de services pour faciliter l’intégration sociale, économique et culturelle des immigrants francophones.",
+    "director": {
+      "name": "Evelyne Kemajou",
+      "title": "Fondatrice et Directrice"
+    },
+    "services": [
+      "Programmes jeunesse : soutien scolaire et aide aux devoirs, activités créatives et éducatives, mentorat et socialisation",
+      "Programmes pour femmes et familles : intégration des femmes immigrantes, programme HIPPY pour enfants d’âge préscolaire, ateliers éducatifs et récréatifs",
+      "Intégration communautaire : accompagnement via SWIS, connexion aux services locaux, activités sociales et inclusion communautaire",
+      "Services spécialisés : séances de counseling, clinique juridique gratuite mensuelle"
+    ],
+    "audience": "Nouveaux arrivants francophones et francophiles à Calgary et environs, incluant femmes, jeunes, familles et aînés.",
+    "projects": [
+      {
+        "name": "Programme HIPPY",
+        "description": "Soutien au développement des enfants d’âge préscolaire à travers la participation parentale et des activités éducatives à domicile."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "840 7 Ave SW #830, Calgary, AB T2P 3P7, Canada",
+        "lat": 51.0472522,
+        "lng": -114.0798202
+      }
+    ],
+    "contact": {
+      "email": "info2@pia-calgary.ca",
+      "phone": "+1 403-668-0299",
+      "website": "https://pia-calgary.ca"
+    },
+    "tags": [
+      "immigration",
+      "francophonie",
+      "nouveaux arrivants",
+      "jeunesse",
+      "familles",
+      "femmes",
+      "éducation",
+      "intégration"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupes sectoriels : Accueil et Établissement, Éducation, Santé et services sociaux"
+    ]
   },
-  "tags": [
-    "francophonie",
-    "communauté",
-    "Brooks",
-    "services communautaires",
-    "jeunesse",
-    "intégration",
-    "culture"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-  ]
-},{
-  "id": "canavua",
-  "name": "CANAVUA",
-  "category": "Services communautaires / Francophonie",
-  "description": "CANAVUA (Canadian Volunteers United in Action) est un organisme francophone basé à Edmonton dédié à la promotion du bénévolat et à la prestation de services communautaires essentiels, notamment une banque alimentaire, un camion‑repas communautaire et des programmes d’aide sociale pour les populations vulnérables.",
-  "director": {
-    "name": "Dicky Dikamba",
-    "title": "Directeur général"
+  {
+    "id": "la_cite_des_rocheuses",
+    "name": "La Cité des Rocheuses",
+    "category": "Culture / Centre communautaire francophone",
+    "description": "La Cité des Rocheuses est un centre communautaire et culturel francophone fondé en 1996 à Calgary, Alberta. Son mandat est de promouvoir la culture et la langue française et de soutenir le développement de la communauté francophone dans le sud de la province.",
+    "director": {
+      "name": "Hervé Stéclebout",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Services aux nouveaux arrivants : accompagnement personnalisé et orientation vers les ressources locales",
+      "Cours de langues : français (CLIC) et anglais (LINC)",
+      "Programmation culturelle et communautaire : spectacles, projections, conférences et festivals",
+      "Restaurant : Café‑Théâtre sur place",
+      "Location d’espaces : salles de réunion, théâtre et espaces événementiels"
+    ],
+    "audience": "Francophones, francophiles de la région de Calgary, jeunes, familles et nouveaux arrivants francophones.",
+    "projects": [
+      {
+        "name": "Théâtre de la Cité des Rocheuses",
+        "description": "Lieu central de programmation culturelle francophone avec spectacles, performances artistiques et événements communautaires."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Calgary",
+        "address": "4800 Richard Rd SW, Calgary, AB T3E 6L1, Canada",
+        "lat": 51.0111734,
+        "lng": -114.1230931
+      }
+    ],
+    "contact": {
+      "email": "info@citedesrocheuses.com",
+      "phone": "+1 403-249-1749",
+      "website": "https://citedesrocheuses.com/"
+    },
+    "tags": [
+      "culture",
+      "francophonie",
+      "communauté",
+      "événements",
+      "Calgary",
+      "spectacles",
+      "accueil nouveaux arrivants"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement",
+      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
+    ]
   },
-  "services": [
-    "Banque alimentaire francophone : distribution de paniers alimentaires à la communauté",
-    "Repas en bus : service mobile distribuant des repas aux sans‑abri, nouveaux arrivants et familles à faible revenu",
-    "Cours de conduite en français (Classe 7) : ateliers théoriques et accompagnement au test",
-    "Navigateur santé : transport et accompagnement en français pour rendez‑vous médicaux",
-    "Aide au déménagement : soutien logistique pour les personnes en transition",
-    "Équipe protocolaire : bénévoles pour l’organisation d’événements communautaires",
-    "Formation et engagement bénévole : recrutement et accompagnement de bénévoles",
-    "Soutien à l’intégration des nouveaux arrivants : information et orientation pour faciliter l’intégration"
-  ],
-  "audience": "Immigrants francophones, personnes âgées, familles à faible revenu, personnes sans‑abri et personnes isolées, notamment dans la grande région d’Edmonton.",
-  "projects": [
-    {
-      "name": "Promotion du bénévolat et soutien communautaire",
-      "description": "Programmes bénévoles et services communautaires visant à renforcer l’action bénévole en français et à offrir un filet de soutien pour la sécurité alimentaire, l’intégration et l’inclusion sociale."
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "8744 50 Ave NW, Edmonton, AB T6E 5K8, Canada",
-      "lat": 53.4874612,
-      "lng": -113.4596865
-    }
-  ],
-  "contact": {
-    "email": "info@canavua.org",
-    "phone": "+1 780‑729‑1709",
-    "website": "https://www.canavua.org/"
+  {
+    "id": "acfa_regionale_canmore_banff",
+    "name": "ACFA régionale de Canmore‑Banff",
+    "category": "Services communautaires / Francophonie",
+    "description": "Depuis 2006, l’ACFA régionale de Canmore‑Banff représente et défend les intérêts de la communauté francophone dans la région des Rocheuses canadiennes, desservant les francophones et francophiles des communautés de Banff, Canmore et des environs.",
+    "director": {
+      "name": "Paul Rovin",
+      "title": "Directeur / Directrice régional(e)"
+    },
+    "services": [
+      "Accueil et établissement : orientation et information pour nouveaux arrivants francophones",
+      "Formation linguistique et culturelle pour renforcer les compétences en français",
+      "Support communautaire et aide à l’accès aux services locaux",
+      "Activités sociales et culturelles pour rassembler la communauté",
+      "Opportunités de bénévolat et engagement communautaire"
+    ],
+    "audience": "Francophones et francophiles de la région des Rocheuses canadiennes, incluant familles, jeunes, nouveaux arrivants et personnes âgées.",
+    "projects": [
+      {
+        "name": "Promotion de la vie francophone locale",
+        "description": "Organisation d’activités et événements culturels et sociaux qui renforcent la cohésion francophone dans la vallée de la Bow."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Canmore",
+        "address": "820 8 St #201B, Canmore, AB T1W 2B7, Canada",
+        "lat": 51.0894789,
+        "lng": -115.3618884
+      }
+    ],
+    "contact": {
+      "email": "direction.canmore-banff@acfa.ab.ca",
+      "phone": "+1 403-678-7582",
+      "website": "https://canmore-banff.acfa.ab.ca/"
+    },
+    "tags": [
+      "francophonie",
+      "communauté",
+      "Canmore",
+      "Banff",
+      "services communautaires",
+      "culture",
+      "intégration"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement"
+    ]
   },
-  "tags": [
-    "francophonie",
-    "services communautaires",
-    "bénévolat",
-    "banque alimentaire",
-    "Edmonton",
-    "intégration",
-    "inclusion sociale"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Accueil et Établissement"
-  ]
-},{
-  "id": "centre_bien_etre_prevention_afro_canadiens_alberta",
-  "name": "Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta",
-  "category": "Santé et services sociaux / Francophonie",
-  "description": "Le Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta (CBEP) vise à améliorer la santé globale des Afro‑Canadiens, en offrant des services culturellement adaptés, de sensibilisation, de prévention des maladies chroniques et de réinsertion sociale.", 
-  "director": {
-    "name": "Dr Nganda Luki",
-    "title": "Directeur général"
+  {
+    "id": "association_francophone_brooks",
+    "name": "Association Francophone de Brooks",
+    "category": "Services communautaires / Francophonie",
+    "description": "L'Association Francophone de Brooks (AFB) est un organisme communautaire fondé le 22 juin 2004 pour promouvoir la langue et la culture françaises à Brooks, Alberta. Sa mission est de faciliter l'accès des nouveaux arrivants francophones aux services en français et de favoriser leur intégration réussie.",
+    "director": {
+      "name": "Sa Eva Katusevanako",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Maison des jeunes : activités de club de devoirs, ateliers, gymnase, musique, danse, cuisine, couture",
+      "Programme d'intégration des jeunes : soutien à l'intégration des jeunes immigrants francophones",
+      "Programme antiracisme : renforcement des capacités des jeunes pour lutter contre le racisme",
+      "Bénévolat : encouragement à l'engagement communautaire des immigrants francophones",
+      "Sports et loisirs : activités sportives comme soccer, football et basketball",
+      "Franco Festival : célébration de la musique francophone et de la diversité"
+    ],
+    "audience": "Nouveaux arrivants et jeunes francophones ainsi que la communauté francophone locale de Brooks et du comté de Newell.",
+    "projects": [
+      {
+        "name": "Franco Festival",
+        "description": "Célébration annuelle de la musique francophone et de la diversité canadienne à travers divers événements culturels."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Brooks",
+        "address": "707 2 Ave E, Brooks, AB T1R 1L2, Canada",
+        "lat": 50.5630181,
+        "lng": -111.886034
+      }
+    ],
+    "contact": {
+      "email": "info@afbrooks.ca",
+      "phone": "+1-403-362-0405",
+      "website": "https://afbrooks.ca/"
+    },
+    "tags": [
+      "francophonie",
+      "communauté",
+      "Brooks",
+      "services communautaires",
+      "jeunesse",
+      "intégration",
+      "culture"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
+    ]
   },
-  "services": [
-    "Prévention des maladies chroniques : programmes centrés sur la prévention du diabète, des maladies cardiovasculaires et des troubles mentaux",
-    "Soutien en santé mentale : ateliers et ressources pour favoriser le bien‑être psychologique",
-    "Réintégration sociale : accompagnement des personnes en situation de précarité vers une meilleure inclusion sociale",
-    "Sensibilisation communautaire : campagnes éducatives et événements pour informer sur les enjeux de santé spécifiques aux Afro‑Canadiens",
-    "Services adaptés culturellement : approche tenant compte des différences culturelles, religieuses et linguistiques pour améliorer l’accès aux soins"
-  ],
-  "audience": "Personnes d’origine africaine vivant en Alberta, incluant nouveaux arrivants, réfugiés, personnes âgées et personnes à risque de problèmes de santé chronique.",
-  "projects": [
-    {
-      "name": "Programmes communautaires de prévention et sensibilisation",
-      "description": "Initiatives visant à sensibiliser la communauté aux enjeux de santé (cardiovasculaires, diabète, santé mentale) et à promouvoir des pratiques de vie saines adaptées culturellement. Les programmes incluent aussi des services de référence vers des soins et des ateliers communautaires. :contentReference[oaicite:0]{index=0}"
-    }
-  ],
-  "locations": [
-    {
-      "city": "Edmonton",
-      "address": "8627 Rue Marie‑Anne Gaboury #315B, Edmonton, AB T6C 4S8, Canada",
-      "lat": 53.5224371,
-      "lng": -113.4664381
-    }
-  ],
-  "contact": {
-    "email": "info@cbep.ca",
-    "phone": "+1 780‑695‑4952",
-    "website": "https://cbep.ca/"
+  {
+    "id": "canavua",
+    "name": "CANAVUA",
+    "category": "Services communautaires / Francophonie",
+    "description": "CANAVUA (Canadian Volunteers United in Action) est un organisme francophone basé à Edmonton dédié à la promotion du bénévolat et à la prestation de services communautaires essentiels, notamment une banque alimentaire, un camion‑repas communautaire et des programmes d’aide sociale pour les populations vulnérables.",
+    "director": {
+      "name": "Dicky Dikamba",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Banque alimentaire francophone : distribution de paniers alimentaires à la communauté",
+      "Repas en bus : service mobile distribuant des repas aux sans‑abri, nouveaux arrivants et familles à faible revenu",
+      "Cours de conduite en français (Classe 7) : ateliers théoriques et accompagnement au test",
+      "Navigateur santé : transport et accompagnement en français pour rendez‑vous médicaux",
+      "Aide au déménagement : soutien logistique pour les personnes en transition",
+      "Équipe protocolaire : bénévoles pour l’organisation d’événements communautaires",
+      "Formation et engagement bénévole : recrutement et accompagnement de bénévoles",
+      "Soutien à l’intégration des nouveaux arrivants : information et orientation pour faciliter l’intégration"
+    ],
+    "audience": "Immigrants francophones, personnes âgées, familles à faible revenu, personnes sans‑abri et personnes isolées, notamment dans la grande région d’Edmonton.",
+    "projects": [
+      {
+        "name": "Promotion du bénévolat et soutien communautaire",
+        "description": "Programmes bénévoles et services communautaires visant à renforcer l’action bénévole en français et à offrir un filet de soutien pour la sécurité alimentaire, l’intégration et l’inclusion sociale."
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "8744 50 Ave NW, Edmonton, AB T6E 5K8, Canada",
+        "lat": 53.4870279,
+        "lng": -113.4592192
+      }
+    ],
+    "contact": {
+      "email": "info@canavua.org",
+      "phone": "+1 780‑729‑1709",
+      "website": "https://www.canavua.org/"
+    },
+    "tags": [
+      "francophonie",
+      "services communautaires",
+      "bénévolat",
+      "banque alimentaire",
+      "Edmonton",
+      "intégration",
+      "inclusion sociale"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Accueil et Établissement"
+    ]
   },
-  "tags": [
-    "santé",
-    "prévention",
-    "Afro‑Canadiens",
-    "bien‑être",
-    "communauté",
-    "Éducation santé",
-    "inclusion",
-    "Edmonton"
-  ],
-  "memberOf": [
-    "RIFA",
-    "Groupe Sectoriel Santé et Services Sociaux"
-  ]
-}
-
-
-
+  {
+    "id": "centre_bien_etre_prevention_afro_canadiens_alberta",
+    "name": "Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta",
+    "category": "Santé et services sociaux / Francophonie",
+    "description": "Le Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta (CBEP) vise à améliorer la santé globale des Afro‑Canadiens, en offrant des services culturellement adaptés, de sensibilisation, de prévention des maladies chroniques et de réinsertion sociale.",
+    "director": {
+      "name": "Dr Nganda Luki",
+      "title": "Directeur général"
+    },
+    "services": [
+      "Prévention des maladies chroniques : programmes centrés sur la prévention du diabète, des maladies cardiovasculaires et des troubles mentaux",
+      "Soutien en santé mentale : ateliers et ressources pour favoriser le bien‑être psychologique",
+      "Réintégration sociale : accompagnement des personnes en situation de précarité vers une meilleure inclusion sociale",
+      "Sensibilisation communautaire : campagnes éducatives et événements pour informer sur les enjeux de santé spécifiques aux Afro‑Canadiens",
+      "Services adaptés culturellement : approche tenant compte des différences culturelles, religieuses et linguistiques pour améliorer l’accès aux soins"
+    ],
+    "audience": "Personnes d’origine africaine vivant en Alberta, incluant nouveaux arrivants, réfugiés, personnes âgées et personnes à risque de problèmes de santé chronique.",
+    "projects": [
+      {
+        "name": "Programmes communautaires de prévention et sensibilisation",
+        "description": "Initiatives visant à sensibiliser la communauté aux enjeux de santé (cardiovasculaires, diabète, santé mentale) et à promouvoir des pratiques de vie saines adaptées culturellement. Les programmes incluent aussi des services de référence vers des soins et des ateliers communautaires. :contentReference[oaicite:0]{index=0}"
+      }
+    ],
+    "locations": [
+      {
+        "city": "Edmonton",
+        "address": "8627 Rue Marie‑Anne Gaboury #315B, Edmonton, AB T6C 4S8, Canada",
+        "lat": 53.522441,
+        "lng": -113.4663024
+      }
+    ],
+    "contact": {
+      "email": "info@cbep.ca",
+      "phone": "+1 780‑695‑4952",
+      "website": "https://cbep.ca/"
+    },
+    "tags": [
+      "santé",
+      "prévention",
+      "Afro‑Canadiens",
+      "bien‑être",
+      "communauté",
+      "Éducation santé",
+      "inclusion",
+      "Edmonton"
+    ],
+    "memberOf": [
+      "RIFA",
+      "Groupe Sectoriel Santé et Services Sociaux"
+    ]
+  }
 ]
