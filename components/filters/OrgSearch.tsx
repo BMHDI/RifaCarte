@@ -15,8 +15,6 @@ import {
   ArrowBigDown,
   Check,
   ChevronDown,
-  ListRestart,
-  Recycle,
 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
@@ -138,7 +136,7 @@ export function OrgSearch() {
                 if (isMobile) toggleSidebar();
               }}
               onSave={() => toggleSavedOrg(org)} // toggle instead of just add
-              isSaved={isSaved(org.id)} // pass the boolean to OrgCard for UI
+              isSaved={isSaved(org.id ?? "")} // pass the boolean to OrgCard for UI
             />
           ))}
         </div>
