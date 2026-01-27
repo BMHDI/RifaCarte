@@ -50,13 +50,22 @@ export function filterOrgs(
       textMatch =
         (phraseInServices || phraseInProjects || wordsInServices || wordsInProjects) ?? false;
     }
+const orgCategories = Array.isArray((org as any).categories)
+  ? (org as any).categories
+  : org.category
+  ? [org.category]
+  : [];
 
-    const categoryMatch =
-      selectedCategories.length === 0 || !org.category || selectedCategories.includes(org.category);
+const categoryMatch =
+  selectedCategories.length === 0 ||
+  orgCategories.some((cat: string) => selectedCategories.includes(cat));
 
-    const cityMatch =
-      selectedCities.length === 0 ||
-      !!org.locations?.[0]?.city && selectedCities.includes(org.locations[0].city);
+
+const cityMatch =
+  selectedCities.length === 0 ||
+  org.locations?.some(
+    (loc) => loc.city && selectedCities.includes(loc.city)
+  );
 
     return textMatch && categoryMatch && cityMatch;
   });

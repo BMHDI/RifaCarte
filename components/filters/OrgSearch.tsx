@@ -8,7 +8,7 @@ import { useOrg } from "@/app/context/OrgContext";
 import { filterOrgs } from "@/lib/orgFilter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-
+import CATEGORIES from "@/lib/categories";
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 import { useSidebar } from "../ui/sidebar";
 import { ArrowBigDown, Check, ChevronDown } from "lucide-react";
@@ -38,11 +38,11 @@ export function OrgSearch() {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   // ✅ unique categories
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    organizations.forEach((o) => set.add(o.category));
-    return Array.from(set).sort();
-  }, []);
+ // ✅ useMemo for flat category list
+const categories = useMemo(() => {
+  // flatten all items from the grouped categories
+  return CATEGORIES.flatMap((group) => group.items.map((item) => item.label));
+}, []);
 
   // ✅ unique cities
   const cities = useMemo(() => {
@@ -75,7 +75,7 @@ export function OrgSearch() {
           {filteredOrgs.map((org) => (
             <OrgCard
               logo=""
-              key={org.id}
+              key={org.id + org.name + org.category}
               name={org.name}
               phone={org.contact?.phone ?? ""}
               address={org.locations[0]?.address ?? ""}

@@ -19,7 +19,7 @@ export type OrgLocation = {
 export interface Org {
   id: string;
   name: string;
-  category?: string;
+  category?: string[];
   description?: string;
   director?: {
     name: string;
