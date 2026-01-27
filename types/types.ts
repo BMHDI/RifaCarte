@@ -17,7 +17,7 @@ export type OrgLocation = {
   lng: number ;
 };
 export interface Org {
-  id: string;
+  id?: string;//to be removed
   name: string;
   category: string | string[];  // Allow string or array
   description?: string;
