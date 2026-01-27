@@ -15,6 +15,7 @@ import { ArrowBigDown, Check, ChevronDown } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
 import { Org } from "@/types/types";
+import CATEGORIES from "@/lib/categories";
 
 export function OrgSearch() {
   const {
@@ -38,11 +39,9 @@ export function OrgSearch() {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   // ✅ unique categories
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    organizations.forEach((o) => set.add(o.category));
-    return Array.from(set).sort();
-  }, []);
+ const categories = useMemo(() => {
+  return CATEGORIES.flatMap(group => group.items.map(item => item.id));
+}, []);
 
   // ✅ unique cities
   const cities = useMemo(() => {
@@ -53,11 +52,11 @@ export function OrgSearch() {
     return Array.from(set).sort();
   }, []);
 
-  const toggleCategory = (cat: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
-    );
-  };
+  const toggleCategory = (catId: string) => {
+  setSelectedCategories(prev =>
+    prev.includes(catId) ? prev.filter(c => c !== catId) : [...prev, catId]
+  );
+};
   const toggleCity = (city: string) => {
     setSelectedCities((prev) =>
       prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
@@ -75,7 +74,7 @@ export function OrgSearch() {
           {filteredOrgs.map((org) => (
             <OrgCard
               logo=""
-              key={org.id}
+              key={org.id+org.name}
               name={org.name}
               phone={org.contact?.phone ?? ""}
               address={org.locations[0]?.address ?? ""}

@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "helper scripts/mergedCategories.js"  ],
   "exclude": ["node_modules"]
 }

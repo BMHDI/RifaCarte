@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { ExternalLink, Ghost, Heart, Map, MapPin, Phone } from "lucide-react";
 import { OrgCardProps } from "@/types/types";
+import { toTitleCase } from "@/lib/utils";
 
 export function OrgCard({
   // logo,
@@ -50,11 +51,7 @@ export function OrgCard({
         </div>
       </div>
 
-      {category && (
-        <CardAction className="p-2">
-          <Badge variant="secondary">{category}</Badge>
-        </CardAction>
-      )}
+    
       {/* CONTENT */}
       <CardContent className="space-y-2 pt-3 ">
         <h3 className=" font-semibold text-base">{name}</h3>
@@ -81,6 +78,18 @@ export function OrgCard({
           <Map />
         </Button>
       </CardFooter>
+        {category && category.length > 0 && (
+        <CardAction className="p-1 flex flex-wrap gap-1">
+          {(Array.isArray(category) ? category : [category]).map((cat) => (
+            <Badge
+              key={cat}
+              variant='outline'
+            >
+    {toTitleCase(cat)}
+            </Badge>
+          ))}
+        </CardAction>
+      )}
     </Card>
   );
 }

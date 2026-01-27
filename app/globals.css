@@ -104,15 +104,15 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 /* increase the size of the popup close button */
-.mapboxgl-popup-close-button {
-  font-size: 1.5rem; /* bigger X */
+/* .mapboxgl-popup-close-button {
+  font-size: 1.5rem; 
   width: 2.5rem;
   height: 2.5rem;
   line-height: 2.5rem;
   top: 0.25rem;
   right: 0.25rem;
-  color: red; /* optional color */
-}
+  color: red;
+} */
 
 
 .dark {

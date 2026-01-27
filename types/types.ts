@@ -19,7 +19,7 @@ export type OrgLocation = {
 export interface Org {
   id: string;
   name: string;
-  category?: string;
+  category: string | string[];  // Allow string or array
   description?: string;
   director?: {
     name: string;
@@ -88,7 +88,7 @@ export interface OrgCardProps {
   name: string;
   phone: string;
   address: string;
-  category?: string;
+  category?: string [] | string;
   onDetails?: () => void;
   onShare?: () => void;
   onMap?: () => void;

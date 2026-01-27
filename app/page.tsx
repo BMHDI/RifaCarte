@@ -1,6 +1,5 @@
 import { MapView } from "@/components/map/MapView";
 import { Page } from "@/components/layout/Page";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { MobileSidebarButton } from "@/components/ui/MobileSidebarButton";
 
 export default function Home() {
