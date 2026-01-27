@@ -6,7 +6,8 @@ const OUTPUT_FILE = "./orgs_with_region.json";
 
 // 👉 REGION TABLE (normalized)
 const REGION_MAP = {
-  north: [
+  nord: [
+    'Saint Isidore',
     "fort mcmurray",
     "wood buffalo",
     "peace river",
@@ -16,6 +17,12 @@ const REGION_MAP = {
     "cold lake",
     "grande prairie",
     "high level",
+    "fairview",
+    "slave lake",
+    "whitecourt",
+    "edson",
+    "crowsnest pass",
+    "dawson creek", // technically BC border but sometimes included in northern networks
   ],
 
   centre: [
@@ -31,9 +38,17 @@ const REGION_MAP = {
     "morinville",
     "fort saskatchewan",
     "red deer",
+    "camrose",
+    "wetaskiwin",
+    "lacombe",
+    "blackfalds",
+    "ponoka",
+    "devon",
+    "parkland county",
+    "gibbons",
   ],
 
-  south: [
+  sud: [
     "calgary",
     "cochrane",
     "airdrie",
@@ -43,8 +58,20 @@ const REGION_MAP = {
     "lethbridge",
     "brooks",
     "taber",
+    "high river",
+    "canmore",
+    "strathmore",
+    "banff",
+    "claresholm",
+    "pincher creek",
+    "cardston",
+    "fort macleod",
+    "turner valley",
+    "cypress hills",
+    "drumheller", // sometimes considered central-south border
   ],
 };
+
 
 // normalize city text
 function norm(text = "") {
@@ -76,7 +103,7 @@ function detectRegion(org) {
 // ---------- RUN ----------
 const orgs = JSON.parse(fs.readFileSync(INPUT_FILE, "utf-8"));
 
-let stats = { north: 0, centre: 0, south: 0 };
+let stats = { nord: 0, centre: 0, sud: 0 };
 
 const updated = orgs.map(org => {
   const region = detectRegion(org);

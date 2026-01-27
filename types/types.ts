@@ -39,6 +39,7 @@ export interface Org {
   };
   tags?: string[];
   memberOf?: string[];
+  region?: string;
 }
 export interface SelectedOrg {
   org?: Org;
@@ -81,6 +82,9 @@ export type OrgContextType = {
   savedOrgs: Org[];
   toggleSavedOrg: (org: Org) => void;
   isSaved: (orgId: string) => boolean;
+  activeRegion: string | null;
+  setActiveRegion: React.Dispatch<React.SetStateAction<string | null>>;
+  resetAllFilters: () => void;
 };
 //orgCard props
 export interface OrgCardProps {
@@ -92,4 +96,7 @@ export interface OrgCardProps {
   onDetails?: () => void;
   onShare?: () => void;
   onMap?: () => void;
+}
+export interface OrgSearchProps {
+  activeRegion?: string | null;
 }

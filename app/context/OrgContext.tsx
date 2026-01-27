@@ -12,6 +12,7 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<SelectedOrg | null>(null);
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
 
   // ✅ hydrate from localStorage AFTER mount (client only)
   useEffect(() => {
@@ -42,7 +43,10 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   }, [query]);
 
   useEffect(() => {
-    localStorage.setItem("selectedCategories", JSON.stringify(selectedCategories));
+    localStorage.setItem(
+      "selectedCategories",
+      JSON.stringify(selectedCategories),
+    );
   }, [selectedCategories]);
 
   useEffect(() => {
@@ -54,12 +58,23 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
     setSavedOrgs((prev) =>
       prev.some((o) => o.id === org.id)
         ? prev.filter((o) => o.id !== org.id)
-        : [...prev, org]
+        : [...prev, org],
     );
   };
 
-  const savedOrgIds = useMemo(() => new Set(savedOrgs.map((o) => o.id)), [savedOrgs]);
+  const savedOrgIds = useMemo(
+    () => new Set(savedOrgs.map((o) => o.id)),
+    [savedOrgs],
+  );
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
+  const resetAllFilters = () => {
+  setQuery("");
+  setSelectedCategories([]);
+  setSelectedCities([]);
+  setSelectedOrg(null);
+  setActiveRegion?.(null); // only if you added activeRegion to context
+};
+
 
   // const clearSavedOrgs = () => setSavedOrgs([]);
 
@@ -77,6 +92,9 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
         savedOrgs,
         toggleSavedOrg,
         isSaved,
+        activeRegion,
+        setActiveRegion,
+        resetAllFilters
         // clearSavedOrgs,
       }}
     >

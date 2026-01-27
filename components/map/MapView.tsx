@@ -4,21 +4,23 @@ import Map, {
   NavigationControl,
   Marker,
   Popup,
+  Source,
+  Layer,
 } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState, useRef, useEffect, useMemo } from "react";
 import organizations from "@/lib/org.json";
 import { MapPin } from "lucide-react";
 import francophoneRegions from "@/lib/francophone-regions.json";
-import { Source, Layer } from "react-map-gl/mapbox";
 import { regionFill, regionLabels, regionBorder } from "@/lib/mapstyles";
 import { useOrg } from "@/app/context/OrgContext";
 import { MapRef } from "react-map-gl/mapbox";
 import { OrgCard } from "../ui/OrgCard";
+import { Button } from "../ui/button";
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
-  const { selectedOrg, setSelectedOrg } = useOrg();
+  const { selectedOrg, setSelectedOrg , activeRegion, setActiveRegion } = useOrg();
   const [mapLoaded, setMapLoaded] = useState(false);
   const [viewState, setViewState] = useState({
     longitude: -113.4711,
@@ -26,7 +28,7 @@ export function MapView() {
     zoom: 5,
   });
 
-  // Handle flying to selected location
+  // Handle flying to selected org location
   useEffect(() => {
     if (selectedOrg?.location && mapRef.current) {
       mapRef.current.flyTo({
@@ -37,7 +39,7 @@ export function MapView() {
     }
   }, [selectedOrg?.location]);
 
-  // Flatten all locations for rendering when nothing is selected
+  // Flatten all locations for rendering
   const allMarkers = useMemo(() => {
     return organizations
       .filter((org) => org.id)
@@ -47,9 +49,56 @@ export function MapView() {
           .map((loc) => ({
             org,
             location: loc,
-          }))
+          })),
       );
   }, []);
+
+  // ---- Compute region centers for clickable markers ----
+  const regionCenters = useMemo(() => {
+    return francophoneRegions.features.map((feature) => {
+      const coords = feature.geometry.coordinates[0]; // Polygon
+      const lats = coords.map((c) => c[1]);
+      const lngs = coords.map((c) => c[0]);
+      const lat = (Math.min(...lats) + Math.max(...lats)) / 2;
+      const lng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
+      return { name: feature.properties.name, lat, lng };
+    });
+  }, []);
+
+  // Determine which markers to show
+  // ---- Filter markers based on active region ----
+const markersToShow = useMemo(() => {
+  if (!activeRegion) return allMarkers;
+  return allMarkers.filter(m =>
+    m.org.region?.trim().toLowerCase() === activeRegion.trim().toLowerCase()
+  );
+}, [activeRegion, allMarkers]);
+
+  // ---- Fly to region when activeRegion changes ----
+  useEffect(() => {
+    if (!activeRegion || !mapRef.current) return;
+
+    // Get all pins in this region
+  const pins = allMarkers.filter(
+  (m) =>
+    m.org.region?.trim().toLowerCase() === activeRegion?.trim().toLowerCase()
+);
+
+    const lats = pins.map((p) => p.location.lat);
+    const lngs = pins.map((p) => p.location.lng);
+    const north = Math.max(...lats);
+    const south = Math.min(...lats);
+    const east = Math.max(...lngs);
+    const west = Math.min(...lngs);
+
+    mapRef.current.fitBounds(
+      [
+        [west, south],
+        [east, north],
+      ],
+      { padding: 80 },
+    );
+  }, [activeRegion, allMarkers]);
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -64,7 +113,7 @@ export function MapView() {
       >
         <NavigationControl position="top-right" />
 
-        {/* Francophone regions Background Layers */}
+        {/* Regions GeoJSON layers */}
         {mapLoaded && (
           <Source
             id="francophone-regions"
@@ -73,47 +122,75 @@ export function MapView() {
           >
             <Layer {...regionFill} />
             <Layer {...regionBorder} />
-            <Layer {...regionLabels} />
           </Source>
         )}
 
-        {/* RENDER LOGIC:
-          If an org is selected, show its specific markers.
-          Otherwise, show markers for every organization in the JSON.
-        */}
-        {!selectedOrg ? (
-          allMarkers.map(({ org, location }, i) => (
-            <Marker
-              key={`all-${org.id}-${i}`}
-              longitude={location.lng!}
-              latitude={location.lat!}
-              anchor="bottom"
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                setSelectedOrg({ org, location });
-              }}
-            >
-              <MapPin size={24} className="text-red-500 hover:scale-110 transition-transform cursor-pointer" fill="currentColor" />
-            </Marker>
-          ))
-        ) : (
-          selectedOrg.org?.locations.map((loc, i) => (
-            <Marker
-              key={`selected-${i}`}
-              longitude={loc.lng!}
-              latitude={loc.lat!}
-              anchor="bottom"
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                setSelectedOrg({ org: selectedOrg.org, location: loc });
-              }}
-            >
-              <MapPin size={30} className="text-blue-600" fill="currentColor" />
-            </Marker>
-          ))
-        )}
+        {/* Region clickable center markers */}
+        {regionCenters.map((region) => (
+          <Marker
+            key={`region-${region.name}`}
+            longitude={region.lng}
+            latitude={region.lat}
+            anchor="center"
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
+              // Filter pins and zoom to bounds
+              const pins = allMarkers.filter(
+                (m) => m.org.region === region.name,
+              );
+              if (pins.length > 0 && mapRef.current) {
+                const lats = pins.map((p) => p.location.lat);
+                const lngs = pins.map((p) => p.location.lng);
+                const north = Math.max(...lats);
+                const south = Math.min(...lats);
+                const east = Math.max(...lngs);
+                const west = Math.min(...lngs);
 
-        {/* Popup for the active selection */}
+                mapRef.current.fitBounds(
+                  [
+                    [west, south],
+                    [east, north],
+                  ],
+                  { padding: 80, duration: 1000 },
+                );
+              }
+              setActiveRegion(region.name);
+            }}
+          >
+            <Button
+             
+              style={{ whiteSpace: "nowrap" }}
+            >
+              {region.name}
+            </Button>
+          </Marker>
+        ))}
+
+        {/* Render org markers */}
+        {markersToShow.map(({ org, location }, i) => (
+          <Marker
+            key={`org-${org.id}-${i}`}
+            longitude={location.lng!}
+            latitude={location.lat!}
+            anchor="bottom"
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
+              setSelectedOrg({ org, location });
+            }}
+          >
+            <MapPin
+              size={selectedOrg?.location === location ? 30 : 24}
+              className={
+                selectedOrg?.location === location
+                  ? "text-blue-600"
+                  : "text-red-500 hover:scale-110 transition-transform cursor-pointer"
+              }
+              fill="currentColor"
+            />
+          </Marker>
+        ))}
+
+        {/* Popup for selected org */}
         {selectedOrg?.location && (
           <Popup
             longitude={selectedOrg.location.lng}
@@ -136,6 +213,8 @@ export function MapView() {
             </div>
           </Popup>
         )}
+
+     
       </Map>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import organizations from "@/lib/org.json";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -8,10 +8,16 @@ import { useOrg } from "@/app/context/OrgContext";
 import { filterOrgs } from "@/lib/orgFilter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-
+import { OrgSearchProps } from "@/types/types";
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 import { useSidebar } from "../ui/sidebar";
-import { ArrowBigDown, Check, ChevronDown } from "lucide-react";
+import {
+  ArrowBigDown,
+  Check,
+  ChevronDown,
+  ListRestart,
+  Recycle,
+} from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
 import { Org } from "@/types/types";
@@ -28,35 +34,59 @@ export function OrgSearch() {
     setSelectedOrg,
     toggleSavedOrg,
     isSaved,
+    activeRegion,
+    resetAllFilters,
   } = useOrg();
   const filteredOrgs: Org[] = filterOrgs(
     organizations,
     query,
     selectedCategories,
     selectedCities,
+    activeRegion,
   );
+
   const { toggleSidebar } = useSidebar();
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   // ✅ unique categories
- const categories = useMemo(() => {
-  return CATEGORIES.flatMap(group => group.items.map(item => item.id));
-}, []);
+  const categories = useMemo(() => {
+    return CATEGORIES.flatMap((group) => group.items.map((item) => item.id));
+  }, []);
 
   // ✅ unique cities
   const cities = useMemo(() => {
     const set = new Set<string>();
-    organizations.forEach((o) =>
-      o.locations.forEach((loc) => set.add(loc.city)),
-    );
-    return Array.from(set).sort();
-  }, []);
+    organizations.forEach((o) => {
+      const orgRegion = o.region?.trim().toLowerCase();
+      const active = activeRegion?.trim().toLowerCase();
 
+      if (!active || orgRegion === active) {
+        o.locations.forEach((loc) => {
+          if (loc.city) set.add(loc.city);
+        });
+      }
+    });
+
+    return Array.from(set).sort();
+  }, [activeRegion]);
+  useEffect(() => {
+    if (!activeRegion) return;
+
+    setSelectedCities((prev) =>
+      prev.filter((city) =>
+        organizations.some(
+          (o) =>
+            o.region === activeRegion &&
+            o.locations.some((l) => l.city === city),
+        ),
+      ),
+    );
+  }, [activeRegion, setSelectedCities]);
   const toggleCategory = (catId: string) => {
-  setSelectedCategories(prev =>
-    prev.includes(catId) ? prev.filter(c => c !== catId) : [...prev, catId]
-  );
-};
+    setSelectedCategories((prev) =>
+      prev.includes(catId) ? prev.filter((c) => c !== catId) : [...prev, catId],
+    );
+  };
   const toggleCity = (city: string) => {
     setSelectedCities((prev) =>
       prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
@@ -74,7 +104,7 @@ export function OrgSearch() {
           {filteredOrgs.map((org) => (
             <OrgCard
               logo=""
-              key={org.id+org.name}
+              key={org.id + org.name}
               name={org.name}
               phone={org.contact?.phone ?? ""}
               address={org.locations[0]?.address ?? ""}
@@ -118,9 +148,7 @@ export function OrgSearch() {
             <>
               {selectedCategories.length > 0 && (
                 <>
-                  <span className="text-sm font-medium flex-shrink-0">
-                    Catégories:
-                  </span>
+                  <span className="text-sm">Catégories:</span>
 
                   <div className="flex flex-wrap items-center gap-1">
                     {selectedCategories.map((c) => (
@@ -144,25 +172,43 @@ export function OrgSearch() {
                   </span>
                   <div className="flex flex-wrap items-center gap-1">
                     {selectedCities.map((c) => (
-                      <Badge
-                        key={`city-${c}`}
-                        variant="default"
-                        className="rounded-full cursor-pointer flex-shrink-0"
-                        onClick={() => toggleCity(c)}
-                      >
+                      <Badge key={`city-${c}`} onClick={() => toggleCity(c)}>
                         {c} ✕
                       </Badge>
                     ))}
                   </div>
                 </>
               )}
+              <div className="flex flex-row justify-center ">
+                <button
+                  onClick={resetAllFilters}
+                  className="text-sm font-semibold  hover:underline hover:text-red-600 "
+                >
+                  ↺ Réinitialiser tous les filtres
+                </button>
+              </div>
             </>
           ) : (
-            <div className="flex flex-row justify-end items-end ">
-              <p className="text-xs font-medium text-gray-900 flex ">
-                Utilisez le bouton filtres pour choisir la ville ou la catégorie
-              </p>
-              <ArrowBigDown className="h-5" fill="#e6425f" />
+            <div className="flex flex-row justify-center ">
+              {activeRegion ||
+              selectedCategories.length ||
+              selectedCities.length ||
+              query ? (
+                <button
+                  onClick={resetAllFilters}
+                  className="text-sm font-semibold  hover:underline hover:text-red-600 "
+                >
+                  ↺ Réinitialiser tous les filtres
+                </button>
+              ) : (
+                <>
+                  <p className="text-xs font-medium text-gray-900 flex">
+                    Utilisez le bouton filtres pour choisir la ville ou la
+                    catégorie
+                  </p>
+                  <ArrowBigDown className="h-5" fill="#e6425f" />
+                </>
+              )}
             </div>
           )}
         </div>
@@ -183,9 +229,13 @@ export function OrgSearch() {
               </Button>
             </PopoverTrigger>
 
-            <PopoverContent className="w-[220px] p-0" align="end">
+            <PopoverContent
+              className="w-[220px] p-0 max-h-[70vh] overflow-hidden"
+              align="end"
+            >
+              {" "}
               <Command>
-                Categories:
+                <span className="text-md font-bold px-2"> Categories : </span>
                 <CommandList>
                   <CommandGroup>
                     {categories.map((cat) => (
@@ -204,7 +254,7 @@ export function OrgSearch() {
                 </CommandList>
               </Command>
               <Command>
-                Villes:
+                <span className="text-md font-bold px-2"> Villes: </span>
                 <CommandList>
                   <CommandGroup>
                     {cities.map((city) => (

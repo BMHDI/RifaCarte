@@ -103,7 +103,7 @@
       "RIFA"
     ],
     "orgId": "fafa",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "fafa-3",
@@ -156,7 +156,7 @@
       "RIFA"
     ],
     "orgId": "fafa",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "fafa-4",
@@ -262,7 +262,7 @@
       "RIFA"
     ],
     "orgId": "fafa",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "fmi-1",
@@ -378,7 +378,7 @@
       "RIFA"
     ],
     "orgId": "fmi",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "fpfa-1",
@@ -611,7 +611,7 @@
       "RIFA"
     ],
     "orgId": "iglf",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "mcg-0",
@@ -670,7 +670,7 @@
       "RIFA"
     ],
     "orgId": "mcg",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "mcg-1",
@@ -788,7 +788,7 @@
       "RIFA"
     ],
     "orgId": "mcg",
-    "region": "centre"
+    "region": "sud"
   },
   {
     "id": "mcg-3",
@@ -847,7 +847,7 @@
       "RIFA"
     ],
     "orgId": "mcg",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "mcg-4",
@@ -1020,7 +1020,7 @@
       "RIFA"
     ],
     "orgId": "parallele",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "pcb-1",
@@ -1144,7 +1144,7 @@
       "RIFA"
     ],
     "orgId": "pcb",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "prospect-1",
@@ -1206,7 +1206,7 @@
       "RIFA"
     ],
     "orgId": "prospect",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "prospect-2",
@@ -1268,7 +1268,7 @@
       "RIFA"
     ],
     "orgId": "prospect",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "prospect-3",
@@ -1330,7 +1330,7 @@
       "RIFA"
     ],
     "orgId": "prospect",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "prospect-4",
@@ -1392,7 +1392,7 @@
       "RIFA"
     ],
     "orgId": "prospect",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "prospect-5",
@@ -1516,7 +1516,7 @@
       "RIFA"
     ],
     "orgId": "prospect",
-    "region": "centre"
+    "region": "sud"
   },
   {
     "id": "rafa-1",
@@ -1752,7 +1752,7 @@
       "RIFA"
     ],
     "orgId": "wcg",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "wcg-1",
@@ -1866,7 +1866,7 @@
       "RIFA"
     ],
     "orgId": "cinemagine",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "cinemagine-2",
@@ -1988,7 +1988,7 @@
       "RIFA"
     ],
     "orgId": "cinemagine",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "cinemagine-4",
@@ -2049,7 +2049,7 @@
       "RIFA"
     ],
     "orgId": "cinemagine",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "cinemagine-5",
@@ -2229,7 +2229,7 @@
       "CLIF du Sud"
     ],
     "orgId": "acfa_calgary",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "acfa_grande_prairie-1",
@@ -2279,7 +2279,7 @@
       "CLIF du Nord"
     ],
     "orgId": "acfa_grande_prairie",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "acfa_red_deer-1",
@@ -2400,7 +2400,7 @@
       "CLIF du Nord"
     ],
     "orgId": "acfa_wood_buffalo",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "acfa_edmonton-1",
@@ -2596,7 +2596,7 @@
       "Groupe Sectoriel Santé et Services Sociaux"
     ],
     "orgId": "ajefa",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "ajfas-1",
@@ -2784,7 +2784,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "campus_saint_jean",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "canada_in_progress-1",
@@ -2848,7 +2848,7 @@
       "Groupe Sectoriel Accueil et Établissement"
     ],
     "orgId": "canada_in_progress",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "canaf-1",
@@ -2919,7 +2919,7 @@
       "Groupe Sectoriel Santé et Services Sociaux"
     ],
     "orgId": "canaf",
-    "region": "south"
+    "region": "sud"
   },
   {
     "name": "Centre d’Appui Familial du Sud de l’Alberta",
@@ -2981,7 +2981,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "centre_appui_familial_sud_alberta",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "centre_appui_familial_sud_alberta-1",
@@ -3044,7 +3044,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "centre_appui_familial_sud_alberta",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "centre_appui_familial_sud_alberta-0",
@@ -3107,7 +3107,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "centre_appui_familial_sud_alberta",
-    "region": "centre"
+    "region": "sud"
   },
   {
     "id": "centre_pour_nouveaux_arrivants_grande_prairie-1",
@@ -3169,7 +3169,7 @@
       "Groupe Sectoriel Accueil et Établissement"
     ],
     "orgId": "centre_pour_nouveaux_arrivants_grande_prairie",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "conseil_scolaire_du_nord_ouest-1",
@@ -3228,7 +3228,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "conseil_scolaire_du_nord_ouest",
-    "region": "centre"
+    "region": "nord"
   },
   {
     "id": "conseil_scolaire_francosud-1",
@@ -3293,7 +3293,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "conseil_scolaire_francosud",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "ecole_francophone_brooks-1",
@@ -3349,7 +3349,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "ecole_francophone_brooks",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "conseil_scolaire_centre_est-1",
@@ -3435,7 +3435,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "conseil_scolaire_centre_est",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "communaute_francophone_accueillante_calgary-1",
@@ -3492,7 +3492,7 @@
       "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
     ],
     "orgId": "communaute_francophone_accueillante_calgary",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "conseil_scolaire_centre_nord-1",
@@ -3713,7 +3713,7 @@
       "Groupe Sectoriel Éducation"
     ],
     "orgId": "fcsfa",
-    "region": "centre"
+    "region": "nord"
   },
   {
     "id": "frap-1",
@@ -3893,7 +3893,7 @@
       "Santé et Services Sociaux"
     ],
     "orgId": "frap",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "frap-4",
@@ -3953,7 +3953,7 @@
       "Santé et Services Sociaux"
     ],
     "orgId": "frap",
-    "region": "north"
+    "region": "nord"
   },
   {
     "id": "frap-6",
@@ -4117,7 +4117,7 @@
       "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
     ],
     "orgId": "kayanou",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "pia-1",
@@ -4171,7 +4171,7 @@
       "Groupes sectoriels : Accueil et Établissement, Éducation, Santé et services sociaux"
     ],
     "orgId": "pia",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "la_cite_des_rocheuses-1",
@@ -4226,7 +4226,7 @@
       "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
     ],
     "orgId": "la_cite_des_rocheuses",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "acfa_regionale_canmore_banff-1",
@@ -4284,7 +4284,7 @@
       "Groupe Sectoriel Accueil et Établissement"
     ],
     "orgId": "acfa_regionale_canmore_banff",
-    "region": "centre"
+    "region": "sud"
   },
   {
     "id": "association_francophone_brooks-1",
@@ -4343,7 +4343,7 @@
       "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
     ],
     "orgId": "association_francophone_brooks",
-    "region": "south"
+    "region": "sud"
   },
   {
     "id": "canavua-1",

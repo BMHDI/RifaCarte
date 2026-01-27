@@ -10,7 +10,8 @@ export function filterOrgs(
   organizations: Org[],
   query: string,
   selectedCategories: string[],
-  selectedCities: string[]
+  selectedCities: string[],
+  activeRegion?: string | null
 ) {
   return organizations.filter((org) => {
     let textMatch = true;
@@ -72,8 +73,12 @@ export function filterOrgs(
   org.locations?.some(
     (loc) => loc.city && selectedCities.includes(loc.city)
   );
+  const regionMatch =
+    !activeRegion ||
+    (org.region &&
+      org.region.trim().toLowerCase() === activeRegion.trim().toLowerCase());
 
 
-    return textMatch && categoryMatch && cityMatch;
+return textMatch && categoryMatch && cityMatch && regionMatch;
   });
 }
