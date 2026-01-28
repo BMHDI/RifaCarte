@@ -26,7 +26,7 @@ export function RegionSelectorList({ onRegionSelect }: RegionSelectorProps) {
   if (activeRegion) return null;
 
   return (
-    <div className="flex flex-wrap gap-10 items-center flex-col justify-evenly">
+    <div className="flex flex-wrap items-center flex-col justify-evenly">
       <span className="text-md font-semibold">Choisissez une région</span>
       {REGION_BUTTONS.map((region) => (
         <Button
@@ -35,8 +35,8 @@ export function RegionSelectorList({ onRegionSelect }: RegionSelectorProps) {
           className="
            h-18 w-18 rounded-full
           shadow-lg hover:scale-110 transition-transform
-          text-lg font-semibold
-          md:h-28 md:w-28
+          text-lg font-bold
+          md:h-25 md:w-25
         "
         >
           {region.name}

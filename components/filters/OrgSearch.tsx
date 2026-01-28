@@ -2,25 +2,20 @@
 
 import { useState, useMemo, useEffect } from "react";
 import organizations from "@/lib/org.json";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { useOrg } from "@/app/context/OrgContext";
 import { filterOrgs } from "@/lib/orgFilter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 import { useSidebar } from "../ui/sidebar";
-import {
-  ArrowBigDown,
-  Check,
-  ChevronDown,
-} from "lucide-react";
+import { ArrowBigDown } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
 import { Org } from "@/types/types";
 import CATEGORIES from "@/lib/categories";
 import { useCities } from "@/hooks/useCities";
 import { RegionSelectorList } from "../ui/RegionSelectorList";
+import SearchWithFilters from "./SearchWithFilters";
 
 export function OrgSearch() {
   const {
@@ -84,48 +79,51 @@ export function OrgSearch() {
     <div>
       <div className="flex flex-col h-[80vh] bg-gray-60">
         <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-          {filteredOrgs.length === 0 && activeRegion && <p>Aucun organisme trouvé.</p>}
- { !activeRegion && <RegionSelectorList />}
-          {activeRegion &&   filteredOrgs.map((org) => (
-            <OrgCard
-              logo=""
-              key={org.id + org.name}
-              name={org.name}
-              phone={org.contact?.phone ?? ""}
-              address={org.locations[0]?.address ?? ""}
-              category={org.category}
-              onDetails={() => {}}
-              onShare={() => {}}
-              onMap={() => {
-                if (org.locations.length === 1) {
-                  // single location → select directly
-                  setSelectedOrg({
-                    org,
-                    location: org.locations[0] as {
-                      lat: number;
-                      lng: number;
-                      city?: string | undefined;
-                      address?: string | undefined;
-                    },
-                  });
-                } else {
-                  // multiple locations → show all markers, no flying yet
-                  setSelectedOrg({
-                    org,
-                    locations: org.locations.map((location) => ({
-                      lat: location.lat ?? 0,
-                      lng: location.lng ?? 0,
-                      city: location.city,
-                      address: location.address,
-                    })),
-                  });
-                }
-                if (isMobile) toggleSidebar();
-              }}
-              onSave={() => toggleSavedOrg(org)} // toggle instead of just add
-              isSaved={isSaved(org.id ?? "")} // pass the boolean to OrgCard for UI
-            />
-          ))}
+          {filteredOrgs.length === 0 && activeRegion && (
+            <p>Aucun organisme trouvé.</p>
+          )}
+          {!activeRegion && <RegionSelectorList />}
+          {activeRegion &&
+            filteredOrgs.map((org) => (
+              <OrgCard
+                logo=""
+                key={org.id + org.name}
+                name={org.name}
+                phone={org.contact?.phone ?? ""}
+                address={org.locations[0]?.address ?? ""}
+                category={org.category}
+                onDetails={() => {}}
+                onShare={() => {}}
+                onMap={() => {
+                  if (org.locations.length === 1) {
+                    // single location → select directly
+                    setSelectedOrg({
+                      org,
+                      location: org.locations[0] as {
+                        lat: number;
+                        lng: number;
+                        city?: string | undefined;
+                        address?: string | undefined;
+                      },
+                    });
+                  } else {
+                    // multiple locations → show all markers, no flying yet
+                    setSelectedOrg({
+                      org,
+                      locations: org.locations.map((location) => ({
+                        lat: location.lat ?? 0,
+                        lng: location.lng ?? 0,
+                        city: location.city,
+                        address: location.address,
+                      })),
+                    });
+                  }
+                  if (isMobile) toggleSidebar();
+                }}
+                onSave={() => toggleSavedOrg(org)} // toggle instead of just add
+                isSaved={isSaved(org.id ?? "")} // pass the boolean to OrgCard for UI
+              />
+            ))}
         </div>
         {/* ✅ SAME STYLING — button becomes dropdown */}
         <div className="mx-4 flex flex-col  ">
@@ -172,7 +170,6 @@ export function OrgSearch() {
                   </div>
                 </>
               )}
-            
             </>
           ) : (
             <div className="flex flex-row justify-center ">
@@ -199,67 +196,17 @@ export function OrgSearch() {
           )}
         </div>
         {/* ✅ SAME STYLING — button becomes dropdown */}
-        <div className="flex w-full p-4 ">
-          <Input
-            className="rounded-r-none"
-            value={query}
-            placeholder="Chercher un organisme..."
-            onChange={(e) => setQuery(e.target.value)}
-          />
-
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button variant="default" className="rounded-l-none flex gap-1">
-                filtres
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-
-            <PopoverContent
-              className="w-[220px] p-0 max-h-[70vh] overflow-hidden"
-              align="end"
-            >
-              {" "}
-              <Command>
-                <span className="text-md font-bold px-2"> Categories : </span>
-                <CommandList>
-                  <CommandGroup>
-                    {categories.map((cat) => (
-                      <CommandItem
-                        key={cat}
-                        onSelect={() => toggleCategory(cat)}
-                        className="flex items-center justify-between"
-                      >
-                        <span>{cat}</span>
-                        {selectedCategories.includes(cat) && (
-                          <Check className="h-4 w-4" />
-                        )}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-              <Command>
-                <span className="text-md font-bold px-2"> Villes: </span>
-                <CommandList>
-                  <CommandGroup>
-                    {cities.map((city) => (
-                      <CommandItem
-                        key={city}
-                        onSelect={() => toggleCity(city)}
-                        className="flex items-center justify-between"
-                      >
-                        <span>{city}</span>
-                        {selectedCities.includes(city) && (
-                          <Check className="h-4 w-4" />
-                        )}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
+        <div className="z-50">
+        <SearchWithFilters
+          query={query}
+          setQuery={setQuery}
+          categories={categories}
+          cities={cities}
+          selectedCategories={selectedCategories}
+          selectedCities={selectedCities}
+          toggleCategory={toggleCategory}
+          toggleCity={toggleCity}
+        />
         </div>
       </div>
     </div>

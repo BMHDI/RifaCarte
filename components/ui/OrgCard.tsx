@@ -25,7 +25,7 @@ export function OrgCard({
   isSaved,
 }: OrgCardProps) {
   return (
-    <Card onClick={onMap}  className="md:w-[297px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
+    <Card   className="md:w-[297px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
       {/* IMAGE HEADER */}
       <div className="relative  h-24 w-full overflow-hidden rounded-t-md">

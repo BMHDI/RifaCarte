@@ -10,3 +10,4 @@ export function toTitleCase(str: string) {
     txt.charAt(0).toUpperCase() + txt.slice(1)
   );
 }
+

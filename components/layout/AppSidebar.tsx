@@ -21,7 +21,7 @@ import FavoritesPage from "../Favorite";
 
 export function AppSidebar() {
   const isMobile = useIsMobile();
-  const { state } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
 
   // Track active menu content
   const [activeTab, setActiveTab] = useState<"search" | "ai" | "Favorites">(
@@ -46,9 +46,12 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.key}>
                   <SidebarMenuButton
                     asChild
-                    onClick={() =>
-                      setActiveTab(item.key as "search" | "ai" | "Favorites")
-                    }
+                    onClick={() => {
+                      setActiveTab(item.key as "search" | "ai" | "Favorites");
+                        if (state !== "expanded" && !isMobile) {
+                        toggleSidebar();
+                        }
+                    }}
                   >
                     <button
                       className={`items-center  text-left ${activeTab === item.key ? "font-bold text-primary  border-black/20 rounded-t-md" : ""}`}

@@ -18,6 +18,8 @@ import { MapRef } from "react-map-gl/mapbox";
 import { OrgCard } from "../ui/OrgCard";
 import { Button } from "../ui/button";
 import { useSidebar } from "../ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
@@ -31,7 +33,7 @@ export function MapView() {
   } = useOrg();
   const [mapLoaded, setMapLoaded] = useState(false);
   const { toggleSidebar, state } = useSidebar();
-
+const isMobile = useIsMobile()
   // Handle flying to selected org location
   useEffect(() => {
     if (selectedOrg?.location && mapRef.current) {
@@ -145,18 +147,16 @@ export function MapView() {
       longitude={region.lng}
       latitude={region.lat}
       anchor="center"
-      onClick={(e) => {
-        e.originalEvent.stopPropagation();
-        setActiveRegion(region.name);
-      }}
+    onClick={(e) => {
+    e.originalEvent.stopPropagation();
+    setActiveRegion(region.name);
+    if (isMobile  && state == "expanded") {
+      toggleSidebar(); // only open when needed
+    }
+  }}
     >
       <Button
-        onClick={() => {
-          setActiveRegion(region.name);
-          if (!state) {
-            toggleSidebar(); // open only if closed
-          }
-        }}
+      
         className="
            h-18 w-18 rounded-full
           shadow-lg hover:scale-110 transition-transform
