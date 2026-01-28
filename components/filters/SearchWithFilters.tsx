@@ -6,24 +6,13 @@ import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { ChevronDown, Check } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { SearchWithFiltersProps } from "@/types/types"
 
-type SearchWithFiltersProps = {
-  query: string
-  setQuery: (q: string) => void
-  categories: string[]
-  cities: string[]
-  selectedCategories: string[]
-  selectedCities: string[]
-  toggleCategory: (c: string) => void
-  toggleCity: (c: string) => void
-}
 
 export default function SearchWithFilters({
   query,
