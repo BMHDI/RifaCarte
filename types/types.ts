@@ -40,6 +40,7 @@ export interface Org {
   tags?: string[];
   memberOf?: string[];
   region?: string;
+
 }
 export interface SelectedOrg {
   org?: Org;
@@ -85,6 +86,9 @@ export type OrgContextType = {
   activeRegion: string | null;
   setActiveRegion: React.Dispatch<React.SetStateAction<string | null>>;
   resetAllFilters: () => void;
+      viewState: any; // or a specific type if available
+  setViewState: (view: any) => void; // or a specific type if available
+  resetMapView: () => void;
 };
 //orgCard props
 export interface OrgCardProps {

@@ -8,7 +8,6 @@ import { useOrg } from "@/app/context/OrgContext";
 import { filterOrgs } from "@/lib/orgFilter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { OrgSearchProps } from "@/types/types";
 import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 import { useSidebar } from "../ui/sidebar";
 import {
@@ -20,6 +19,8 @@ import { Badge } from "../ui/badge";
 import { OrgCard } from "../ui/OrgCard";
 import { Org } from "@/types/types";
 import CATEGORIES from "@/lib/categories";
+import { useCities } from "@/hooks/useCities";
+import { RegionSelectorList } from "../ui/RegionSelectorList";
 
 export function OrgSearch() {
   const {
@@ -52,21 +53,7 @@ export function OrgSearch() {
   }, []);
 
   // ✅ unique cities
-  const cities = useMemo(() => {
-    const set = new Set<string>();
-    organizations.forEach((o) => {
-      const orgRegion = o.region?.trim().toLowerCase();
-      const active = activeRegion?.trim().toLowerCase();
-
-      if (!active || orgRegion === active) {
-        o.locations.forEach((loc) => {
-          if (loc.city) set.add(loc.city);
-        });
-      }
-    });
-
-    return Array.from(set).sort();
-  }, [activeRegion]);
+  const cities = useCities();
   useEffect(() => {
     if (!activeRegion) return;
 
@@ -97,9 +84,9 @@ export function OrgSearch() {
     <div>
       <div className="flex flex-col h-[80vh] bg-gray-60">
         <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-          {filteredOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
-
-          {filteredOrgs.map((org) => (
+          {filteredOrgs.length === 0 && activeRegion && <p>Aucun organisme trouvé.</p>}
+ { !activeRegion && <RegionSelectorList />}
+          {activeRegion &&   filteredOrgs.map((org) => (
             <OrgCard
               logo=""
               key={org.id + org.name}
@@ -144,6 +131,14 @@ export function OrgSearch() {
         <div className="mx-4 flex flex-col  ">
           {selectedCategories.length > 0 || selectedCities.length > 0 ? (
             <>
+              <div className="flex flex-row justify-center ">
+                <button
+                  onClick={resetAllFilters}
+                  className="text-sm font-semibold  hover:underline hover:text-red-600 "
+                >
+                  ↺ Réinitialiser tous les filtres
+                </button>
+              </div>
               {selectedCategories.length > 0 && (
                 <>
                   <span className="text-sm">Catégories:</span>
@@ -177,14 +172,7 @@ export function OrgSearch() {
                   </div>
                 </>
               )}
-              <div className="flex flex-row justify-center ">
-                <button
-                  onClick={resetAllFilters}
-                  className="text-sm font-semibold  hover:underline hover:text-red-600 "
-                >
-                  ↺ Réinitialiser tous les filtres
-                </button>
-              </div>
+            
             </>
           ) : (
             <div className="flex flex-row justify-center ">

@@ -13,6 +13,42 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<SelectedOrg | null>(null);
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const getDefaultView = () => {
+  if (typeof window === "undefined") {
+    return {
+      longitude: -114.0719,
+      latitude: 53.0447,
+      zoom: 3,
+    };
+  }
+
+  const w = window.innerWidth;
+
+  if (w >= 1024) {
+    // laptop / desktop
+    return {
+      longitude: -114.0719,
+      latitude: 54.0447,
+      zoom: 5,
+    };
+  }
+
+  // mobile / tablet
+  return {
+    longitude: -114.0719,
+    latitude: 53.0447,
+    zoom: 4,
+  };
+};
+
+    const DEFAULT_VIEW = {
+  longitude: -114.0719, // Calgary-ish center of Alberta
+  latitude: 53.0447,
+  zoom: 4,
+};
+const [viewState, setViewState] = useState(() => getDefaultView());
+
+const resetMapView = () => setViewState(DEFAULT_VIEW);
 
   // ✅ hydrate from localStorage AFTER mount (client only)
   useEffect(() => {
@@ -67,12 +103,14 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
     [savedOrgs],
   );
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
-  const resetAllFilters = () => {
+
+const resetAllFilters = () => {
   setQuery("");
   setSelectedCategories([]);
   setSelectedCities([]);
   setSelectedOrg(null);
-  setActiveRegion?.(null); // only if you added activeRegion to context
+  setActiveRegion?.(null);
+  resetMapView(); // ✅ zoom + center reset
 };
 
 
@@ -94,8 +132,12 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
         isSaved,
         activeRegion,
         setActiveRegion,
-        resetAllFilters
+        resetAllFilters,
         // clearSavedOrgs,
+        resetMapView,
+        viewState,
+        setViewState
+          
       }}
     >
       {children}

@@ -17,16 +17,20 @@ import { useOrg } from "@/app/context/OrgContext";
 import { MapRef } from "react-map-gl/mapbox";
 import { OrgCard } from "../ui/OrgCard";
 import { Button } from "../ui/button";
+import { useSidebar } from "../ui/sidebar";
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
-  const { selectedOrg, setSelectedOrg , activeRegion, setActiveRegion } = useOrg();
+  const {
+    selectedOrg,
+    setSelectedOrg,
+    activeRegion,
+    setActiveRegion,
+    viewState,
+    setViewState,
+  } = useOrg();
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [viewState, setViewState] = useState({
-    longitude: -113.4711,
-    latitude: 53.5198,
-    zoom: 5,
-  });
+  const { toggleSidebar, state } = useSidebar();
 
   // Handle flying to selected org location
   useEffect(() => {
@@ -67,22 +71,25 @@ export function MapView() {
 
   // Determine which markers to show
   // ---- Filter markers based on active region ----
-const markersToShow = useMemo(() => {
-  if (!activeRegion) return allMarkers;
-  return allMarkers.filter(m =>
-    m.org.region?.trim().toLowerCase() === activeRegion.trim().toLowerCase()
-  );
-}, [activeRegion, allMarkers]);
+  const markersToShow = useMemo(() => {
+    if (!activeRegion) return allMarkers;
+    return allMarkers.filter(
+      (m) =>
+        m.org.region?.trim().toLowerCase() ===
+        activeRegion.trim().toLowerCase(),
+    );
+  }, [activeRegion, allMarkers]);
 
   // ---- Fly to region when activeRegion changes ----
   useEffect(() => {
     if (!activeRegion || !mapRef.current) return;
 
     // Get all pins in this region
-  const pins = allMarkers.filter(
-  (m) =>
-    m.org.region?.trim().toLowerCase() === activeRegion?.trim().toLowerCase()
-);
+    const pins = allMarkers.filter(
+      (m) =>
+        m.org.region?.trim().toLowerCase() ===
+        activeRegion?.trim().toLowerCase(),
+    );
 
     const lats = pins.map((p) => p.location.lat);
     const lngs = pins.map((p) => p.location.lng);
@@ -126,48 +133,45 @@ const markersToShow = useMemo(() => {
         )}
 
         {/* Region clickable center markers */}
-        {regionCenters.map((region) => (
-          <Marker
-            key={`region-${region.name}`}
-            longitude={region.lng}
-            latitude={region.lat}
-            anchor="center"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              // Filter pins and zoom to bounds
-              const pins = allMarkers.filter(
-                (m) => m.org.region === region.name,
-              );
-              if (pins.length > 0 && mapRef.current) {
-                const lats = pins.map((p) => p.location.lat);
-                const lngs = pins.map((p) => p.location.lng);
-                const north = Math.max(...lats);
-                const south = Math.min(...lats);
-                const east = Math.max(...lngs);
-                const west = Math.min(...lngs);
+        {regionCenters.map((region) => {
+  const isActive =
+    activeRegion?.trim().toLowerCase() === region.name.trim().toLowerCase();
 
-                mapRef.current.fitBounds(
-                  [
-                    [west, south],
-                    [east, north],
-                  ],
-                  { padding: 80, duration: 1000 },
-                );
-              }
-              setActiveRegion(region.name);
-            }}
-          >
-            <Button
-             
-              style={{ whiteSpace: "nowrap" }}
-            >
-              {region.name}
-            </Button>
-          </Marker>
-        ))}
+  if (isActive) return null; // ✅ hide this region button
+
+  return (
+    <Marker
+      key={`region-${region.name}`}
+      longitude={region.lng}
+      latitude={region.lat}
+      anchor="center"
+      onClick={(e) => {
+        e.originalEvent.stopPropagation();
+        setActiveRegion(region.name);
+      }}
+    >
+      <Button
+        onClick={() => {
+          setActiveRegion(region.name);
+          if (!state) {
+            toggleSidebar(); // open only if closed
+          }
+        }}
+        className="
+           h-18 w-18 rounded-full
+          shadow-lg hover:scale-110 transition-transform
+          text-lg font-semibold
+        "
+      >
+        {region.name}
+      </Button>
+    </Marker>
+  );
+})}
+        
 
         {/* Render org markers */}
-        {markersToShow.map(({ org, location }, i) => (
+        {activeRegion && markersToShow.map(({ org, location }, i) => (
           <Marker
             key={`org-${org.id}-${i}`}
             longitude={location.lng!}
@@ -213,8 +217,6 @@ const markersToShow = useMemo(() => {
             </div>
           </Popup>
         )}
-
-     
       </Map>
     </div>
   );
