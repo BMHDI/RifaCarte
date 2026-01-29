@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { ChevronDown, Check } from "lucide-react"
-import { useIsMobile } from "@/hooks/use-mobile"
 import { SearchWithFiltersProps } from "@/types/types"
 
 

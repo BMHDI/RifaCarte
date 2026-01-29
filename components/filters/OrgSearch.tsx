@@ -77,7 +77,7 @@ const groupNames = useMemo(() => {
 
   return (
     <div>
-      <div className="flex flex-col h-[80vh] bg-gray-60">
+      <div className="flex w-full flex-col h-[80vh] bg-gray-60">
         <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
           {filteredOrgs.length === 0 && activeRegion && (
             <p>Aucun organisme trouvé.</p>

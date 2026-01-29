@@ -81,7 +81,7 @@ async function chatAvecOrgs(userQuery) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gemini-1.5-turbo",
+model: 'gemini-live-2.5-flash-native-audio',
         messages,
         temperature: 0.7,
         max_output_tokens: 400,
