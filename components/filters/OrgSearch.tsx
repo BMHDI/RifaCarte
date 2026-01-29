@@ -43,9 +43,9 @@ export function OrgSearch() {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   // ✅ unique categories
-  const categories = useMemo(() => {
-    return CATEGORIES.flatMap((group) => group.items.map((item) => item.id));
-  }, []);
+const groupNames = useMemo(() => {
+  return CATEGORIES.map(group => group.group);
+}, []);
 
   // ✅ unique cities
   const cities = useCities();
@@ -200,7 +200,7 @@ export function OrgSearch() {
         <SearchWithFilters
           query={query}
           setQuery={setQuery}
-          categories={categories}
+          categories={groupNames}
           cities={cities}
           selectedCategories={selectedCategories}
           selectedCities={selectedCities}

@@ -27,7 +27,6 @@ export default function SearchWithFilters({
   const [open, setOpen] = React.useState(false)
 
   // Mobile detection
-  const isMobile = useIsMobile()
 
   const scrollableContent = (
     <div className="max-h-[70vh] z-50 overflow-hidden ">

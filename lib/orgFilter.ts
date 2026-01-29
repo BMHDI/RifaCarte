@@ -1,7 +1,7 @@
 // lib/orgFilter.ts
 import { normalize } from "./normalize"; // optional: move your normalize function here too
 import { Org } from "@/types/types";
-
+import CATEGORIES from "./categories";
 
 
 const stopWords = ["pour", "les", "de", "du", "des", "la", "le", "un", "une", "et"];
@@ -63,10 +63,18 @@ export function filterOrgs(
           wordsInProjects
         );
     }
+const GROUP_TO_CATEGORIES = CATEGORIES.reduce<Record<string, string[]>>((acc, group) => {
+  acc[group.group] = group.items.map((item) => item.id);
+  return acc;
+}, {});
 
-   const categoryMatch =
+const categoryMatch =
   selectedCategories.length === 0 ||
-  (Array.isArray(org.category) && org.category.some((cat) => selectedCategories.includes(cat)));
+  (Array.isArray(org.category) &&
+    selectedCategories.some((group) => {
+      const groupCats = GROUP_TO_CATEGORIES[group] || [];
+      return (org.category as string[]).some((cat) => groupCats.includes(cat));
+    }));
 
   const cityMatch =
   selectedCities.length === 0 ||
