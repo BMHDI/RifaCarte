@@ -15,7 +15,9 @@ import {
 } from "@/components/ui/sidebar";
 import { OrgSearch } from "../filters/OrgSearch";
 import { SidebarToggleButton } from "../ui/SidebarToggleButton";
-import { AIConversationGemini} from"../chatbot/AIConversationGemini";
+import { ChatBox}from"../chatbot/ChatBox";
+
+
 import { useState } from "react";
 import FavoritesPage from "../Favorite";
 
@@ -68,7 +70,7 @@ export function AppSidebar() {
             {(state === "expanded" || isMobile) && (
               <div className="mt-4">
                 {activeTab === "search" && <OrgSearch />}
-                {activeTab === "ai" && <AIConversationGemini />}
+                {activeTab === "ai" && <ChatBox />}
                 {activeTab === "Favorites" && <FavoritesPage />}
               </div>
             )}

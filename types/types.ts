@@ -114,3 +114,18 @@ export interface OrgCardProps {
 export interface OrgSearchProps {
   activeRegion?: string | null;
 }
+export type Role = "system" | "user" | "assistant";
+
+export interface ChatMessage {
+  role: Role;
+  content: string;
+}
+
+export interface UserProfile {
+  city?: string;
+  intent?: "emploi" | "logement" | "immigration" | "services";
+  profession?: string;
+  experienceYears?: number;
+  urgency?: "immediate" | "soon";
+  companyType?: "large" | "sme" | "startup" | "any";
+}

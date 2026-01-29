@@ -4,42 +4,58 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export function AIConversationGemini() {
-  const [messages, setMessages] = useState<
-    { role: "user" | "ai"; text: string }[]
-  >([
+type Message = { role: "user" | "ai"; text: string };
+
+export function ChatBox() {
+  const [messages, setMessages] = useState<Message[]>([
     {
       role: "ai",
       text: "👋 Salut ! Je suis votre assistant virtuel. Posez-moi vos questions sur les organismes francophones en Alberta 😊",
     },
   ]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    // Ajouter le message utilisateur
-    setMessages((prev) => [...prev, { role: "user", text: input }]);
+    const userMessage: Message = { role: "user", text: input };
+
+    // 1️⃣ Update local UI immediately
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setLoading(true);
 
     try {
+      // 2️⃣ Send to backend with mapped history
       const res = await fetch("/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: input }),
+        body: JSON.stringify({
+          question: input,
+          history: [
+            ...messages.map((m) => ({
+              role: m.role === "ai" ? "model" : "user",
+              text: m.text,
+            })),
+          ],
+        }),
       });
 
       const data = await res.json();
 
-      setMessages((prev) => [...prev, { role: "ai", text: data.text }]);
+      // 3️⃣ Add AI response to local messages
+      const aiMessage: Message = { role: "ai", text: data.text };
+      setMessages((prev) => [...prev, aiMessage]);
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
         { role: "ai", text: "Erreur lors de la réponse de l'IA." },
       ]);
+    } finally {
+      setLoading(false);
     }
-
-    setInput("");
   };
 
   return (
@@ -57,6 +73,11 @@ export function AIConversationGemini() {
             {msg.text}
           </div>
         ))}
+        {loading && (
+          <div className="p-2 rounded-md bg-gray-200 self-start max-w-3/4">
+            💬 L'IA réfléchit...
+          </div>
+        )}
       </div>
 
       <div className="flex w-full p-4 gap-2">
@@ -66,8 +87,9 @@ export function AIConversationGemini() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          disabled={loading}
         />
-        <Button variant="default" onClick={sendMessage}>
+        <Button variant="default" onClick={sendMessage} disabled={loading}>
           Envoyer
         </Button>
       </div>

@@ -3299,7 +3299,11 @@
     "id": "ecole_francophone_brooks-1",
     "name": "École Francophone de Brooks (École Le Ruisseau)",
     "category": [
-      "vie communautaire"
+      "education",
+      "francophonie",
+      "jeunesse",
+      "familles",
+      "petite enfance"
     ],
     "description": "École publique francophone à Brooks, Alberta, accueillant les élèves de la prématernelle à la 12e année. L’école fait partie du Conseil scolaire FrancoSud et offre un environnement d’apprentissage axé sur la réussite académique, le développement personnel et l’épanouissement culturel.",
     "foundedYear": 2013,
@@ -4019,6 +4023,10 @@
     "id": "kayanou-1",
     "name": "Kayanou",
     "category": [
+      "culture",
+      "histoire",
+      "patrimoine",
+      "francophonie",
       "vie communautaire"
     ],
     "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
@@ -4071,7 +4079,11 @@
     "id": "kayanou-0",
     "name": "Kayanou",
     "category": [
-      "vie communautaire"
+      "francophonie",
+      "culture",
+      "patrimoine",
+      "ateliers",
+      "jeunesse"
     ],
     "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
     "director": {
@@ -4123,7 +4135,11 @@
     "id": "pia-1",
     "name": "Portail de l’Immigrant Association",
     "category": [
-      "vie communautaire"
+      "francophonie",
+      "nouveaux arrivants",
+      "integration",
+      "education",
+      "familles"
     ],
     "description": "Le Portail de l’Immigrant Association (PIA) est un organisme fondé en 2008 à Calgary par un groupe d’immigrants francophones. Il offre une gamme de services pour faciliter l’intégration sociale, économique et culturelle des immigrants francophones.",
     "director": {
@@ -4177,7 +4193,11 @@
     "id": "la_cite_des_rocheuses-1",
     "name": "La Cité des Rocheuses",
     "category": [
-      "vie communautaire"
+      "francophonie",
+      "vie communautaire",
+      "culture",
+      "nouveaux arrivants",
+      "apprentissage du francais"
     ],
     "description": "La Cité des Rocheuses est un centre communautaire et culturel francophone fondé en 1996 à Calgary, Alberta. Son mandat est de promouvoir la culture et la langue française et de soutenir le développement de la communauté francophone dans le sud de la province.",
     "director": {
@@ -4349,7 +4369,11 @@
     "id": "canavua-1",
     "name": "CANAVUA",
     "category": [
-      "vie communautaire"
+      "francophonie",
+      "benevolat",
+      "services sociaux",
+      "nouveaux arrivants",
+      "integration"
     ],
     "description": "CANAVUA (Canadian Volunteers United in Action) est un organisme francophone basé à Edmonton dédié à la promotion du bénévolat et à la prestation de services communautaires essentiels, notamment une banque alimentaire, un camion‑repas communautaire et des programmes d’aide sociale pour les populations vulnérables.",
     "director": {
@@ -4406,7 +4430,10 @@
     "id": "centre_bien_etre_prevention_afro_canadiens_alberta-1",
     "name": "Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta",
     "category": [
-      "vie communautaire"
+      "sante",
+      "bien etre",
+      "integration",
+      "services sociaux"
     ],
     "description": "Le Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta (CBEP) vise à améliorer la santé globale des Afro‑Canadiens, en offrant des services culturellement adaptés, de sensibilisation, de prévention des maladies chroniques et de réinsertion sociale.",
     "director": {
