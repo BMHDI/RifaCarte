@@ -16,7 +16,8 @@ export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "👋 Salut ! Je suis votre assistant virtuel. Posez-moi vos questions sur les organismes francophones en Alberta 😊",
+      content:
+        "👋 Salut ! Je suis votre assistant virtuel. Posez-moi vos questions sur les organismes francophones en Alberta 😊",
     },
   ]);
   const [input, setInput] = useState("");
@@ -41,7 +42,7 @@ export function ChatBox() {
 
     try {
       // NOTE: vérifiez si votre route est /api/gemini ou /api/chat
-      const res = await fetch("/api/gemini", { 
+      const res = await fetch("/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: newMessages }),
@@ -51,10 +52,10 @@ export function ChatBox() {
 
       setMessages((prev) => [
         ...prev,
-        { 
-          role: "assistant", 
-          content: data.text, 
-          sources: data.sources // On stocke les sources renvoyées par l'API
+        {
+          role: "assistant",
+          content: data.text,
+          sources: data.sources, // On stocke les sources renvoyées par l'API
         },
       ]);
     } catch (err) {
@@ -69,14 +70,9 @@ export function ChatBox() {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] border rounded-xl bg-white shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="p-4 border-b bg-blue-600 text-white font-medium">
-        Assistant Francophone Alberta
-      </div>
-
+    <div className="flex flex-col h-[80vh]  rounded-xl bg-white  overflow-hidden">
       {/* Zone des messages */}
-      <div 
+      <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-6 bg-gray-50/50"
       >
@@ -98,55 +94,63 @@ export function ChatBox() {
               </div>
 
               {/* Affichage des sources (uniquement pour l'assistant) */}
-              {msg.role === "assistant" && msg.sources && msg.sources.length > 0 && (
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <p className="text-[10px] font-bold uppercase text-gray-400 mb-2">Sources consultées :</p>
-                  <div className="flex flex-wrap gap-1">
-                    {msg.sources.map((src, sIdx) => (
-                      <Badge key={sIdx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700 hover:bg-blue-100 border-none">
-                        {src.name}
-                      </Badge>
-                    ))}
+              {msg.role === "assistant" &&
+                msg.sources &&
+                msg.sources.length > 0 && (
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <p className="text-[10px] font-bold uppercase text-gray-400 mb-2">
+                      Sources consultées :
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {msg.sources.map((src, sIdx) => (
+                        <Badge
+                          key={sIdx}
+                          variant="secondary"
+                          className="text-[10px] bg-blue-50 text-blue-700 hover:bg-blue-100 border-none"
+                        >
+                          {src.name}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-white border border-gray-100 p-4 rounded-2xl rounded-tl-none flex items-center gap-2 shadow-sm">
               <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
-              <span className="text-xs text-gray-500 font-medium">Recherche dans le répertoire...</span>
+              <span className="text-xs text-gray-500 font-medium">
+                Recherche dans le répertoire...
+              </span>
             </div>
           </div>
         )}
       </div>
 
       {/* Zone d'input */}
-      <div className="p-4 border-t bg-white">
-        <div className="flex gap-2">
-          <Input
-            className="flex-1 focus-visible:ring-blue-500 border-gray-200"
-            placeholder="Ex: activités pour enfants à Edmonton..."
-            value={input}
-            disabled={isLoading}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          />
-          <Button 
-            className="bg-blue-600 hover:bg-blue-700 transition-colors" 
-            onClick={sendMessage}
-            disabled={isLoading || !input.trim()}
-          >
-            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Envoyer"}
-          </Button>
-        </div>
-        <p className="text-[10px] text-center text-gray-400 mt-2">
-          L'IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
-        </p>
+      <div className="flex w-full p-4">
+        <Input
+          className="rounded-r-none flex-1"
+          placeholder="Chercher un organisme..."
+          value={input}
+          disabled={isLoading}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+        />
+       <Button className="rounded-l-none flex gap-1"
+          onClick={sendMessage}
+          disabled={isLoading || !input.trim()}
+        >
+          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Envoyer"}
+        </Button>
       </div>
+      <p className="text-[10px] text-center text-gray-400 mt-2">
+        L'IA peut faire des erreurs. Vérifiez les informations auprès des
+        organismes.
+      </p>
     </div>
   );
 }
