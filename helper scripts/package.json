@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "@google/gemini-cli": "^0.26.0",
+    "@supabase/supabase-js": "^2.93.3",
     "axios": "^1.13.4",
     "dotenv": "^17.2.3",
     "fs": "^0.0.1-security",

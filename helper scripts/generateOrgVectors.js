@@ -1,52 +1,121 @@
 import fs from "fs";
 import dotenv from "dotenv";
-import OpenAI from "openai";
 
 dotenv.config();
 
-if (!process.env.GEMINI_API_KEY ) {
-  console.error("Erreur : OPENAI_API_KEY non définie !");
+const API_KEY = process.env.GEMINI_API_KEY;
+
+if (!API_KEY) {
+  console.error("❌ GEMINI_API_KEY non définie !");
   process.exit(1);
 }
 
-const client = new OpenAI({
-  apiKey: process.env.GEMINI_API_KEY
-});
-
-// Charger les organisations
+// Load orgs
 const orgs = JSON.parse(fs.readFileSync("./orgs.json", "utf8"));
 
-// Fonction pour créer un texte représentatif de chaque org
+/**
+ * Convert one organization into rich semantic text
+ */
 function orgToText(org) {
-  const locations = org.locations?.map(l => l.city).join(", ");
-  return `${org.name}. Services: ${org.services?.join(", ")}. Tags: ${org.tags?.join(", ")}. Catégories: ${org.category?.join(", ")}. Villes: ${locations}`;
+  const cities =
+    org.locations?.map((l) => l.city).join(", ") || "Alberta";
+
+  const services = org.services?.join(", ") || "Non spécifié";
+  const tags = org.tags?.join(", ") || "Aucun";
+  const categories = org.category?.join(", ") || "Général";
+  const projects = org.projects?.join(", ") || "Aucun";
+
+  const email = org.contact?.email || "Non disponible";
+  const phone = org.contact?.phone || "Non disponible";
+  const website = org.website || "Non disponible";
+
+  return `
+Nom: ${org.name}
+
+Description: ${org.description || "Aucune description"}
+
+Localisation: ${cities}
+
+Services: ${services}
+
+Catégories: ${categories}
+
+Projets: ${projects}
+
+Tags: ${tags}
+
+Contact:
+Email: ${email}
+Téléphone: ${phone}
+Site web: ${website}
+`;
 }
 
+/**
+ * Call Gemini embedding API
+ */
+async function embed(text) {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${API_KEY}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: {
+          parts: [{ text }],
+        },
+        task_type: "RETRIEVAL_DOCUMENT",
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+
+  const data = await res.json();
+
+  return data.embedding.values;
+}
+
+/**
+ * Main indexing function
+ */
 async function generateVectors() {
-  const orgVectors = [];
+  const results = [];
 
   for (const org of orgs) {
-    const text = orgToText(org);
-
     try {
-      const embeddingResponse = await client.embeddings.create({
-        model: "gemini-text-embedding-3-large",
-        input: text
+      const text = orgToText(org);
+
+      const vector = await embed(text);
+
+      results.push({
+        id: org.id,
+        name: org.name,
+        city: org.locations?.[0]?.city || null,
+        category: org.category || [],
+        text,
+        embedding: vector,
       });
 
-      const vector = embeddingResponse.data[0].embedding;
-      orgVectors.push({ id: org.id, vector });
-
-      console.log(`✅ Embedding généré pour ${org.name}`);
+      console.log(`✅ Indexed: ${org.name}`);
     } catch (err) {
-      console.error(`❌ Erreur pour ${org.name}:`, err.message);
+      console.error(`❌ ${org.name}:`, err.message);
     }
   }
 
-  // Sauvegarder dans un fichier JSON
-  fs.writeFileSync("./orgsWithVectors.json", JSON.stringify(orgVectors, null, 2), "utf8");
-  console.log("✅ Tous les vecteurs ont été générés et sauvegardés dans orgsWithVectors.json");
+  fs.writeFileSync(
+    "./orgs_index.json",
+    JSON.stringify(results, null, 2),
+    "utf8"
+  );
+
+  console.log("🎉 Indexation terminée !");
 }
 
-// Lancer
+// Run
 generateVectors();
