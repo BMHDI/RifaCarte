@@ -15,16 +15,48 @@ const orgs = JSON.parse(fs.readFileSync(orgsFile, "utf8"));
 
 // Convert an org to text
 function buildText(org) {
+  const categories = Array.isArray(org.category)
+    ? org.category.join(", ")
+    : "divers";
+
+  const services = Array.isArray(org.services)
+    ? org.services.join(", ")
+    : "plusieurs services";
+
+  const tags = Array.isArray(org.tags)
+    ? org.tags.join(", ")
+    : "aucun tag";
+
+  const projects = Array.isArray(org.projects)
+    ? org.projects.join(", ")
+    : "aucun projet";
+
+  const phone = org.contact?.phone || "non disponible";
+  const email = org.contact?.email || "non disponible";
+  const website = org.website || "non disponible";
+  const address = org.address || org.location?.address || "non disponible";
+
   return `
-Name: ${org.name}
-City: ${org.city}
-Categories: ${org.category ? org.category.join(", ") : ""}
-Description: ${org.description}
+L'organisme s'appelle ${org.name}.
+Il est situé à ${org.city}, ${org.province}, ${address}.
+
+Domaines: ${categories}.
+Services: ${services}.
+Projets: ${projects}.
+Tags: ${tags}.
+
+Description: ${org.description || ""}
+
+Contact:
+Téléphone: ${phone}
+Email: ${email}
+Site web: ${website}
 `.trim();
 }
 
+
 // Embed function with error handling
-async function embed(text) {
+async function embed(text, title) {
   try {
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${API_KEY}`,
@@ -32,7 +64,10 @@ async function embed(text) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          model: "models/embedding-001", // Spécifiez le modèle ici aussi
           content: { parts: [{ text }] },
+          task_type: "RETRIEVAL_DOCUMENT", // CRUCIAL : Dit à l'IA que c'est une source de données
+          title: title // Aide l'IA à donner plus de poids au nom de l'organisme
         }),
       }
     );

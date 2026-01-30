@@ -18,8 +18,17 @@ const orgs = JSON.parse(fs.readFileSync("./orgs.json", "utf8"));
 
 // Fonction pour créer un texte représentatif de chaque org
 function orgToText(org) {
-  const locations = org.locations?.map(l => l.city).join(", ");
-  return `${org.name}. Services: ${org.services?.join(", ")}. Tags: ${org.tags?.join(", ")}. Catégories: ${org.category?.join(", ")}. Villes: ${locations}`;
+  const cities = org.locations?.map(l => l.city).join(" et ") || "l'Alberta";
+  const services = org.services?.join(", ");
+  const tags = org.tags?.join(", ");
+
+  
+  // On crée une phrase que l'IA peut "comprendre" sémantiquement
+  return `L'organisme ${org.name} est situé à ${cities}. 
+          Il offre des services de ${services}. leur tags sont ${tags}.
+          Ses domaines d'expertise incluent ${org.category?.join(", ")}.
+          leur projets sont ${org.projects?.join(", ")}
+          Description: ${org.description} leur contact information sont ${org.contact?.email} et ${org.contact?.phone} et leurs site web est ${org.website}. `
 }
 
 async function generateVectors() {
@@ -29,10 +38,15 @@ async function generateVectors() {
     const text = orgToText(org);
 
     try {
-      const embeddingResponse = await client.embeddings.create({
-        model: "gemini-text-embedding-3-large",
-        input: text
-      });
+      const embeddingResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${API_KEY}`, {
+    method: "POST",
+    body: JSON.stringify({
+        model: "models/text-embedding-004",
+        content: { parts: [{ text: text }] },
+        task_type: "RETRIEVAL_DOCUMENT", // Crucial pour l'indexation
+        title: org.name // Optionnel mais aide pour les titres d'organismes
+    })
+});
 
       const vector = embeddingResponse.data[0].embedding;
       orgVectors.push({ id: org.id, vector });

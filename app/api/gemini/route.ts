@@ -1,16 +1,61 @@
-// app/api/gemini/route.js
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
 const API_KEY = process.env.GEMINI_API_KEY;
-if (!API_KEY) throw new Error("Please set GEMINI_API_KEY in .env");
 
-// Load vectorized orgs JSON
-const orgsPath = path.resolve("lib/org_with_vectors.json");
-const orgs = JSON.parse(fs.readFileSync(orgsPath, "utf8"));
+/**
+ * 1. PRÉ-TRAITEMENT CONDITIONNEL
+ * N'utilise l'IA pour enrichir la question QUE si elle est courte ou ambiguë.
+ */
+async function getOptimizedQuery(messages) {
+  const lastMessage = messages[messages.length - 1].content;
+  
+  // CONDITION : Si la question est longue (> 6 mots), on considère qu'elle a assez de contexte.
+  // On gagne ainsi un appel API (environ 1.5s de gain).
+  if (lastMessage.split(" ").length > 6 && messages.length === 1) {
+    return lastMessage;
+  }
 
-// Cosine similarity function
+  const history = messages.slice(0, -1)
+    .map(m => `${m.role === "user" ? "Utilisateur" : "Assistant"}: ${m.content}`)
+    .join("\n");
+
+  const prompt = `
+    Transforme cette question en requête de recherche optimisée.
+    Historique: ${history || "Aucun"}
+    Question: "${lastMessage}"
+    
+    Tâche : Ajoute des synonymes si le mot est seul (ex: "théâtre" -> "culture, spectacle") 
+    et résous les pronoms (ex: "son adresse" -> "adresse de [Nom]").
+    Réponse (uniquement la requête) :`;
+
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] }),
+    });
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || lastMessage;
+  } catch {
+    return lastMessage;
+  }
+}
+
+async function embedQuestion(text) {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${API_KEY}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: { parts: [{ text }] },
+      task_type: "RETRIEVAL_QUERY",
+    }),
+  });
+  const data = await res.json();
+  return data.embedding.values;
+}
+
 function cosineSim(a, b) {
   let dot = 0, na = 0, nb = 0;
   for (let i = 0; i < a.length; i++) {
@@ -21,113 +66,48 @@ function cosineSim(a, b) {
   return dot / (Math.sqrt(na) * Math.sqrt(nb));
 }
 
-// Semantic search: returns top N orgs
-function searchOrgs(questionVec, orgs, top = 5) {
-  return orgs
-    .map((org) => ({ ...org, score: cosineSim(questionVec, org.embedding) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, top);
-}
-
-// Embed question using Gemini
-async function embedQuestion(question) {
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${API_KEY}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: { parts: [{ text: question }] } }),
-    }
-  );
-  const data = await res.json();
-  if (!data?.embedding?.values) throw new Error("Embedding failed");
-  return data.embedding.values;
-}
-
 export async function POST(req) {
   try {
-    const { question } = await req.json();
-    if (!question) {
-      return NextResponse.json(
-        { text: "Erreur : question manquante." },
-        { status: 400 }
-      );
-    }
+    const { messages } = await req.json();
 
-    // 1️⃣ Embed the user question
-    const qVec = await embedQuestion(question);
+    // Étape 1 : Analyse intelligente (Conditionnelle)
+    const searchQuery = await getOptimizedQuery(messages);
+    console.log("🔍 Requête finale :", searchQuery);
 
-    // 2️⃣ Search top 5 semantically similar orgs
-    const topOrgs = searchOrgs(qVec, orgs, 5);
+    // Étape 2 : Vecteur
+    const qVec = await embedQuestion(searchQuery);
 
-    // 3️⃣ Prepare prompt for Gemini
-    const context =
-      topOrgs.length > 0
-        ? topOrgs
-            .map(
-              (o) =>
-                `${o.name} (${o.city}): ${o.description || "Pas de description"}`
-            )
-            .join("\n\n")
-        : "";
+    // Étape 3 : Recherche Locale
+    const orgs = JSON.parse(fs.readFileSync(path.resolve("lib/org_with_vectors.json"), "utf8"));
+    const topOrgs = orgs
+      .map(o => ({ ...o, score: cosineSim(qVec, o.embedding) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
 
-    const prompt = `
-Tu es un assistant pour la communauté francophone en Alberta.
-Voici les organismes pertinents pour la question posée :
-${context || "Aucun organisme trouvé."}
+    const context = topOrgs.map(o => `${o.name}: ${o.description}`).join("\n\n");
 
-IMPORTANT :
-- Ne parle **que** des organismes listés ci-dessus.
-- Ne devine pas d’informations ; si la liste est vide, dis simplement : "Désolé, je n’ai pas trouvé d’organismes pertinents dans la liste."
+    // Étape 4 : Réponse finale (Flash 2.0 Lite pour la rapidité)
+    const geminiHistory = [
+      { role: "user", parts: [{ text: `Système: Utilise ces infos pour répondre : ${context}` }] },
+      ...messages.map(m => ({
+        role: m.role === "user" ? "user" : "model",
+        parts: [{ text: m.content }]
+      }))
+    ];
 
-Réponds de manière naturelle et claire à l'utilisateur.
-Question : "${question}"`;
+    const finalRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: geminiHistory }),
+    });
 
-    // 4️⃣ Call Gemini Flash-Lite
-    const MAX_RETRIES = 3;
-    let attempts = 0;
-    let data;
-    let lastError;
+    const finalData = await finalRes.json();
+    return NextResponse.json({ 
+      text: finalData.candidates?.[0]?.content?.parts?.[0]?.text,
+      sources: topOrgs.map(o => o.name)
+    });
 
-    while (attempts < MAX_RETRIES) {
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
-          }),
-        }
-      );
-
-      data = await res.json();
-
-      if (!data.error || data.error.status !== "UNAVAILABLE") break;
-
-      lastError = data.error;
-      attempts++;
-      await new Promise((r) => setTimeout(r, 1500));
-    }
-
-    if (data?.error) {
-      console.error("Gemini API error:", data.error || lastError);
-      return NextResponse.json(
-        { text: "Erreur lors de la réponse de Gemini." },
-        { status: 500 }
-      );
-    }
-
-    const text =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Désolé, je n’ai pas trouvé de réponse.";
-
-    return NextResponse.json({ text, sources: topOrgs.map((o) => o.name) });
   } catch (error) {
-    console.error("Server error:", error);
-    return NextResponse.json(
-      { text: "Erreur serveur lors de l'appel à Gemini." },
-      { status: 500 }
-    );
+    return NextResponse.json({ text: "Erreur serveur" }, { status: 500 });
   }
 }
