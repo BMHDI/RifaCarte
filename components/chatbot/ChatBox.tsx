@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"; // Assurez-vous d'avoir ce composant shadcn ou créez un span stylé
 import { Loader2 } from "lucide-react"; // Optionnel pour une icône de chargement
+import { trackEvent } from "@/app/googleAnalytics";
+
 
 type Message = {
   role: "user" | "assistant";
@@ -30,44 +32,53 @@ export function ChatBox() {
     }
   }, [messages, isLoading]);
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+const sendMessage = async () => {
+  if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: input };
-    const newMessages = [...messages, userMessage];
+  const userMessage: Message = { role: "user", content: input };
+  
+  // Track the user input as a GA event
+  trackEvent("chat_message_sent", { 
+    category: "interaction", 
+    label: input.slice(0, 50) // only first 50 chars to avoid privacy issues
+  });
 
-    setMessages(newMessages);
-    setInput("");
-    setIsLoading(true);
+  const newMessages = [...messages, userMessage];
+  setMessages(newMessages);
+  setInput("");
+  setIsLoading(true);
 
-    try {
-      // NOTE: vérifiez si votre route est /api/gemini ou /api/chat
-      const res = await fetch("/api/gemini", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
-      });
+  try {
+    const res = await fetch("/api/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: newMessages }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.text,
-          sources: data.sources, // On stocke les sources renvoyées par l'API
-        },
-      ]);
-    } catch (err) {
-      console.error(err);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Désolé, une erreur est survenue." },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    // Track the assistant response as an event
+    trackEvent("chat_response_received", { category: "interaction" });
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: data.text,
+        sources: data.sources,
+      },
+    ]);
+  } catch (err) {
+    console.error(err);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: "Désolé, une erreur est survenue." },
+    ]);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="flex flex-col h-[80vh]  rounded-xl bg-white  overflow-hidden">
@@ -148,7 +159,7 @@ export function ChatBox() {
         </Button>
       </div>
       <p className="text-[10px] text-center text-gray-400 mt-2">
-        L'IA peut faire des erreurs. Vérifiez les informations auprès des
+        L`IA peut faire des erreurs. Vérifiez les informations auprès des
         organismes.
       </p>
     </div>

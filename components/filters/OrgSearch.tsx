@@ -41,7 +41,6 @@ export function OrgSearch() {
 
   const { toggleSidebar } = useSidebar();
   const isMobile = useIsMobile();
-  const [open, setOpen] = useState(false);
   // ✅ unique categories
 const groupNames = useMemo(() => {
   return CATEGORIES.map(group => group.group);

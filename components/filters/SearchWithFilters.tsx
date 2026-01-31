@@ -11,6 +11,7 @@ import {
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { ChevronDown, Check } from "lucide-react"
 import { SearchWithFiltersProps } from "@/types/types"
+import {  trackEvent } from "@/app/googleAnalytics"
 
 
 export default function SearchWithFilters({
@@ -73,8 +74,15 @@ export default function SearchWithFilters({
         className="rounded-r-none flex-1"
         value={query}
         placeholder="Chercher un organisme..."
-        onChange={(e) => setQuery(e.target.value)}
-      />
+onChange={(e) => {
+    setQuery(e.target.value);
+
+    // Track event for GA
+    trackEvent("org_search_input", {
+      category: "search",
+      label: e.target.value.slice(0, 50), // first 50 chars only
+    });
+  }}      />
 
     
         <DropdownMenu open={open} onOpenChange={setOpen} >
