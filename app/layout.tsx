@@ -7,6 +7,7 @@ import {
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
 import { OrgProvider } from "@/app/context/OrgContext"; // import your context provider
+import Script from "next/script";
 
 
 export const metadata: Metadata = {
@@ -22,6 +23,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="overflow-hidden">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
+      </head>
       <meta charSet="utf-8" />
       <body className="h-svh w-svw overflow-hidden">
         <OrgProvider>
