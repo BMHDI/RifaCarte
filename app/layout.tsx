@@ -31,7 +31,7 @@ export default function RootLayout({
             <SidebarInset>{children}</SidebarInset>
           </SidebarProvider>
         </OrgProvider>
-        <GoogleAnalytics gaId="G-23PE17HWN8" />
+        <GoogleAnalytics gaMeasurementId="G-23PE17HWN8" />
       </body>
     </html>
   );
