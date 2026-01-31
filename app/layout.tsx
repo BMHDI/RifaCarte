@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
 import { OrgProvider } from "@/app/context/OrgContext"; // import your context provider
-import Script from "next/script";
-
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 export const metadata: Metadata = {
   title: "carte des organisations",
@@ -24,21 +20,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="overflow-hidden">
       <head>
-              <meta charSet="utf-8" />
-
-        {/* Google Analytics */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-23PE17HWN8`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-23PE17HWN8');
-          `}
-        </Script>
+        <meta charSet="utf-8" />
       </head>
       <body className="h-svh w-svw overflow-hidden">
         <OrgProvider>
@@ -49,6 +31,7 @@ export default function RootLayout({
             <SidebarInset>{children}</SidebarInset>
           </SidebarProvider>
         </OrgProvider>
+        <GoogleAnalytics gaId="G-23PE17HWN8" />
       </body>
     </html>
   );
