@@ -5,7 +5,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
 import { OrgProvider } from "@/app/context/OrgContext"; // import your context provider
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import Analytics from "./googleAnalytics"; // the client wrapper
 
 export const metadata: Metadata = {
   title: "carte des organisations",
@@ -24,6 +24,8 @@ export default function RootLayout({
         <meta charSet="utf-8" />
       </head>
       <body className="h-svh w-svw overflow-hidden">
+                <Analytics /> {/* Client GA component */}
+
         <OrgProvider>
           <Header />
           <SidebarProvider>
@@ -32,7 +34,6 @@ export default function RootLayout({
             <SidebarInset>{children}</SidebarInset>
           </SidebarProvider>
         </OrgProvider>
-        <GoogleAnalytics gaMeasurementId="G-23PE17HWN8" />
       </body>
     </html>
   );
