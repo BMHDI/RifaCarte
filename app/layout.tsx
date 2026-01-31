@@ -24,6 +24,8 @@ export default function RootLayout({
   return (
     <html lang="fr" className="overflow-hidden">
       <head>
+              <meta charSet="utf-8" />
+
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-23PE17HWN8`}
@@ -38,7 +40,6 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <meta charSet="utf-8" />
       <body className="h-svh w-svw overflow-hidden">
         <OrgProvider>
           <Header />
