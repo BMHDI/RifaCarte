@@ -82,7 +82,12 @@ onChange={(e) => {
       category: "search",
       label: e.target.value.slice(0, 50), // first 50 chars only
     });
-  }}      />
+  }}   
+  onKeyDown={(e) => {
+  if (e.key === "Enter") {
+    trackEvent("org_search", { category: "search", label: query.slice(0, 50) });
+  }
+}}   />
 
     
         <DropdownMenu open={open} onOpenChange={setOpen} >
