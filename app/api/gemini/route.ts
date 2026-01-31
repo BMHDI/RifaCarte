@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { buildSearchQuery, isWeakMessage } from "@/lib/isWeakMessage";
 export const dynamic = "force-dynamic";
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_KEY = process.env.SUPABASE_KEY!;
@@ -31,7 +32,24 @@ export async function POST(req: Request) {
     const lastUserMessage = messages[messages.length - 1].content;
 
     // Étape 1 : Créer le vecteur de recherche
-    const qVec = await embedQuestion(lastUserMessage);
+   // Smart search text (keeps intent + city)
+let searchText = lastUserMessage;
+let lastStrongIntent = "";
+
+
+if (!isWeakMessage(lastUserMessage)) {
+  lastStrongIntent = lastUserMessage;
+} else if (lastStrongIntent) {
+  searchText = lastStrongIntent + " | " + lastUserMessage;
+} else {
+  searchText = buildSearchQuery(messages);
+}
+
+// console.log("🧠 INTENT:", lastStrongIntent);
+// console.log("🔍 SEARCH TEXT:", searchText);
+
+const qVec = await embedQuestion(searchText);
+
 
     // Étape 2 : Recherche dans Supabase
     const { data: rawOrgs, error } = await supabase.rpc("match_organizations", {
@@ -56,40 +74,41 @@ CONTACT: ${o.phone || ""} | ${o.website || ""}
       .join("\n---\n");
 
     // LOG DE DEBUG : Vérifiez votre console serveur pour voir si 'context' contient du texte !
-    console.log("--- CONTEXTE RÉCUPÉRÉ ---");
-    console.log(context);
+    // console.log("--- CONTEXTE RÉCUPÉRÉ ---\n");
+    // console.log(context);
 
     // Étape 4 : Préparer l'historique pour Gemini
     const conversationHistory = messages.map((m: any) => ({
       role: m.role === "user" ? "user" : "model",
       parts: [{ text: m.content }],
     }));
-  console.log("--- HISTORIQUE RÉCUPÉRÉ ---");
-console.log(JSON.stringify(conversationHistory));
+    // console.log("--- HISTORIQUE RÉCUPÉRÉ ---\n");
+    // console.log(JSON.stringify(conversationHistory));
 
     // Étape 5 : L'INJECTION DE FORCE (On met les données à la fin)
     const finalInstruction = {
-  role: "user",
-  parts: [
-    {
-      text: `
-Tu es un assistant spécialisé dans l’accompagnement des utilisateurs francophones, en particulier les nouveaux arrivants, pour trouver des services utiles à partir d’une base de données interne.
+      role: "user",
+      parts: [
+        {
+          text: `
+          Tu es un assistant spécialisé dans l’accompagnement des utilisateurs francophones, en particulier les nouveaux arrivants, pour trouver des services utiles à partir d’une base de données interne.
 
-Ton rôle est :
-- d’expliquer clairement les informations,
-- de guider l’utilisateur étape par étape,
-- d’aider concrètement à prendre les bonnes décisions,
-- de poser des questions pertinentes si nécessaire.
+          Ton rôle est :
+         -savoir la ville ou laregion de l’utilisateur, 
+        - d’expliquer clairement les informations,
+        - de guider l’utilisateur étape par étape,
+        - d’aider concrètement à prendre les bonnes décisions,
+        - de poser des questions pertinentes si nécessaire.
 
-CONTEXTE :
-Voici la question de l’utilisateur :
-"${lastUserMessage}"
+        CONTEXTE :
+        Voici la question de l’utilisateur :
+        "${lastUserMessage}"
 
-Voici les informations disponibles dans notre base de données :
-${context}
+        Voici les informations disponibles dans notre base de données :
+        ${context}
 
-RÈGLES STRICTES :
-
+        RÈGLES STRICTES :
+ 0. Tu dois etre concise et court et clair.
 1. Tu dois utiliser UNIQUEMENT les données fournies ci-dessus.
 2. Tu n’as pas le droit d’inventer, supposer ou ajouter des informations externes.
 3. Si les données ne permettent pas de répondre clairement, réponds uniquement :
@@ -121,14 +140,14 @@ FORMAT AVANCÉ (OBLIGATOIRE quand c’est pertinent) :
 
 Après avoir présenté les organismes, ajoute toujours :
 
-### ✅ Ce que cet organisme peut faire pour toi
+✅ Ce que cet organisme peut faire pour toi
 Explique concrètement comment l’utilisateur peut en bénéficier.
 
-### 🧭 Par quoi commencer
+🧭 Par quoi commencer
 Donne 2 à 4 étapes simples et pratiques.
 
-### ❓ Pour mieux t’aider
-Pose 2 à 4 questions utiles (statut, niveau, expérience, besoins, etc.)
+❓ Pour mieux t’aider
+Pose des questions pour savoir la ville, le statut, etc.
 Ne pose jamais de questions déjà répondues.
 
 OBJECTIF :
@@ -140,13 +159,29 @@ Ton objectif est d’aider l’utilisateur à :
 - se sentir accompagné et soutenu,
 
 tout en restant strictement dans le cadre des données fournies.
-`
-    }
-  ]
-};
+`,
+        },
+      ],
+    };
 
+const recentHistory = conversationHistory.slice(-6);
 
-    const contents = [finalInstruction, ...conversationHistory.slice(-8)];
+const contents = [
+  finalInstruction,
+  {
+    role: "user",
+    parts: [
+      {
+        text: `
+Historique récent :
+${recentHistory
+  .map((m) => `${m.role}: ${m.parts[0].text}`)
+  .join("\n")}
+`,
+      },
+    ],
+  },
+];
 
     // Étape 6 : Appel Gemini 2.0
     const finalRes = await fetch(
