@@ -4,7 +4,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Header } from "@/components/layout/Header";
 import { OrgProvider } from "@/app/context/OrgContext"; // import your context provider
-import Analytics from "./googleAnalytics"; // the client wrapper
+import { Analytics }  from "./googleAnalytics"; // the client wrapper
 
 export const metadata: Metadata = {
   title: "carte des organisations",
