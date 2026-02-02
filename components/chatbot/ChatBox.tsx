@@ -95,7 +95,7 @@ const sendMessage = async () => {
             <div
               className={`max-w-[85%] p-4 rounded-2xl shadow-sm ${
                 msg.role === "user"
-                  ? "bg-blue-600 text-white rounded-tr-none"
+                  ? "bg-primary text-white rounded-tr-none"
                   : "bg-white border border-gray-100 text-gray-800 rounded-tl-none"
               }`}
             >

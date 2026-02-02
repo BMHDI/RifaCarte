@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import organizations from "@/lib/org.json";
 import { useOrg } from "@/app/context/OrgContext";
 import { filterOrgs } from "@/lib/orgFilter";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
 import { useSidebar } from "../ui/sidebar";
 import { ArrowBigDown } from "lucide-react";
 import { Badge } from "../ui/badge";
