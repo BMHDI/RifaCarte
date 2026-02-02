@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import {  searchOrganizations  } from "@/lib/db";
+import { embedQuestion } from "@/lib/embeddings";
+import { extractCity } from "@/lib/location";
 
 export const dynamic = "force-dynamic";
 
-const SUPABASE_URL = process.env.SUPABASE_URL!;
-const SUPABASE_KEY = process.env.SUPABASE_KEY!;
+
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
 
 // 1. Définition de l'outil avec une description plus directive
 const tools = [
@@ -15,13 +16,15 @@ const tools = [
     function_declarations: [
       {
         name: "search_organizations",
-        description: "RECHERCHE OBLIGATOIRE pour trouver des organismes, services, activités (enfants, sport, emploi, santé) ou aides locales dans la base de données interne. À utiliser dès que l'utilisateur mentionne un besoin concret ou une ville.",
+        description:
+          "RECHERCHE OBLIGATOIRE pour trouver des organismes, services, activités (enfants, sport, emploi, santé) ou aides locales dans la base de données interne. À utiliser dès que l'utilisateur mentionne un besoin concret ou une ville.",
         parameters: {
           type: "object",
           properties: {
             query: {
               type: "string",
-              description: "Texte de recherche (ex: 'activités sportives enfants Calgary' ou 'aide emploi francophone')",
+              description:
+                "Texte de recherche (ex: 'activités sportives enfants Calgary' ou 'aide emploi francophone')",
             },
           },
           required: ["query"],
@@ -31,22 +34,7 @@ const tools = [
   },
 ];
 
-async function embedQuestion(text: string) {
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${GEMINI_API_KEY}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        content: { parts: [{ text }] },
-        task_type: "RETRIEVAL_QUERY",
-      }),
-    },
-  );
-  const data = await res.json();
-  if (!data.embedding) throw new Error("Erreur d'embedding");
-  return data.embedding.values;
-}
+
 
 export async function POST(req: Request) {
   try {
@@ -67,33 +55,37 @@ export async function POST(req: Request) {
           contents,
           tools,
           systemInstruction: {
-            parts: [{ text: `Tu es un conseiller expert pour les nouveaux arrivants. 
+            parts: [
+              {
+                text: `Tu es un conseiller expert pour les nouveaux arrivants. 
             RÈGLE CRITIQUE : Ne devine jamais les services. Si l'utilisateur demande une aide, un emploi, une activité ou un organisme, tu DOIS appeler la fonction 'search_organizations'. 
             N'utilise tes connaissances générales que pour les salutations ou les politesses. 
-            Dès qu'une ville (ex: Calgary) et un besoin (ex: sport) sont identifiés, lance la recherche.
-            me j amais dit Pour trouver les infos , je dois effectuer une recherche. Veuillez patienter un instant. tu dois appeler la fonction 'search_organizations immidiatement'.` }]
-          }
+            Dès qu'une ville (ex: Calgary) et un besoin (ex: sport) sont identifiés, lance la recherche, ne j amais donner meme organisme en double sur la meme reponse. et donne seulement les organisme dont tu es sur qu il les offre.
+            me j amais dit Pour trouver les infos , je dois effectuer une recherche. Veuillez patienter un instant. tu dois appeler la fonction 'search_organizations' immidiatement.`,
+              },
+            ],
+          },
         }),
-      }
+      },
     );
 
     const firstData = await firstRes.json();
     const candidate = firstData.candidates?.[0];
-    const functionCall = candidate?.content?.parts?.find((p: any) => p.functionCall);
+    const functionCall = candidate?.content?.parts?.find(
+      (p: any) => p.functionCall,
+    );
 
     if (functionCall) {
       const { query } = functionCall.functionCall.args;
-      
-      const qVec = await embedQuestion(query);
-      const { data: rawOrgs, error } = await supabase.rpc("match_organizations", {
-        query_embedding: qVec,
-        match_count: 5,
-      });
 
-      if (error) throw error;
+     const city = extractCity(query);
+
+const qVec = await embedQuestion(query);
+const rawOrgs = await searchOrganizations(qVec, 5, city ?? undefined);
 
       // Si aucun résultat n'est trouvé en base de données
-      const contextResults = rawOrgs?.length > 0 ? rawOrgs : "AUCUN RÉSULTAT TROUVÉ DANS LA BASE.";
+      const contextResults =
+        rawOrgs?.length > 0 ? rawOrgs : "AUCUN RÉSULTAT TROUVÉ DANS LA BASE.";
 
       const finalRes = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
@@ -106,16 +98,23 @@ export async function POST(req: Request) {
               candidate.content,
               {
                 role: "function",
-                parts: [{
-                  functionResponse: {
-                    name: "search_organizations",
-                    response: { result: contextResults }
-                  }
-                }]
-              }
+                parts: [
+                  {
+                    functionResponse: {
+                      name: "search_organizations",
+                      response: { result: contextResults },
+                    },
+                  },
+                ],
+              },
             ],
             systemInstruction: {
-              parts: [{ text: `Réponds de manière chaleureuse en utilisant uniquement les données de la fonction. Si la liste est vide, dis poliment que tu n'as rien trouvé dans la base de données. 
+              parts: [
+                {
+                  text: `Réponds de manière chaleureuse en utilisant uniquement les données de la fonction. Si la liste est vide, dis poliment que tu n'as rien trouvé dans la base de données.
+                  essai de poser les bonnes questions pour cibler la recherche de l'utilisateur d une maniere conversationnelle.
+                Tjours rappeler toi de la ville ou la region de l'utilisateur.
+                 tres important : si tu na pas de villes pose la question donne pas tous les organismes de la province.
 Quand tu présentes un organisme, utilise ce format :
 
 📍 Nom de l’organisme  
@@ -123,16 +122,20 @@ Quand tu présentes un organisme, utilise ce format :
 📌 Services principaux  
 📞 Contact (si disponible)  
 🌐 Site web (si disponible)
- ` }]
-            }
+ `,
+                },
+              ],
+            },
           }),
-        }
+        },
       );
 
       const finalData = await finalRes.json();
       return NextResponse.json({
         text: finalData.candidates?.[0]?.content?.parts?.[0]?.text,
-        sources: rawOrgs ? rawOrgs.map((o: any) => ({ name: o.name, id: o.id })) : [],
+        sources: rawOrgs
+          ? rawOrgs.map((o: any) => ({ name: o.name, id: o.id }))
+          : [],
       });
     }
 
@@ -140,9 +143,11 @@ Quand tu présentes un organisme, utilise ce format :
       text: candidate?.content?.parts?.[0]?.text,
       sources: [],
     });
-
   } catch (error: any) {
     console.error("❌ API error:", error);
-    return NextResponse.json({ text: "Désolé, j'ai rencontré un problème technique." }, { status: 500 });
+    return NextResponse.json(
+      { text: "Désolé, j'ai rencontré un problème technique." },
+      { status: 500 },
+    );
   }
 }

@@ -1,38 +1,28 @@
 import { createClient } from "@supabase/supabase-js";
-import { Org } from "@/types/types"; // your TS type
 
-const KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-console.log(URL, KEY);
 
-// Create Supabase client
- const supabase = createClient(URL,KEY);
+const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_KEY = process.env.SUPABASE_KEY!;
 
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 /**
- * Fetch all organizations from the database
+ * Search organizations using vector similarity, optionally filtered by city
  */
-export async function getOrganizations(): Promise<Org[]> {
-  try {
-    // Example: using a Supabase RPC function (vector search) or direct table select
-    const { data, error } = await supabase
-      .from("organizations") // your table name
-      .select("*"); // select all fields, or specify fields if you want
+export async function searchOrganizations(
+  queryEmbedding: number[],
+  matchCount = 5,
+  city?: string,
+) {
+  const { data, error } = await supabase.rpc("match_organizations", {
+    query_embedding: queryEmbedding,
+    match_count: matchCount,
+    city_filter: city ?? null, // pass city to the RPC
+  });
 
-    if (error) throw error;
+  if (error) {
+    console.error("❌ Supabase RPC error:", error);
+    throw error;
+  }
 
-    return data as Org[];
-  } catch (err) {
-    console.error("Error fetching organizations:", err);
-    return [];
-  }
-}
-export async function getAllOrganizations(): Promise<Org[]> {
-  try {
-    const { data, error } = await supabase.from("organizations").select("*");
-    if (error) throw error;
-    return data as Org[];
-  } catch (err) {
-    console.error("Error fetching organizations:", err);
-    return [];
-  }
+  return data;
 }
