@@ -17,30 +17,37 @@ export type OrgLocation = {
   lng: number ;
 };
 export interface Org {
-  id?: string;//to be removed
+  id: string; // required, matches DB primary key
   name: string;
-  category: string | string[];  // Allow string or array
-  description?: string;
+  category?: string[];           // always an array in DB
+  description?: string | null;
   director?: {
-    name: string;
-    title?: string;
-  };
-  services?: string[];
-  audience?: string;
+    name?: string | null;
+    title?: string | null;
+  } | null;
+  services?: string[];           // array
+  audience?: string | null;
   projects?: {
     name: string;
-    description?: string;
-  }[];
-  locations: OrgLocation[];
+    description?: string | null;
+  }[] | null;
+  locations: OrgLocation[];      // must be an array, even if empty
   contact?: {
-    email?: string;
-    phone?: string | null; // allow null
-    website?: string;
-  };
-  tags?: string[];
-  memberOf?: string[];
-  region?: string;
-
+    email?: string | null;
+    phone?: string | null;
+    website?: string | null;
+  } | null;
+  tags?: string[] | null;
+  members?: string[] | null;     // renamed from memberOf to match DB
+  region?: string | null;
+  content?: string | null;       // optional AI-generated content field
+  email?: string | null;         // denormalized for DB convenience
+  phone?: string | null;         // denormalized for DB convenience
+  website?: string | null;       // denormalized for DB convenience
+  address?: string | null;       // denormalized first location
+  city?: string | null;          // denormalized first location
+  lat?: number | null;           // denormalized first location
+  lng?: number | null;           // denormalized first location
 }
 export interface SelectedOrg {
   org?: Org;
