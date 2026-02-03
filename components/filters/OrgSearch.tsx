@@ -12,6 +12,11 @@ import { ArrowBigDown } from "lucide-react";
 import CATEGORIES from "@/lib/categories";
 import { Org } from "@/types/types";
 import { RegionSelectorList } from "../ui/RegionSelectorList";
+import { getCategoryIdsFromGroups } from "@/lib/utils";
+import { useRef } from "react";
+import { Map as MapboxMap } from "react-map-gl/mapbox";
+import { Spinner } from "@/components/ui/spinner"
+
 
 export function OrgSearch() {
   const {
@@ -29,51 +34,55 @@ export function OrgSearch() {
   } = useOrg();
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
-  const [cities, setCities] = useState<string[]>([]);
+  const [allCities, setAllCities] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { toggleSidebar } = useSidebar();
   const isMobile = useIsMobile();
-
+  const mapRef = useRef<typeof MapboxMap | null>(null);
   // -----------------------------------
   // Categories list
   // -----------------------------------
   const groupNames = useMemo(() => CATEGORIES.map((g) => g.group), []);
 
   // -----------------------------------
-  // Fetch cities once from DB
+  // Fetch all cities once
   // -----------------------------------
   useEffect(() => {
     const loadCities = async () => {
       try {
-        const data = await fetchCities();
-        setCities(data);
+        const citiesFromDB = await fetchCities();
+        setAllCities(citiesFromDB.sort());
       } catch (err) {
         console.error("Failed to load cities", err);
       }
     };
     loadCities();
   }, []);
-  
 
   // -----------------------------------
   // Fetch organizations whenever filters change
   // -----------------------------------
   useEffect(() => {
     const fetchOrgs = async () => {
-      if (!activeRegion) return;
+      const categoryIds = getCategoryIdsFromGroups(selectedCategories);
+
+      if (!activeRegion) {
+        console.log("❌ No activeRegion, aborting");
+        return;
+      }
 
       try {
         setLoading(true);
 
         const data = await fetchFilteredOrgs({
           query,
-          categories: selectedCategories,
+          categories: categoryIds,
           cities: selectedCities,
           region: activeRegion,
         });
 
-        const normalized: Org[] = data.map((org) => ({
+        const normalized = data.map((org) => ({
           ...org,
           locations:
             org.lat && org.lng
@@ -90,7 +99,7 @@ export function OrgSearch() {
 
         setDbOrgs(normalized);
       } catch (err) {
-        console.error("Failed to fetch orgs", err);
+        console.error("❌ Failed to fetch orgs", err);
       } finally {
         setLoading(false);
       }
@@ -100,17 +109,33 @@ export function OrgSearch() {
   }, [query, selectedCategories, selectedCities, activeRegion]);
 
   // -----------------------------------
+  // Derived cities for dropdown
+  // -----------------------------------
+  const filteredCitiesForRegion = useMemo(() => {
+    if (!activeRegion) return allCities;
+
+    const citySet = new Set<string>();
+    dbOrgs.forEach((org) =>
+      org.locations.forEach((loc) => {
+        if (loc.city) citySet.add(loc.city);
+      }),
+    );
+
+    return Array.from(citySet).sort();
+  }, [activeRegion, dbOrgs, allCities]);
+
+  // -----------------------------------
   // Filter toggles
   // -----------------------------------
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
     );
   };
 
   const toggleCity = (city: string) => {
     setSelectedCities((prev) =>
-      prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
+      prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
     );
   };
 
@@ -121,8 +146,7 @@ export function OrgSearch() {
     <div className="flex w-full flex-col h-[80vh]">
       <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
         {!activeRegion && <RegionSelectorList />}
-
-        {loading && <p>Chargement des organismes…</p>}
+        {loading && <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />}
         {!loading && activeRegion && dbOrgs.length === 0 && (
           <p>Aucun organisme trouvé.</p>
         )}
@@ -131,29 +155,65 @@ export function OrgSearch() {
           dbOrgs.map((org) => (
             <OrgCard
               key={org.id}
-              logo=""
+              image_url={org.image_url ?? ""}
               name={org.name}
               phone={org.contact?.phone ?? ""}
               address={org.locations[0]?.address ?? ""}
               category={org.category}
               onDetails={() => {}}
               onShare={() => {}}
-              onMap={() => {
-                setSelectedOrg({
-                  org,
-                  locations: org.locations,
-                });
-                if (isMobile) toggleSidebar();
-              }}
               onSave={() => toggleSavedOrg(org)}
               isSaved={isSaved(org.id)}
+              onMap={() => {
+                if (org.locations.length === 1) {
+                  setSelectedOrg({
+                    org,
+                    location: org.locations[0],
+                  });
+
+                  // Fly to single location
+                  if (mapRef.current) {
+                    mapRef.current.flyTo({
+                      center: [org.locations[0].lng, org.locations[0].lat],
+                      zoom: 14,
+                      essential: true,
+                    });
+                  }
+                } else {
+                  // Multiple locations → select all markers
+                  setSelectedOrg({
+                    org,
+                    locations: org.locations.map((l) => ({
+                      lat: l.lat ?? 0,
+                      lng: l.lng ?? 0,
+                      city: l.city,
+                      address: l.address,
+                    })),
+                  });
+
+                  // Fly to bounds
+                  if (mapRef.current) {
+                    const lats = org.locations.map((l) => l.lat ?? 0);
+                    const lngs = org.locations.map((l) => l.lng ?? 0);
+                    mapRef.current.fitBounds(
+                      [
+                        [Math.min(...lngs), Math.min(...lats)],
+                        [Math.max(...lngs), Math.max(...lats)],
+                      ],
+                      { padding: 80 },
+                    );
+                  }
+                }
+
+                if (isMobile) toggleSidebar();
+              }}
             />
           ))}
       </div>
 
       {/* Filters summary */}
       <div className="mx-4 flex flex-col">
-        {selectedCategories.length > 0 || selectedCities.length > 0 ? (
+        {selectedCategories.length > 0 || selectedCities.length > 0  || activeRegion? (
           <>
             <div className="flex justify-center">
               <button
@@ -206,7 +266,7 @@ export function OrgSearch() {
           query={query}
           setQuery={setQuery}
           categories={groupNames}
-          cities={cities}
+          cities={filteredCitiesForRegion} // ✅ only cities in region
           selectedCategories={selectedCategories}
           selectedCities={selectedCities}
           toggleCategory={toggleCategory}

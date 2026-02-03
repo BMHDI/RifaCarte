@@ -13,7 +13,7 @@ import { OrgCardProps } from "@/types/types";
 import { toTitleCase } from "@/lib/utils";
 
 export function OrgCard({
-  // logo,
+  image_url, 
   name,
   phone,
   address,
@@ -24,6 +24,9 @@ export function OrgCard({
   onSave,
   isSaved,
 }: OrgCardProps) {
+    const defaultImage = "https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png";
+  const imgSrc = image_url || defaultImage;
+
   return (
     <Card   className="md:w-[297px] max-h-[400px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
@@ -36,7 +39,7 @@ export function OrgCard({
           fill={isSaved ? "red" : "none"}
         />
         <img
-          src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
+          src={imgSrc}
           alt={`${name} background`}
           className="absolute inset-0 h-full w-full object-cover blur-md brightness-90 scale-110"
         />
@@ -45,7 +48,7 @@ export function OrgCard({
         <div className="relative z-10 flex h-full items-end justify-center pb-2">
           <img
             alt={name}
-            src="https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png"
+          src={imgSrc}
             className="h-22  object-contain rounded-xl p-1"
           />
         </div>

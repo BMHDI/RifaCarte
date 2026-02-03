@@ -12,7 +12,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import organizations from "@/lib/org.json";
 import { MapPin } from "lucide-react";
 import francophoneRegions from "@/lib/francophone-regions.json";
-import { regionFill, regionLabels, regionBorder } from "@/lib/mapstyles";
+import { regionFill, regionBorder } from "@/lib/mapstyles";
 import { useOrg } from "@/app/context/OrgContext";
 import { MapRef } from "react-map-gl/mapbox";
 import { OrgCard } from "../ui/OrgCard";
@@ -44,7 +44,10 @@ const isMobile = useIsMobile()
       });
     }
   }, [selectedOrg?.location]);
-
+const albertaBounds: [[number, number], [number, number]] = [
+  [-120.0, 49.0], // [westLng, southLat]
+  [-110.0, 60.0], // [eastLng, northLat]
+];
   // Flatten all locations for rendering
   const allMarkers = useMemo(() => {
     return organizations
@@ -119,6 +122,7 @@ const isMobile = useIsMobile()
         mapStyle="mapbox://styles/bmhdi/cmkoaod33000k01r83dx855i3"
         style={{ width: "100%", height: "100%" }}
         onLoad={() => setMapLoaded(true)}
+        
       >
         <NavigationControl position="top-right" />
 

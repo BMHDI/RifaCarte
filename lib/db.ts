@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { normalize } from "./normalize";
 
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -52,33 +53,34 @@ export async function fetchFilteredOrgs({
 }) {
   let qb = supabase.from("organizations").select("*");
 
-  if (region) {
-    qb = qb.eq("region", region);
+  // Region filter
+  if (region?.trim()) {
+    qb = qb.ilike("region", `%${region.trim()}%`);
   }
 
-  // 🔹 If category is a Postgres text[], use contains
-  if (categories && categories.length > 0) {
-    qb = qb.contains("category", categories); // matches orgs containing any of the selected categories
+  // Categories filter
+  if (categories?.length) {
+    qb = qb.overlaps("category", categories);
   }
 
-  // 🔹 If cities is JSON array inside locations, filter in JS instead
-  // Or if you have a flat 'city' column, filter directly:
-  if (cities && cities.length > 0) {
-    qb = qb.in("city", cities);
+  // Cities filter (case-insensitive)
+  if (cities?.length) {
+    qb = qb.or(cities.map((c) => `city.ilike.%${c}%`).join(','));
   }
 
-  if (query && query.trim()) {
-    qb = qb.ilike("name", `%${query}%`);
+  // Name search
+  if (query?.trim()) {
+    qb = qb.ilike("name", `%${query.trim()}%`);
   }
 
   const { data, error } = await qb;
 
   if (error) {
-    console.error("❌ Supabase fetchFilteredOrgs error:", error);
+    console.error("❌ Supabase error:", error);
     throw error;
   }
 
-  return data;
+  return data ?? [];
 }
 
 

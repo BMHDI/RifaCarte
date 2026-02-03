@@ -1,5 +1,5 @@
 export interface OrgCardProps {
-  logo: string;
+   image_url: string;
   name: string;
   phone: string;
   address: string;
@@ -48,6 +48,7 @@ export interface Org {
   city?: string | null;          // denormalized first location
   lat?: number | null;           // denormalized first location
   lng?: number | null;           // denormalized first location
+  image_url?: string | null;
 }
 export interface SelectedOrg {
   org?: Org;
