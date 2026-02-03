@@ -131,7 +131,8 @@ const resetAllFilters = () => {
   setSelectedCities([]);
   setSelectedOrg(null);
   setActiveRegion?.(null);
-  resetMapView(); // ✅ zoom + center reset
+  resetMapView(); 
+  localStorage.removeItem("activeRegion");// ✅ zoom + center reset
 };
 
 
