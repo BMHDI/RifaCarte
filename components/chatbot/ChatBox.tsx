@@ -3,86 +3,116 @@
 import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge"; // Assurez-vous d'avoir ce composant shadcn ou créez un span stylé
-import { Loader2 } from "lucide-react"; // Optionnel pour une icône de chargement
+import { Badge } from "@/components/ui/badge";
+import { Loader2 } from "lucide-react";
 import { trackEvent } from "@/app/googleAnalytics";
-
+import {supabase} from "@/lib/db";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
-  sources?: { name: string; id: string }[]; // Ajout des sources
+  sources?: { name: string; id: string }[];
+  created_at?: string;
 };
 
 export function ChatBox() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content:
-        "👋 Salut ! Je suis votre assistant virtuel. Posez-moi vos questions sur les organismes francophones en Alberta 😊",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Load messages from Supabase on mount
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from("chat_messages")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching messages:", error);
+        return;
+      }
+
+      setMessages(data as Message[]);
+    };
+
+    fetchMessages();
+  }, []);
+
+  // Scroll to bottom whenever messages change
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
 
-const sendMessage = async () => {
-  if (!input.trim() || isLoading) return;
+  // Save message in Supabase
+  const saveMessage = async (message: Message) => {
+    const { error } = await supabase.from("chat_messages").insert([
+      {
+        role: message.role,
+        content: message.content,
+        sources: message.sources || null,
+      },
+    ]);
 
-  const userMessage: Message = { role: "user", content: input };
-  
-  // Track the user input as a GA event
-  trackEvent("chat_message_sent", { 
-    category: "interaction", 
-    label: input.slice(0, 50) // only first 50 chars to avoid privacy issues
-  });
+    if (error) console.error("Error saving message:", error);
+  };
 
-  const newMessages = [...messages, userMessage];
-  setMessages(newMessages);
-  setInput("");
-  setIsLoading(true);
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
 
-  try {
-    const res = await fetch("/api/gemini", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: newMessages }),
+    const userMessage: Message = { role: "user", content: input };
+
+    trackEvent("chat_message_sent", {
+      category: "interaction",
+      label: input.slice(0, 50),
     });
 
-    const data = await res.json();
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+    setInput("");
+    setIsLoading(true);
 
-    // Track the assistant response as an event
-    trackEvent("chat_response_received", { category: "interaction" });
+    // Save user message
+    await saveMessage(userMessage);
 
-    setMessages((prev) => [
-      ...prev,
-      {
+    try {
+      const res = await fetch("/api/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+
+      const data = await res.json();
+
+      trackEvent("chat_response_received", { category: "interaction" });
+
+      const assistantMessage: Message = {
         role: "assistant",
         content: data.text,
         sources: data.sources,
-      },
-    ]);
-  } catch (err) {
-    console.error(err);
-    setMessages((prev) => [
-      ...prev,
-      { role: "assistant", content: "Désolé, une erreur est survenue." },
-    ]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      };
 
+      setMessages((prev) => [...prev, assistantMessage]);
+      await saveMessage(assistantMessage);
+    } catch (err) {
+      console.error(err);
+      const errorMessage: Message = {
+        role: "assistant",
+        content: "Désolé, une erreur est survenue.",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+      await saveMessage(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="flex flex-col h-[80vh]  rounded-xl bg-white  overflow-hidden">
-      {/* Zone des messages */}
+    <div className="flex flex-col h-[80vh] rounded-xl bg-white overflow-hidden">
+      {/* Messages */}
       <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-4 space-y-6 bg-gray-50/50"
@@ -99,32 +129,26 @@ const sendMessage = async () => {
                   : "bg-white border border-gray-100 text-gray-800 rounded-tl-none"
               }`}
             >
-              {/* Contenu du message */}
-              <div className="text-sm leading-relaxed whitespace-pre-wrap">
-                {msg.content}
-              </div>
+              <div className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</div>
 
-              {/* Affichage des sources (uniquement pour l'assistant) */}
-              {msg.role === "assistant" &&
-                msg.sources &&
-                msg.sources.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-gray-100">
-                    <p className="text-[10px] font-bold uppercase text-gray-400 mb-2">
-                      Sources consultées :
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {msg.sources.map((src, sIdx) => (
-                        <Badge
-                          key={sIdx}
-                          variant="secondary"
-                          className="text-[10px] bg-blue-50 text-blue-700 hover:bg-blue-100 border-none"
-                        >
-                          {src.name}
-                        </Badge>
-                      ))}
-                    </div>
+              {msg.role === "assistant" && msg.sources && msg.sources.length > 0 && (
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <p className="text-[10px] font-bold uppercase text-gray-400 mb-2">
+                    Sources consultées :
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {msg.sources.map((src, sIdx) => (
+                      <Badge
+                        key={sIdx}
+                        variant="secondary"
+                        className="text-[10px] bg-blue-50 text-blue-700 hover:bg-blue-100 border-none"
+                      >
+                        {src.name}
+                      </Badge>
+                    ))}
                   </div>
-                )}
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -141,7 +165,7 @@ const sendMessage = async () => {
         )}
       </div>
 
-      {/* Zone d'input */}
+      {/* Input */}
       <div className="flex w-full p-4">
         <Input
           className="rounded-r-none flex-1"
@@ -151,16 +175,17 @@ const sendMessage = async () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
-       <Button className="rounded-l-none flex gap-1"
+        <Button
+          className="rounded-l-none flex gap-1"
           onClick={sendMessage}
           disabled={isLoading || !input.trim()}
         >
           {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Envoyer"}
         </Button>
       </div>
+
       <p className="text-[10px] text-center text-gray-400 mt-2">
-        L`IA peut faire des erreurs. Vérifiez les informations auprès des
-        organismes.
+        L`IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
       </p>
     </div>
   );
