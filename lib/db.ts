@@ -68,10 +68,21 @@ export async function fetchFilteredOrgs({
     qb = qb.or(cities.map((c) => `city.ilike.%${c}%`).join(','));
   }
 
-  // Name search
+  // ✅ Full-text search flexible (accent-insensitive, multi-word)
   if (query?.trim()) {
-    qb = qb.ilike("name", `%${query.trim()}%`);
+    const normalizedQuery = normalize(query);
+    const words = normalizedQuery.split(/\s+/).filter(Boolean);
+
+    // Build AND filters for each word
+    words.forEach((word) => {
+      qb = qb.ilike(
+        // search_text should already be normalized in DB (lowercase, accents removed)
+        "search_text",
+        `%${word}%`
+      );
+    });
   }
+
 
   const { data, error } = await qb;
 

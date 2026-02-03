@@ -15,8 +15,7 @@ import { RegionSelectorList } from "../ui/RegionSelectorList";
 import { getCategoryIdsFromGroups } from "@/lib/utils";
 import { useRef } from "react";
 import { Map as MapboxMap } from "react-map-gl/mapbox";
-import { Spinner } from "@/components/ui/spinner"
-
+import { Spinner } from "@/components/ui/spinner";
 
 export function OrgSearch() {
   const {
@@ -31,7 +30,7 @@ export function OrgSearch() {
     isSaved,
     activeRegion,
     resetAllFilters,
-    mapInstance
+    mapInstance,
   } = useOrg();
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
@@ -145,9 +144,19 @@ export function OrgSearch() {
   // -----------------------------------
   return (
     <div className="flex w-full flex-col h-[80vh]">
-      <div className="h-full grid gap-2 mb-2 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-        {!activeRegion && <RegionSelectorList />}
-        {loading && <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />}
+<div
+  className="h-full overflow-y-auto"
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+    rowGap: "1rem",    // espace vertical uniquement
+    columnGap: "0px",  // plus d’espace horizontal
+    gridAutoRows: "1fr", // toutes les cartes sur la même ligne ont la même hauteur
+  }}
+>        {!activeRegion && <RegionSelectorList />}
+        {loading && (
+          <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />
+        )}
         {!loading && activeRegion && dbOrgs.length === 0 && (
           <p>Aucun organisme trouvé.</p>
         )}
@@ -155,17 +164,15 @@ export function OrgSearch() {
         {activeRegion &&
           dbOrgs.map((org) => (
             <OrgCard
+              id={org.id ?? ""}
               key={org.id}
               image_url={org.image_url ?? ""}
               name={org.name}
-              phone={org.contact?.phone ?? ""}
+              phone={org.phone ?? ""}
               address={org.locations[0]?.address ?? ""}
               category={org.category}
-              onDetails={() => {}}
-              onShare={() => {}}
               onSave={() => toggleSavedOrg(org)}
-              isSaved={isSaved(org.id ?? "")
-}
+              isSaved={isSaved(org.id ?? "")}
               onMap={() => {
                 if (org.locations.length === 1) {
                   setSelectedOrg({
@@ -174,30 +181,30 @@ export function OrgSearch() {
                   });
 
                   // Fly to single location
-               if (mapInstance) {
-  // single location
-  mapInstance.flyTo({
-    center: [org.locations[0].lng, org.locations[0].lat],
-    zoom: 14,
-    essential: true,
-  });
-
+                  if (mapInstance) {
+                    // single location
+                    mapInstance.flyTo({
+                      center: [org.locations[0].lng, org.locations[0].lat],
+                      zoom: 14,
+                      essential: true,
+                    });
                   }
                 } else {
                   // Multiple locations → select all markers
-               // or multiple locations
-               if (mapInstance) {
-  const lats = org.locations.map(l => l.lat ?? 0);
-  const lngs = org.locations.map(l => l.lng ?? 0);
+                  // or multiple locations
+                  if (mapInstance) {
+                    const lats = org.locations.map((l) => l.lat ?? 0);
+                    const lngs = org.locations.map((l) => l.lng ?? 0);
 
-  mapInstance.fitBounds(
-    [
-      [Math.min(...lngs), Math.min(...lats)],
-      [Math.max(...lngs), Math.max(...lats)],
-    ],
-    { padding: 80 }
-  );}
-}
+                    mapInstance.fitBounds(
+                      [
+                        [Math.min(...lngs), Math.min(...lats)],
+                        [Math.max(...lngs), Math.max(...lats)],
+                      ],
+                      { padding: 80 },
+                    );
+                  }
+                }
 
                 if (isMobile) toggleSidebar();
               }}
@@ -207,14 +214,16 @@ export function OrgSearch() {
 
       {/* Filters summary */}
       <div className="mx-4 flex flex-col">
-        {selectedCategories.length > 0 || selectedCities.length > 0  || activeRegion? (
+        {selectedCategories.length > 0 ||
+        selectedCities.length > 0 ||
+        activeRegion ? (
           <>
             <div className="flex justify-center">
               <button
                 onClick={resetAllFilters}
                 className="text-sm font-semibold hover:underline hover:text-red-600"
               >
-                ↺ Réinitialiser tous les filtres
+                ↺ Réinitialiser tous les filtres pour  (total de {dbOrgs.length})
               </button>
             </div>
 

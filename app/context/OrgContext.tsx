@@ -17,6 +17,8 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<SelectedOrg | null>(null);
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+
+
   const getDefaultView = () => {
   if (typeof window === "undefined") {
     return {
@@ -92,7 +94,7 @@ const resetMapView = () => setViewState(DEFAULT_VIEW);
   useEffect(() => {
     localStorage.setItem("selectedCities", JSON.stringify(selectedCities));
   }, [selectedCities]);
-
+// 
   // actions
   const toggleSavedOrg = (org: Org) => {
     setSavedOrgs((prev) =>
@@ -106,7 +108,22 @@ const resetMapView = () => setViewState(DEFAULT_VIEW);
     () => new Set(savedOrgs.map((o) => o.id)),
     [savedOrgs],
   );
+  //helper local activew region
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
+  useEffect(() => {
+  try {
+    const storedRegion = localStorage.getItem("activeRegion");
+    if (storedRegion) setActiveRegion(storedRegion);
+  } catch (e) {
+    console.error("Failed to load activeRegion from localStorage", e);
+  }
+}, []);
+useEffect(() => {
+  if (activeRegion !== null) {
+    localStorage.setItem("activeRegion", activeRegion);
+  }
+}, [activeRegion]);
+
 
 const resetAllFilters = () => {
   setQuery("");
