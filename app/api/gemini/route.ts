@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
-import {  searchOrganizations  } from "@/lib/db";
+import { searchOrganizations } from "@/lib/db";
 import { embedQuestion } from "@/lib/embeddings";
 import { extractCity } from "@/lib/location";
 
 export const dynamic = "force-dynamic";
 
-
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-
-
 
 // 1. Définition de l'outil avec une description plus directive
 const tools = [
@@ -34,8 +31,6 @@ const tools = [
   },
 ];
 
-
-
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
@@ -56,13 +51,20 @@ export async function POST(req: Request) {
           tools,
           systemInstruction: {
             parts: [
-              {
-                text: `Tu es un conseiller expert pour les nouveaux arrivants. 
-            RÈGLE CRITIQUE : Ne devine jamais les services. Si l'utilisateur demande une aide, un emploi, une activité ou un organisme, tu DOIS appeler la fonction 'search_organizations'. 
-            N'utilise tes connaissances générales que pour les salutations ou les politesses. 
-            Dès qu'une ville (ex: Calgary) et un besoin (ex: sport) sont identifiés, lance la recherche, ne j amais donner meme organisme en double sur la meme reponse. et donne seulement les organisme dont tu es sur qu il les offre.
-            me j amais dit Pour trouver les infos , je dois effectuer une recherche. Veuillez patienter un instant. tu dois appeler la fonction 'search_organizations' immidiatement.`,
-              },
+             {
+  text: `Tu es un conseiller expert pour les nouveaux arrivants. Reponds toujours en français de manière chaleureuse et professionnelle et conversationnelle.
+
+  DIRECTIVE ABSOLUE :
+  Dès que l'utilisateur mentionne un nom d'organisme (ex: "La cité des Rocheuses"), un besoin (ex: "emploi") ou une ville, tu DOIS appeler immédiatement la fonction 'search_organizations'.
+
+  RÈGLES CRITIQUES :
+  1. NE JAMAIS DIRE "Je ne sais pas" ou "Je n'ai pas d'infos sur X" sans avoir lancé une recherche au préalable via la fonction.
+  2. Si l'utilisateur donne un nom d'organisme spécifique, utilise ce nom comme paramètre de recherche principal.
+  3. Ne devine jamais les services. Utilise uniquement les résultats renvoyés par la fonction.
+  4. Pas de doublons dans la même réponse.
+  5. Ne dis jamais : "Je vais faire une recherche". Appelle la fonction immédiatement et présente les résultats.
+  6. Si la recherche ne donne aucun résultat, suggère alors des services similaires ou demande de préciser la ville.`
+}
             ],
           },
         }),
@@ -78,10 +80,10 @@ export async function POST(req: Request) {
     if (functionCall) {
       const { query } = functionCall.functionCall.args;
 
-     const city = extractCity(query);
+      const city = extractCity(query);
 
-const qVec = await embedQuestion(query);
-const rawOrgs = await searchOrganizations(qVec, 5, city ?? undefined);
+      const qVec = await embedQuestion(query);
+      const rawOrgs = await searchOrganizations(qVec, 5, city ?? undefined);
 
       // Si aucun résultat n'est trouvé en base de données
       const contextResults =
