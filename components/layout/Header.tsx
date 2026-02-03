@@ -2,8 +2,6 @@ import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
   NavigationMenuLink,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";

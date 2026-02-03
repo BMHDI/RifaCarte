@@ -32,6 +32,7 @@ export function OrgSearch() {
     resetAllFilters,
     mapInstance,
   } = useOrg();
+const [regionCities, setRegionCities] = useState<string[]>([]);
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
   const [allCities, setAllCities] = useState<string[]>([]);
@@ -111,18 +112,20 @@ export function OrgSearch() {
   // -----------------------------------
   // Derived cities for dropdown
   // -----------------------------------
-  const filteredCitiesForRegion = useMemo(() => {
-    if (!activeRegion) return allCities;
+ const filteredCitiesForRegion = useMemo(() => {
+  if (!activeRegion) return allCities;
 
-    const citySet = new Set<string>();
-    dbOrgs.forEach((org) =>
-      org.locations.forEach((loc) => {
-        if (loc.city) citySet.add(loc.city);
-      }),
-    );
+  // Only filter by region, not by selected cities
+  const citySet = new Set<string>();
+  dbOrgs.forEach((org) =>
+    org.locations.forEach((loc) => {
+      if (loc.city) citySet.add(loc.city);
+    }),
+  );
 
-    return Array.from(citySet).sort();
-  }, [activeRegion, dbOrgs, allCities]);
+  return Array.from(citySet).sort();
+}, [activeRegion, dbOrgs]); // remove allCities if you compute from dbOrgs
+
 
   // -----------------------------------
   // Filter toggles
