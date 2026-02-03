@@ -212,6 +212,7 @@ const isMobile = useIsMobile()
           >
             <div className="max-w-md bg-white overflow-hidden">
               <OrgCard
+                id={selectedOrg.org?.id ?? ""}
                 image_url={selectedOrg.org?.image_url ?? ""}
                 name={selectedOrg.org?.name ?? "Unknown"}
                 phone={selectedOrg.org?.contact?.phone ?? ""}
