@@ -164,7 +164,8 @@ export function OrgSearch() {
               onDetails={() => {}}
               onShare={() => {}}
               onSave={() => toggleSavedOrg(org)}
-              isSaved={isSaved(org.id)}
+              isSaved={isSaved(org.id ?? "")
+}
               onMap={() => {
                 if (org.locations.length === 1) {
                   setSelectedOrg({
