@@ -2,11 +2,15 @@
 
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { SelectedOrg, OrgContextType, Org } from "@/types/types";
+import type mapboxgl from "mapbox-gl";
+
 
 const OrgContext = createContext<OrgContextType | null>(null);
 
 export function OrgProvider({ children }: { children: React.ReactNode }) {
   // ✅ neutral defaults for SSR
+  const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null);
+
   const [savedOrgs, setSavedOrgs] = useState<Org[]>([]);
   const [query, setQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -136,8 +140,9 @@ const resetAllFilters = () => {
         // clearSavedOrgs,
         resetMapView,
         viewState,
-        setViewState
-          
+        setViewState,   
+        mapInstance,
+      setMapInstance, 
       }}
     >
       {children}

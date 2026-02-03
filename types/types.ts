@@ -97,6 +97,8 @@ export type OrgContextType = {
       viewState: any; // or a specific type if available
   setViewState: (view: any) => void; // or a specific type if available
   resetMapView: () => void;
+  mapInstance: mapboxgl.Map | null;
+  setMapInstance: (map: mapboxgl.Map | null) => void;
 };
 export type SearchWithFiltersProps = {
   query: string

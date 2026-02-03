@@ -22,6 +22,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 
 export function MapView() {
+
   const mapRef = useRef<MapRef | null>(null);
   const {
     selectedOrg,
@@ -30,6 +31,7 @@ export function MapView() {
     setActiveRegion,
     viewState,
     setViewState,
+    setMapInstance,
   } = useOrg();
   const [mapLoaded, setMapLoaded] = useState(false);
   const { toggleSidebar, state } = useSidebar();
@@ -44,10 +46,7 @@ const isMobile = useIsMobile()
       });
     }
   }, [selectedOrg?.location]);
-const albertaBounds: [[number, number], [number, number]] = [
-  [-120.0, 49.0], // [westLng, southLat]
-  [-110.0, 60.0], // [eastLng, northLat]
-];
+
   // Flatten all locations for rendering
   const allMarkers = useMemo(() => {
     return organizations
@@ -121,7 +120,10 @@ const albertaBounds: [[number, number], [number, number]] = [
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/bmhdi/cmkoaod33000k01r83dx855i3"
         style={{ width: "100%", height: "100%" }}
-        onLoad={() => setMapLoaded(true)}
+       onLoad={(e) => {
+    setMapLoaded(true);
+    setMapInstance(e.target); // <-- e.target is the Mapbox GL JS instance
+  }}
         
       >
         <NavigationControl position="top-right" />

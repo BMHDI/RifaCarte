@@ -31,6 +31,7 @@ export function OrgSearch() {
     isSaved,
     activeRegion,
     resetAllFilters,
+    mapInstance
   } = useOrg();
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
@@ -172,38 +173,30 @@ export function OrgSearch() {
                   });
 
                   // Fly to single location
-                  if (mapRef.current) {
-                    mapRef.current.flyTo({
-                      center: [org.locations[0].lng, org.locations[0].lat],
-                      zoom: 14,
-                      essential: true,
-                    });
+               if (mapInstance) {
+  // single location
+  mapInstance.flyTo({
+    center: [org.locations[0].lng, org.locations[0].lat],
+    zoom: 14,
+    essential: true,
+  });
+
                   }
                 } else {
                   // Multiple locations → select all markers
-                  setSelectedOrg({
-                    org,
-                    locations: org.locations.map((l) => ({
-                      lat: l.lat ?? 0,
-                      lng: l.lng ?? 0,
-                      city: l.city,
-                      address: l.address,
-                    })),
-                  });
+               // or multiple locations
+               if (mapInstance) {
+  const lats = org.locations.map(l => l.lat ?? 0);
+  const lngs = org.locations.map(l => l.lng ?? 0);
 
-                  // Fly to bounds
-                  if (mapRef.current) {
-                    const lats = org.locations.map((l) => l.lat ?? 0);
-                    const lngs = org.locations.map((l) => l.lng ?? 0);
-                    mapRef.current.fitBounds(
-                      [
-                        [Math.min(...lngs), Math.min(...lats)],
-                        [Math.max(...lngs), Math.max(...lats)],
-                      ],
-                      { padding: 80 },
-                    );
-                  }
-                }
+  mapInstance.fitBounds(
+    [
+      [Math.min(...lngs), Math.min(...lats)],
+      [Math.max(...lngs), Math.max(...lats)],
+    ],
+    { padding: 80 }
+  );}
+}
 
                 if (isMobile) toggleSidebar();
               }}
