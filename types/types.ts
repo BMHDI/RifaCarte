@@ -17,7 +17,7 @@ export type OrgLocation = {
   lng: number ;
 };
 export interface Org {
-  id: string; // required, matches DB primary key
+  id?: string; // required, matches DB primary key
   name: string;
   category?: string[];           // always an array in DB
   description?: string | null;
