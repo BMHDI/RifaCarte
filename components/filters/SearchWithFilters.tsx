@@ -65,7 +65,7 @@ export default function SearchWithFilters({
   );
 
   return (
-    <div className="flex w-full p-4">
+    <div className="flex w-full px-4 ">
       <Input
         className="rounded-r-none flex-1"
         value={query}

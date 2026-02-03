@@ -214,10 +214,10 @@ export function ChatBox() {
       </div>
 
       {/* Zone de saisie */}
-      <p className="text-[10px] text-center text-gray-400 mt-3">
+      <p className="text-xs text-center text-primary p-2  mt-3">
           L'IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
         </p>
-      <div className="p-4 bg-white ">
+      <div className="px-4 bg-white ">
         <div className="flex w-full ">
           <Input
             className="rounded-r-none flex-1"

@@ -8,7 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "../ui/sidebar";
 import SearchWithFilters from "./SearchWithFilters";
 import { Badge } from "../ui/badge";
-import { ArrowBigDown } from "lucide-react";
+import { ArrowBigDown, RotateCcw } from "lucide-react";
 import CATEGORIES from "@/lib/categories";
 import { Org } from "@/types/types";
 import { RegionSelectorList } from "../ui/RegionSelectorList";
@@ -221,12 +221,12 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
         selectedCities.length > 0 ||
         activeRegion ? (
           <>
-            <div className="flex justify-center">
+            <div className="flex justify-center p-2">
               <button
                 onClick={resetAllFilters}
-                className="text-sm font-semibold hover:underline hover:text-red-600"
+                className="text-xs  font-semibold hover:underline hover:text-primary flex items-center gap-1"
               >
-                ↺ Réinitialiser tous les filtres pour  (total de {dbOrgs.length})
+                <RotateCcw className=" h-3 w-3" /> Réinitialiser tous les filtres pour  ( {dbOrgs.length} en total)
               </button>
             </div>
 
@@ -267,7 +267,7 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
       </div>
 
       {/* Filters dropdown */}
-      <div className="z-50">
+      <div >
         <SearchWithFilters
           query={query}
           setQuery={setQuery}
