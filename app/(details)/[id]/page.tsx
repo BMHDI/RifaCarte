@@ -27,12 +27,12 @@ const normalizedOrg = {
   description: typeof org.description === "string" ? org.description : org.description?.text || "",
   directorName: org.director?.name || "",
   directorTitle: org.director?.title || "",
-  projects: Array.isArray(org.projects)
-    ? org.projects.map(proj => ({
-        name: proj.name || "",
-        description: proj.description || "",
-      }))
-    : [],
+projects: Array.isArray(org.projects)
+  ? org.projects.map((proj: { name?: string; description?: string }) => ({
+      name: proj.name || "",
+      description: proj.description || "",
+    }))
+  : [],
   category: Array.isArray(org.category) ? org.category : [],
   tags: Array.isArray(org.tags) ? org.tags : [],
 };
