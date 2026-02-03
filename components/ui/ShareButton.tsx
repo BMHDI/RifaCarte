@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Facebook, MessageSquare, Copy, Phone } from "lucide-react";
+import { ExternalLink, Facebook, MessageSquare, Copy } from "lucide-react";
+import { Whatsapp } from "@/components/ui/WhatsappLogo";
 
 export function ShareButton({ id, name }: { id: string; name: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,7 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
                 onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, "_blank")}
                 title="Partager sur WhatsApp"
               >
-                <Phone className="h-5 w-5" />
+                <Whatsapp className="h-5 w-5" />
               </Button>
 
               <Button
