@@ -13,47 +13,58 @@ type Message = {
   content: string;
   sources?: { name: string; id: string }[];
   created_at?: string;
+  timestamp?: string;
+  [key: string]: any; // <--- Add this line to allow any other properties
 };
 
 export function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null); // Track the user
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Load messages from Supabase on mount
+  // 1. Generate or Retrieve Session ID on Mount
   useEffect(() => {
+    let id = localStorage.getItem("chat_session_id");
+    if (!id) {
+      id = crypto.randomUUID(); // Creates a unique ID like "550e8400-e29b..."
+      localStorage.setItem("chat_session_id", id);
+    }
+    setSessionId(id);
+  }, []);
+
+  // 2. Fetch messages ONLY for this session
+  useEffect(() => {
+    if (!sessionId) return; // Wait until session ID is ready
+
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from("chat_messages")
         .select("*")
+        .eq("session_id", sessionId) // <--- THIS FILTERS OUT OTHER USERS
         .order("created_at", { ascending: true });
 
       if (error) {
         console.error("Error fetching messages:", error);
         return;
       }
-
       setMessages(data as Message[]);
     };
 
     fetchMessages();
-  }, []);
+  }, [sessionId]); // Re-run when sessionId is set
 
-  // Scroll to bottom whenever messages change
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages, isLoading]);
-
-  // Save message in Supabase
+  // 3. Save message with the session_id
   const saveMessage = async (message: Message) => {
+    if (!sessionId) return;
+
     const { error } = await supabase.from("chat_messages").insert([
       {
         role: message.role,
         content: message.content,
         sources: message.sources || null,
+        session_id: sessionId, // <--- TAGS THE MESSAGE TO THIS USER
       },
     ]);
 
@@ -64,11 +75,12 @@ export function ChatBox() {
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: "user", content: input };
-
-    trackEvent("chat_message_sent", {
-      category: "interaction",
-      label: input.slice(0, 50),
-    });
+const currentInput = input;
+   trackEvent("chat_message_sent", {
+    category: "interaction",
+    label: currentInput.slice(0, 50),
+    // Add a timestamp to ensure uniqueness in the logs
+  });
 
     const newMessages = [...messages, userMessage];
     setMessages(newMessages);

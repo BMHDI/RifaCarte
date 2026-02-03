@@ -115,6 +115,7 @@ const rawOrgs = await searchOrganizations(qVec, 5, city ?? undefined);
                   essai de poser les bonnes questions pour cibler la recherche de l'utilisateur d une maniere conversationnelle.
                 Tjours rappeler toi de la ville ou la region de l'utilisateur.
                  tres important : si tu na pas de villes pose la question donne pas tous les organismes de la province.
+                 n utilise pas format ** et -- et == ou tout autre format de ce genre. format propre et lisible.
 Quand tu présentes un organisme, utilise ce format :
 
 📍 Nom de l’organisme  
