@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { SelectedOrg, OrgContextType, Org } from "@/types/types";
-import type mapboxgl from "mapbox-gl";
 
 
 const OrgContext = createContext<OrgContextType | null>(null);

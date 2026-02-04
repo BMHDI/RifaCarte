@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, RotateCcw } from "lucide-react";
 import { trackEvent } from "@/app/googleAnalytics";
 import { supabase } from "@/lib/db";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Message = {
   role: "user" | "assistant";
@@ -41,7 +43,7 @@ export function ChatBox() {
     setSessionId(id);
   }, []);
 
-  // 2. Chargement de l'historique depuis Supabase
+  // 2. loading the history
   useEffect(() => {
     if (!sessionId) return;
 
@@ -57,7 +59,7 @@ export function ChatBox() {
         return;
       }
       
-      // Si on a des messages en DB, on remplace le message de bienvenue par l'historique
+      // if there is a message replace woth welocoming 
       if (data && data.length > 0) {
         setMessages(data as Message[]);
       }
@@ -66,7 +68,7 @@ export function ChatBox() {
     fetchMessages();
   }, [sessionId]);
 
-  // Scroll automatique vers le bas
+  // Auto Scroll down
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -77,7 +79,7 @@ export function ChatBox() {
     const newId = crypto.randomUUID();
     localStorage.setItem("chat_session_id", newId);
     setSessionId(newId);
-    setMessages([welcomeMessage]); // Reset l'affichage avec le message de bienvenue
+    setMessages([welcomeMessage]); // reset the message to welocoming
     setInput("");
   };
 
@@ -177,7 +179,37 @@ export function ChatBox() {
                   : "bg-white border border-gray-100 text-gray-800 rounded-tl-none"
               }`}
             >
-              <div className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</div>
+              <div className="text-sm leading-relaxed whitespace-pre-wrap">
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+    components={{
+     ul: ({ children }) => (
+  <ul className="list-disc list-inside ml-4 space-y-0.5">
+    {children}
+  </ul>
+),
+ol: ({ children }) => (
+  <ol className="list-decimal list-inside ml-4 space-y-0.5">
+    {children}
+  </ol>
+),
+li: ({ children }) => <li className="leading-tight">{children}</li>,
+strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+h2: ({ children }) => (
+  <h2 className="text-lg font-semibold text-primary leading-tight mt-2 mb-1">
+    {children}
+  </h2>
+),
+h3: ({ children }) => (
+  <h3 className="font-semibold text-primary leading-tight mt-1 mb-1">
+    {children}
+  </h3>
+),
+    }}
+  >
+    {msg.content}
+  </ReactMarkdown>
+</div>
 
               {msg.role === "assistant" && msg.sources && msg.sources.length > 0 && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
@@ -214,9 +246,10 @@ export function ChatBox() {
       </div>
 
       {/* Zone de saisie */}
+      { messages.length == 0 &&
       <p className="text-xs text-center text-primary p-2  mt-3">
           L'IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
-        </p>
+        </p>}
       <div className="px-4 bg-white ">
         <div className="flex w-full ">
           <Input

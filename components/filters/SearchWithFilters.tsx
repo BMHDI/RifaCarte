@@ -11,6 +11,7 @@ import {
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { ChevronDown, Check } from "lucide-react";
 import { SearchWithFiltersProps } from "@/types/types";
+import { useRef } from "react"; // Import useRef
 
 export default function SearchWithFilters({
   query,
@@ -23,7 +24,14 @@ export default function SearchWithFilters({
   toggleCity,
 }: SearchWithFiltersProps) {
   const [open, setOpen] = React.useState(false);
+  // Inside your component:
+const inputRef = useRef<HTMLInputElement>(null);
 
+const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (e.key === "Enter") {
+    inputRef.current?.blur(); // This hides the keyboard
+  }
+};
   const scrollableContent = (
     <div className="max-h-[70vh] overflow-y-auto">
       <Command>
@@ -67,6 +75,7 @@ export default function SearchWithFilters({
   return (
     <div className="flex w-full px-4 ">
       <Input
+      onKeyDown={handleKeyDown} // Listen for the Enter key
         className="rounded-r-none flex-1"
         value={query}
         placeholder="Chercher un organisme..."

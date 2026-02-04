@@ -20,9 +20,7 @@ import { Button } from "../ui/button";
 import { useSidebar } from "../ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-
 export function MapView() {
-
   const mapRef = useRef<MapRef | null>(null);
   const {
     selectedOrg,
@@ -35,7 +33,12 @@ export function MapView() {
   } = useOrg();
   const [mapLoaded, setMapLoaded] = useState(false);
   const { toggleSidebar, state } = useSidebar();
-const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
+  // Define this outside your component to prevent re-renders
+const ALBERTA_BOUNDS: [[number, number], [number, number]] = [
+  [-120.5, 48.9], // Southwest: BC border/US border
+  [-109.5, 60.1], // Northeast: SK border/NWT border
+];
   // Handle flying to selected org location
   useEffect(() => {
     if (selectedOrg?.location && mapRef.current) {
@@ -114,17 +117,17 @@ const isMobile = useIsMobile()
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Map
+      maxBounds={ALBERTA_BOUNDS}
         ref={mapRef}
         {...viewState}
         onMove={(e) => setViewState(e.viewState)}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/bmhdi/cmkoaod33000k01r83dx855i3"
         style={{ width: "100%", height: "100%" }}
-       onLoad={(e) => {
-    setMapLoaded(true);
-    setMapInstance(e.target); // <-- e.target is the Mapbox GL JS instance
-  }}
-        
+        onLoad={(e) => {
+          setMapLoaded(true);
+          setMapInstance(e.target); // <-- e.target is the Mapbox GL JS instance
+        }}
       >
         <NavigationControl position="top-right" />
 
@@ -142,63 +145,63 @@ const isMobile = useIsMobile()
 
         {/* Region clickable center markers */}
         {regionCenters.map((region) => {
-  const isActive =
-    activeRegion?.trim().toLowerCase() === region.name.trim().toLowerCase();
+          const isActive =
+            activeRegion?.trim().toLowerCase() ===
+            region.name.trim().toLowerCase();
 
-  if (isActive) return null; // ✅ hide this region button
+          if (isActive) return null; // ✅ hide this region button
 
-  return (
-    <Marker
-      key={`region-${region.name}`}
-      longitude={region.lng}
-      latitude={region.lat}
-      anchor="center"
-    onClick={(e) => {
-    e.originalEvent.stopPropagation();
-    setActiveRegion(region.name);
-    if (isMobile  && state == "expanded") {
-      toggleSidebar(); // only open when needed
-    }
-  }}
-    >
-      <Button
-      
-        className="
+          return (
+            <Marker
+              key={`region-${region.name}`}
+              longitude={region.lng}
+              latitude={region.lat}
+              anchor="center"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                setActiveRegion(region.name);
+                if (isMobile && state == "expanded") {
+                  toggleSidebar(); // only open when needed
+                }
+              }}
+            >
+              <Button
+                className="
            h-18 w-18 rounded-full
           shadow-lg hover:scale-110 transition-transform
           text-lg font-semibold
         "
-      >
-        {region.name}
-      </Button>
-    </Marker>
-  );
-})}
-        
+              >
+                {region.name}
+              </Button>
+            </Marker>
+          );
+        })}
 
         {/* Render org markers */}
-        {activeRegion && markersToShow.map(({ org, location }, i) => (
-          <Marker
-            key={`org-${org.id}-${i}`}
-            longitude={location.lng!}
-            latitude={location.lat!}
-            anchor="bottom"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              setSelectedOrg({ org, location });
-            }}
-          >
-            <MapPin
-              size={selectedOrg?.location === location ? 30 : 24}
-              className={
-                selectedOrg?.location === location
-                  ? "text-blue-600"
-                  : "text-red-500 hover:scale-110 transition-transform cursor-pointer"
-              }
-              fill="currentColor"
-            />
-          </Marker>
-        ))}
+        {activeRegion &&
+          markersToShow.map(({ org, location }, i) => (
+            <Marker
+              key={`org-${org.id}-${i}`}
+              longitude={location.lng!}
+              latitude={location.lat!}
+              anchor="bottom"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                setSelectedOrg({ org, location });
+              }}
+            >
+              <MapPin
+                size={selectedOrg?.location === location ? 30 : 24}
+                className={
+                  selectedOrg?.location === location
+                    ? "text-blue-600"
+                    : "text-red-500 hover:scale-110 transition-transform cursor-pointer"
+                }
+                fill="currentColor"
+              />
+            </Marker>
+          ))}
 
         {/* Popup for selected org */}
         {selectedOrg?.location && (
@@ -208,7 +211,17 @@ const isMobile = useIsMobile()
             anchor="top"
             offset={10}
             closeOnClick={false}
-            onClose={() => setSelectedOrg(null)}
+            onClose={() => {
+              setSelectedOrg(null);
+
+              // Zoom out when closing popup
+              setViewState((prev) => ({
+                ...prev,
+                zoom: activeRegion ? 7 : 6, // adjust levels as you like
+                transitionDuration: 900,
+                transitionInterpolator: undefined,
+              }));
+            }}
           >
             <div className="max-w-md bg-white overflow-hidden">
               <OrgCard
