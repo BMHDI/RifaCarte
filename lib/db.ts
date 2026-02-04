@@ -109,3 +109,16 @@ export async function fetchCities(): Promise<string[]> {
   // unique + sorted
   return [...new Set(data.map((row) => row.city))].sort();
 }
+export async function searchFAQ(queryEmbedding : any , matchCount = 5) {
+  const { data, error } = await supabase.rpc("match_faq_entries", {
+    query_embedding: queryEmbedding,
+    match_count: matchCount,
+  });
+
+  if (error) {
+    console.error("❌ FAQ search error:", error);
+    throw error;
+  }
+
+  return data;
+}

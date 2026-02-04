@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { searchOrganizations } from "@/lib/db";
+import { searchFAQ, searchOrganizations } from "@/lib/db";
 import { embedQuestion } from "@/lib/embeddings";
 import { extractCity } from "@/lib/location";
 
@@ -84,10 +84,12 @@ export async function POST(req: Request) {
 
       const qVec = await embedQuestion(query);
       const rawOrgs = await searchOrganizations(qVec, 5, city ?? undefined);
+const faqResults = await searchFAQ(qVec, 3);
 
       // Si aucun résultat n'est trouvé en base de données
       const contextResults =
         rawOrgs?.length > 0 ? rawOrgs : "AUCUN RÉSULTAT TROUVÉ DANS LA BASE.";
+        const cobinedresult = [...contextResults, ...faqResults]
 
       const finalRes = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
@@ -104,7 +106,7 @@ export async function POST(req: Request) {
                   {
                     functionResponse: {
                       name: "search_organizations",
-                      response: { result: contextResults },
+                      response: { result: cobinedresult },
                     },
                   },
                 ],
