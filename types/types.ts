@@ -140,3 +140,10 @@ export interface UserProfile {
   urgency?: "immediate" | "soon";
   companyType?: "large" | "sme" | "startup" | "any";
 }
+export type ViewState = {
+  longitude: number;
+  latitude: number;
+  zoom: number;
+  transitionDuration?: number;
+  // ...other fields you use
+};

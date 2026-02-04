@@ -19,6 +19,7 @@ import { OrgCard } from "../ui/OrgCard";
 import { Button } from "../ui/button";
 import { useSidebar } from "../ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ViewState } from "@/types/types";
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
@@ -215,7 +216,7 @@ const ALBERTA_BOUNDS: [[number, number], [number, number]] = [
               setSelectedOrg(null);
 
               // Zoom out when closing popup
-              setViewState((prev) => ({
+              setViewState((prev : ViewState) => ({
                 ...prev,
                 zoom: activeRegion ? 7 : 6, // adjust levels as you like
                 transitionDuration: 900,
