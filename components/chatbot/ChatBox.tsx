@@ -149,15 +149,15 @@ export function ChatBox() {
       
       {/* Header avec bouton Reset (Affiche seulement s'il y a plus que le message de bienvenue) */}
       {messages.length > 1 && (
-        <div className="flex justify-end items-center p-2  backdrop-blur-sm">
-          <Button 
+        <div onClick={startNewChat} className="flex justify-end items-center   flex gap-2 items-center text-primary hover:text-black transition-colors ">
+            Nouvelle discussion <Button 
             variant="ghost" 
             size="sm" 
             onClick={startNewChat}
-            className="text-[10px] uppercase tracking-wider font-bold flex gap-2 items-center text-primary hover:text-black transition-colors"
+            
           >
-            <RotateCcw className="h-3 w-3" />
-            Nouvelle discussion
+            <RotateCcw className="h-5 w-5" />
+         
           </Button>
         </div>
       )}
@@ -210,7 +210,7 @@ h3: ({ children }) => (
     {msg.content}
   </ReactMarkdown>
 </div>
-
+{/* 
               {msg.role === "assistant" && msg.sources && msg.sources.length > 0 && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
                   <p className="text-[10px] font-bold uppercase text-gray-400 mb-2">
@@ -228,7 +228,7 @@ h3: ({ children }) => (
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         ))}
@@ -246,8 +246,8 @@ h3: ({ children }) => (
       </div>
 
       {/* Zone de saisie */}
-      {messages.length == 0 &&
-      <p className="text-xs text-center text-primary p-2  mt-3">
+      {messages.length == 1 &&
+      <p className="text-xs text-center text-primary pb-2  mt-3">
           L'IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
         </p>}
     
@@ -262,7 +262,7 @@ h3: ({ children }) => (
           />
          
           <Button 
-            className="rounded-l-none flex gap-1"
+            className="rounded-l-none flex gap-1 w-24"
             onClick={sendMessage}
             disabled={isLoading }
           > 
