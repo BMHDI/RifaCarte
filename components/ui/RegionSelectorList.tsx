@@ -33,7 +33,7 @@ export function RegionSelectorList({ onRegionSelect }: RegionSelectorProps) {
           key={region.value}
           onClick={() => handleSelect(region.value)}
           className="
-           h-18 w-18 rounded-full
+           h-24 w-24 rounded-full
           shadow-lg hover:scale-110 transition-transform
           text-lg font-bold
           md:h-25 md:w-25
