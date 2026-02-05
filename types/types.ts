@@ -147,3 +147,4 @@ export type ViewState = {
   transitionDuration?: number;
   // ...other fields you use
 };
+ export type RateLimitRecord = { count: number; lastCall: number };

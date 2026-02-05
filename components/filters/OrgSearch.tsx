@@ -32,7 +32,7 @@ export function OrgSearch() {
     resetAllFilters,
     mapInstance,
   } = useOrg();
-const [regionCities, setRegionCities] = useState<string[]>([]);
+  const [regionCities, setRegionCities] = useState<string[]>([]);
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
   const [allCities, setAllCities] = useState<string[]>([]);
@@ -112,20 +112,19 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
   // -----------------------------------
   // Derived cities for dropdown
   // -----------------------------------
- const filteredCitiesForRegion = useMemo(() => {
-  if (!activeRegion) return allCities;
+  const filteredCitiesForRegion = useMemo(() => {
+    if (!activeRegion) return allCities;
 
-  // Only filter by region, not by selected cities
-  const citySet = new Set<string>();
-  dbOrgs.forEach((org) =>
-    org.locations.forEach((loc) => {
-      if (loc.city) citySet.add(loc.city);
-    }),
-  );
+    // Only filter by region, not by selected cities
+    const citySet = new Set<string>();
+    dbOrgs.forEach((org) =>
+      org.locations.forEach((loc) => {
+        if (loc.city) citySet.add(loc.city);
+      }),
+    );
 
-  return Array.from(citySet).sort();
-}, [activeRegion, dbOrgs]); // remove allCities if you compute from dbOrgs
-
+    return Array.from(citySet).sort();
+  }, [activeRegion, dbOrgs]); // remove allCities if you compute from dbOrgs
 
   // -----------------------------------
   // Filter toggles
@@ -147,23 +146,24 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
   // -----------------------------------
   return (
     <div className="flex w-full flex-col h-[80vh]">
-<div
-  className="h-full overflow-y-auto"
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-    rowGap: "1rem",    // espace vertical uniquement
-    columnGap: "0px",  // plus d’espace horizontal
-    gridAutoRows: "1fr", // toutes les cartes sur la même ligne ont la même hauteur
-  }}
->        {!activeRegion && <RegionSelectorList />}
+      <div
+        className="h-full overflow-y-auto"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+          rowGap: "1rem", // espace vertical uniquement
+          columnGap: "0px", // plus d’espace horizontal
+          gridAutoRows: "1fr", // toutes les cartes sur la même ligne ont la même hauteur
+        }}
+      >
+        {" "}
+        {!activeRegion && <RegionSelectorList />}
         {loading && (
           <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />
         )}
         {!loading && activeRegion && dbOrgs.length === 0 && (
           <p>Aucun organisme trouvé.</p>
         )}
-
         {activeRegion &&
           dbOrgs.map((org) => (
             <OrgCard
@@ -224,9 +224,13 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
             <div className="flex justify-center p-2">
               <button
                 onClick={resetAllFilters}
-                className="text-xs  font-semibold hover:underline hover:text-primary flex items-center gap-1"
+                className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
               >
-                <RotateCcw className=" h-3 w-3" /> Réinitialiser tous les filtres pour  ( {dbOrgs.length} en total)
+                <RotateCcw className="h-3 w-3" /> Réinitialiser tous les filtres
+                pour{" "}
+                <span className="text-primary font-bold">
+                  ({dbOrgs.length} au total)
+                </span>
               </button>
             </div>
 
@@ -267,7 +271,7 @@ const [regionCities, setRegionCities] = useState<string[]>([]);
       </div>
 
       {/* Filters dropdown */}
-      <div >
+      <div>
         <SearchWithFilters
           query={query}
           setQuery={setQuery}

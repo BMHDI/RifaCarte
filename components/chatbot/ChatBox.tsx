@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, RotateCcw } from "lucide-react";
+import { Loader2, RotateCcw, Send, Sparkles } from "lucide-react";
 import { trackEvent } from "@/app/googleAnalytics";
 import { supabase } from "@/lib/db";
 import ReactMarkdown from "react-markdown";
@@ -236,9 +236,9 @@ h3: ({ children }) => (
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-white border border-gray-100 p-4 rounded-2xl rounded-tl-none flex items-center gap-2 shadow-sm">
-              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
-              <span className="text-xs text-gray-500 font-medium italic">
-                Recherche dans le répertoire...
+              
+              <span className="text-xs  flex gap-4 ">
+               <Sparkles className=" animate-spin "  />  Recherche dans le répertoire
               </span>
             </div>
           </div>
@@ -246,12 +246,12 @@ h3: ({ children }) => (
       </div>
 
       {/* Zone de saisie */}
-      { messages.length == 0 &&
+      {messages.length == 0 &&
       <p className="text-xs text-center text-primary p-2  mt-3">
           L'IA peut faire des erreurs. Vérifiez les informations auprès des organismes.
         </p>}
-      <div className="px-4 bg-white ">
-        <div className="flex w-full ">
+    
+        <div className="flex w-full px-4  ">
           <Input
             className="rounded-r-none flex-1"
             placeholder="Chercher un organisme..."
@@ -260,16 +260,19 @@ h3: ({ children }) => (
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           />
+         
           <Button 
             className="rounded-l-none flex gap-1"
             onClick={sendMessage}
-            disabled={isLoading || !input.trim()}
-          >
-            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Envoyer"}
+            disabled={isLoading }
+          > 
+            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>
+    <Send className="h-4 w-4 mr-1" /> {/* optional margin */}
+    Envoyer
+  </>}
           </Button>
         </div>
         
-      </div>
     </div>
   );
 }

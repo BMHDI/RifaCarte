@@ -9,7 +9,7 @@ export default function FavoritesPage() {
   if (!savedOrgs.length) {
     return (
       <div className="p-6 text-center text-muted-foreground">
-        Pas de favoris enregistrés pour l&apos;instant 😅
+        Pas de favoris enregistrés pour l&apos;instant  ❤️
       </div>
     )
   }

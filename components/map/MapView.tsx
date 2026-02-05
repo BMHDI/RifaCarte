@@ -35,11 +35,7 @@ export function MapView() {
   const [mapLoaded, setMapLoaded] = useState(false);
   const { toggleSidebar, state } = useSidebar();
   const isMobile = useIsMobile();
-  // Define this outside your component to prevent re-renders
-const ALBERTA_BOUNDS: [[number, number], [number, number]] = [
-  [-120.5, 48.9], // Southwest: BC border/US border
-  [-109.5, 60.1], // Northeast: SK border/NWT border
-];
+
   // Handle flying to selected org location
   useEffect(() => {
     if (selectedOrg?.location && mapRef.current) {
@@ -118,7 +114,8 @@ const ALBERTA_BOUNDS: [[number, number], [number, number]] = [
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Map
-      maxBounds={ALBERTA_BOUNDS}
+  minZoom={4}
+  maxZoom={15}
         ref={mapRef}
         {...viewState}
         onMove={(e) => setViewState(e.viewState)}

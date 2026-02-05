@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { searchFAQ, searchOrganizations } from "@/lib/db";
 import { embedQuestion } from "@/lib/embeddings";
 import { extractCity } from "@/lib/location";
+import { rateLimit } from "@/lib/ratelimiter";
+
 
 export const dynamic = "force-dynamic";
 
@@ -32,7 +34,19 @@ const tools = [
 ];
 
 export async function POST(req: Request) {
-  try {
+ try {
+    // 1️⃣ Identify user (use IP or user ID)
+    const ip = req.headers.get("x-forwarded-for") || "unknown";
+
+    // 2️⃣ Check rate limit
+    if (!rateLimit(ip, 5, 10_000)) { // 5 requests per 10 seconds
+      return NextResponse.json(
+        { text: "Trop de requêtes, essayez à nouveau dans quelques secondes." },
+        { status: 429 }
+      );
+    }
+
+   
     const { messages } = await req.json();
 
     const contents = messages.map((m: any) => ({

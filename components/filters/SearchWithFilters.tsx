@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import { ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check, Filter, SlidersHorizontal } from "lucide-react";
 import { SearchWithFiltersProps } from "@/types/types";
 import { useRef } from "react"; // Import useRef
 
@@ -85,7 +85,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button className="rounded-l-none flex gap-1">
-            filtres
+            <SlidersHorizontal />Filtres
             <ChevronDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>

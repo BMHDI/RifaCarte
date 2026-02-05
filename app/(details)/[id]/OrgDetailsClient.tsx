@@ -17,7 +17,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
       <div className="max-w-6xl mx-auto px-4 py-6">
         <Link
           href={`/?region=${activeRegion || ""}`}
-          className="inline-flex items-center gap-2 text-sm text-red-600 hover:underline"
+          className="inline-flex items-center gap-2 text-md font-bold text-primary hover:underline"
         >
           <MapPin size={16} />
           Retour à la carte
@@ -114,7 +114,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
                 <Mail size={16} className="mt-1 text-gray-500" />
                 <a
                   href={`mailto:${org.email}`}
-                  className="text-red-600 hover:underline"
+                  className="hover:underline"
                 >
                   {org.email}
                 </a>
@@ -127,7 +127,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
                 <a
                   href={org.website}
                   target="_blank"
-                  className="text-red-600 hover:underline"
+                  className="hover:underline"
                 >
                   {org.website}
                 </a>
