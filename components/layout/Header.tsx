@@ -24,15 +24,15 @@ export function Header() {
   to-rose-300
   "
       >
-        <div className="flex items-center  justify-between align w-[75dvw] mx-auto">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center  justify-between h-4 align w-[75dvw] mx-auto">
+          {/* <div className="flex items-center gap-2">
             <Mail  className="h-5"  color="white" />
             <p className="text-white font-bold text-xs">rifa@rifalberta.com</p>
           </div>
           <div className="flex  items-center gap-2 ">
             <Facebook className="h-5"  color="white" />
             <Instagram  className="h-5" color="white" />
-          </div>
+          </div> */}
         </div>
         <div />
       </div>
