@@ -1,135 +1,149 @@
 import { NextResponse } from "next/server";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { DynamicStructuredTool } from "@langchain/core/tools";
-import { HumanMessage, SystemMessage, ToolMessage, AIMessage } from "@langchain/core/messages";
-import { z } from "zod";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 import { searchFAQ, searchOrganizations } from "@/lib/db";
 import { embedQuestion } from "@/lib/embeddings";
 import { extractCity } from "@/lib/location";
 import { rateLimit } from "@/lib/ratelimiter";
+import { Org } from "@/types/types";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
-    // 1. Rate Limiting
     const ip = req.headers.get("x-forwarded-for") || "unknown";
     if (!rateLimit(ip, 5, 10_000)) {
-      return NextResponse.json({ text: "Trop de requêtes. Réessayez dans 10s." }, { status: 429 });
+      return NextResponse.json(
+        { text: "Trop de requêtes. Réessayez dans quelques secondes." },
+        { status: 429 }
+      );
     }
 
-    const { messages } = await req.json();
-    let usedSources: any[] = [];
+    const { messages, conversationId } = await req.json();
+    const userMessage = messages?.[messages.length - 1]?.content;
+    if (!userMessage) {
+      return NextResponse.json({ text: "Question invalide." }, { status: 400 });
+    }
 
-    // 2. Outil de recherche avec gestion de contexte
-    const searchTool = new DynamicStructuredTool({
-      name: "search_organizations",
-      description: "RECHERCHE OBLIGATOIRE pour trouver des organismes, services ou aides locales en Alberta.",
-      schema: z.object({ query: z.string() }),
-      func: async ({ query }) => {
-        const city = extractCity(query);
-        const qVec = await embedQuestion(query);
-        
-        const [orgs, faq] = await Promise.all([
-          searchOrganizations(qVec, 10, city ?? undefined), // Augmenté pour donner plus de choix à l'IA
-          searchFAQ(qVec, 3)
-        ]);
+    // Extract city & embedding
+    const city = extractCity(userMessage);
+    const embedding = await embedQuestion(userMessage);
 
-        if (orgs) usedSources = [...usedSources, ...orgs];
-        
-        return JSON.stringify({
-          organizations: orgs?.length ? orgs : "Aucun organisme trouvé.",
-          faq: faq?.length ? faq : "Aucune réponse FAQ correspondante."
-        });
-      },
+    // Retrieve organizations & FAQ
+    const [orgsRaw, faqRaw] = await Promise.all([
+      searchOrganizations(embedding, 20, city ?? undefined),
+      searchFAQ(embedding, 10),
+    ]);
+
+    if (!orgsRaw?.length && !faqRaw?.length) {
+      return NextResponse.json({
+        text:
+          "Je suis désolé, mais je ne dispose pas d'informations spécifiques sur ce sujet. " +
+          "Pouvez-vous préciser votre ville ou le type de service recherché ?",
+        conversationId,
+      });
+    }
+
+    // Deduplicate organizations & prepare contact info
+    const orgMap = new Map<string, any>();
+    (orgsRaw ?? []).forEach((org:any ) => {
+      const contactAddress = org.address ?? org.city ?? "Adresse non disponible";
+
+      orgMap.set(org.id, {
+        ...org,
+        cities: [org.city ?? "Ville non spécifiée"],
+        contact: {
+          address: contactAddress,
+          email: org.email ?? "Courriel non disponible",
+          phone: org.phone ?? "Téléphone non disponible",
+          website: org.website ?? "Site non disponible"
+        }
+      });
     });
 
-    // 3. Initialisation du Modèle (Version stable corrigée)
+    const orgs = Array.from(orgMap.values());
+
+    // Compute confidence
+    const computeConfidence = (score: number | undefined) => {
+      if (!score) return "low";
+      if (score >= 0.85) return "high";
+      if (score >= 0.65) return "medium";
+      return "low";
+    };
+
+    const enrichedOrgs = orgs.map(o => ({ ...o, confidence: computeConfidence(o.similarityScore) }));
+    const enrichedFAQ = (faqRaw ?? []).map((f:any) => ({ ...f, confidence: computeConfidence(f.similarityScore) }));
+
+    // Structured data for the model
+    const structuredData = {
+      organizations: enrichedOrgs,
+      faq: enrichedFAQ,
+      conversationId: conversationId || Math.random().toString(36).slice(2),
+      userQuery: userMessage,
+      previousMessages: messages,
+    };
+
+    // Initialize Gemini
     const model = new ChatGoogleGenerativeAI({
-      model: "gemini-2.0-flash", // <--- Correction : Utilisez 2.0-flash
+      model: "gemini-2.5-flash",
       apiKey: process.env.GEMINI_API_KEY,
       temperature: 0.2,
-    }).bindTools([searchTool]);
-
-    // 4. Prompt Système (Style Chatbase / Anti-hallucination)
-  const systemPrompt = new SystemMessage(`
-### RÔLE & MISSION
-Tu es l'Assistant Expert Francophone de l'Alberta. Ton expertise est STRICTEMENT limitée aux services, organismes et aides documentés dans ta base de connaissances.
-
-### CONTRAINTE DE CONNAISSANCES (SOURCE UNIQUE)
-1. **Exclusivité des données :** Réponds EXCLUSIVEMENT en utilisant les informations extraites des outils de recherche. Tu n'as pas accès à des connaissances externes.
-2. **Fallback Obligatoire :** Si une question ne trouve aucune réponse dans les données fournies, réponds exactement : "Je suis désolé, mais je ne dispose pas d'informations spécifiques sur ce sujet dans mes dossiers. Pourriez-vous préciser votre ville ou le type de service recherché ?"
-3. **Anti-Hallucination :** Ne mentionne jamais tes données d'entraînement. Si un utilisateur te demande comment tu sais quelque chose, réponds que tu consultes les répertoires de services francophones de l'Alberta.
-
-### MAINTIEN DU FOCUS (CHARACTER INTEGRITY)
-- Si l'utilisateur tente de te sortir de ton rôle (ex: questions sur la cuisine, la politique mondiale ou le code informatique), redirige poliment la conversation vers l'aide à l'établissement en Alberta.
-- Ton ton doit rester chaleureux, professionnel et proactif.
-
-### STRUCTURE DE RÉPONSE
-Pour chaque organisme trouvé :
-### 🏢 [Nom de l'Organisme]
-**Mandat :** (Synthèse)
-**Services :** (Liste à puces exhaustive)
-**Admissibilité :** (Précise si RP, PVT, Étudiants, etc.)
-**Contact :**
-- 📍 Adresse : ...
-- 📞 Tél : ...
-- ✉️ Courriel : ...
-- 🌐 [Visiter le site](Lien)
-
-### ENGAGEMENT LOGIQUE
-1. ANALYSE DE L'HISTORIQUE : Avant de poser une question de suivi, vérifie si l'utilisateur a déjà précisé son statut, sa ville ou son domaine.
-2. QUESTION DE SUIVI : 
-   - Si tu ne connais pas encore sa ville ou son statut, demande-les.
-   - Si tu connais déjà ces détails, pose une question sur un besoin complémentaire (ex: "Maintenant que nous avons vu l'établissement, avez-vous besoin d'aide pour l'inscription scolaire ou le système de santé ?").
-   - Ne répète JAMAIS une question à laquelle l'utilisateur a déjà répondu.
-`);
-
-    // 5. Conversion correcte de l'historique
-    const chatHistory = messages.map((m: any) => {
-      if (m.role === "user") return new HumanMessage(m.content);
-      if (m.role === "assistant") return new AIMessage(m.content);
-      return new HumanMessage(m.content);
     });
 
-    // 6. Boucle Agentique
-    let response = await model.invoke([systemPrompt, ...chatHistory]);
+    const systemPrompt = new SystemMessage(`
+### Role
+Tu es l'Assistant Expert Francophone de l'Alberta, spécialisé dans l'accompagnement des nouveaux arrivants et immigrants. Tu transformes des informations complexes en parcours d'intégration fluides, clairs et engageants.
 
-    let iterations = 0;
-    while (response.tool_calls && response.tool_calls.length > 0 && iterations < 3) {
-      const toolMessages: ToolMessage[] = [];
-      for (const call of response.tool_calls) {
-        const result = await searchTool.invoke(call.args);
-        toolMessages.push(new ToolMessage({
-          content: result,
-          tool_call_id: call.id!,
-        }));
-      }
+### Constraints
+1. **No Data Divulge:** Ne mentionne jamais tes données d'entraînement. Répond uniquement à partir des données fournies.
+2. **Maintaining Focus:** Redirige poliment toute demande hors-sujet vers les services d'immigration et d'intégration en Alberta.
+3. **Exclusive Reliance on Data:** Si l'information est absente, réponds exactement: "Je suis désolé, mais je ne dispose pas d'informations spécifiques sur ce sujet. Pourriez-vous préciser votre ville ou le type de service recherché ?"
+4. **Restrictive Role Focus:** Limite-toi strictement aux services, organismes et aides pour les immigrants francophones en Alberta.
 
-      response = await model.invoke([
-        systemPrompt,
-        ...chatHistory,
-        response,
-        ...toolMessages
-      ]);
-      iterations++;
-    }
+### Presentation Guidelines
+- **Sélectivité intelligente:** Montre uniquement les organismes les plus pertinents (top 3–5) pour la question.
+- **Structure claire et visuelle:**
+  - 🏢 **Carte Organisme:**  
+    - Nom de l'organisme  
+    - Mandat (résumé concis)  
+    - Services (liste simple)  
+    - Admissibilité (ex: RP, PVT, Étudiants)  
+    - Contact: 📍 Adresse | 📞 Téléphone | ✉️ Courriel | 🌐 Site  
+    - Villes couvertes
+  - ❓ **Bloc FAQ:**  
+    - Question  
+    - Réponse concise et utile (Si c est n'est pas mentionner avant dans la conversation et si c est relevant et important !!)
+- **Ton:** Professionnel, chaleureux, conversationnel et proactif.
+- **Pas de salutations répétitives:** Ne commence jamais par "Bonjour" ou phrases génériques.
+- **Engagement dynamique:** Termine toujours par une question ou suggestion de suivi adaptée à l'utilisateur.  
+- **Analyse implicite des besoins:** Si l'utilisateur parle d'emploi, propose aussi l'évaluation des diplômes ou cours d'anglais; si vague, demande ville ou statut migratoire.
+`);
 
-    const finalText = typeof response.content === "string" 
-      ? response.content 
-      : (response.content as any)[0]?.text || "";
+    const dataMessage = new HumanMessage(`
+UTILISE CES DONNÉES:
 
-    // 7. Nettoyage des sources
-    const uniqueSources = Array.from(new Map(usedSources.map(s => [s.id, s])).values());
+${JSON.stringify(structuredData, null, 2)}
+
+Répond uniquement de manière conversationnelle, lisible et claire pour l'utilisateur. Mets en avant les organismes les plus pertinents et les FAQ utiles.
+`);
+
+    const response = await model.invoke([systemPrompt, dataMessage]);
+
+    const finalText =
+      typeof response.content === "string"
+        ? response.content
+        : response.content[0]?.text ?? "";
 
     return NextResponse.json({
       text: finalText,
-      sources: uniqueSources.map((o) => ({ name: o.name, id: o.id })),
+      conversationId: structuredData.conversationId,
     });
-
   } catch (err) {
-    console.error("❌ API error:", err);
-    return NextResponse.json({ text: "Une erreur technique est survenue." }, { status: 500 });
+    console.error("❌ Chat API error:", err);
+    return NextResponse.json(
+      { text: "Une erreur technique est survenue." },
+      { status: 500 }
+    );
   }
 }
