@@ -25,8 +25,7 @@ if (!SUPABASE_URL || !SUPABASE_KEY || !GEMINI_API_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const FAQ_URL = "https://rifalberta.com/en/faq/";
-const GEMINI_EMBED_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent";
+
 
 /* ─────────────────────────────────────────────── */
 /* UTILS                                          */
@@ -47,6 +46,10 @@ async function fetchWithTimeout(url, options, timeoutMs = 10000) {
 /* EMBEDDING                                      */
 /* ─────────────────────────────────────────────── */
 
+// Use gemini-embedding-001 (the modern version of embedding-001)
+const GEMINI_EMBED_URL =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent";
+
 async function embedText(text) {
   const res = await fetchWithTimeout(
     `${GEMINI_EMBED_URL}?key=${GEMINI_API_KEY}`,
@@ -54,8 +57,10 @@ async function embedText(text) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        model: "models/gemini-embedding-001", // Explicitly name the model
         content: { parts: [{ text }] },
         task_type: "RETRIEVAL_DOCUMENT",
+        outputDimensionality: 1536, // <--- CRITICAL: Force 1536 dimensions
       }),
     }
   );
@@ -64,7 +69,7 @@ async function embedText(text) {
 
   if (!res.ok || !json?.embedding?.values) {
     console.error("❌ Gemini response:", json);
-    throw new Error("Embedding failed");
+    throw new Error(`Embedding failed: ${json.error?.message || res.statusText}`);
   }
 
   return json.embedding.values;

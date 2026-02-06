@@ -14,17 +14,16 @@ export async function searchOrganizations(
   matchCount = 5,
   city?: string,
 ) {
-  const { data, error } = await supabase.rpc("match_organizations", {
+  const { data, error } = await supabase.rpc("search_organizations", { // Changed from match_organizations
     query_embedding: queryEmbedding,
     match_count: matchCount,
-    city_filter: city ?? null, // pass city to the RPC
+    filter_city: city ?? null, // Changed from city_filter to filter_city
   });
 
   if (error) {
     console.error("❌ Supabase RPC error:", error);
     throw error;
   }
-
   return data;
 }
 // fetch all orgs
@@ -70,18 +69,13 @@ export async function fetchFilteredOrgs({
 
   // ✅ Full-text search flexible (accent-insensitive, multi-word)
   if (query?.trim()) {
-    const normalizedQuery = normalize(query);
-    const words = normalizedQuery.split(/\s+/).filter(Boolean);
-
-    // Build AND filters for each word
-    words.forEach((word) => {
-      qb = qb.ilike(
-        // search_text should already be normalized in DB (lowercase, accents removed)
-        "search_text",
-        `%${word}%`
-      );
-    });
-  }
+  // Use textSearch for better linguistic matching than ilike
+  // 'french' configuration handles stop words and accents
+  qb = qb.textSearch("search_text", query, {
+    config: "french", 
+    type: "websearch" 
+  });
+}
 
 
   const { data, error } = await qb;
@@ -109,8 +103,9 @@ export async function fetchCities(): Promise<string[]> {
   // unique + sorted
   return [...new Set(data.map((row) => row.city))].sort();
 }
-export async function searchFAQ(queryEmbedding : any , matchCount = 5) {
-  const { data, error } = await supabase.rpc("match_faq_entries", {
+// --- searchFAQ update ---
+export async function searchFAQ(queryEmbedding: any, matchCount = 5) {
+  const { data, error } = await supabase.rpc("search_faq", { // Changed from match_faq_entries
     query_embedding: queryEmbedding,
     match_count: matchCount,
   });
@@ -119,6 +114,5 @@ export async function searchFAQ(queryEmbedding : any , matchCount = 5) {
     console.error("❌ FAQ search error:", error);
     throw error;
   }
-
   return data;
 }

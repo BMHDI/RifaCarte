@@ -13,8 +13,6 @@ import CATEGORIES from "@/lib/categories";
 import { Org } from "@/types/types";
 import { RegionSelectorList } from "../ui/RegionSelectorList";
 import { getCategoryIdsFromGroups } from "@/lib/utils";
-import { useRef } from "react";
-import { Map as MapboxMap } from "react-map-gl/mapbox";
 import { Spinner } from "@/components/ui/spinner";
 
 export function OrgSearch() {
@@ -32,7 +30,6 @@ export function OrgSearch() {
     resetAllFilters,
     mapInstance,
   } = useOrg();
-  const [regionCities, setRegionCities] = useState<string[]>([]);
 
   const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
   const [allCities, setAllCities] = useState<string[]>([]);
@@ -40,7 +37,6 @@ export function OrgSearch() {
 
   const { toggleSidebar } = useSidebar();
   const isMobile = useIsMobile();
-  const mapRef = useRef<typeof MapboxMap | null>(null);
   // -----------------------------------
   // Categories list
   // -----------------------------------

@@ -1,9 +1,8 @@
-// lib/embeddings.ts
 import { supabase } from "@/lib/db";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent";
+// Use the v1beta endpoint for the latest features like outputDimensionality
+const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent";
 
 async function fetchWithTimeout(
   url: string,
@@ -29,7 +28,8 @@ export async function embedQuestion(text: string): Promise<number[]> {
     .single();
 
   if (cached?.embedding) {
-    return cached.embedding;
+    // Optional: Safety check to ensure cached embedding matches your 1536 requirement
+    if (cached.embedding.length === 1536) return cached.embedding;
   }
 
   // 2️⃣ Retry logic (max 3 tries)
@@ -43,23 +43,29 @@ export async function embedQuestion(text: string): Promise<number[]> {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            model: "models/gemini-embedding-001",
             content: { parts: [{ text }] },
             task_type: "RETRIEVAL_QUERY",
+            // This is the magic line that truncates the 3072 native vector to 1536
+            outputDimensionality: 1536, 
           }),
         },
       );
 
       if (!res.ok) {
-        throw new Error(`Gemini error ${res.status}`);
+        const errorData = await res.json();
+        throw new Error(`Gemini error ${res.status}: ${errorData.error?.message || "Unknown error"}`);
       }
 
       const data = await res.json();
       const embedding = data?.embedding?.values;
 
-      if (!embedding) throw new Error("Invalid embedding response");
+      if (!embedding || embedding.length !== 1536) {
+         throw new Error(`Invalid embedding length: expected 1536, got ${embedding?.length}`);
+      }
 
       // 3️⃣ Save to cache
-      await supabase.from("embeddings_cache").insert({
+      await supabase.from("embeddings_cache").upsert({
         text,
         embedding,
       });
@@ -67,7 +73,9 @@ export async function embedQuestion(text: string): Promise<number[]> {
       return embedding;
     } catch (err) {
       lastError = err;
-      console.warn(`⚠️ Embedding attempt ${attempt} failed`);
+      console.warn(`⚠️ Embedding attempt ${attempt} failed:`, err instanceof Error ? err.message : err);
+      // Exponential backoff before retry
+      await new Promise(resolve => setTimeout(resolve, attempt * 1000));
     }
   }
 
