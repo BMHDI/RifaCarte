@@ -26,7 +26,8 @@ export function RegionSelectorList({ onRegionSelect }: RegionSelectorProps) {
   if (activeRegion) return null;
 
   return (
-    <div className="flex flex-wrap items-center flex-col gap-8 pt-4">
+    <div className="flex flex-wrap items-center flex-col gap-8 md:mt-4 mt-2 ">
+     
       {REGION_BUTTONS.map((region) => (
         <Button
           key={region.value}

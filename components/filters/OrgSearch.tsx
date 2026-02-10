@@ -143,7 +143,7 @@ export function OrgSearch() {
   return (
     <div className="flex w-full flex-col h-[85dvh]">
       {/* Filters dropdown */}
-      <div>
+     {activeRegion && <div>
         <SearchWithFilters
           query={query}
           setQuery={setQuery}
@@ -154,58 +154,58 @@ export function OrgSearch() {
           toggleCategory={toggleCategory}
           toggleCity={toggleCity}
         />
-      </div>
+      </div> }
       {/* Filters summary */}
-      <div className="px-4 flex flex-col">
-        {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
-          <>
-            <div className="flex justify-center p-2">
-              <button
-                onClick={resetAllFilters}
-                className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
-              >
-                <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres</p>
-                pour <span className="text-primary font-bold">({dbOrgs.length} au total)</span>
-              </button>
-            </div>
+      {  <div className="px-4 flex flex-col">
+          {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
+            <>
+              <div className="flex justify-center p-2">
+                <button
+                  onClick={resetAllFilters}
+                  className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
+                >
+                  <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres</p>
+                  pour <span className="text-primary font-bold">({dbOrgs.length} au total)</span>
+                </button>
+              </div>
 
-            {selectedCategories.length > 0 && (
-              <>
-                <span className="text-xs font-medium">Catégories :</span>
-                <div className="flex flex-wrap gap-1 p-2">
-                  {selectedCategories.map((c) => (
-                    <Badge key={c} onClick={() => toggleCategory(c)}>
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
+              {selectedCategories.length > 0 && (
+                <>
+                  <span className="text-xs font-medium">Catégories :</span>
+                  <div className="flex flex-wrap gap-1 p-2">
+                    {selectedCategories.map((c) => (
+                      <Badge key={c} onClick={() => toggleCategory(c)}>
+                        {c} ✕
+                      </Badge>
+                    ))}
+                  </div>
+                </>
+              )}
 
-            {selectedCities.length > 0 && (
-              <>
-                <span className="text-xs font-medium">Villes :</span>
-                <div className="flex flex-wrap gap-1 p-2">
-                  {selectedCities.map((c) => (
-                    <Badge key={c} onClick={() => toggleCity(c)}>
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          <div className="flex justify-center items-center gap-4">
-            <div className="bg-gray-100 rounded-md p-3 ">
-              <p className="text-sm text-center text-gray-700  ">
-                Commencez par choisir une région, puis utilisez les filtres.
-              </p>
+              {selectedCities.length > 0 && (
+                <>
+                  <span className="text-xs font-medium">Villes :</span>
+                  <div className="flex flex-wrap gap-1 p-2">
+                    {selectedCities.map((c) => (
+                      <Badge key={c} onClick={() => toggleCity(c)}>
+                        {c} ✕
+                      </Badge>
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <div className="flex justify-center items-center  gap-4">
+              <div className="bg-gray-100 rounded-md  flex p-4 flex-col items-center ">
+                <p className="text-sm font-medium text-center  text-gray-700  ">
+                  Commencez par choisir une région, puis utilisez les filtres.
+                </p> <ArrowBigDown className="animate-bounce" size={28} />
+              </div>
+             
             </div>
-            <ArrowBigUp className="h-5 animate-bounce" />
-          </div>
-        )}
-      </div>
+          )}
+        </div>}
       <div
         className="h-full overflow-y-auto"
         style={{
