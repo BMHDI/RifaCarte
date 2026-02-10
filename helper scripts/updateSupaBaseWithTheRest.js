@@ -8,12 +8,13 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 const data = JSON.parse(fs.readFileSync('./orgs.json', 'utf8'));
 
 async function enrichData() {
-  console.log("🚀 Starting full data enrichment...");
+  console.log('🚀 Starting full data enrichment...');
 
   for (const org of data) {
     // 1. Build a much more detailed text block for the AI
-    const projectDetails = org.projects?.map(p => `- ${p.name}: ${p.description}`).join('\n') || 'None';
-    
+    const projectDetails =
+      org.projects?.map((p) => `- ${p.name}: ${p.description}`).join('\n') || 'None';
+
     const aiContext = `
 Name: ${org.name}
 Director: ${org.director?.name} (${org.director?.title})
@@ -38,27 +39,27 @@ Contact: ${org.contact?.email} | ${org.contact?.phone} | ${org.contact?.website}
         categories: org.category || [],
         tags: org.tags || [],
         members: org.memberOf || [],
-        
+
         // Director info
         director_name: org.director?.name || null,
         director_title: org.director?.title || null,
-        
+
         // Project info (storing as JSONB or string)
-        projects: org.projects || [], 
-        
+        projects: org.projects || [],
+
         // Location info
         city: org.locations?.[0]?.city || null,
         address: org.locations?.[0]?.address || null,
         lat: org.locations?.[0]?.lat || null,
         lng: org.locations?.[0]?.lng || null,
-        
+
         // Contact info
         email: org.contact?.email || null,
         phone: org.contact?.phone || null,
         website: org.contact?.website || null,
-        
+
         // The "Brain" for Gemini
-        content: aiContext 
+        content: aiContext,
       })
       .eq('id', org.id);
 
@@ -69,7 +70,7 @@ Contact: ${org.contact?.email} | ${org.contact?.phone} | ${org.contact?.website}
     }
   }
 
-  console.log("🎉 All information synced to Supabase!");
+  console.log('🎉 All information synced to Supabase!');
 }
 
 enrichData();

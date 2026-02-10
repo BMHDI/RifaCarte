@@ -1,19 +1,14 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { ExternalLink, Ghost, Heart, Map, MapPin, Phone, Plus } from "lucide-react";
-import { OrgCardProps } from "@/types/types";
-import { toTitleCase } from "@/lib/utils";
-import Link from "next/link";
-import { ShareButton } from "./ShareButton";
-import { useOrg } from "@/app/context/OrgContext";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardAction, CardContent, CardFooter } from '@/components/ui/card';
+import { ExternalLink, Ghost, Heart, Map, MapPin, Phone, Plus } from 'lucide-react';
+import { OrgCardProps } from '@/types/types';
+import { toTitleCase } from '@/lib/utils';
+import Link from 'next/link';
+import { ShareButton } from './ShareButton';
+import { useOrg } from '@/app/context/OrgContext';
 
 export function OrgCard({
   id, // 👈 add this
@@ -27,9 +22,9 @@ export function OrgCard({
   isSaved,
 }: OrgCardProps) {
   const defaultImage =
-    "https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png";
+    'https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png';
   const imgSrc = image_url || defaultImage;
-const { activeRegion, setActiveRegion } = useOrg();
+  const { activeRegion, setActiveRegion } = useOrg();
 
   return (
     <Card className="md:w-[297px] max-h-[400px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
@@ -40,7 +35,7 @@ const { activeRegion, setActiveRegion } = useOrg();
           onClick={onSave}
           className="  absolute m-2 top-0 right-0 rounded-full z-20"
           stroke="red"
-          fill={isSaved ? "red" : "none"}
+          fill={isSaved ? 'red' : 'none'}
         />
         <img
           src={imgSrc}
@@ -50,11 +45,7 @@ const { activeRegion, setActiveRegion } = useOrg();
 
         {/* LOGO */}
         <div className="relative z-10 flex h-full items-end justify-center pb-2">
-          <img
-            alt={name}
-            src={imgSrc}
-            className="h-22  object-contain rounded-xl p-1"
-          />
+          <img alt={name} src={imgSrc} className="h-22  object-contain rounded-xl p-1" />
         </div>
       </div>
 
@@ -74,9 +65,11 @@ const { activeRegion, setActiveRegion } = useOrg();
       </CardContent>
 
       <CardFooter className="flex gap-1 flex-wrap m-2">
-       <Link href={`/${id}?region=${activeRegion}`}>
-  <Button size="sm" variant="default">Voir plus</Button>
-</Link>
+        <Link href={`/${id}?region=${activeRegion}`}>
+          <Button size="sm" variant="default">
+            Voir plus
+          </Button>
+        </Link>
         {/* Share button */}
         <ShareButton id={id} name={name} />
         <Button size="sm" variant="outline" onClick={onMap}>

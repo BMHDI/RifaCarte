@@ -1,6 +1,6 @@
 export interface OrgCardProps {
-   id: string;
-   image_url: string;
+  id: string;
+  image_url: string;
   name: string;
   phone: string;
   address: string;
@@ -14,41 +14,43 @@ export interface OrgCardProps {
 export type OrgLocation = {
   city?: string;
   address?: string;
-  lat: number ;
-  lng: number ;
+  lat: number;
+  lng: number;
 };
 export interface Org {
   id?: string; // required, matches DB primary key
   name: string;
-  category?: string[];           // always an array in DB
+  category?: string[]; // always an array in DB
   description?: string | null;
   director?: {
     name?: string | null;
     title?: string | null;
   } | null;
-  services?: string[];           // array
+  services?: string[]; // array
   audience?: string | null;
-  projects?: {
-    name: string;
-    description?: string | null;
-  }[] | null;
-  locations: OrgLocation[];      // must be an array, even if empty
+  projects?:
+    | {
+        name: string;
+        description?: string | null;
+      }[]
+    | null;
+  locations: OrgLocation[]; // must be an array, even if empty
   contact?: {
     email?: string | null;
     phone?: string | null;
     website?: string | null;
   } | null;
   tags?: string[] | null;
-  members?: string[] | null;     // renamed from memberOf to match DB
+  members?: string[] | null; // renamed from memberOf to match DB
   region?: string | null;
-  content?: string | null;       // optional AI-generated content field
-  email?: string | null;         // denormalized for DB convenience
-  phone?: string | null;         // denormalized for DB convenience
-  website?: string | null;       // denormalized for DB convenience
-  address?: string | null;       // denormalized first location
-  city?: string | null;          // denormalized first location
-  lat?: number | null;           // denormalized first location
-  lng?: number | null;           // denormalized first location
+  content?: string | null; // optional AI-generated content field
+  email?: string | null; // denormalized for DB convenience
+  phone?: string | null; // denormalized for DB convenience
+  website?: string | null; // denormalized for DB convenience
+  address?: string | null; // denormalized first location
+  city?: string | null; // denormalized first location
+  lat?: number | null; // denormalized first location
+  lng?: number | null; // denormalized first location
   image_url?: string | null;
 }
 export interface SelectedOrg {
@@ -80,7 +82,7 @@ export interface GeoJSONGeometry {
   coordinates: number[][];
 }
 // context value type
-export type TabType = "search" | "ai" | "Favorites";
+export type TabType = 'search' | 'ai' | 'Favorites';
 
 export type OrgContextType = {
   selectedOrg: SelectedOrg | null;
@@ -97,30 +99,31 @@ export type OrgContextType = {
   activeRegion: string | null;
   setActiveRegion: React.Dispatch<React.SetStateAction<string | null>>;
   resetAllFilters: () => void;
-      viewState: any; // or a specific type if available
+  viewState: any; // or a specific type if available
   setViewState: (view: any) => void; // or a specific type if available
   resetMapView: () => void;
   mapInstance: mapboxgl.Map | null;
   setMapInstance: (map: mapboxgl.Map | null) => void;
   activeTab: string;
-setActiveTab: (activTab: TabType) => void;};
+  setActiveTab: (activTab: TabType) => void;
+};
 export type SearchWithFiltersProps = {
-  query: string
-  setQuery: (q: string) => void
-  categories: string[]
-  cities: string[]
-  selectedCategories: string[]
-  selectedCities: string[]
-  toggleCategory: (c: string) => void
-  toggleCity: (c: string) => void
-}
+  query: string;
+  setQuery: (q: string) => void;
+  categories: string[];
+  cities: string[];
+  selectedCategories: string[];
+  selectedCities: string[];
+  toggleCategory: (c: string) => void;
+  toggleCity: (c: string) => void;
+};
 //orgCard props
 export interface OrgCardProps {
   // logo: string;
   name: string;
   phone: string;
   address: string;
-  category?: string [] | string;
+  category?: string[] | string;
   onDetails?: () => void;
   onShare?: () => void;
   onMap?: () => void;
@@ -128,7 +131,7 @@ export interface OrgCardProps {
 export interface OrgSearchProps {
   activeRegion?: string | null;
 }
-export type Role = "system" | "user" | "assistant";
+export type Role = 'system' | 'user' | 'assistant';
 
 export interface ChatMessage {
   role: Role;
@@ -137,11 +140,11 @@ export interface ChatMessage {
 
 export interface UserProfile {
   city?: string;
-  intent?: "emploi" | "logement" | "immigration" | "services";
+  intent?: 'emploi' | 'logement' | 'immigration' | 'services';
   profession?: string;
   experienceYears?: number;
-  urgency?: "immediate" | "soon";
-  companyType?: "large" | "sme" | "startup" | "any";
+  urgency?: 'immediate' | 'soon';
+  companyType?: 'large' | 'sme' | 'startup' | 'any';
 }
 export type ViewState = {
   longitude: number;
@@ -150,4 +153,4 @@ export type ViewState = {
   transitionDuration?: number;
   // ...other fields you use
 };
- export type RateLimitRecord = { count: number; lastCall: number };
+export type RateLimitRecord = { count: number; lastCall: number };

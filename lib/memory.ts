@@ -1,10 +1,10 @@
-import { supabase } from "@/lib/db";
+import { supabase } from '@/lib/db';
 
 export async function getMemory(sessionId: string) {
   const { data } = await supabase
-    .from("chat_memory")
-    .select("*")
-    .eq("session_id", sessionId)
+    .from('chat_memory')
+    .select('*')
+    .eq('session_id', sessionId)
     .single();
 
   return data;
@@ -17,11 +17,9 @@ export async function saveMemory(
     last_topic?: string;
   }
 ) {
-  await supabase
-    .from("chat_memory")
-    .upsert({
-      session_id: sessionId,
-      ...memory,
-      updated_at: new Date(),
-    });
+  await supabase.from('chat_memory').upsert({
+    session_id: sessionId,
+    ...memory,
+    updated_at: new Date(),
+  });
 }

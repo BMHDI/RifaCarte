@@ -1,22 +1,22 @@
-import fs from "fs";
+import fs from 'fs';
 
 // ---------- CONFIG ----------
-const OLD_FILE = "./orgs.json";
-const UPDATED_FILE = "./orgs-updated.json";
-const OUTPUT_FILE = "./orgs-merged.json";
+const OLD_FILE = './orgs.json';
+const UPDATED_FILE = './orgs-updated.json';
+const OUTPUT_FILE = './orgs-merged.json';
 // ----------------------------
 
-const oldOrgs = JSON.parse(fs.readFileSync(OLD_FILE, "utf-8"));
-const updatedOrgs = JSON.parse(fs.readFileSync(UPDATED_FILE, "utf-8"));
+const oldOrgs = JSON.parse(fs.readFileSync(OLD_FILE, 'utf-8'));
+const updatedOrgs = JSON.parse(fs.readFileSync(UPDATED_FILE, 'utf-8'));
 
 // normalize helper: lowercase, remove accents, punctuation, extra spaces
 function normalizeName(name) {
   return name
     .toLowerCase()
-    .normalize("NFD")                 // split accents
-    .replace(/[\u0300-\u036f]/g, "")  // remove accents
-    .replace(/[^a-z0-9 ]/g, " ")      // remove punctuation
-    .replace(/\s+/g, " ")             // collapse spaces
+    .normalize('NFD') // split accents
+    .replace(/[\u0300-\u036f]/g, '') // remove accents
+    .replace(/[^a-z0-9 ]/g, ' ') // remove punctuation
+    .replace(/\s+/g, ' ') // collapse spaces
     .trim();
 }
 
@@ -57,16 +57,16 @@ const merged = oldOrgs.map((oldOrg) => {
 });
 
 // backup original
-fs.copyFileSync(OLD_FILE, "./orgs-old.backup.json");
+fs.copyFileSync(OLD_FILE, './orgs-old.backup.json');
 
 // write merged output
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(merged, null, 2), "utf-8");
+fs.writeFileSync(OUTPUT_FILE, JSON.stringify(merged, null, 2), 'utf-8');
 
 // write missing matches for review
-fs.writeFileSync("./orgs-missing.json", JSON.stringify(missing, null, 2), "utf-8");
+fs.writeFileSync('./orgs-missing.json', JSON.stringify(missing, null, 2), 'utf-8');
 
-console.log("✅ Merge finished");
-console.log("Replaced categories:", replaced);
-console.log("Missing matches:", missing.length);
-console.log("Output file:", OUTPUT_FILE);
-console.log("Missing file:", "orgs-missing.json");
+console.log('✅ Merge finished');
+console.log('Replaced categories:', replaced);
+console.log('Missing matches:', missing.length);
+console.log('Output file:', OUTPUT_FILE);
+console.log('Missing file:', 'orgs-missing.json');

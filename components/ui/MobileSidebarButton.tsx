@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "./button";
-import { useSidebar } from "./sidebar";
-import { List, X } from "lucide-react";
-import { useOrg } from "@/app/context/OrgContext";
+import { useState } from 'react';
+import { Button } from './button';
+import { useSidebar } from './sidebar';
+import { List, X } from 'lucide-react';
+import { useOrg } from '@/app/context/OrgContext';
 
 export function MobileSidebarButton() {
-  const { toggleSidebar , state } = useSidebar();
+  const { toggleSidebar, state } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
-const {  setActiveTab } = useOrg()
+  const { setActiveTab } = useOrg();
 
   const handleClick = () => {
     toggleSidebar(); // toggles the sidebar
     setIsOpen((prev) => !prev); // update local state
-    setActiveTab("search")
+    setActiveTab('search');
   };
 
   return (
@@ -27,9 +27,9 @@ const {  setActiveTab } = useOrg()
         shadow-lg
         flex md:hidden
       "
-      aria-label={isOpen ? "Close sidebar" : "Open search"}
+      aria-label={isOpen ? 'Close sidebar' : 'Open search'}
     >
-      {isOpen && state === "collapsed"  ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
+      {isOpen && state === 'collapsed' ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
     </Button>
   );
 }

@@ -1,7 +1,4 @@
-export function rankResults(
-  results: any[],
-  city?: string
-) {
+export function rankResults(results: any[], city?: string) {
   return results
     .map((r) => {
       let score = r.similarity || 0;

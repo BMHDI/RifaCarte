@@ -1,25 +1,19 @@
-"use client";
+'use client';
 
-import Map, {
-  NavigationControl,
-  Marker,
-  Popup,
-  Source,
-  Layer,
-} from "react-map-gl/mapbox";
-import "mapbox-gl/dist/mapbox-gl.css";
-import { useState, useRef, useEffect, useMemo } from "react";
-import organizations from "@/lib/org.json";
-import { MapPin } from "lucide-react";
-import francophoneRegions from "@/lib/francophone-regions.json";
-import { regionFill, regionBorder } from "@/lib/mapstyles";
-import { useOrg } from "@/app/context/OrgContext";
-import { MapRef } from "react-map-gl/mapbox";
-import { OrgCard } from "../ui/OrgCard";
-import { Button } from "../ui/button";
-import { useSidebar } from "../ui/sidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ViewState } from "@/types/types";
+import Map, { NavigationControl, Marker, Popup, Source, Layer } from 'react-map-gl/mapbox';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import organizations from '@/lib/org.json';
+import { MapPin } from 'lucide-react';
+import francophoneRegions from '@/lib/francophone-regions.json';
+import { regionFill, regionBorder } from '@/lib/mapstyles';
+import { useOrg } from '@/app/context/OrgContext';
+import { MapRef } from 'react-map-gl/mapbox';
+import { OrgCard } from '../ui/OrgCard';
+import { Button } from '../ui/button';
+import { useSidebar } from '../ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { ViewState } from '@/types/types';
 
 export function MapView() {
   const mapRef = useRef<MapRef | null>(null);
@@ -57,7 +51,7 @@ export function MapView() {
           .map((loc) => ({
             org,
             location: loc,
-          })),
+          }))
       );
   }, []);
 
@@ -78,9 +72,7 @@ export function MapView() {
   const markersToShow = useMemo(() => {
     if (!activeRegion) return allMarkers;
     return allMarkers.filter(
-      (m) =>
-        m.org.region?.trim().toLowerCase() ===
-        activeRegion.trim().toLowerCase(),
+      (m) => m.org.region?.trim().toLowerCase() === activeRegion.trim().toLowerCase()
     );
   }, [activeRegion, allMarkers]);
 
@@ -90,9 +82,7 @@ export function MapView() {
 
     // Get all pins in this region
     const pins = allMarkers.filter(
-      (m) =>
-        m.org.region?.trim().toLowerCase() ===
-        activeRegion?.trim().toLowerCase(),
+      (m) => m.org.region?.trim().toLowerCase() === activeRegion?.trim().toLowerCase()
     );
 
     const lats = pins.map((p) => p.location.lat);
@@ -107,21 +97,21 @@ export function MapView() {
         [west, south],
         [east, north],
       ],
-      { padding: 80 },
+      { padding: 80 }
     );
   }, [activeRegion, allMarkers]);
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: '100vw', height: '100vh' }}>
       <Map
-  minZoom={4}
-  maxZoom={15}
+        minZoom={4}
+        maxZoom={15}
         ref={mapRef}
         {...viewState}
         onMove={(e) => setViewState(e.viewState)}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/bmhdi/cmkoaod33000k01r83dx855i3"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: '100%', height: '100%' }}
         onLoad={(e) => {
           setMapLoaded(true);
           setMapInstance(e.target); // <-- e.target is the Mapbox GL JS instance
@@ -143,9 +133,7 @@ export function MapView() {
 
         {/* Region clickable center markers */}
         {regionCenters.map((region) => {
-          const isActive =
-            activeRegion?.trim().toLowerCase() ===
-            region.name.trim().toLowerCase();
+          const isActive = activeRegion?.trim().toLowerCase() === region.name.trim().toLowerCase();
 
           if (isActive) return null; // ✅ hide this region button
 
@@ -158,7 +146,7 @@ export function MapView() {
               onClick={(e) => {
                 e.originalEvent.stopPropagation();
                 setActiveRegion(region.name);
-                if (isMobile && state == "expanded") {
+                if (isMobile && state == 'expanded') {
                   toggleSidebar(); // only open when needed
                 }
               }}
@@ -193,8 +181,8 @@ export function MapView() {
                 size={selectedOrg?.location === location ? 30 : 24}
                 className={
                   selectedOrg?.location === location
-                    ? "text-blue-600"
-                    : "text-red-500 hover:scale-110 transition-transform cursor-pointer"
+                    ? 'text-blue-600'
+                    : 'text-red-500 hover:scale-110 transition-transform cursor-pointer'
                 }
                 fill="currentColor"
               />
@@ -213,7 +201,7 @@ export function MapView() {
               setSelectedOrg(null);
 
               // Zoom out when closing popup
-              setViewState((prev : ViewState) => ({
+              setViewState((prev: ViewState) => ({
                 ...prev,
                 zoom: activeRegion ? 7 : 6, // adjust levels as you like
                 transitionDuration: 900,
@@ -223,14 +211,14 @@ export function MapView() {
           >
             <div className="max-w-md bg-white overflow-hidden">
               <OrgCard
-                id={selectedOrg.org?.id ?? ""}
-                image_url={selectedOrg.org?.image_url ?? ""}
-                name={selectedOrg.org?.name ?? "Unknown"}
-                phone={selectedOrg.org?.contact?.phone ?? ""}
-                address={selectedOrg.location.address ?? ""}
+                id={selectedOrg.org?.id ?? ''}
+                image_url={selectedOrg.org?.image_url ?? ''}
+                name={selectedOrg.org?.name ?? 'Unknown'}
+                phone={selectedOrg.org?.contact?.phone ?? ''}
+                address={selectedOrg.location.address ?? ''}
                 category={selectedOrg.org?.category}
-                onDetails={() => console.log("Details", selectedOrg.org?.name)}
-                onShare={() => console.log("Share", selectedOrg.org?.name)}
+                onDetails={() => console.log('Details', selectedOrg.org?.name)}
+                onShare={() => console.log('Share', selectedOrg.org?.name)}
               />
             </div>
           </Popup>

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Facebook, MessageSquare, Copy } from "lucide-react";
-import { Whatsapp } from "@/components/ui/WhatsappLogo";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { ExternalLink, Facebook, MessageSquare, Copy } from 'lucide-react';
+import { Whatsapp } from '@/components/ui/WhatsappLogo';
 
 export function ShareButton({ id, name }: { id: string; name: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     setUrl(`${window.location.origin}/${id}`);
@@ -18,7 +18,7 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
   const handleCopy = () => {
     if (url) {
       navigator.clipboard.writeText(url);
-      alert("Lien copié dans le presse-papiers !");
+      alert('Lien copié dans le presse-papiers !');
     }
   };
 
@@ -36,7 +36,12 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
             <div className="flex justify-around">
               <Button
                 variant="outline"
-                onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, "_blank")}
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`,
+                    '_blank'
+                  )
+                }
                 title="Partager sur WhatsApp"
               >
                 <Whatsapp className="h-5 w-5" />
@@ -44,7 +49,12 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
 
               <Button
                 variant="outline"
-                onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank")}
+                onClick={() =>
+                  window.open(
+                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                    '_blank'
+                  )
+                }
                 title="Partager sur Facebook"
               >
                 <Facebook className="h-5 w-5" />
@@ -52,7 +62,9 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
 
               <Button
                 variant="outline"
-                onClick={() => window.open(`sms:?body=${encodeURIComponent(text + " " + url)}`, "_self")}
+                onClick={() =>
+                  window.open(`sms:?body=${encodeURIComponent(text + ' ' + url)}`, '_self')
+                }
                 title="Partager par SMS"
               >
                 <MessageSquare className="h-5 w-5" />
@@ -63,7 +75,12 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
               </Button>
             </div>
 
-            <Button size="sm" variant="ghost" className="mt-2 w-full" onClick={() => setIsOpen(false)}>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="mt-2 w-full"
+              onClick={() => setIsOpen(false)}
+            >
               Annuler
             </Button>
           </div>

@@ -1,13 +1,13 @@
 // components/RegionSelectorList.tsx
-"use client";
+'use client';
 
-import { useOrg } from "@/app/context/OrgContext";
-import { Button } from "./button";
+import { useOrg } from '@/app/context/OrgContext';
+import { Button } from './button';
 
 const REGION_BUTTONS = [
-  { name: "Nord", value: "nord" },
-  { name: "Centre", value: "centre" },
-  { name: "Sud", value: "sud" },
+  { name: 'Nord', value: 'nord' },
+  { name: 'Centre', value: 'centre' },
+  { name: 'Sud', value: 'sud' },
 ];
 
 interface RegionSelectorProps {
@@ -27,7 +27,6 @@ export function RegionSelectorList({ onRegionSelect }: RegionSelectorProps) {
 
   return (
     <div className="flex flex-wrap items-center flex-col gap-8 pt-4">
-     
       {REGION_BUTTONS.map((region) => (
         <Button
           key={region.value}

@@ -1,5 +1,4 @@
-import { RateLimitRecord } from "@/types/types";
-
+import { RateLimitRecord } from '@/types/types';
 
 const rateLimitMap = new Map<string, RateLimitRecord>();
 

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useOrg } from "@/app/context/OrgContext";
-import Link from "next/link";
-import { Mail, Phone, Globe, MapPin } from "lucide-react";
-import { ShareButton } from "@/components/ui/ShareButton";
-import { Button } from "@/components/ui/button";
-import { OrgMap } from "@/components/map/OrgMap";
+import { useOrg } from '@/app/context/OrgContext';
+import Link from 'next/link';
+import { Mail, Phone, Globe, MapPin } from 'lucide-react';
+import { ShareButton } from '@/components/ui/ShareButton';
+import { Button } from '@/components/ui/button';
+import { OrgMap } from '@/components/map/OrgMap';
 
 export function OrgDetailsClient({ org }: { org: any }) {
   const { activeRegion } = useOrg();
-  console.log("OrgDetailsClient org:", org);
+  console.log('OrgDetailsClient org:', org);
 
   return (
     <div className="bg-white dark:bg-gray-900">
       {/* BACK LINK */}
       <div className="max-w-6xl mx-auto px-4 py-6">
         <Link
-          href={`/?region=${activeRegion || ""}`}
+          href={`/?region=${activeRegion || ''}`}
           className="inline-flex items-center gap-2 text-md font-bold text-primary hover:underline"
         >
           <MapPin size={16} />
@@ -38,9 +38,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
           <h2 className="text-lg font-semibold mb-4">À propos</h2>
 
           {org.description ? (
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {org.description}
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{org.description}</p>
           ) : (
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               Aucune description disponible pour cette organisation.
@@ -49,8 +47,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
 
           {org.director && (
             <p className="mt-2 text-gray-700 dark:text-gray-300">
-              <strong>Directeur:</strong> {org.director.name} (
-              {org.director.title})
+              <strong>Directeur:</strong> {org.director.name} ({org.director.title})
             </p>
           )}
 
@@ -112,10 +109,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
             {org.email && (
               <div className="flex gap-3 text-sm">
                 <Mail size={16} className="mt-1 text-gray-500" />
-                <a
-                  href={`mailto:${org.email}`}
-                  className="hover:underline"
-                >
+                <a href={`mailto:${org.email}`} className="hover:underline">
                   {org.email}
                 </a>
               </div>
@@ -124,11 +118,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
             {org.website && (
               <div className="flex gap-3 text-sm">
                 <Globe size={16} className="mt-1 text-gray-500" />
-                <a
-                  href={org.website}
-                  target="_blank"
-                  className="hover:underline"
-                >
+                <a href={org.website} target="_blank" className="hover:underline">
                   {org.website}
                 </a>
               </div>

@@ -1,22 +1,45 @@
-import fs from "fs";
-import axios from "axios";
-import dotenv from "dotenv";
+import fs from 'fs';
+import axios from 'axios';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 // 👉 CONFIGURATION
-const INPUT_FILE = "./orgs.json";
-const OUTPUT_FILE = "./orgs_updated.json";
+const INPUT_FILE = './orgs.json';
+const OUTPUT_FILE = './orgs_updated.json';
 const API_KEY = process.env.GEMINI_API_KEY;
-const MODEL = "gemini-2.5-flash";// 👉 MASTER CATEGORY LIST
+const MODEL = 'gemini-2.5-flash'; // 👉 MASTER CATEGORY LIST
 const MASTER_CATEGORIES = [
-  "francophonie", "vie communautaire", "integration", "nouveaux arrivants", "benevolat", "defense des droits",
-  "culture", "arts", "patrimoine", "histoire", "cinema", "festivals",
-  "education", "apprentissage du francais", "formation professionnelle", "ateliers",
-  "jeunesse", "familles", "petite enfance", "garderie", "camps",
-  "emploi", "carriere", "entrepreneuriat",
-  "sante", "services sociaux", "bien etre",
-  "medias", "radio", "information communautaire"
+  'francophonie',
+  'vie communautaire',
+  'integration',
+  'nouveaux arrivants',
+  'benevolat',
+  'defense des droits',
+  'culture',
+  'arts',
+  'patrimoine',
+  'histoire',
+  'cinema',
+  'festivals',
+  'education',
+  'apprentissage du francais',
+  'formation professionnelle',
+  'ateliers',
+  'jeunesse',
+  'familles',
+  'petite enfance',
+  'garderie',
+  'camps',
+  'emploi',
+  'carriere',
+  'entrepreneuriat',
+  'sante',
+  'services sociaux',
+  'bien etre',
+  'medias',
+  'radio',
+  'information communautaire',
 ];
 
 // 👉 GEMINI MAPPER
@@ -26,13 +49,13 @@ You are an expert classifier for francophone community organizations in Alberta,
 TASK: Select the 2 to 5 most relevant categories for the organization provided.
 
 ALLOWED CATEGORIES:
-${MASTER_CATEGORIES.join(", ")}
+${MASTER_CATEGORIES.join(', ')}
 
 ORGANIZATION TO CLASSIFY:
 Name: ${org.name}
-Description: ${org.description || "N/A"}
-Services: ${(org.services || []).join(", ")}
-Current Tags: ${(org.tags || []).join(", ")}
+Description: ${org.description || 'N/A'}
+Services: ${(org.services || []).join(', ')}
+Current Tags: ${(org.tags || []).join(', ')}
 
 RULES:
 1. Only use categories from the ALLOWED list.
@@ -46,10 +69,10 @@ RULES:
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
-          response_mime_type: "application/json", // Forces Gemini to return valid JSON
-        }
+          response_mime_type: 'application/json', // Forces Gemini to return valid JSON
+        },
       },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { 'Content-Type': 'application/json' } }
     );
 
     const rawResult = response.data.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -67,27 +90,27 @@ async function run() {
     return;
   }
 
-  const orgs = JSON.parse(fs.readFileSync(INPUT_FILE, "utf8"));
+  const orgs = JSON.parse(fs.readFileSync(INPUT_FILE, 'utf8'));
   console.log(`🚀 Starting processing of ${orgs.length} organizations...`);
 
   for (let i = 0; i < orgs.length; i++) {
     const org = orgs[i];
-    
-    // Skip if already processed (optional, helpful for large datasets)
-   const needsUpdate =
-  !Array.isArray(org.category) ||
-  (org.category.length === 1 && org.category[0] === "vie communautaire");
 
-if (!needsUpdate) {
-  console.log(`⏩ Skipping ${org.name} (Already categorized)`);
-  continue;
-}
+    // Skip if already processed (optional, helpful for large datasets)
+    const needsUpdate =
+      !Array.isArray(org.category) ||
+      (org.category.length === 1 && org.category[0] === 'vie communautaire');
+
+    if (!needsUpdate) {
+      console.log(`⏩ Skipping ${org.name} (Already categorized)`);
+      continue;
+    }
     console.log(`🔄 [${i + 1}/${orgs.length}] Processing: ${org.name}`);
 
     let newCats = await mapCategoriesWithGemini(org);
 
     // Fallback if the AI returns an empty list or fails
-    org.category = (newCats && newCats.length > 0) ? newCats : ["vie communautaire"];
+    org.category = newCats && newCats.length > 0 ? newCats : ['vie communautaire'];
 
     // 👉 SAVE PROGRESS EVERY 5 ITEMS (Safety Checkpoint)
     if (i % 5 === 0) {
@@ -95,7 +118,7 @@ if (!needsUpdate) {
     }
 
     // Rate limit buffer (Flash allows ~15 RPM on free tier, 1s - 2s is safe)
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise((r) => setTimeout(r, 1500));
   }
 
   // ✅ FINAL SAVE
@@ -103,4 +126,4 @@ if (!needsUpdate) {
   console.log(`\n✅ Done! Updated data saved to: ${OUTPUT_FILE}`);
 }
 
-run().catch(err => console.error("💥 Critical Script Failure:", err));
+run().catch((err) => console.error('💥 Critical Script Failure:', err));

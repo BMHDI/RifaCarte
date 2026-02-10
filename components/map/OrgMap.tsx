@@ -1,15 +1,9 @@
-"use client";
+'use client';
 
-import Map, { Marker } from "react-map-gl/mapbox";
-import "mapbox-gl/dist/mapbox-gl.css";
+import Map, { Marker } from 'react-map-gl/mapbox';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-export function OrgMap({
-  lat,
-  lng,
-}: {
-  lat: number;
-  lng: number;
-}) {
+export function OrgMap({ lat, lng }: { lat: number; lng: number }) {
   return (
     <div className="h-48 w-full rounded-lg overflow-hidden border">
       <Map

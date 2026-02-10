@@ -39,16 +39,8 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": [
-      "ainés",
-      "francophone",
-      "soutien",
-      "communautaire",
-      "santé"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"],
     "orgId": "fafa"
   },
   {
@@ -91,16 +83,8 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": [
-      "ainés",
-      "francophone",
-      "soutien",
-      "communautaire",
-      "santé"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"],
     "orgId": "fafa"
   },
   {
@@ -143,16 +127,8 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": [
-      "ainés",
-      "francophone",
-      "soutien",
-      "communautaire",
-      "santé"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"],
     "orgId": "fafa"
   },
   {
@@ -195,16 +171,8 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": [
-      "ainés",
-      "francophone",
-      "soutien",
-      "communautaire",
-      "santé"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"],
     "orgId": "fafa"
   },
   {
@@ -247,28 +215,14 @@
       "email": "fafa@fafa.ab.ca",
       "website": "https://www.fafalta.ca"
     },
-    "tags": [
-      "ainés",
-      "francophone",
-      "soutien",
-      "communautaire",
-      "santé"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["ainés", "francophone", "soutien", "communautaire", "santé"],
+    "memberOf": ["RIFA"],
     "orgId": "fafa"
   },
   {
     "id": "fmi-1",
     "name": "Femme Moderne Influente (FMI)",
-    "category": [
-      "francophonie",
-      "vie communautaire",
-      "entrepreneuriat",
-      "carriere",
-      "bien etre"
-    ],
+    "category": ["francophonie", "vie communautaire", "entrepreneuriat", "carriere", "bien etre"],
     "description": "Organisation dédiée à l’autonomisation des femmes francophones afin de surmonter les obstacles et réaliser leur plein potentiel, en favorisant le leadership, l’entrepreneuriat et l’engagement communautaire.",
     "foundedYear": null,
     "director": {
@@ -311,21 +265,13 @@
       "réseautage",
       "francophone"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "fmi"
   },
   {
     "id": "fmi-2",
     "name": "Femme Moderne Influente (FMI)",
-    "category": [
-      "francophonie",
-      "vie communautaire",
-      "entrepreneuriat",
-      "carriere",
-      "bien etre"
-    ],
+    "category": ["francophonie", "vie communautaire", "entrepreneuriat", "carriere", "bien etre"],
     "description": "Organisation dédiée à l’autonomisation des femmes francophones afin de surmonter les obstacles et réaliser leur plein potentiel, en favorisant le leadership, l’entrepreneuriat et l’engagement communautaire.",
     "foundedYear": null,
     "director": {
@@ -368,21 +314,13 @@
       "réseautage",
       "francophone"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "fmi"
   },
   {
     "id": "fpfa-1",
     "name": "Fédération des parents francophones de l’Alberta (FPFA)",
-    "category": [
-      "francophonie",
-      "familles",
-      "education",
-      "petite enfance",
-      "defense des droits"
-    ],
+    "category": ["francophonie", "familles", "education", "petite enfance", "defense des droits"],
     "description": "Organisme qui soutient les parents francophones de l’Alberta en les représentant, outillant et rassemblant pour favoriser l’épanouissement des enfants francophones.",
     "foundedYear": null,
     "director": {
@@ -416,29 +354,14 @@
       "email": "info@fpfa.ab.ca",
       "website": "https://fpfa.ab.ca"
     },
-    "tags": [
-      "parents",
-      "éducation",
-      "francophonie",
-      "services de garde",
-      "ateliers",
-      "familles"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["parents", "éducation", "francophonie", "services de garde", "ateliers", "familles"],
+    "memberOf": ["RIFA"],
     "orgId": "fpfa"
   },
   {
     "id": "fja-1",
     "name": "Francophonie Jeunesse de l’Alberta (FJA)",
-    "category": [
-      "francophonie",
-      "jeunesse",
-      "vie communautaire",
-      "education",
-      "arts"
-    ],
+    "category": ["francophonie", "jeunesse", "vie communautaire", "education", "arts"],
     "description": "Organisme qui représente et rassemble la jeunesse d’expression française en Alberta pour renforcer l’engagement et l’épanouissement de ses membres et assurer la persévérance de la francophonie.",
     "foundedYear": 1972,
     "director": {
@@ -472,30 +395,14 @@
       "email": "fja@fja.ab.ca",
       "website": "https://fjalberta.ca"
     },
-    "tags": [
-      "jeunesse",
-      "leadership",
-      "francophonie",
-      "éducation",
-      "arts",
-      "sports",
-      "engagement"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["jeunesse", "leadership", "francophonie", "éducation", "arts", "sports", "engagement"],
+    "memberOf": ["RIFA"],
     "orgId": "fja"
   },
   {
     "id": "iglf-2",
     "name": "Institut Guy-Lacombe de la Famille (IGLF)",
-    "category": [
-      "francophonie",
-      "familles",
-      "jeunesse",
-      "bien etre",
-      "vie communautaire"
-    ],
+    "category": ["francophonie", "familles", "jeunesse", "bien etre", "vie communautaire"],
     "description": "Organisme francophone soutenant les familles francophones et francophiles d’Edmonton et du nord de l’Alberta, offrant des services pour le développement des enfants, adolescents et parents, le bien-être familial et l’inclusion sociale.",
     "foundedYear": 1998,
     "director": {
@@ -539,21 +446,13 @@
       "francophonie",
       "développement familial"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "iglf"
   },
   {
     "id": "iglf-1",
     "name": "Institut Guy-Lacombe de la Famille (IGLF)",
-    "category": [
-      "francophonie",
-      "familles",
-      "jeunesse",
-      "bien etre",
-      "vie communautaire"
-    ],
+    "category": ["francophonie", "familles", "jeunesse", "bien etre", "vie communautaire"],
     "description": "Organisme francophone soutenant les familles francophones et francophiles d’Edmonton et du nord de l’Alberta, offrant des services pour le développement des enfants, adolescents et parents, le bien-être familial et l’inclusion sociale.",
     "foundedYear": 1998,
     "director": {
@@ -597,20 +496,13 @@
       "francophonie",
       "développement familial"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "iglf"
   },
   {
     "id": "mcg-0",
     "name": "MCG Careers",
-    "category": [
-      "emploi",
-      "carriere",
-      "formation professionnelle",
-      "ateliers"
-    ],
+    "category": ["emploi", "carriere", "formation professionnelle", "ateliers"],
     "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
     "foundedYear": 1989,
     "director": {
@@ -655,20 +547,13 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "mcg"
   },
   {
     "id": "mcg-1",
     "name": "MCG Careers",
-    "category": [
-      "emploi",
-      "carriere",
-      "formation professionnelle",
-      "ateliers"
-    ],
+    "category": ["emploi", "carriere", "formation professionnelle", "ateliers"],
     "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
     "foundedYear": 1989,
     "director": {
@@ -713,20 +598,13 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "mcg"
   },
   {
     "id": "mcg-2",
     "name": "MCG Careers",
-    "category": [
-      "emploi",
-      "carriere",
-      "formation professionnelle",
-      "ateliers"
-    ],
+    "category": ["emploi", "carriere", "formation professionnelle", "ateliers"],
     "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
     "foundedYear": 1989,
     "director": {
@@ -771,20 +649,13 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "mcg"
   },
   {
     "id": "mcg-3",
     "name": "MCG Careers",
-    "category": [
-      "emploi",
-      "carriere",
-      "formation professionnelle",
-      "ateliers"
-    ],
+    "category": ["emploi", "carriere", "formation professionnelle", "ateliers"],
     "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
     "foundedYear": 1989,
     "director": {
@@ -829,20 +700,13 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "mcg"
   },
   {
     "id": "mcg-4",
     "name": "MCG Careers",
-    "category": [
-      "emploi",
-      "carriere",
-      "formation professionnelle",
-      "ateliers"
-    ],
+    "category": ["emploi", "carriere", "formation professionnelle", "ateliers"],
     "description": "Entreprise albertaine spécialisée dans les services d’emploi, la formation professionnelle et le développement de carrière, accompagnant les chercheurs d’emploi et employeurs à travers la province avec un focus sur inclusion et autonomisation.",
     "foundedYear": 1989,
     "director": {
@@ -887,9 +751,7 @@
       "inclusion",
       "mentorats"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "mcg"
   },
   {
@@ -943,9 +805,7 @@
       "formation",
       "réseautage"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "parallele"
   },
   {
@@ -999,9 +859,7 @@
       "formation",
       "réseautage"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "parallele"
   },
   {
@@ -1060,9 +918,7 @@
       "communauté",
       "diversité"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "pcb"
   },
   {
@@ -1121,9 +977,7 @@
       "communauté",
       "diversité"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "pcb"
   },
   {
@@ -1182,9 +1036,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1243,9 +1095,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1304,9 +1154,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1365,9 +1213,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1426,9 +1272,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1487,9 +1331,7 @@
       "jeunes adultes",
       "immigrants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "prospect"
   },
   {
@@ -1544,21 +1386,13 @@
       "représentation",
       "artistique"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "rafa"
   },
   {
     "id": "rsa-1",
     "name": "Réseau santé Alberta (RSA)",
-    "category": [
-      "sante",
-      "francophonie",
-      "bien etre",
-      "services sociaux",
-      "vie communautaire"
-    ],
+    "category": ["sante", "francophonie", "bien etre", "services sociaux", "vie communautaire"],
     "description": "Organisme chef de file en santé en Alberta, visant à renforcer l'accès aux services de santé en français, promouvoir le mieux-être et faciliter la concertation entre les acteurs de la santé et les communautés francophones.",
     "foundedYear": 2004,
     "director": {
@@ -1611,21 +1445,13 @@
       "professionnels de santé",
       "mobilisation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "rsa"
   },
   {
     "id": "shfa-1",
     "name": "Société historique francophone de l’Alberta",
-    "category": [
-      "histoire",
-      "patrimoine",
-      "francophonie",
-      "education",
-      "culture"
-    ],
+    "category": ["histoire", "patrimoine", "francophonie", "education", "culture"],
     "description": "Organisme provincial à but non lucratif dédié à la protection, au rayonnement et à la représentation du patrimoine et de l’histoire franco-albertaine, avec des initiatives pédagogiques et numériques pour valoriser l’histoire de la francophonie en Alberta.",
     "foundedYear": 2012,
     "director": {
@@ -1659,17 +1485,8 @@
       "email": "info@shfa.ca",
       "website": "https://histoireab.ca"
     },
-    "tags": [
-      "patrimoine",
-      "culture",
-      "francophonie",
-      "histoire",
-      "archives",
-      "éducation"
-    ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "tags": ["patrimoine", "culture", "francophonie", "histoire", "archives", "éducation"],
+    "memberOf": ["RIFA"],
     "orgId": "shfa"
   },
   {
@@ -1719,9 +1536,7 @@
       "jeunes",
       "anciens combattants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "wcg"
   },
   {
@@ -1771,17 +1586,13 @@
       "jeunes",
       "anciens combattants"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "wcg"
   },
   {
     "id": "cinemagine-1",
     "name": "Cinémagine",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
     "foundedYear": 2023,
     "director": {
@@ -1827,17 +1638,13 @@
       "projection",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "cinemagine"
   },
   {
     "id": "cinemagine-2",
     "name": "Cinémagine",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
     "foundedYear": 2023,
     "director": {
@@ -1883,17 +1690,13 @@
       "projection",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "cinemagine"
   },
   {
     "id": "cinemagine-3",
     "name": "Cinémagine",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
     "foundedYear": 2023,
     "director": {
@@ -1939,17 +1742,13 @@
       "projection",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "cinemagine"
   },
   {
     "id": "cinemagine-4",
     "name": "Cinémagine",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
     "foundedYear": 2023,
     "director": {
@@ -1995,17 +1794,13 @@
       "projection",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "cinemagine"
   },
   {
     "id": "cinemagine-5",
     "name": "Cinémagine",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Organisme qui promeut la culture francophone en Alberta à travers le cinéma, offrant projections, ateliers scolaires et stages pour tous âges, ainsi qu’un festival annuel de films francophones.",
     "foundedYear": 2023,
     "director": {
@@ -2051,9 +1846,7 @@
       "projection",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "cinemagine"
   },
   {
@@ -2109,9 +1902,7 @@
       "promotion",
       "intégration"
     ],
-    "memberOf": [
-      "RIFA"
-    ],
+    "memberOf": ["RIFA"],
     "orgId": "acfa"
   },
   {
@@ -2167,10 +1958,7 @@
       "bénévolat",
       "nouveaux arrivants"
     ],
-    "memberOf": [
-      "RIFA",
-      "CLIF du Sud"
-    ],
+    "memberOf": ["RIFA", "CLIF du Sud"],
     "orgId": "acfa_calgary"
   },
   {
@@ -2216,10 +2004,7 @@
       "services communautaires",
       "nouveaux arrivants"
     ],
-    "memberOf": [
-      "RIFA",
-      "CLIF du Nord"
-    ],
+    "memberOf": ["RIFA", "CLIF du Nord"],
     "orgId": "acfa_grande_prairie"
   },
   {
@@ -2276,10 +2061,7 @@
       "nouveaux arrivants",
       "jeunesse"
     ],
-    "memberOf": [
-      "RIFA",
-      "CLIF du Nord"
-    ],
+    "memberOf": ["RIFA", "CLIF du Nord"],
     "orgId": "acfa_red_deer"
   },
   {
@@ -2335,10 +2117,7 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": [
-      "RIFA",
-      "CLIF du Nord"
-    ],
+    "memberOf": ["RIFA", "CLIF du Nord"],
     "orgId": "acfa_wood_buffalo"
   },
   {
@@ -2406,10 +2185,7 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": [
-      "RIFA",
-      "CLIF du Nord"
-    ],
+    "memberOf": ["RIFA", "CLIF du Nord"],
     "orgId": "acfa_edmonton"
   },
   {
@@ -2467,10 +2243,7 @@
       "nouveaux arrivants",
       "étudiants en droit"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Santé et Services Sociaux"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"],
     "orgId": "ajefa"
   },
   {
@@ -2528,22 +2301,13 @@
       "nouveaux arrivants",
       "étudiants en droit"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Santé et Services Sociaux"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"],
     "orgId": "ajefa"
   },
   {
     "id": "ajfas-1",
     "name": "Alliance Jeunesse-Famille de l’Alberta Society",
-    "category": [
-      "francophonie",
-      "jeunesse",
-      "familles",
-      "integration",
-      "services sociaux"
-    ],
+    "category": ["francophonie", "jeunesse", "familles", "integration", "services sociaux"],
     "description": "Fondée en décembre 1999, l’AJFAS est un organisme francophone à but non lucratif dédié à la prévention de la criminalité auprès des jeunes et des familles francophones d’origine immigrante et à leur intégration socio-professionnelle en Alberta. L’organisme promeut l’harmonie, la sécurité, la cohésion sociale et l’appréciation de la diversité.",
     "foundedYear": 1999,
     "director": {
@@ -2601,18 +2365,13 @@
       "leadership",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Santé et Services Sociaux"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"],
     "orgId": "ajfas"
   },
   {
     "id": "campus_saint_jean",
     "name": "Campus Saint-Jean",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Campus multidisciplinaire francophone de l’Université de l’Alberta, établi en 1908 à Edmonton, offrant des programmes universitaires de premier cycle et des cycles supérieurs en français.",
     "foundedYear": 1908,
     "director": {
@@ -2653,18 +2412,13 @@
       "culture",
       "services étudiants"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "campus_saint_jean"
   },
   {
     "id": "campus_saint_jean-1",
     "name": "Campus Saint-Jean",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Campus multidisciplinaire francophone de l’Université de l’Alberta, établi en 1908 à Edmonton, offrant des programmes universitaires de premier cycle et des cycles supérieurs en français.",
     "foundedYear": 1908,
     "director": {
@@ -2705,22 +2459,13 @@
       "culture",
       "services étudiants"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "campus_saint_jean"
   },
   {
     "id": "canada_in_progress-1",
     "name": "Canada In Progress",
-    "category": [
-      "francophonie",
-      "vie communautaire",
-      "integration",
-      "culture",
-      "services sociaux"
-    ],
+    "category": ["francophonie", "vie communautaire", "integration", "culture", "services sociaux"],
     "description": "Société à but non lucratif fondée en 2017 à Grande Prairie, Canada In Progress a pour mandat d’éduquer et sensibiliser la communauté francophone locale, notamment à travers des activités et formations favorisant l’engagement civique, social et culturel, la diversité et l’inclusion.",
     "foundedYear": 2017,
     "director": {
@@ -2768,18 +2513,13 @@
       "jeunesse",
       "familles"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Accueil et Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"],
     "orgId": "canada_in_progress"
   },
   {
     "id": "canaf-1",
     "name": "CANAF",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le CANAF soutient les nouveaux arrivants francophones en les orientant vers les services et programmes nécessaires à leur établissement. Il favorise le rapprochement communautaire pour une francophonie multiculturelle et inclusive, et promeut des activités culturelles et sociales pour célébrer la diversité au sein de la communauté francophone de Calgary et du sud de l’Alberta.",
     "foundedYear": null,
     "director": {
@@ -2842,9 +2582,7 @@
   },
   {
     "name": "Centre d’Appui Familial du Sud de l’Alberta",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Centre d’Appui Familial du Sud de l’Alberta soutient les familles francophones et exogames du sud de l’Alberta en offrant des services en français axés sur le développement des enfants, le soutien parental et le bien-être familial.",
     "foundedYear": 2018,
     "director": {
@@ -2891,18 +2629,13 @@
       "communauté",
       "sud de l’Alberta"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "centre_appui_familial_sud_alberta"
   },
   {
     "id": "centre_appui_familial_sud_alberta-1",
     "name": "Centre d’Appui Familial du Sud de l’Alberta",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Centre d’Appui Familial du Sud de l’Alberta soutient les familles francophones et exogames du sud de l’Alberta en offrant des services en français axés sur le développement des enfants, le soutien parental et le bien-être familial.",
     "foundedYear": 2018,
     "director": {
@@ -2949,18 +2682,13 @@
       "communauté",
       "sud de l’Alberta"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "centre_appui_familial_sud_alberta"
   },
   {
     "id": "centre_appui_familial_sud_alberta-0",
     "name": "Centre d’Appui Familial du Sud de l’Alberta",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Centre d’Appui Familial du Sud de l’Alberta soutient les familles francophones et exogames du sud de l’Alberta en offrant des services en français axés sur le développement des enfants, le soutien parental et le bien-être familial.",
     "foundedYear": 2018,
     "director": {
@@ -3007,18 +2735,13 @@
       "communauté",
       "sud de l’Alberta"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "centre_appui_familial_sud_alberta"
   },
   {
     "id": "centre_pour_nouveaux_arrivants_grande_prairie-1",
     "name": "Centre pour les Nouveaux Arrivants de Grande Prairie",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Centre pour les Nouveaux Arrivants de Grande Prairie (GPCN) est un organisme communautaire dédié à l’accueil et à l’accompagnement des nouveaux arrivants et résidents temporaires dans leur établissement et intégration à Grande Prairie et ses environs, offrant des services en anglais et en français.",
     "foundedYear": 2011,
     "director": {
@@ -3064,18 +2787,13 @@
       "emploi",
       "soutien administratif"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Accueil et Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"],
     "orgId": "centre_pour_nouveaux_arrivants_grande_prairie"
   },
   {
     "id": "conseil_scolaire_du_nord_ouest-1",
     "name": "Conseil scolaire du Nord-Ouest",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Conseil scolaire du Nord-Ouest (CSNO) est une autorité scolaire francophone publique en Alberta, fondée en 1994 et basée à St-Isidore. Il vise à offrir une programmation francophone complète de qualité, incluant l’enseignement de la prématernelle à la 12e année, des services d’appui et des activités parascolaires, tout en soutenant une communauté scolaire inclusive et animée par la culture francophone.",
     "foundedYear": 1994,
     "director": {
@@ -3118,18 +2836,13 @@
       "secondaire",
       "soutien scolaire"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "conseil_scolaire_du_nord_ouest"
   },
   {
     "id": "conseil_scolaire_francosud-1",
     "name": "Conseil scolaire FrancoSud",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Conseil scolaire FrancoSud offre une éducation en français langue première, gratuite et financée par la province, opérant 19 écoles (15 publiques et 4 catholiques) à travers le sud de l’Alberta. Son mandat découle de l’article 23 de la Charte canadienne des droits et libertés, qui garantit aux ayants droit l’accès à l’éducation francophone.",
     "foundedYear": 2013,
     "director": {
@@ -3178,18 +2891,13 @@
       "transport scolaire",
       "activité parascolaire"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "conseil_scolaire_francosud"
   },
   {
     "id": "ecole_francophone_brooks-1",
     "name": "École Francophone de Brooks (École Le Ruisseau)",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "École publique francophone à Brooks, Alberta, accueillant les élèves de la prématernelle à la 12e année. L’école fait partie du Conseil scolaire FrancoSud et offre un environnement d’apprentissage axé sur la réussite académique, le développement personnel et l’épanouissement culturel.",
     "foundedYear": 2013,
     "director": {
@@ -3233,18 +2941,13 @@
       "soutien scolaire",
       "inclusion"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "ecole_francophone_brooks"
   },
   {
     "id": "conseil_scolaire_centre_est-1",
     "name": "Conseil scolaire Centre-Est",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Conseil scolaire Centre-Est (CSCE) est une autorité scolaire francophone située à St. Paul, Alberta. Il offre une éducation francophone de qualité de la prématernelle à la 12e année et valorise le patrimoine culturel francophone dans un contexte bilingue.",
     "foundedYear": 1995,
     "director": {
@@ -3314,18 +3017,13 @@
       "culture francophone",
       "soutien pédagogique"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "conseil_scolaire_centre_est"
   },
   {
     "id": "communaute_francophone_accueillante_calgary-1",
     "name": "Communauté Francophone Accueillante de Calgary",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le projet Communauté Francophone Accueillante (CFA) a débuté en 2019 pour favoriser l’inclusion et l’intégration des nouveaux arrivants francophones à Calgary. Le CANAF agit comme agent fiduciaire local pour la mise en œuvre du projet.",
     "foundedYear": 2019,
     "director": {
@@ -3366,18 +3064,13 @@
       "services aux nouveaux arrivants",
       "Calgary"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"],
     "orgId": "communaute_francophone_accueillante_calgary"
   },
   {
     "id": "conseil_scolaire_centre_nord-1",
     "name": "Conseil scolaire Centre-Nord",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Conseil scolaire Centre-Nord (CSCN), fondé en 1994, dessert environ 3 700 élèves dans 19 écoles publiques et catholiques du centre et nord de l’Alberta. Il offre une éducation en français langue première tout en respectant les droits linguistiques et confessionnels des communautés francophones.",
     "foundedYear": 1994,
     "director": {
@@ -3475,9 +3168,7 @@
   {
     "id": "edmonton_fusion_fc-1",
     "name": "Edmonton Fusion FC",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Fondé en 2018, l’Edmonton Fusion FC est un club de soccer bilingue (français-anglais) à but non lucratif basé à Edmonton. Il se distingue par son engagement communautaire, son accessibilité et son approche inclusive, offrant des programmes adaptés à tous les âges et niveaux.",
     "foundedYear": 2018,
     "director": {
@@ -3520,18 +3211,13 @@
       "familles",
       "Alberta"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Écosystème d’Appui au Secteur de l’Établissement"],
     "orgId": "edmonton_fusion_fc"
   },
   {
     "id": "fcsfa-1",
     "name": "Fédération des Conseils Scolaires Francophones de l’Alberta",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "La FCSFA regroupe les quatre conseils scolaires francophones de l’Alberta. Elle assure la concertation entre eux et veille à promouvoir, défendre et renforcer l’éducation en français langue première dans la province, tout en respectant l’autonomie de chaque conseil.",
     "director": {
       "name": "Gisèle Bourque",
@@ -3573,18 +3259,13 @@
       "promotion de la langue",
       "soutien scolaire"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Éducation"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Éducation"],
     "orgId": "fcsfa"
   },
   {
     "id": "frap-1",
     "name": "Francophonie Albertaine Plurielle",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
     "director": {
       "name": "Alphonse Ndem Ahola",
@@ -3637,9 +3318,7 @@
   {
     "id": "frap-2",
     "name": "Francophonie Albertaine Plurielle",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
     "director": {
       "name": "Alphonse Ndem Ahola",
@@ -3692,9 +3371,7 @@
   {
     "id": "frap-3",
     "name": "Francophonie Albertaine Plurielle",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
     "director": {
       "name": "Alphonse Ndem Ahola",
@@ -3747,9 +3424,7 @@
   {
     "id": "frap-4",
     "name": "Francophonie Albertaine Plurielle",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
     "director": {
       "name": "Alphonse Ndem Ahola",
@@ -3802,9 +3477,7 @@
   {
     "id": "frap-6",
     "name": "Francophonie Albertaine Plurielle",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Créée en 2014, la Francophonie Albertaine Plurielle accompagne les immigrants francophones en Alberta grâce à des services d’accueil, d’établissement, d’intégration scolaire et communautaire, offrant un soutien pratique pour le logement, les démarches d’immigration, la garde d’enfants, la citoyenneté et la participation sociale.",
     "director": {
       "name": "Alphonse Ndem Ahola",
@@ -3857,9 +3530,7 @@
   {
     "id": "kayanou-1",
     "name": "Kayanou",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
     "director": {
       "name": "Mireille Isidore",
@@ -3899,18 +3570,13 @@
       "familles",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"],
     "orgId": "kayanou"
   },
   {
     "id": "kayanou-0",
     "name": "Kayanou",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Kayanou a pour mission de documenter, archiver et transmettre l’histoire des diasporas caribéennes francophones et afro-descendantes en Alberta. L’organisme vise à renforcer le sentiment d’appartenance, promouvoir l’inclusion sociale et sensibiliser le grand public à la richesse culturelle des communautés noires francophones.",
     "director": {
       "name": "Mireille Isidore",
@@ -3950,18 +3616,13 @@
       "familles",
       "éducation"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"],
     "orgId": "kayanou"
   },
   {
     "id": "pia-1",
     "name": "Portail de l’Immigrant Association",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Portail de l’Immigrant Association (PIA) est un organisme fondé en 2008 à Calgary par un groupe d’immigrants francophones. Il offre une gamme de services pour faciliter l’intégration sociale, économique et culturelle des immigrants francophones.",
     "director": {
       "name": "Evelyne Kemajou",
@@ -4012,9 +3673,7 @@
   {
     "id": "la_cite_des_rocheuses-1",
     "name": "La Cité des Rocheuses",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "La Cité des Rocheuses est un centre communautaire et culturel francophone fondé en 1996 à Calgary, Alberta. Son mandat est de promouvoir la culture et la langue française et de soutenir le développement de la communauté francophone dans le sud de la province.",
     "director": {
       "name": "Hervé Stéclebout",
@@ -4066,9 +3725,7 @@
   {
     "id": "acfa_regionale_canmore_banff-1",
     "name": "ACFA régionale de Canmore‑Banff",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Depuis 2006, l’ACFA régionale de Canmore‑Banff représente et défend les intérêts de la communauté francophone dans la région des Rocheuses canadiennes, desservant les francophones et francophiles des communautés de Banff, Canmore et des environs.",
     "director": {
       "name": "Paul Rovin",
@@ -4110,18 +3767,13 @@
       "culture",
       "intégration"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Accueil et Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"],
     "orgId": "acfa_regionale_canmore_banff"
   },
   {
     "id": "association_francophone_brooks-1",
     "name": "Association Francophone de Brooks",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "L'Association Francophone de Brooks (AFB) est un organisme communautaire fondé le 22 juin 2004 pour promouvoir la langue et la culture françaises à Brooks, Alberta. Sa mission est de faciliter l'accès des nouveaux arrivants francophones aux services en français et de favoriser leur intégration réussie.",
     "director": {
       "name": "Sa Eva Katusevanako",
@@ -4164,18 +3816,13 @@
       "intégration",
       "culture"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Écosystème d’appui au secteur de l’établissement"],
     "orgId": "association_francophone_brooks"
   },
   {
     "id": "canavua-1",
     "name": "CANAVUA",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "CANAVUA (Canadian Volunteers United in Action) est un organisme francophone basé à Edmonton dédié à la promotion du bénévolat et à la prestation de services communautaires essentiels, notamment une banque alimentaire, un camion‑repas communautaire et des programmes d’aide sociale pour les populations vulnérables.",
     "director": {
       "name": "Dicky Dikamba",
@@ -4220,18 +3867,13 @@
       "intégration",
       "inclusion sociale"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Accueil et Établissement"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Accueil et Établissement"],
     "orgId": "canavua"
   },
   {
     "id": "centre_bien_etre_prevention_afro_canadiens_alberta-1",
     "name": "Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta",
-    "category": [
-      "vie communautaire"
-    ],
+    "category": ["vie communautaire"],
     "description": "Le Centre de bien‑être et de prévention pour Afro‑Canadiens de l’Alberta (CBEP) vise à améliorer la santé globale des Afro‑Canadiens, en offrant des services culturellement adaptés, de sensibilisation, de prévention des maladies chroniques et de réinsertion sociale.",
     "director": {
       "name": "Dr Nganda Luki",
@@ -4274,10 +3916,7 @@
       "inclusion",
       "Edmonton"
     ],
-    "memberOf": [
-      "RIFA",
-      "Groupe Sectoriel Santé et Services Sociaux"
-    ],
+    "memberOf": ["RIFA", "Groupe Sectoriel Santé et Services Sociaux"],
     "orgId": "centre_bien_etre_prevention_afro_canadiens_alberta"
   }
 ]

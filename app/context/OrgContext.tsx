@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import { SelectedOrg, OrgContextType, Org } from "@/types/types";
+import { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { SelectedOrg, OrgContextType, Org } from '@/types/types';
 
 const OrgContext = createContext<OrgContextType | null>(null);
 
@@ -10,17 +10,15 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null);
 
   const [savedOrgs, setSavedOrgs] = useState<Org[]>([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<SelectedOrg | null>(null);
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"search" | "ai" | "Favorites">(
-    "search",
-  );
+  const [activeTab, setActiveTab] = useState<'search' | 'ai' | 'Favorites'>('search');
 
   const getDefaultView = () => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return {
         longitude: -114.0719,
         latitude: 53.0447,
@@ -59,79 +57,71 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   // ✅ hydrate from localStorage AFTER mount (client only)
   useEffect(() => {
     try {
-      const rawSaved = localStorage.getItem("savedOrgs");
+      const rawSaved = localStorage.getItem('savedOrgs');
       if (rawSaved) setSavedOrgs(JSON.parse(rawSaved));
 
-      const q = localStorage.getItem("query");
+      const q = localStorage.getItem('query');
       if (q) setQuery(q);
 
-      const cats = localStorage.getItem("selectedCategories");
+      const cats = localStorage.getItem('selectedCategories');
       if (cats) setSelectedCategories(JSON.parse(cats));
 
-      const cities = localStorage.getItem("selectedCities");
+      const cities = localStorage.getItem('selectedCities');
       if (cities) setSelectedCities(JSON.parse(cities));
     } catch (e) {
-      console.error("Failed to load from localStorage", e);
+      console.error('Failed to load from localStorage', e);
     }
   }, []);
 
   // ✅ sync OUT to localStorage
   useEffect(() => {
-    localStorage.setItem("savedOrgs", JSON.stringify(savedOrgs));
+    localStorage.setItem('savedOrgs', JSON.stringify(savedOrgs));
   }, [savedOrgs]);
 
   useEffect(() => {
-    localStorage.setItem("query", query);
+    localStorage.setItem('query', query);
   }, [query]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "selectedCategories",
-      JSON.stringify(selectedCategories),
-    );
+    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
   }, [selectedCategories]);
 
   useEffect(() => {
-    localStorage.setItem("selectedCities", JSON.stringify(selectedCities));
+    localStorage.setItem('selectedCities', JSON.stringify(selectedCities));
   }, [selectedCities]);
   //
   // actions
   const toggleSavedOrg = (org: Org) => {
     setSavedOrgs((prev) =>
-      prev.some((o) => o.id === org.id)
-        ? prev.filter((o) => o.id !== org.id)
-        : [...prev, org],
+      prev.some((o) => o.id === org.id) ? prev.filter((o) => o.id !== org.id) : [...prev, org]
     );
   };
 
-  const savedOrgIds = useMemo(
-    () => new Set(savedOrgs.map((o) => o.id)),
-    [savedOrgs],
-  );
+  const savedOrgIds = useMemo(() => new Set(savedOrgs.map((o) => o.id)), [savedOrgs]);
   //helper local activew region
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
   useEffect(() => {
     try {
-      const storedRegion = localStorage.getItem("activeRegion");
+      const storedRegion = localStorage.getItem('activeRegion');
       if (storedRegion) setActiveRegion(storedRegion);
     } catch (e) {
-      console.error("Failed to load activeRegion from localStorage", e);
+      console.error('Failed to load activeRegion from localStorage', e);
     }
   }, []);
   useEffect(() => {
     if (activeRegion !== null) {
-      localStorage.setItem("activeRegion", activeRegion);
+      localStorage.setItem('activeRegion', activeRegion);
     }
   }, [activeRegion]);
 
   const resetAllFilters = () => {
-    setQuery("");
+    setQuery('');
     setSelectedCategories([]);
     setSelectedCities([]);
     setSelectedOrg(null);
     setActiveRegion?.(null);
     resetMapView();
-    localStorage.removeItem("activeRegion"); // ✅ zoom + center reset
+    localStorage.removeItem('activeRegion'); // ✅ zoom + center reset
   };
 
   // const clearSavedOrgs = () => setSavedOrgs([]);
@@ -170,7 +160,7 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
 
 export const useOrg = () => {
   const ctx = useContext(OrgContext);
-  if (!ctx) throw new Error("useOrg must be used inside OrgProvider");
+  if (!ctx) throw new Error('useOrg must be used inside OrgProvider');
   return ctx;
 };
 /**

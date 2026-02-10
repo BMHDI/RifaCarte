@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import * as React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import { ChevronDown, Check, Filter, SlidersHorizontal } from "lucide-react";
-import { SearchWithFiltersProps } from "@/types/types";
-import { useRef } from "react"; // Import useRef
+} from '@/components/ui/dropdown-menu';
+import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
+import { ChevronDown, Check, Filter, SlidersHorizontal } from 'lucide-react';
+import { SearchWithFiltersProps } from '@/types/types';
+import { useRef } from 'react'; // Import useRef
 
 export default function SearchWithFilters({
   query,
@@ -25,13 +25,13 @@ export default function SearchWithFilters({
 }: SearchWithFiltersProps) {
   const [open, setOpen] = React.useState(false);
   // Inside your component:
-const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  if (e.key === "Enter") {
-    inputRef.current?.blur(); // This hides the keyboard
-  }
-};
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      inputRef.current?.blur(); // This hides the keyboard
+    }
+  };
   const scrollableContent = (
     <div className="max-h-[70vh] overflow-y-auto">
       <Command>
@@ -75,7 +75,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
   return (
     <div className="flex w-full px-4 ">
       <Input
-      onKeyDown={handleKeyDown} // Listen for the Enter key
+        onKeyDown={handleKeyDown} // Listen for the Enter key
         className="rounded-r-none flex-1"
         value={query}
         placeholder="Chercher un organisme..."
@@ -85,7 +85,8 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button className="rounded-l-none flex gap-1">
-            <SlidersHorizontal />Filtres
+            <SlidersHorizontal />
+            Filtres
             <ChevronDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>

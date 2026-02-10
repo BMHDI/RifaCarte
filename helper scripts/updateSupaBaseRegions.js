@@ -2,7 +2,6 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 
-
 dotenv.config();
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
@@ -11,11 +10,12 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 const data = JSON.parse(fs.readFileSync('./orgs.json', 'utf8'));
 
 async function enrichData() {
-  console.log("🚀 Starting full data enrichment...");
+  console.log('🚀 Starting full data enrichment...');
 
   for (const org of data) {
     // Build detailed content
-    const projectDetails = org.projects?.map(p => `- ${p.name}: ${p.description}`).join('\n') || 'None';
+    const projectDetails =
+      org.projects?.map((p) => `- ${p.name}: ${p.description}`).join('\n') || 'None';
 
     const aiContext = `
 Name: ${org.name}
@@ -52,7 +52,7 @@ Region: ${org.region ?? 'N/A'}
         phone: org.contact?.phone ?? null,
         website: org.contact?.website ?? null,
         region: org.region ?? null,
-        content: aiContext
+        content: aiContext,
       })
       .eq('id', org.id);
 
@@ -63,7 +63,7 @@ Region: ${org.region ?? 'N/A'}
     }
   }
 
-  console.log("🎉 All organizations synced to Supabase!");
+  console.log('🎉 All organizations synced to Supabase!');
 }
 
 // Run the script

@@ -7,13 +7,13 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 
 async function linkImagesFromBucket() {
   const bucketName = 'images';
-  console.log("🚀 Linking images from bucket...");
+  console.log('🚀 Linking images from bucket...');
 
   const { data: files, error: listError } = await supabase.storage
     .from(bucketName)
     .list('', { limit: 1000 });
 
-  if (listError) return console.error("❌ Error listing files:", listError.message);
+  if (listError) return console.error('❌ Error listing files:', listError.message);
 
   console.log(`Found ${files.length} files in the bucket`);
 
@@ -36,7 +36,7 @@ async function linkImagesFromBucket() {
     }
   }
 
-  console.log("🎉 Done linking images!");
+  console.log('🎉 Done linking images!');
 }
 
 linkImagesFromBucket();

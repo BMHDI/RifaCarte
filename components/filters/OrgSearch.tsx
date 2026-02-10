@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { fetchFilteredOrgs, fetchCities } from "@/lib/db";
-import { useOrg } from "@/app/context/OrgContext";
-import { OrgCard } from "../ui/OrgCard";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useSidebar } from "../ui/sidebar";
-import SearchWithFilters from "./SearchWithFilters";
-import { Badge } from "../ui/badge";
-import { ArrowBigDown, ArrowBigUp, RotateCcw } from "lucide-react";
-import CATEGORIES from "@/lib/categories";
-import { Org } from "@/types/types";
-import { RegionSelectorList } from "../ui/RegionSelectorList";
-import { getCategoryIdsFromGroups } from "@/lib/utils";
-import { Spinner } from "@/components/ui/spinner";
+import { useEffect, useMemo, useState } from 'react';
+import { fetchFilteredOrgs, fetchCities } from '@/lib/db';
+import { useOrg } from '@/app/context/OrgContext';
+import { OrgCard } from '../ui/OrgCard';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { useSidebar } from '../ui/sidebar';
+import SearchWithFilters from './SearchWithFilters';
+import { Badge } from '../ui/badge';
+import { ArrowBigDown, ArrowBigUp, RotateCcw } from 'lucide-react';
+import CATEGORIES from '@/lib/categories';
+import { Org } from '@/types/types';
+import { RegionSelectorList } from '../ui/RegionSelectorList';
+import { getCategoryIdsFromGroups } from '@/lib/utils';
+import { Spinner } from '@/components/ui/spinner';
 
 export function OrgSearch() {
   const {
@@ -51,7 +51,7 @@ export function OrgSearch() {
         const citiesFromDB = await fetchCities();
         setAllCities(citiesFromDB.sort());
       } catch (err) {
-        console.error("Failed to load cities", err);
+        console.error('Failed to load cities', err);
       }
     };
     loadCities();
@@ -65,7 +65,7 @@ export function OrgSearch() {
       const categoryIds = getCategoryIdsFromGroups(selectedCategories);
 
       if (!activeRegion) {
-        console.log("❌ No activeRegion, aborting");
+        console.log('❌ No activeRegion, aborting');
         return;
       }
 
@@ -87,8 +87,8 @@ export function OrgSearch() {
                   {
                     lat: org.lat,
                     lng: org.lng,
-                    city: org.city ?? "",
-                    address: org.address ?? "",
+                    city: org.city ?? '',
+                    address: org.address ?? '',
                   },
                 ]
               : [],
@@ -96,7 +96,7 @@ export function OrgSearch() {
 
         setDbOrgs(normalized);
       } catch (err) {
-        console.error("❌ Failed to fetch orgs", err);
+        console.error('❌ Failed to fetch orgs', err);
       } finally {
         setLoading(false);
       }
@@ -116,7 +116,7 @@ export function OrgSearch() {
     dbOrgs.forEach((org) =>
       org.locations.forEach((loc) => {
         if (loc.city) citySet.add(loc.city);
-      }),
+      })
     );
 
     return Array.from(citySet).sort();
@@ -127,13 +127,13 @@ export function OrgSearch() {
   // -----------------------------------
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
   };
 
   const toggleCity = (city: string) => {
     setSelectedCities((prev) =>
-      prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city],
+      prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
     );
   };
 
@@ -142,7 +142,7 @@ export function OrgSearch() {
   // -----------------------------------
   return (
     <div className="flex w-full flex-col h-[85dvh]">
-       {/* Filters dropdown */}
+      {/* Filters dropdown */}
       <div>
         <SearchWithFilters
           query={query}
@@ -155,22 +155,17 @@ export function OrgSearch() {
           toggleCity={toggleCity}
         />
       </div>
-         {/* Filters summary */}
+      {/* Filters summary */}
       <div className="px-4 flex flex-col">
-        {selectedCategories.length > 0 ||
-        selectedCities.length > 0 ||
-        activeRegion ? (
+        {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
           <>
             <div className="flex justify-center p-2">
               <button
                 onClick={resetAllFilters}
                 className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
               >
-                <RotateCcw className="h-3 w-3" /> <p > Réinitialiser tous les filtres</p>
-                pour{" "}
-                <span className="text-primary font-bold">
-                  ({dbOrgs.length} au total)
-                </span>
+                <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres</p>
+                pour <span className="text-primary font-bold">({dbOrgs.length} au total)</span>
               </button>
             </div>
 
@@ -202,45 +197,43 @@ export function OrgSearch() {
           </>
         ) : (
           <div className="flex justify-center items-center gap-4">
-     <div className="bg-gray-100 rounded-md p-3 ">
-  <p className="text-sm text-center text-gray-700  ">
-    Commencez par choisir une région, puis utilisez les filtres.
-  </p>
-</div>
-<ArrowBigUp className="h-5 animate-bounce" />
+            <div className="bg-gray-100 rounded-md p-3 ">
+              <p className="text-sm text-center text-gray-700  ">
+                Commencez par choisir une région, puis utilisez les filtres.
+              </p>
+            </div>
+            <ArrowBigUp className="h-5 animate-bounce" />
           </div>
         )}
       </div>
       <div
         className="h-full overflow-y-auto"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-          rowGap: "1rem", // espace vertical uniquement
-          columnGap: "0px", // plus d’espace horizontal
-          gridAutoRows: "1fr", // toutes les cartes sur la même ligne ont la même hauteur
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))',
+          rowGap: '1rem', // espace vertical uniquement
+          columnGap: '0px', // plus d’espace horizontal
+          gridAutoRows: '1fr', // toutes les cartes sur la même ligne ont la même hauteur
         }}
       >
-        {" "}
+        {' '}
         {!activeRegion && <RegionSelectorList />}
         {loading && (
           <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />
         )}
-        {!loading && activeRegion && dbOrgs.length === 0 && (
-          <p>Aucun organisme trouvé.</p>
-        )}
+        {!loading && activeRegion && dbOrgs.length === 0 && <p>Aucun organisme trouvé.</p>}
         {activeRegion &&
           dbOrgs.map((org) => (
             <OrgCard
-              id={org.id ?? ""}
+              id={org.id ?? ''}
               key={org.id}
-              image_url={org.image_url ?? ""}
+              image_url={org.image_url ?? ''}
               name={org.name}
-              phone={org.phone ?? ""}
-              address={org.locations[0]?.address ?? ""}
+              phone={org.phone ?? ''}
+              address={org.locations[0]?.address ?? ''}
               category={org.category}
               onSave={() => toggleSavedOrg(org)}
-              isSaved={isSaved(org.id ?? "")}
+              isSaved={isSaved(org.id ?? '')}
               onMap={() => {
                 if (org.locations.length === 1) {
                   setSelectedOrg({
@@ -269,7 +262,7 @@ export function OrgSearch() {
                         [Math.min(...lngs), Math.min(...lats)],
                         [Math.max(...lngs), Math.max(...lats)],
                       ],
-                      { padding: 80 },
+                      { padding: 80 }
                     );
                   }
                 }
@@ -279,10 +272,6 @@ export function OrgSearch() {
             />
           ))}
       </div>
-
-   
-
-     
     </div>
   );
 }

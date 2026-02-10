@@ -28,7 +28,10 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "helper scripts/mergedCategories.js", "helper scripts/ChatWithGemini.js", "app/googleAnalytics.tsx"  ],
+    "**/*.mts",
+    "helper scripts/mergedCategories.js",
+    "helper scripts/ChatWithGemini.js",
+    "app/googleAnalytics.tsx"
+  ],
   "exclude": ["node_modules"]
 }

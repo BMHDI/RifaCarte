@@ -1,38 +1,37 @@
-import fs from "fs";
-import dotenv from "dotenv";
+import fs from 'fs';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
-  console.error("❌ GEMINI_API_KEY non définie !");
+  console.error('❌ GEMINI_API_KEY non définie !');
   process.exit(1);
 }
 
 // Load orgs
-const orgs = JSON.parse(fs.readFileSync("./orgs.json", "utf8"));
+const orgs = JSON.parse(fs.readFileSync('./orgs.json', 'utf8'));
 
 /**
  * Convert one organization into rich semantic text
  */
 function orgToText(org) {
-  const cities =
-    org.locations?.map((l) => l.city).join(", ") || "Alberta";
+  const cities = org.locations?.map((l) => l.city).join(', ') || 'Alberta';
 
-  const services = org.services?.join(", ") || "Non spécifié";
-  const tags = org.tags?.join(", ") || "Aucun";
-  const categories = org.category?.join(", ") || "Général";
-  const projects = org.projects?.join(", ") || "Aucun";
+  const services = org.services?.join(', ') || 'Non spécifié';
+  const tags = org.tags?.join(', ') || 'Aucun';
+  const categories = org.category?.join(', ') || 'Général';
+  const projects = org.projects?.join(', ') || 'Aucun';
 
-  const email = org.contact?.email || "Non disponible";
-  const phone = org.contact?.phone || "Non disponible";
-  const website = org.website || "Non disponible";
+  const email = org.contact?.email || 'Non disponible';
+  const phone = org.contact?.phone || 'Non disponible';
+  const website = org.website || 'Non disponible';
 
   return `
 Nom: ${org.name}
 
-Description: ${org.description || "Aucune description"}
+Description: ${org.description || 'Aucune description'}
 
 Localisation: ${cities}
 
@@ -58,15 +57,15 @@ async function embed(text) {
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${API_KEY}`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         content: {
           parts: [{ text }],
         },
-        task_type: "RETRIEVAL_DOCUMENT",
+        task_type: 'RETRIEVAL_DOCUMENT',
       }),
     }
   );
@@ -108,13 +107,9 @@ async function generateVectors() {
     }
   }
 
-  fs.writeFileSync(
-    "./orgs_index.json",
-    JSON.stringify(results, null, 2),
-    "utf8"
-  );
+  fs.writeFileSync('./orgs_index.json', JSON.stringify(results, null, 2), 'utf8');
 
-  console.log("🎉 Indexation terminée !");
+  console.log('🎉 Indexation terminée !');
 }
 
 // Run

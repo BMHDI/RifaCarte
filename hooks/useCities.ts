@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import organizations from "../lib/org.json";
-import { useOrg } from "@/app/context/OrgContext";
+import { useMemo } from 'react';
+import organizations from '../lib/org.json';
+import { useOrg } from '@/app/context/OrgContext';
 
 export function useCities() {
   const { activeRegion } = useOrg();

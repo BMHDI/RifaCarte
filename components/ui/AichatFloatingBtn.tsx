@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Button } from "./button";
-import { useSidebar } from "./sidebar";
-import { BotMessageSquare } from "lucide-react";
-import { useOrg } from "@/app/context/OrgContext";
+import { useState, useEffect } from 'react';
+import { Button } from './button';
+import { useSidebar } from './sidebar';
+import { BotMessageSquare } from 'lucide-react';
+import { useOrg } from '@/app/context/OrgContext';
 
 export function AichatFloatingBtn() {
   const { toggleSidebar, state } = useSidebar();
   const [showInvite, setShowInvite] = useState(true);
 
-  const { setActiveTab,activeTab } = useOrg();
+  const { setActiveTab, activeTab } = useOrg();
 
   // Hide message after a few seconds
   useEffect(() => {
@@ -20,31 +20,31 @@ export function AichatFloatingBtn() {
 
     return () => clearTimeout(timer);
   }, []);
-const handleClick = () => {
-  setShowInvite(false); // hide the bubble immediately
+  const handleClick = () => {
+    setShowInvite(false); // hide the bubble immediately
 
-  if (state == "collapsed") {
-    // Sidebar is closed → open it and set tab to AI
-    toggleSidebar();
-    setActiveTab("ai");
-  } else {
-    // Sidebar is open
-    if (activeTab !== "ai") {
-      // Switch tab to AI without closing
-      setActiveTab("ai");
-    } else {
-      // Already in AI tab → close sidebar
+    if (state == 'collapsed') {
+      // Sidebar is closed → open it and set tab to AI
       toggleSidebar();
+      setActiveTab('ai');
+    } else {
+      // Sidebar is open
+      if (activeTab !== 'ai') {
+        // Switch tab to AI without closing
+        setActiveTab('ai');
+      } else {
+        // Already in AI tab → close sidebar
+        toggleSidebar();
+      }
     }
-  }
-};
-
+  };
 
   return (
-    <div className="fixed md:bottom-12 bottom-25  right-6 z-50 flex items-center gap-2 flex-col items-end
+    <div
+      className="fixed md:bottom-12 bottom-25  right-6 z-50 flex items-center gap-2 flex-col items-end
 
-     ">
-      
+     "
+    >
       {/* Invite bubble */}
       {showInvite && (
         <div
@@ -58,7 +58,7 @@ const handleClick = () => {
             max-w-[180px]
           "
         >
-          👋 Bonjour !  
+          👋 Bonjour !
           <br />
           Je suis là pour vous aider.
         </div>
