@@ -14,6 +14,7 @@ import { Org } from '@/types/types';
 import { RegionSelectorList } from '../ui/RegionSelectorList';
 import { getCategoryIdsFromGroups } from '@/lib/utils';
 import { Spinner } from '@/components/ui/spinner';
+import { Button } from '../ui/button';
 
 export function OrgSearch() {
   const {
@@ -160,13 +161,13 @@ export function OrgSearch() {
           {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
             <>
               <div className="flex justify-center p-2">
-                <button
+                <Button
                   onClick={resetAllFilters}
-                  className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
-                >
-                  <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres</p>
-                  pour <span className="text-primary font-bold">({dbOrgs.length} au total)</span>
-                </button>
+                  className="text-sm font-medium  flex items-center gap-0 h-6"
+                > 
+                  <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres
+                   </p> <span className=" font-bold">({dbOrgs.length} au total)</span>
+                </Button>
               </div>
 
               {selectedCategories.length > 0 && (
