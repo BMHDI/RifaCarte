@@ -47,20 +47,31 @@ export function AichatFloatingBtn() {
     >
       {/* Invite bubble */}
       {showInvite && (
-        <div
-          className="
-            bg-white text-gray-800
-            px-3 py-2
-            rounded-lg
-            shadow-md
-            text-sm
-            animate-bounce
-            max-w-[180px]
-          "
-        >
-          👋 Bonjour !
-          <br />
-          Je suis là pour vous aider.
+        <div className="relative max-w-[180px]">
+          {/* Bubble */}
+          <div
+            className="
+        bg-white text-gray-800
+        px-3 py-2
+        rounded-lg
+        shadow-md
+        text-sm
+animate-bounce        relative
+      "
+          >
+            👋 Bonjour !<br />
+            Je suis votre assistant pour chercher des services francophones.
+            {/* Pointer / Pin */}
+            <span
+              className="       
+    absolute -bottom-4 right-4
+    w-0 h-0
+    border-l-16 border-l-transparent
+    border-r-16 border-r-transparent
+    border-t-16 border-t-white
+  "
+            ></span>
+          </div>
         </div>
       )}
 
