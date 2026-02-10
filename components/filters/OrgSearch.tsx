@@ -190,7 +190,7 @@ export function OrgSearch() {
             {selectedCities.length > 0 && (
               <>
                 <span className="text-xs font-medium">Villes :</span>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1 p-2">
                   {selectedCities.map((c) => (
                     <Badge key={c} onClick={() => toggleCity(c)}>
                       {c} ✕
