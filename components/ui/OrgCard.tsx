@@ -51,16 +51,16 @@ export function OrgCard({
 
       {/* CONTENT */}
       <CardContent className="space-y-2 pt-3 ">
-        <h3 className=" font-semibold text-base">{name}</h3>
+        <h4 className=" font-semibold ">{name}</h4>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Phone className="h-4 w-4" />
-          <span>{phone}</span>
+          <span className='text-xs'>{phone}</span>
         </div>
 
         <div className="flex items-start gap-2 text-sm text-muted-foreground">
           <MapPin className="h-4 w-4 mt-0.5" />
-          <span>{address}</span>
+          <span className='text-xs'>{address}</span>
         </div>
       </CardContent>
 
@@ -77,7 +77,7 @@ export function OrgCard({
         </Button>
       </CardFooter>
       {category && category.length > 0 && (
-        <CardAction className="p-1 flex flex-wrap gap-1">
+        <CardAction className="p-1 flex  flex-wrap gap-1">
           {(Array.isArray(category) ? category : [category]).map((cat) => (
             <Badge key={cat} variant="outline">
               {toTitleCase(cat)}
