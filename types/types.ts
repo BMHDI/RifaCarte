@@ -80,6 +80,8 @@ export interface GeoJSONGeometry {
   coordinates: number[][];
 }
 // context value type
+export type TabType = "search" | "ai" | "Favorites";
+
 export type OrgContextType = {
   selectedOrg: SelectedOrg | null;
   setSelectedOrg: (org: SelectedOrg | null) => void;
@@ -100,7 +102,8 @@ export type OrgContextType = {
   resetMapView: () => void;
   mapInstance: mapboxgl.Map | null;
   setMapInstance: (map: mapboxgl.Map | null) => void;
-};
+  activeTab: string;
+setActiveTab: (activTab: TabType) => void;};
 export type SearchWithFiltersProps = {
   query: string
   setQuery: (q: string) => void

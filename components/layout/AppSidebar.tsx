@@ -18,18 +18,13 @@ import { SidebarToggleButton } from "../ui/SidebarToggleButton";
 import { ChatBox } from "../chatbot/ChatBox";
 import { useOrg } from "@/app/context/OrgContext";
 
-import { useState } from "react";
 import FavoritesPage from "../Favorite";
-import { RegionSelectorList } from "../ui/RegionSelectorList";
 
 export function AppSidebar() {
   const isMobile = useIsMobile();
   const { state, toggleSidebar } = useSidebar();
-  const { activeRegion } = useOrg();
+  const { activeRegion, activeTab, setActiveTab } = useOrg();
   // Track active menu content
-  const [activeTab, setActiveTab] = useState<"search" | "ai" | "Favorites">(
-    "search",
-  );
 
   const menuItems = [
     { title: "Rechercher ", key: "search", icon: List },
@@ -39,13 +34,13 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="md:w-170 mt-19 ">
-      {isMobile ? <SidebarTrigger /> : <SidebarToggleButton />}
+       {isMobile ? (
+  <SidebarTrigger />
+) : activeRegion ? (
+  <SidebarToggleButton />
+) : null}
 
-      {!activeRegion ? (
-        <div className="h-[calc(80vh-50px)] grid  [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-          <RegionSelectorList />
-        </div>
-      ) : (
+      
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
@@ -87,7 +82,7 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-      )}
+      
     </Sidebar>
   );
 }

@@ -8,7 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "../ui/sidebar";
 import SearchWithFilters from "./SearchWithFilters";
 import { Badge } from "../ui/badge";
-import { ArrowBigDown, RotateCcw } from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, RotateCcw } from "lucide-react";
 import CATEGORIES from "@/lib/categories";
 import { Org } from "@/types/types";
 import { RegionSelectorList } from "../ui/RegionSelectorList";
@@ -141,7 +141,76 @@ export function OrgSearch() {
   // Render
   // -----------------------------------
   return (
-    <div className="flex w-full flex-col h-[80vh]">
+    <div className="flex w-full flex-col h-[85dvh]">
+       {/* Filters dropdown */}
+      <div>
+        <SearchWithFilters
+          query={query}
+          setQuery={setQuery}
+          categories={groupNames}
+          cities={filteredCitiesForRegion} // ✅ only cities in region
+          selectedCategories={selectedCategories}
+          selectedCities={selectedCities}
+          toggleCategory={toggleCategory}
+          toggleCity={toggleCity}
+        />
+      </div>
+         {/* Filters summary */}
+      <div className="px-4 flex flex-col">
+        {selectedCategories.length > 0 ||
+        selectedCities.length > 0 ||
+        activeRegion ? (
+          <>
+            <div className="flex justify-center p-2">
+              <button
+                onClick={resetAllFilters}
+                className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
+              >
+                <RotateCcw className="h-3 w-3" /> <p > Réinitialiser tous les filtres</p>
+                pour{" "}
+                <span className="text-primary font-bold">
+                  ({dbOrgs.length} au total)
+                </span>
+              </button>
+            </div>
+
+            {selectedCategories.length > 0 && (
+              <>
+                <span className="text-xs font-medium">Catégories :</span>
+                <div className="flex flex-wrap gap-1 p-2">
+                  {selectedCategories.map((c) => (
+                    <Badge key={c} onClick={() => toggleCategory(c)}>
+                      {c} ✕
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {selectedCities.length > 0 && (
+              <>
+                <span className="text-xs font-medium">Villes :</span>
+                <div className="flex flex-wrap gap-1">
+                  {selectedCities.map((c) => (
+                    <Badge key={c} onClick={() => toggleCity(c)}>
+                      {c} ✕
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="flex justify-center items-center gap-4">
+     <div className="bg-gray-100 rounded-md p-3 ">
+  <p className="text-sm text-center text-gray-700  ">
+    Commencez par choisir une région, puis utilisez les filtres.
+  </p>
+</div>
+<ArrowBigUp className="h-5 animate-bounce" />
+          </div>
+        )}
+      </div>
       <div
         className="h-full overflow-y-auto"
         style={{
@@ -211,74 +280,9 @@ export function OrgSearch() {
           ))}
       </div>
 
-      {/* Filters summary */}
-      <div className="mx-4 flex flex-col">
-        {selectedCategories.length > 0 ||
-        selectedCities.length > 0 ||
-        activeRegion ? (
-          <>
-            <div className="flex justify-center p-2">
-              <button
-                onClick={resetAllFilters}
-                className="text-xs   hover:underline hover:text-primary flex items-center gap-1"
-              >
-                <RotateCcw className="h-3 w-3" /> Réinitialiser tous les filtres
-                pour{" "}
-                <span className="text-primary font-bold">
-                  ({dbOrgs.length} au total)
-                </span>
-              </button>
-            </div>
+   
 
-            {selectedCategories.length > 0 && (
-              <>
-                <span className="text-sm">Catégories :</span>
-                <div className="flex flex-wrap gap-1">
-                  {selectedCategories.map((c) => (
-                    <Badge key={c} onClick={() => toggleCategory(c)}>
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {selectedCities.length > 0 && (
-              <>
-                <span className="text-sm">Villes :</span>
-                <div className="flex flex-wrap gap-1">
-                  {selectedCities.map((c) => (
-                    <Badge key={c} onClick={() => toggleCity(c)}>
-                      {c} ✕
-                    </Badge>
-                  ))}
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          <div className="flex justify-center items-center gap-1">
-            <p className="text-xs font-medium">
-              Utilisez le bouton filtres pour choisir la ville ou la catégorie
-            </p>
-            <ArrowBigDown className="h-5" />
-          </div>
-        )}
-      </div>
-
-      {/* Filters dropdown */}
-      <div>
-        <SearchWithFilters
-          query={query}
-          setQuery={setQuery}
-          categories={groupNames}
-          cities={filteredCitiesForRegion} // ✅ only cities in region
-          selectedCategories={selectedCategories}
-          selectedCities={selectedCities}
-          toggleCategory={toggleCategory}
-          toggleCity={toggleCity}
-        />
-      </div>
+     
     </div>
   );
 }

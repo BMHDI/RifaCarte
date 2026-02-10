@@ -4,14 +4,17 @@ import { useState } from "react";
 import { Button } from "./button";
 import { useSidebar } from "./sidebar";
 import { List, X } from "lucide-react";
+import { useOrg } from "@/app/context/OrgContext";
 
 export function MobileSidebarButton() {
   const { toggleSidebar , state } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
+const {  setActiveTab } = useOrg()
 
   const handleClick = () => {
     toggleSidebar(); // toggles the sidebar
     setIsOpen((prev) => !prev); // update local state
+    setActiveTab("search")
   };
 
   return (

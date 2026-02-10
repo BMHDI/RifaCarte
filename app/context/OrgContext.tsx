@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { SelectedOrg, OrgContextType, Org } from "@/types/types";
 
-
 const OrgContext = createContext<OrgContextType | null>(null);
 
 export function OrgProvider({ children }: { children: React.ReactNode }) {
@@ -16,44 +15,46 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<SelectedOrg | null>(null);
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
-
+  const [activeTab, setActiveTab] = useState<"search" | "ai" | "Favorites">(
+    "search",
+  );
 
   const getDefaultView = () => {
-  if (typeof window === "undefined") {
+    if (typeof window === "undefined") {
+      return {
+        longitude: -114.0719,
+        latitude: 53.0447,
+        zoom: 3,
+      };
+    }
+
+    const w = window.innerWidth;
+
+    if (w >= 1024) {
+      // laptop / desktop
+      return {
+        longitude: -114.0719,
+        latitude: 54.0447,
+        zoom: 5,
+      };
+    }
+
+    // mobile / tablet
     return {
       longitude: -114.0719,
       latitude: 53.0447,
-      zoom: 3,
+      zoom: 4,
     };
-  }
+  };
 
-  const w = window.innerWidth;
-
-  if (w >= 1024) {
-    // laptop / desktop
-    return {
-      longitude: -114.0719,
-      latitude: 54.0447,
-      zoom: 5,
-    };
-  }
-
-  // mobile / tablet
-  return {
-    longitude: -114.0719,
+  const DEFAULT_VIEW = {
+    longitude: -114.0719, // Calgary-ish center of Alberta
     latitude: 53.0447,
     zoom: 4,
   };
-};
+  const [viewState, setViewState] = useState(() => getDefaultView());
 
-    const DEFAULT_VIEW = {
-  longitude: -114.0719, // Calgary-ish center of Alberta
-  latitude: 53.0447,
-  zoom: 4,
-};
-const [viewState, setViewState] = useState(() => getDefaultView());
-
-const resetMapView = () => setViewState(DEFAULT_VIEW);
+  const resetMapView = () => setViewState(DEFAULT_VIEW);
 
   // ✅ hydrate from localStorage AFTER mount (client only)
   useEffect(() => {
@@ -93,7 +94,7 @@ const resetMapView = () => setViewState(DEFAULT_VIEW);
   useEffect(() => {
     localStorage.setItem("selectedCities", JSON.stringify(selectedCities));
   }, [selectedCities]);
-// 
+  //
   // actions
   const toggleSavedOrg = (org: Org) => {
     setSavedOrgs((prev) =>
@@ -110,30 +111,28 @@ const resetMapView = () => setViewState(DEFAULT_VIEW);
   //helper local activew region
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
   useEffect(() => {
-  try {
-    const storedRegion = localStorage.getItem("activeRegion");
-    if (storedRegion) setActiveRegion(storedRegion);
-  } catch (e) {
-    console.error("Failed to load activeRegion from localStorage", e);
-  }
-}, []);
-useEffect(() => {
-  if (activeRegion !== null) {
-    localStorage.setItem("activeRegion", activeRegion);
-  }
-}, [activeRegion]);
+    try {
+      const storedRegion = localStorage.getItem("activeRegion");
+      if (storedRegion) setActiveRegion(storedRegion);
+    } catch (e) {
+      console.error("Failed to load activeRegion from localStorage", e);
+    }
+  }, []);
+  useEffect(() => {
+    if (activeRegion !== null) {
+      localStorage.setItem("activeRegion", activeRegion);
+    }
+  }, [activeRegion]);
 
-
-const resetAllFilters = () => {
-  setQuery("");
-  setSelectedCategories([]);
-  setSelectedCities([]);
-  setSelectedOrg(null);
-  setActiveRegion?.(null);
-  resetMapView(); 
-  localStorage.removeItem("activeRegion");// ✅ zoom + center reset
-};
-
+  const resetAllFilters = () => {
+    setQuery("");
+    setSelectedCategories([]);
+    setSelectedCities([]);
+    setSelectedOrg(null);
+    setActiveRegion?.(null);
+    resetMapView();
+    localStorage.removeItem("activeRegion"); // ✅ zoom + center reset
+  };
 
   // const clearSavedOrgs = () => setSavedOrgs([]);
 
@@ -157,9 +156,11 @@ const resetAllFilters = () => {
         // clearSavedOrgs,
         resetMapView,
         viewState,
-        setViewState,   
+        setViewState,
         mapInstance,
-      setMapInstance, 
+        setMapInstance,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
