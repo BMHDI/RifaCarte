@@ -86,7 +86,7 @@ animate-bounce        relative
         "
         aria-label="Ouvrir le Chat"
       >
-       <BotMessageSquare className="size-8" />
+       <BotMessageSquare className="size-6" />
       </Button>
     </div>
   );

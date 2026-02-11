@@ -29,7 +29,7 @@ export function MobileSidebarButton() {
       "
       aria-label={isOpen ? 'Close sidebar' : 'Open search'}
     >
-      {isOpen && state === 'collapsed' ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
+      {isOpen && state === 'collapsed' ? <X className="size-5" /> : <List className="size-5" />}
     </Button>
   );
 }
