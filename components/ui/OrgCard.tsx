@@ -3,10 +3,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter } from '@/components/ui/card';
-import {  Heart, Map, MapPin, Phone } from 'lucide-react';
+import {  Heart, MapPin, MapPinned, Phone, PhoneOff } from 'lucide-react';
 import { OrgCardProps } from '@/types/types';
 import { toTitleCase } from '@/lib/utils';
-import Link from 'next/link';
 import { ShareButton } from './ShareButton';
 import { useOrg } from '@/app/context/OrgContext';
 import { useRouter } from 'next/navigation';
@@ -37,10 +36,10 @@ const handleClick = () => {
     router.push(`/${id}?region=${activeRegion}`);
   };
   return (
-    <Card className="md:w-[297px] max-h-[400px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
+    <Card className="md:w-[297px] max-h-[400px] w-[88dvw] mx-auto md:mx-3  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
       {/* IMAGE HEADER */}
-      <div className="relative  h-24 w-full overflow-hidden rounded-t-md">
+      <div className="relative  h-26 w-full overflow-hidden rounded-t-md">
         <Heart
           onClick={onSave}
           className="  absolute m-2 top-0 right-0 rounded-full z-20"
@@ -61,16 +60,16 @@ const handleClick = () => {
 
       {/* CONTENT */}
       <CardContent className="space-y-2 pt-3 ">
-        <h4 className=" font-semibold ">{name}</h4>
+        <h4 className="font-semibold  h-[2.5rem] ">{name}</h4>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Phone className="h-4 w-4" />
-          <span className='text-xs'>{phone}</span>
+        {phone ? <Phone className="h-4 w-4" /> : <PhoneOff className="h-4 w-4" />}
+          <span  className='text-xs '> {phone ? phone : "Non disponible"}</span>
         </div>
 
         <div className="flex items-start gap-2 text-sm text-muted-foreground">
           <MapPin className="h-4 w-4 mt-0.5" />
-          <span className='text-xs'>{address}</span>
+          <span className='text-xs h-[2.5rem]'>{address ? address : "Non disponible"}</span>
         </div>
       </CardContent>
 
@@ -86,13 +85,13 @@ const handleClick = () => {
         {/* Share button */}
         <ShareButton id={id} name={name} />
         <Button size="sm" variant="outline" onClick={onMap}>
-          <Map />
+        <MapPinned />
         </Button>
       </CardFooter>
       {category && category.length > 0 && (
         <CardAction className="p-1 flex  flex-wrap gap-1">
           {(Array.isArray(category) ? category : [category]).map((cat) => (
-            <Badge key={cat} variant="outline">
+            <Badge key={cat} variant="outline" className='border border-gray-400 '>
               {toTitleCase(cat)}
             </Badge>
           ))}

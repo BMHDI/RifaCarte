@@ -24,54 +24,57 @@ export function AppSidebar() {
   const isMobile = useIsMobile();
   const { state, toggleSidebar } = useSidebar();
   const { activeRegion, activeTab, setActiveTab } = useOrg();
-  // Track active menu content
 
   const menuItems = [
-    { title: 'Rechercher ', key: 'search', icon: List },
-    { title: 'Chatbot', key: 'ai', icon: Bot },
-    { title: 'Favoris', key: 'Favorites', icon: Heart },
+    { title: 'Rechercher', key: 'search', icon: List },
+    { title: 'Assistant IA', key: 'ai', icon: Bot },
+    { title: 'Mes Favoris', key: 'Favorites', icon: Heart },
   ];
 
   return (
-    <Sidebar collapsible="icon" className="md:w-170 mt-19 ">
+    <Sidebar collapsible="icon" className="md:w-170 mt-19">
       {isMobile ? <SidebarTrigger /> : activeRegion ? <SidebarToggleButton /> : null}
 
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.key}>
-                  <SidebarMenuButton
-                    asChild
-                    onClick={() => {
-                      setActiveTab(item.key as 'search' | 'ai' | 'Favorites');
-                      if (state !== 'expanded' && !isMobile) {
-                        toggleSidebar();
-                      }
-                    }}
-                  >
-                    <button
-                      className={`relative items-center text-left font-medium md:my-2
-    transition-all duration-300
-    ${
-      activeTab === item.key
-        ? 'font-extrabold text-primary underline  decoration-6 underline-offset-3   transition-all duration-300 ease-in-out'
-        : 'no-underline'
-    }
-  `}
+              {menuItems.map((item) => {
+                const Icon = item.icon; // Assign variable for dynamic icon
+
+                return (
+                  <SidebarMenuItem key={item.key}>
+                    <SidebarMenuButton
+                      asChild
+                      onClick={() => {
+                        setActiveTab(item.key as 'search' | 'ai' | 'Favorites');
+                        if (state !== 'expanded' && !isMobile) toggleSidebar();
+                      }}
                     >
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </button>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                      <button
+                        className={`flex items-center gap-2 text-left font-medium md:mt-2 transition-all duration-300 relative
+                          ${
+                            activeTab === item.key
+                              ? 'font-extrabold text-primary underline decoration-6 underline-offset-3 ease-in-out'
+                              : 'text-gray-700 dark:text-gray-300'
+                          }`}
+                      >
+                        <Icon
+                          className={`transition-transform duration-300 ${
+                            activeTab === item.key ? 'scale-155' : 'scale-100'
+                          }`}
+                        />
+                        <span>{item.title}</span>
+                      </button>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
 
             {/* Render the content of the selected menu item */}
             {(state === 'expanded' || isMobile) && (
-              <div>
+              <div className="mt-4">
                 {activeTab === 'search' && <OrgSearch />}
                 {activeTab === 'ai' && <ChatBox />}
                 {activeTab === 'Favorites' && <FavoritesPage />}

@@ -1,26 +1,19 @@
 'use client';
 
-import { useOrg } from '@/app/context/OrgContext';
-import Link from 'next/link';
-import { Mail, Phone, Globe, MapPin } from 'lucide-react';
+import { Mail, Phone, Globe, MapPin, ArrowLeft } from 'lucide-react';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { Button } from '@/components/ui/button';
 import { OrgMap } from '@/components/map/OrgMap';
+import BackButton from '@/components/ui/BackButton';
+
 
 export function OrgDetailsClient({ org }: { org: any }) {
-  const { activeRegion } = useOrg();
 
   return (
     <div className="bg-white dark:bg-gray-900">
       {/* BACK LINK */}
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <Link
-          href={`/?region=${activeRegion || ''}`}
-          className="inline-flex items-center gap-2 text-md font-bold text-primary hover:underline"
-        >
-          <MapPin size={16} />
-          Retour à la carte
-        </Link>
+      <BackButton/>
       </div>
 
       {/* CONTENT */}

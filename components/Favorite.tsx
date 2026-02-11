@@ -15,7 +15,7 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className=" grid gap-4 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
+    <div className=" grid mt-8 gap-4 overflow-y-auto [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
       {savedOrgs.map((org) => (
         <OrgCard
           id={org.id ?? ''}
