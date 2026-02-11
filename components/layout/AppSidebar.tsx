@@ -52,11 +52,14 @@ export function AppSidebar() {
                     }}
                   >
                     <button
-                      className={`items-center text-left md:text-[17px] md:my-2 ${
-                        activeTab === item.key
-                          ? 'font-bold text-primary border-black/20 rounded-t-md'
-                          : ''
-                      }`}
+                      className={`relative items-center text-left font-medium md:my-2
+    transition-all duration-300
+    ${
+      activeTab === item.key
+        ? 'font-extrabold text-primary underline  decoration-6 underline-offset-3   transition-all duration-300 ease-in-out'
+        : 'no-underline'
+    }
+  `}
                     >
                       <item.icon />
                       <span>{item.title}</span>
@@ -68,7 +71,7 @@ export function AppSidebar() {
 
             {/* Render the content of the selected menu item */}
             {(state === 'expanded' || isMobile) && (
-              <div className="mt-4">
+              <div>
                 {activeTab === 'search' && <OrgSearch />}
                 {activeTab === 'ai' && <ChatBox />}
                 {activeTab === 'Favorites' && <FavoritesPage />}
