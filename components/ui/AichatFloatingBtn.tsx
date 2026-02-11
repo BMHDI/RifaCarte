@@ -41,7 +41,7 @@ export function AichatFloatingBtn() {
 
   return (
     <div
-      className="fixed md:bottom-12 bottom-25  right-6 z-50 flex items-center gap-2 flex-col items-end
+      className="fixed md:bottom-18 bottom-25  right-6 z-50 flex items-center gap-2 flex-col items-end
 
      "
     >
@@ -77,6 +77,7 @@ animate-bounce        relative
 
       {/* Button */}
       <Button
+        size="icon-lg"
         onClick={handleClick}
         className="
           h-15 w-15 rounded-full
@@ -85,7 +86,7 @@ animate-bounce        relative
         "
         aria-label="Ouvrir le Chat"
       >
-        <BotMessageSquare />
+       <BotMessageSquare className="size-8" />
       </Button>
     </div>
   );

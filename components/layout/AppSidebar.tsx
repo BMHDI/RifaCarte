@@ -28,8 +28,8 @@ export function AppSidebar() {
 
   const menuItems = [
     { title: 'Rechercher ', key: 'search', icon: List },
-    { title: 'Conversation AI', key: 'ai', icon: Bot },
-    { title: 'Mes favoris', key: 'Favorites', icon: Heart },
+    { title: 'Chatbot', key: 'ai', icon: Bot },
+    { title: 'Favoris', key: 'Favorites', icon: Heart },
   ];
 
   return (
@@ -52,7 +52,7 @@ export function AppSidebar() {
                     }}
                   >
                     <button
-                      className={`items-center text-left ${
+                      className={`items-center text-left md:text-[17px] md:my-2 ${
                         activeTab === item.key
                           ? 'font-bold text-primary border-black/20 rounded-t-md'
                           : ''

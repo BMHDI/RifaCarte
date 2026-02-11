@@ -3,12 +3,16 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter } from '@/components/ui/card';
-import { ExternalLink, Ghost, Heart, Map, MapPin, Phone, Plus } from 'lucide-react';
+import {  Heart, Map, MapPin, Phone } from 'lucide-react';
 import { OrgCardProps } from '@/types/types';
 import { toTitleCase } from '@/lib/utils';
 import Link from 'next/link';
 import { ShareButton } from './ShareButton';
 import { useOrg } from '@/app/context/OrgContext';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Spinner } from './spinner';
+
 
 export function OrgCard({
   id, // 👈 add this
@@ -25,7 +29,13 @@ export function OrgCard({
     'https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png';
   const imgSrc = image_url || defaultImage;
   const { activeRegion, setActiveRegion } = useOrg();
+  const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
+const handleClick = () => {
+    setLoading(true);
+    router.push(`/${id}?region=${activeRegion}`);
+  };
   return (
     <Card className="md:w-[297px] max-h-[400px]  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
@@ -65,11 +75,14 @@ export function OrgCard({
       </CardContent>
 
       <CardFooter className="flex gap-1 flex-wrap m-2">
-        <Link href={`/${id}?region=${activeRegion}`}>
-          <Button size="sm" variant="default">
-            Voir plus
-          </Button>
-        </Link>
+        <Button
+      size="sm"
+      variant="default"
+      onClick={handleClick}
+      disabled={loading}
+    >
+      {loading ? <Spinner className='animate-spin mx-6' /> : 'Voir plus'}
+    </Button>
         {/* Share button */}
         <ShareButton id={id} name={name} />
         <Button size="sm" variant="outline" onClick={onMap}>

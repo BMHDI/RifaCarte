@@ -142,7 +142,7 @@ export function OrgSearch() {
   // Render
   // -----------------------------------
   return (
-    <div className="flex w-full flex-col h-[85dvh]">
+    <div className="flex w-full flex-col h-[90dvh]">
       {/* Filters dropdown */}
      {activeRegion && <div>
         <SearchWithFilters
@@ -165,9 +165,10 @@ export function OrgSearch() {
                   onClick={resetAllFilters}
                   className="text-sm font-medium  flex items-center gap-0 h-6"
                 > 
-                  <RotateCcw className="h-3 w-3" /> <p> Réinitialiser tous les filtres
-                   </p> <span className=" font-bold">({dbOrgs.length} au total)</span>
+                  <RotateCcw /> <p className="px-1" >Réinitialiser
+                   </p> 
                 </Button>
+                {/* <span className=" font-bold">({dbOrgs.length} au total)</span> */}
               </div>
 
               {selectedCategories.length > 0 && (

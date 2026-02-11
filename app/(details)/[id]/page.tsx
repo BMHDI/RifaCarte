@@ -12,7 +12,6 @@ export default async function OrgPage({
   searchParams?: { region?: string };
 }) {
   const { id } = await params; // <-- unwrap here
-  console.log('Fetching details for org ID:', id);
 
   const { data: org, error } = await supabase
     .from('organizations')

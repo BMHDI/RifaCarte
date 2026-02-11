@@ -9,13 +9,16 @@ import francophoneRegions from '@/lib/francophone-regions.json';
 import { regionFill, regionBorder } from '@/lib/mapstyles';
 import { useOrg } from '@/app/context/OrgContext';
 import { MapRef } from 'react-map-gl/mapbox';
-import { OrgCard } from '../ui/OrgCard';
 import { Button } from '../ui/button';
 import { useSidebar } from '../ui/sidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ViewState } from '@/types/types';
+import { useRouter } from 'next/navigation';
+import { ShareButton } from '../ui/ShareButton';
+
 
 export function MapView() {
+  const router = useRouter();
   const mapRef = useRef<MapRef | null>(null);
   const {
     selectedOrg,
@@ -209,18 +212,58 @@ export function MapView() {
               }));
             }}
           >
-            <div className="max-w-md bg-white overflow-hidden">
-              <OrgCard
-                id={selectedOrg.org?.id ?? ''}
-                image_url={selectedOrg.org?.image_url ?? ''}
-                name={selectedOrg.org?.name ?? 'Unknown'}
-                phone={selectedOrg.org?.contact?.phone ?? ''}
-                address={selectedOrg.location.address ?? ''}
-                category={selectedOrg.org?.category}
-                onDetails={() => console.log('Details', selectedOrg.org?.name)}
-                onShare={() => console.log('Share', selectedOrg.org?.name)}
-              />
-            </div>
+            <div className=" rounded-xl px-4 py-3 max-w-xs ">
+
+  {/* Name */}
+  <h3 className="text-sm font-semibold text-gray-900 leading-tight">
+    {selectedOrg.org?.name ?? 'Unknown'}
+  </h3>
+
+  {/* Category */}
+  {selectedOrg.org?.category && (
+    <p className="text-xs text-gray-500 mt-0.5">
+      {selectedOrg.org.category}
+    </p>
+  )}
+
+  {/* Address */}
+  {selectedOrg.location.address && (
+    <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+      📍 {selectedOrg.location.address}
+    </p>
+  )}
+
+  {/* Phone */}
+  {selectedOrg.org?.contact?.phone && (
+    <p className="text-xs text-gray-600 mt-1">
+      📞 {selectedOrg.org.contact.phone}
+    </p>
+  )}
+
+  {/* Actions */}
+  <div className="flex items-center justify-end gap-2 mt-2">
+
+    {/* Details */}
+    <Button
+      onClick={() =>
+        router.push(`/${selectedOrg.org?.id}?region=${activeRegion}`)
+      }
+      className="text-xs hover:underline"
+    >
+      Voir +
+    </Button>
+
+    {/* Share */}
+    <ShareButton
+      id={selectedOrg.org?.id ?? ''}
+      name={selectedOrg.org?.name ?? ''}
+
+    />
+      
+   
+  </div>
+
+</div>
           </Popup>
         )}
       </Map>

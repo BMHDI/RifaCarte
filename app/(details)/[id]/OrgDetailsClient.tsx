@@ -9,7 +9,6 @@ import { OrgMap } from '@/components/map/OrgMap';
 
 export function OrgDetailsClient({ org }: { org: any }) {
   const { activeRegion } = useOrg();
-  console.log('OrgDetailsClient org:', org);
 
   return (
     <div className="bg-white dark:bg-gray-900">
