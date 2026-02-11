@@ -8,7 +8,7 @@ import { OrgCardProps } from '@/types/types';
 import { toTitleCase } from '@/lib/utils';
 import { ShareButton } from './ShareButton';
 import { useOrg } from '@/app/context/OrgContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Spinner } from './spinner';
 
@@ -29,14 +29,12 @@ export function OrgCard({
   const imgSrc = image_url || defaultImage;
   const { activeRegion } = useOrg();
   const router = useRouter();
-    const [loading, setLoading] = useState(false);
-useEffect(() => {
-    const resetLoading = () => setLoading(false);
+    const pathname = usePathname(); // track current route
 
-    // For App Router, use router.events via 'next/navigation' workaround
-    // or use setTimeout if router.events is unavailable
-    return resetLoading; // simple: always reset loading on mount
-  }, []);
+    const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(false);
+  }, [pathname]);
 const handleClick = () => {
     setLoading(true);
     router.push(`/${id}?region=${activeRegion}`);
