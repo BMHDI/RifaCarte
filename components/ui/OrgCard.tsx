@@ -27,12 +27,16 @@ export function OrgCard({
   const defaultImage =
     'https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png';
   const imgSrc = image_url || defaultImage;
-  const { activeRegion, setActiveRegion } = useOrg();
+  const { activeRegion } = useOrg();
   const router = useRouter();
     const [loading, setLoading] = useState(false);
 useEffect(() => {
-  setLoading(false);
-}, [id]);
+    const resetLoading = () => setLoading(false);
+
+    // For App Router, use router.events via 'next/navigation' workaround
+    // or use setTimeout if router.events is unavailable
+    return resetLoading; // simple: always reset loading on mount
+  }, []);
 const handleClick = () => {
     setLoading(true);
     router.push(`/${id}?region=${activeRegion}`);
