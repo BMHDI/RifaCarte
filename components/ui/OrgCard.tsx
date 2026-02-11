@@ -9,7 +9,7 @@ import { toTitleCase } from '@/lib/utils';
 import { ShareButton } from './ShareButton';
 import { useOrg } from '@/app/context/OrgContext';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from './spinner';
 
 
@@ -30,7 +30,9 @@ export function OrgCard({
   const { activeRegion, setActiveRegion } = useOrg();
   const router = useRouter();
     const [loading, setLoading] = useState(false);
-
+useEffect(() => {
+  setLoading(false);
+}, [id]);
 const handleClick = () => {
     setLoading(true);
     router.push(`/${id}?region=${activeRegion}`);
