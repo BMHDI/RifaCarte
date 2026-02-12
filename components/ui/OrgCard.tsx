@@ -11,6 +11,7 @@ import { useOrg } from '@/app/context/OrgContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Spinner } from './spinner';
+import Link from 'next/link';
 
 
 export function OrgCard({
@@ -27,18 +28,9 @@ export function OrgCard({
   const defaultImage =
     'https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png';
   const imgSrc = image_url || defaultImage;
-  const { activeRegion } = useOrg();
-  const router = useRouter();
-    const pathname = usePathname(); // track current route
-
-    const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(false);
-  }, [pathname]);
-const handleClick = () => {
-    setLoading(true);
-    router.push(`/${id}?region=${activeRegion}`);
-  };
+ 
+    
+ 
   return (
     <Card className="md:w-[297px] max-h-[400px] w-[88dvw] mx-auto md:mx-3  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
@@ -81,10 +73,10 @@ const handleClick = () => {
         <Button
       size="sm"
       variant="default"
-      onClick={handleClick}
-      disabled={loading}
     >
-      {loading ? <Spinner className='animate-spin mx-6' /> : 'Voir plus'}
+     <Link href={`/${id}`}>
+  Voir +
+</Link>
     </Button>
         {/* Share button */}
         <ShareButton id={id} name={name} />

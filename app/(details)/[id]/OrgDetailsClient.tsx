@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, Phone, Globe, MapPin, ArrowLeft } from 'lucide-react';
+import { Mail, Phone, Globe, MapPin } from 'lucide-react';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { Button } from '@/components/ui/button';
 import { OrgMap } from '@/components/map/OrgMap';
