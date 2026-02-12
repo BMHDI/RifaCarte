@@ -16,7 +16,6 @@ import { ViewState } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { ShareButton } from '../ui/ShareButton';
 
-
 export function MapView() {
   const router = useRouter();
   const mapRef = useRef<MapRef | null>(null);
@@ -213,57 +212,42 @@ export function MapView() {
             }}
           >
             <div className=" rounded-xl px-4 py-3 max-w-xs ">
+              {/* Name */}
+              <h3 className="text-sm font-semibold text-gray-900 leading-tight">
+                {selectedOrg.org?.name ?? 'Unknown'}
+              </h3>
 
-  {/* Name */}
-  <h3 className="text-sm font-semibold text-gray-900 leading-tight">
-    {selectedOrg.org?.name ?? 'Unknown'}
-  </h3>
+              {/* Category */}
+              {selectedOrg.org?.category && (
+                <p className="text-xs text-gray-500 mt-0.5">{selectedOrg.org.category}</p>
+              )}
 
-  {/* Category */}
-  {selectedOrg.org?.category && (
-    <p className="text-xs text-gray-500 mt-0.5">
-      {selectedOrg.org.category}
-    </p>
-  )}
+              {/* Address */}
+              {selectedOrg.location.address && (
+                <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                  📍 {selectedOrg.location.address}
+                </p>
+              )}
 
-  {/* Address */}
-  {selectedOrg.location.address && (
-    <p className="text-xs text-gray-600 mt-1 line-clamp-2">
-      📍 {selectedOrg.location.address}
-    </p>
-  )}
+              {/* Phone */}
+              {selectedOrg.org?.contact?.phone && (
+                <p className="text-xs text-gray-600 mt-1">📞 {selectedOrg.org.contact.phone}</p>
+              )}
 
-  {/* Phone */}
-  {selectedOrg.org?.contact?.phone && (
-    <p className="text-xs text-gray-600 mt-1">
-      📞 {selectedOrg.org.contact.phone}
-    </p>
-  )}
+              {/* Actions */}
+              <div className="flex items-center justify-end gap-2 mt-2">
+                {/* Details */}
+                <Button
+                  onClick={() => router.push(`/${selectedOrg.org?.id}?region=${activeRegion}`)}
+                  className="text-xs hover:underline"
+                >
+                  Voir +
+                </Button>
 
-  {/* Actions */}
-  <div className="flex items-center justify-end gap-2 mt-2">
-
-    {/* Details */}
-    <Button
-      onClick={() =>
-        router.push(`/${selectedOrg.org?.id}?region=${activeRegion}`)
-      }
-      className="text-xs hover:underline"
-    >
-      Voir +
-    </Button>
-
-    {/* Share */}
-    <ShareButton
-      id={selectedOrg.org?.id ?? ''}
-      name={selectedOrg.org?.name ?? ''}
-
-    />
-      
-   
-  </div>
-
-</div>
+                {/* Share */}
+                <ShareButton id={selectedOrg.org?.id ?? ''} name={selectedOrg.org?.name ?? ''} />
+              </div>
+            </div>
           </Popup>
         )}
       </Map>

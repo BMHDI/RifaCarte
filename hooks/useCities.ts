@@ -1,26 +1,44 @@
-import { useMemo } from 'react';
-import organizations from '../lib/org.json';
-import { useOrg } from '@/app/context/OrgContext';
+'use client';
 
-export function useCities() {
-  const { activeRegion } = useOrg();
+import { useEffect, useState, useMemo } from 'react';
+import { fetchCities } from '@/lib/db';
+import { Org } from '@/types/types';
 
-  const cities = useMemo(() => {
-    const set = new Set<string>();
+interface UseCitiesProps {
+  activeRegion?: string | null;
+  dbOrgs: Org[];
+}
 
-    organizations.forEach((o) => {
-      const orgRegion = o.region?.trim().toLowerCase();
-      const active = activeRegion?.trim().toLowerCase();
+export function useCities({ activeRegion, dbOrgs }: UseCitiesProps) {
+  const [allCities, setAllCities] = useState<string[]>([]);
 
-      if (!active || orgRegion === active) {
-        o.locations.forEach((loc) => {
-          if (loc.city) set.add(loc.city);
-        });
+  // Fetch all cities once
+  useEffect(() => {
+    const loadCities = async () => {
+      try {
+        const citiesFromDB = await fetchCities();
+        setAllCities(citiesFromDB.sort());
+      } catch (err) {
+        console.error('Failed to load cities', err);
       }
-    });
+    };
 
-    return Array.from(set).sort();
-  }, [activeRegion]);
+    loadCities();
+  }, []);
 
-  return cities;
+  // Derived cities based on activeRegion and dbOrgs
+  const filteredCitiesForRegion = useMemo(() => {
+    if (!activeRegion) return allCities;
+
+    const citySet = new Set<string>();
+    dbOrgs.forEach((org) =>
+      org.locations.forEach((loc) => {
+        if (loc.city) citySet.add(loc.city);
+      })
+    );
+
+    return Array.from(citySet).sort();
+  }, [activeRegion, dbOrgs, allCities]);
+
+  return filteredCitiesForRegion;
 }

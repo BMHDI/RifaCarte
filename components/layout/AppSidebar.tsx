@@ -74,7 +74,7 @@ export function AppSidebar() {
 
             {/* Render the content of the selected menu item */}
             {(state === 'expanded' || isMobile) && (
-              <div className="mt-4">
+              <div className="mt-2">
                 {activeTab === 'search' && <OrgSearch />}
                 {activeTab === 'ai' && <ChatBox />}
                 {activeTab === 'Favorites' && <FavoritesPage />}

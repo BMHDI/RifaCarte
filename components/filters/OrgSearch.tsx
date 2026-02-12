@@ -1,20 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { fetchFilteredOrgs, fetchCities } from '@/lib/db';
+import {  useMemo } from 'react';
 import { useOrg } from '@/app/context/OrgContext';
 import { OrgCard } from '../ui/OrgCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useSidebar } from '../ui/sidebar';
 import SearchWithFilters from './SearchWithFilters';
 import { Badge } from '../ui/badge';
-import { ArrowBigDown, ArrowBigUp, RotateCcw } from 'lucide-react';
+import { ArrowBigDown, RotateCcw } from 'lucide-react';
 import CATEGORIES from '@/lib/categories';
-import { Org } from '@/types/types';
 import { RegionSelectorList } from '../ui/RegionSelectorList';
-import { getCategoryIdsFromGroups } from '@/lib/utils';
 import { Spinner } from '@/components/ui/spinner';
 import { Button } from '../ui/button';
+import { useFilteredOrgs } from '@/hooks/useFilteredOrgs';
+import { useCities } from '@/hooks/useCities';
 
 export function OrgSearch() {
   const {
@@ -31,107 +30,26 @@ export function OrgSearch() {
     resetAllFilters,
     mapInstance,
   } = useOrg();
-
-  const [dbOrgs, setDbOrgs] = useState<Org[]>([]);
-  const [allCities, setAllCities] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { dbOrgs, loading } = useFilteredOrgs({
+    query,
+    selectedCategories,
+    selectedCities,
+    activeRegion,
+  });
+  const filteredCitiesForRegion = useCities({ activeRegion, dbOrgs });
 
   const { toggleSidebar } = useSidebar();
   const isMobile = useIsMobile();
   // -----------------------------------
   // Categories list
-  // -----------------------------------
   const groupNames = useMemo(() => CATEGORIES.map((g) => g.group), []);
-
-  // -----------------------------------
-  // Fetch all cities once
-  // -----------------------------------
-  useEffect(() => {
-    const loadCities = async () => {
-      try {
-        const citiesFromDB = await fetchCities();
-        setAllCities(citiesFromDB.sort());
-      } catch (err) {
-        console.error('Failed to load cities', err);
-      }
-    };
-    loadCities();
-  }, []);
-
-  // -----------------------------------
-  // Fetch organizations whenever filters change
-  // -----------------------------------
-  useEffect(() => {
-    const fetchOrgs = async () => {
-      const categoryIds = getCategoryIdsFromGroups(selectedCategories);
-
-      if (!activeRegion) {
-        console.log('❌ No activeRegion, aborting');
-        return;
-      }
-
-      try {
-        setLoading(true);
-
-        const data = await fetchFilteredOrgs({
-          query,
-          categories: categoryIds,
-          cities: selectedCities,
-          region: activeRegion,
-        });
-
-        const normalized = data.map((org) => ({
-          ...org,
-          locations:
-            org.lat && org.lng
-              ? [
-                  {
-                    lat: org.lat,
-                    lng: org.lng,
-                    city: org.city ?? '',
-                    address: org.address ?? '',
-                  },
-                ]
-              : [],
-        }));
-
-        setDbOrgs(normalized);
-      } catch (err) {
-        console.error('❌ Failed to fetch orgs', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOrgs();
-  }, [query, selectedCategories, selectedCities, activeRegion]);
-
-  // -----------------------------------
-  // Derived cities for dropdown
-  // -----------------------------------
-  const filteredCitiesForRegion = useMemo(() => {
-    if (!activeRegion) return allCities;
-
-    // Only filter by region, not by selected cities
-    const citySet = new Set<string>();
-    dbOrgs.forEach((org) =>
-      org.locations.forEach((loc) => {
-        if (loc.city) citySet.add(loc.city);
-      })
-    );
-
-    return Array.from(citySet).sort();
-  }, [activeRegion, dbOrgs]); // remove allCities if you compute from dbOrgs
-
   // -----------------------------------
   // Filter toggles
-  // -----------------------------------
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
   };
-
   const toggleCity = (city: string) => {
     setSelectedCities((prev) =>
       prev.includes(city) ? prev.filter((c) => c !== city) : [...prev, city]
@@ -142,31 +60,33 @@ export function OrgSearch() {
   // Render
   // -----------------------------------
   return (
-    <div className="flex w-full flex-col h-[90dvh]">
+    <div className="flex w-full flex-col h-[85.5dvh]">
       {/* Filters dropdown */}
-     {activeRegion && <div>
-        <SearchWithFilters
-          query={query}
-          setQuery={setQuery}
-          categories={groupNames}
-          cities={filteredCitiesForRegion} // ✅ only cities in region
-          selectedCategories={selectedCategories}
-          selectedCities={selectedCities}
-          toggleCategory={toggleCategory}
-          toggleCity={toggleCity}
-        />
-      </div> }
+      {activeRegion && (
+        <div>
+          <SearchWithFilters
+            query={query}
+            setQuery={setQuery}
+            categories={groupNames}
+            cities={filteredCitiesForRegion} // ✅ only cities in region
+            selectedCategories={selectedCategories}
+            selectedCities={selectedCities}
+            toggleCategory={toggleCategory}
+            toggleCity={toggleCity}
+          />
+        </div>
+      )}
       {/* Filters summary */}
-      {  <div className="px-4 flex flex-col">
+      {
+        <div className="flex flex-col sticky top-0 z-10 bg-white">
           {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
             <>
               <div className="flex justify-center p-2">
                 <Button
                   onClick={resetAllFilters}
                   className="text-sm font-medium  flex items-center gap-0 h-6"
-                > 
-                  <RotateCcw /> <p className="px-1" >Réinitialiser
-                   </p> 
+                >
+                  <RotateCcw /> <p className="px-1">Réinitialiser</p>
                 </Button>
                 {/* <span className=" font-bold">({dbOrgs.length} au total)</span> */}
               </div>
@@ -202,12 +122,13 @@ export function OrgSearch() {
               <div className="bg-gray-100 rounded-md  flex p-4 flex-col items-center ">
                 <p className="text-sm font-medium text-center  text-gray-700  ">
                   Commencez par choisir une région, puis utilisez les filtres.
-                </p> <ArrowBigDown className="animate-bounce" size={28} />
+                </p>{' '}
+                <ArrowBigDown className="animate-bounce" size={28} />
               </div>
-             
             </div>
           )}
-        </div>}
+        </div>
+      }
       <div
         className="h-full overflow-y-auto"
         style={{
@@ -258,7 +179,6 @@ export function OrgSearch() {
                   if (mapInstance) {
                     const lats = org.locations.map((l) => l.lat ?? 0);
                     const lngs = org.locations.map((l) => l.lng ?? 0);
-
                     mapInstance.fitBounds(
                       [
                         [Math.min(...lngs), Math.min(...lats)],
@@ -268,7 +188,6 @@ export function OrgSearch() {
                     );
                   }
                 }
-
                 if (isMobile) toggleSidebar();
               }}
             />
