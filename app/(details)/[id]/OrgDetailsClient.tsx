@@ -6,20 +6,18 @@ import { Button } from '@/components/ui/button';
 import { OrgMap } from '@/components/map/OrgMap';
 import BackButton from '@/components/ui/BackButton';
 
-
 export function OrgDetailsClient({ org }: { org: any }) {
-
   return (
     <div className="bg-white dark:bg-gray-900 ">
       {/* BACK LINK */}
       <div className="max-w-6xl mx-auto  ">
-      <BackButton/>
+        <BackButton />
       </div>
 
       {/* CONTENT */}
-<main className="max-w-6xl mx-auto px-4 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 overflow-auto h-screen">
+      <main className="max-w-6xl mx-auto px-4 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 overflow-auto h-screen pb-35">
         {/* LEFT – ABOUT */}
-  <section className="space-y-4">
+        <section className="space-y-4">
           <img
             src={org.image_url}
             alt={org.name}
@@ -74,14 +72,14 @@ export function OrgDetailsClient({ org }: { org: any }) {
         </section>
 
         {/* RIGHT – SIDEBAR */}
-  <aside className="space-y-6">
+        <aside className="space-y-6">
           {/* MAP PLACEHOLDER */}
           <div className="rounded-lg overflow-hidden border">
             {org.lat && org.lng && <OrgMap lat={org.lat} lng={org.lng} />}
           </div>
 
           {/* CONTACTS */}
-    <div className="border rounded-lg p-5 space-y-4 mb-30 ">
+          <div className="border rounded-lg p-5 space-y-4 mb-30 ">
             <h3 className="font-semibold">Contacts</h3>
 
             {org.address && (
