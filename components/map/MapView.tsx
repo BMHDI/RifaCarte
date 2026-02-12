@@ -15,6 +15,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { ViewState } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { ShareButton } from '../ui/ShareButton';
+import { Spinner } from '../ui/spinner';
 
 export function MapView() {
   const router = useRouter();
@@ -105,6 +106,11 @@ export function MapView() {
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
+       {!mapLoaded && (
+    <div className="absolute inset-0 flex items-center bg-gray-100 justify-center z-2">
+          <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />
+    </div>
+  )}
       <Map
         minZoom={4}
         maxZoom={15}
