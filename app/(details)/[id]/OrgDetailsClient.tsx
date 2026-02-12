@@ -12,7 +12,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
   return (
     <div className="bg-white dark:bg-gray-900 ">
       {/* BACK LINK */}
-      <div className="max-w-6xl mx-auto px-4 py-6 ">
+      <div className="max-w-6xl mx-auto  ">
       <BackButton/>
       </div>
 
@@ -81,7 +81,7 @@ export function OrgDetailsClient({ org }: { org: any }) {
           </div>
 
           {/* CONTACTS */}
-    <div className="border rounded-lg p-5 space-y-4 mb-35 ">
+    <div className="border rounded-lg p-5 space-y-4 mb-30 ">
             <h3 className="font-semibold">Contacts</h3>
 
             {org.address && (

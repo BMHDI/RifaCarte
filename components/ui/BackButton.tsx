@@ -9,7 +9,7 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="inline-flex items-center gap-2 text-md font-bold text-primary hover:underline"
+      className="inline-flex items-center gap-2 text-md font-bold text-primary p-2 hover:underline"
     >
       <ArrowLeft size={24} />
       Retour à la carte

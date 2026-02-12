@@ -60,7 +60,7 @@ export function OrgSearch() {
   // Render
   // -----------------------------------
   return (
-    <div className="flex w-full flex-col h-[85.5dvh]">
+    <div className="flex w-full flex-col h-[87dvh]">
       {/* Filters dropdown */}
       {activeRegion && (
         <div>
