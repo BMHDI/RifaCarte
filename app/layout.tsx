@@ -11,11 +11,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-     <html lang="fr" className="overflow-hidden">
+     <html lang="fr"  >
       <head>
         <meta charSet="utf-8" />
       </head>
-      <body className="h-svh w-svw overflow-hidden">{children}</body>
+      <body className='overflow-hidden'>
+        {children}
+        </body>
     </html>
   );
 }

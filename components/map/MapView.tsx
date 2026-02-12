@@ -105,7 +105,7 @@ export function MapView() {
   }, [activeRegion, allMarkers]);
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100dvw', height: '100dvh', overflow: 'hidden' }}>
        {!mapLoaded && (
     <div className="absolute inset-0 flex items-center bg-gray-100 justify-center z-2">
           <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />

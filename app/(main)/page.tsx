@@ -8,7 +8,7 @@ export default function Home() {
      
         <AichatFloatingBtn />
         <MobileSidebarButton />
-      {/* <SidebarTrigger className="fixed z-50 bottom-16 right-8 md:hidden" /> */}
+     
       <MapView />
     </>
   );

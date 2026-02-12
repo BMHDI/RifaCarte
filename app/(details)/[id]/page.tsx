@@ -6,7 +6,6 @@ import { Header } from '@/components/layout/Header';
 
 export default async function OrgPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ id: string }>;
   searchParams?: { region?: string };
@@ -38,9 +37,9 @@ export default async function OrgPage({
   };
 
   return (
-    <>
+    <div className='overflow-auto'>
       {' '}
       <Header /> <OrgDetailsClient org={normalizedOrg} />
-    </>
+    </div>
   );
 }
