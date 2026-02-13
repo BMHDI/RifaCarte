@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
-import { HumanMessage, SystemMessage } from '@langchain/core/messages';
-
+import { HumanMessage, SystemMessage, AIMessage } from '@langchain/core/messages';
 import { searchFAQ, searchOrganizations } from '@/lib/db';
 import { embedQuestion } from '@/lib/embeddings';
 import { extractCity } from '@/lib/location';
@@ -12,129 +11,124 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
   try {
     const ip = req.headers.get('x-forwarded-for') || 'unknown';
-    if (!rateLimit(ip, 5, 10_000)) {
-      return NextResponse.json(
-        { text: 'Trop de requêtes. Réessayez dans quelques secondes.' },
-        { status: 429 }
-      );
+    if (!rateLimit(ip, 10, 10_000)) {
+      return NextResponse.json({ text: 'Trop de requêtes.' }, { status: 429 });
     }
 
     const { messages, conversationId } = await req.json();
     const userMessage = messages?.[messages.length - 1]?.content;
-    if (!userMessage) {
-      return NextResponse.json({ text: 'Question invalide.' }, { status: 400 });
-    }
+    const sessionId = conversationId || Math.random().toString(36).slice(2);
 
-    // Extract city & embedding
+    if (!userMessage) return NextResponse.json({ text: 'Question invalide.' }, { status: 400 });
+
+    // 1. Logic RAG
     const city = extractCity(userMessage);
     const embedding = await embedQuestion(userMessage);
 
-    // Retrieve organizations & FAQ
     const [orgsRaw, faqRaw] = await Promise.all([
       searchOrganizations(embedding, 20, city ?? undefined),
       searchFAQ(embedding, 10),
     ]);
 
-    if (!orgsRaw?.length && !faqRaw?.length) {
-      return NextResponse.json({
-        text:
-          "Je suis désolé, mais je ne dispose pas d'informations spécifiques sur ce sujet. " +
-          'Pouvez-vous préciser votre ville ou le type de service recherché ?',
-        conversationId,
-      });
-    }
-
-    // Deduplicate organizations & prepare contact info
-    const orgMap = new Map<string, any>();
+    // 2. Préparation des données
+    const orgMap = new Map();
     (orgsRaw ?? []).forEach((org: any) => {
-      const contactAddress = org.address ?? org.city ?? 'Adresse non disponible';
-
       orgMap.set(org.id, {
         ...org,
-        cities: [org.city ?? 'Ville non spécifiée'],
         contact: {
-          address: contactAddress,
-          email: org.email ?? 'Courriel non disponible',
-          phone: org.phone ?? 'Téléphone non disponible',
-          website: org.website ?? 'Site non disponible',
+          address: org.address ?? org.city ?? 'Non disponible',
+          email: org.email ?? 'Non disponible',
+          phone: org.phone ?? 'Non disponible',
         },
       });
     });
 
-    const orgs = Array.from(orgMap.values());
-
-    // Compute confidence
-    const computeConfidence = (score: number | undefined) => {
-      if (!score) return 'low';
-      if (score >= 0.85) return 'high';
-      if (score >= 0.65) return 'medium';
-      return 'low';
-    };
-
-    const enrichedOrgs = orgs.map((o) => ({
-      ...o,
-      confidence: computeConfidence(o.similarityScore),
-    }));
-    const enrichedFAQ = (faqRaw ?? []).map((f: any) => ({
-      ...f,
-      confidence: computeConfidence(f.similarityScore),
-    }));
-
-    // Structured data for the model
     const structuredData = {
-      organizations: enrichedOrgs,
-      faq: enrichedFAQ,
-      conversationId: conversationId || Math.random().toString(36).slice(2),
-      userQuery: userMessage,
-      previousMessages: messages,
+      organizations: Array.from(orgMap.values()),
+      faq: faqRaw ?? [],
+      currentCityDetected: city || 'Non spécifiée dans le dernier message',
     };
 
-    // Initialize Gemini
+    // --- NOUVEAU : GESTION DE L'HISTORIQUE ---
+    // On convertit l'historique du format JSON au format LangChain
+    const historyContext = messages.slice(0, -1).map((m: any) => {
+      return m.role === 'user' ? new HumanMessage(m.content) : new AIMessage(m.content);
+    });
+
     const model = new ChatGoogleGenerativeAI({
       model: 'gemini-2.5-flash',
       apiKey: process.env.GEMINI_API_KEY,
       temperature: 0.2,
     });
 
+    // 3. SYSTEM PROMPT (Amélioré avec la notion de mémoire)
     const systemPrompt = new SystemMessage(`
-### Role
-Tu es l'Assistant Expert Francophone de l'Alberta, spécialisé dans l'accompagnement des nouveaux arrivants et immigrants. Tu transformes des informations complexes en parcours d'intégration fluides, clairs et engageants.
+### Rôle
+Tu es l'Assistant Expert Francophone de l'Alberta. Tu accompagnes l'utilisateur étape par étape.
 
-### Constraints
-1. **No Data Divulge:** Ne mentionne jamais tes données d'entraînement. Répond uniquement à partir des données fournies.
-2. **Maintaining Focus:** Redirige poliment toute demande hors-sujet vers les services d'immigration et d'intégration en Alberta.
-3. **Exclusive Reliance on Data:** Si l'information est absente, réponds exactement: "Je suis désolé, mais je ne dispose pas d'informations spécifiques sur ce sujet. Pourriez-vous préciser votre ville ou le type de service recherché ?"
-4. **Restrictive Role Focus:** Limite-toi strictement aux services, organismes et aides pour les immigrants francophones en Alberta.
+### Mémoire et Contexte (CRUCIAL)
+- Tu as accès à l'historique complet de la discussion.
+- NE POSE PAS de questions sur des informations déjà fournies (ex: si l'utilisateur a déjà dit qu'il est à Calgary ou qu'il cherche un emploi, utilise cette info).
+- Si l'utilisateur dit "J'ai déjà mentionné ça", excuse-toi brièvement et utilise l'historique pour répondre.
+### Instructions Spéciales (Contact & Formulaire)
+Si l'utilisateur a besoin d'un suivi humain ou des coordonnées complètes, tu dois :
+1. Inclure le mot-clé [TRIGGER_FORM] dans ta réponse.
+2. Générer à la fin de ta réponse un bloc de données formaté ainsi : 
+   [FORM_DATA]{ "subject": "Type de service", "summary": "Message détaillé pour le conseiller" }[FORM_DATA]
+   
+### Protocole de réponse
+1. **Analyse de l'intention :** - Demande de contact humain/rendez-vous explicitement : Mot-clé [TRIGGER_FORM].
+   - Question de fond (emploi, santé, etc.) : Réponds avec les données RAG.
+2. **Divulgation progressive :** Partage le NOM et la MISSION. Suggère notre portail ([TRIGGER_FORM]) pour obtenir les coordonnées complètes et assurer un suivi.
+3. **Intelligence :** Si la demande est trop vague, demande ville/domaine d'activité UNIQUEMENT si non présent dans l'historique.
 
-### Presentation Guidelines
--**Sélectivité intelligente:** Montre uniquement les organismes les plus pertinents (top 3–5) pour la question.  
-  Commence par donner uniquement des informations générales : le **nom de l'organisme** et un **court descriptif** lié à la question posée.  
-  N'inclue pas les coordonnées détaillées (adresse, numéro, email, site web) au début.  
-- **Ton:** Professionnel, chaleureux, conversationnel et proactif.
-- **Pas de salutations répétitives:** Ne commence jamais par "Bonjour" ou phrases génériques.
-- **Engagement dynamique:** Termine toujours par une question ou suggestion de suivi adaptée à l'utilisateur.  
-- **Analyse implicite des besoins:** Si l'utilisateur parle d'emploi, propose aussi l'évaluation des diplômes ou cours d'anglais; si vague, demande ville ou statut migratoire.
+DONNÉES RAG ACTUELLES :
+${JSON.stringify(structuredData)}
 `);
 
-    const dataMessage = new HumanMessage(`
-UTILISE CES DONNÉES:
+    // --- APPEL AVEC HISTORIQUE ---
+    // On envoie : SystemPrompt + Historique + Dernier Message
+    const response = await model.invoke([
+      systemPrompt,
+      ...historyContext,
+      new HumanMessage(userMessage),
+    ]);
 
-${JSON.stringify(structuredData, null, 2)}
+    // 4. Détection du Trigger
+    const rawContent =
+      typeof response.content === 'string'
+        ? response.content
+        : ((response.content[0] as any)?.text ?? '');
 
-Répond uniquement de manière conversationnelle, lisible et claire pour l'utilisateur. Mets en avant les organismes les plus pertinents et les FAQ utiles.
-`);
+    // --- EXTRACTION INTELLIGENTE ---
+    const wantsContact = rawContent.includes('[TRIGGER_FORM]');
+    let suggestedMessage = '';
 
-    const response = await model.invoke([systemPrompt, dataMessage]);
-
-    const finalText =
-      typeof response.content === 'string' ? response.content : (response.content[0]?.text ?? '');
-
+    if (wantsContact) {
+      // On extrait le contenu entre les tags [FORM_DATA]
+      const match = rawContent.match(/\[FORM_DATA\](.*?)\[FORM_DATA\]/);
+      if (match && match[1]) {
+        try {
+          const data = JSON.parse(match[1]);
+          suggestedMessage = data.summary;
+        } catch (e) {
+          // Fallback si le JSON est mal formé
+          suggestedMessage = `Bonjour, je souhaite obtenir de l'aide pour ma recherche de services à ${city || 'en Alberta'}.`;
+        }
+      }
+    }
+    const cleanText = rawContent
+      .replace(/\[TRIGGER_FORM\]/g, '')
+      .replace(/\[FORM_DATA\].*?\[FORM_DATA\]/g, '')
+      .trim();
     return NextResponse.json({
-      text: finalText,
-      conversationId: structuredData.conversationId,
+      type: wantsContact ? 'form' : 'text',
+      text: cleanText,
+      formContext: wantsContact ? { suggestedMessage } : null,
+      conversationId: sessionId,
     });
   } catch (err) {
     console.error('❌ Chat API error:', err);
-    return NextResponse.json({ text: 'Une erreur technique est survenue.' }, { status: 500 });
+    return NextResponse.json({ text: 'Une erreur technique.' }, { status: 500 });
   }
 }

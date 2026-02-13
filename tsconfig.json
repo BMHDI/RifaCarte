@@ -32,6 +32,6 @@
     "helper scripts/mergedCategories.js",
     "helper scripts/ChatWithGemini.js",
     "app/googleAnalytics.tsx"
-  ],
+, "lib/testMailer.js"  ],
   "exclude": ["node_modules"]
 }
