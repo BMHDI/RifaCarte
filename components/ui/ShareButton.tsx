@@ -24,7 +24,7 @@ export function ShareButton({ id, name }: { id: string; name: string }) {
 
   return (
     <>
-      <Button size="sm" variant="outline" onClick={() => setIsOpen(true)}>
+      <Button size="sm" variant="outline" className="cursor-pointer" onClick={() => setIsOpen(true)}>
         <ExternalLink className="h-4 w-4 mr-1" /> Partager
       </Button>
 

@@ -68,7 +68,7 @@ export function OrgSearch() {
             query={query}
             setQuery={setQuery}
             categories={groupNames}
-            cities={filteredCitiesForRegion} // ✅ only cities in region
+            cities={filteredCitiesForRegion} 
             selectedCategories={selectedCategories}
             selectedCities={selectedCities}
             toggleCategory={toggleCategory}
@@ -78,13 +78,13 @@ export function OrgSearch() {
       )}
       {/* Filters summary */}
       {
-        <div className="flex flex-col sticky top-0 z-10 bg-white">
+        <div className="flex flex-col top-0 z-10 ">
           {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
             <>
-              <div className="flex justify-center p-2">
+              <div className="flex justify-center py-2 shadow-sm">
                 <Button
                   onClick={resetAllFilters}
-                  className="text-sm font-medium  flex items-center gap-0 h-6"
+                  className="text-sm font-medium cursor-pointer  flex items-center gap-0 h-6 shadow-md hover:scale-101"
                 >
                   <RotateCcw /> <p className="px-1">Réinitialiser</p>
                 </Button>
@@ -96,7 +96,7 @@ export function OrgSearch() {
                   <span className="text-xs font-medium">Catégories :</span>
                   <div className="flex flex-wrap gap-1 p-2">
                     {selectedCategories.map((c) => (
-                      <Badge key={c} onClick={() => toggleCategory(c)}>
+                      <Badge className='cursor-pointer shadow-md' key={c} onClick={() => toggleCategory(c)}>
                         {c} ✕
                       </Badge>
                     ))}
@@ -109,7 +109,7 @@ export function OrgSearch() {
                   <span className="text-xs font-medium">Villes :</span>
                   <div className="flex flex-wrap gap-1 p-2">
                     {selectedCities.map((c) => (
-                      <Badge key={c} onClick={() => toggleCity(c)}>
+                      <Badge  className='cursor-pointer shadow-md' key={c} onClick={() => toggleCity(c)}>
                         {c} ✕
                       </Badge>
                     ))}

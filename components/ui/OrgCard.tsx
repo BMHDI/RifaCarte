@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter } from '@/components/ui/card';
-import {  Heart, MapPin, MapPinned, Phone, PhoneOff } from 'lucide-react';
+import { Heart, MapPin, MapPinned, Phone, PhoneOff } from 'lucide-react';
 import { OrgCardProps } from '@/types/types';
 import { toTitleCase } from '@/lib/utils';
 import { ShareButton } from './ShareButton';
@@ -12,7 +12,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Spinner } from './spinner';
 import Link from 'next/link';
-
 
 export function OrgCard({
   id, // 👈 add this
@@ -28,9 +27,7 @@ export function OrgCard({
   const defaultImage =
     'https://edmonton.acfa.ab.ca/wp-content/uploads/2019/05/Logo-2-updatex-345x242.png';
   const imgSrc = image_url || defaultImage;
- 
-    
- 
+
   return (
     <Card className="md:w-[297px] max-h-[400px] w-[88dvw] mx-auto md:mx-3  pb-4 bg-gray-100 dark:bg-gray-800 shadow ">
       {/* Optional overlay if needed */}
@@ -38,7 +35,7 @@ export function OrgCard({
       <div className="relative  h-26 w-full overflow-hidden rounded-t-md">
         <Heart
           onClick={onSave}
-          className="  absolute m-2 top-0 right-0 rounded-full z-20"
+          className="  absolute m-2 top-0 right-0 rounded-full cursor-pointer hover:scale-110 z-20"
           stroke="red"
           fill={isSaved ? 'red' : 'none'}
         />
@@ -59,35 +56,31 @@ export function OrgCard({
         <h4 className="font-semibold  h-[2.5rem] ">{name}</h4>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        {phone ? <Phone className="h-4 w-4" /> : <PhoneOff className="h-4 w-4" />}
-          <span  className='text-xs '> {phone ? phone : "Non disponible"}</span>
+          {phone ? <Phone className="h-4 w-4" /> : <PhoneOff className="h-4 w-4" />}
+          <span className="text-xs "> {phone ? phone : 'Non disponible'}</span>
         </div>
 
         <div className="flex items-start gap-2 text-sm text-muted-foreground">
           <MapPin className="h-4 w-4 mt-0.5" />
-          <span className='text-xs h-[2.5rem]'>{address ? address : "Non disponible"}</span>
+          <span className="text-xs h-[2.5rem]">{address ? address : 'Non disponible'}</span>
         </div>
       </CardContent>
 
       <CardFooter className="flex gap-1 flex-wrap m-2">
-        <Button
-      size="sm"
-      variant="default"
-    >
-     <Link href={`/${id}`}>
-  Voir +
-</Link>
-    </Button>
+        <Button size="sm" variant="default">
+          <Link href={`/${id}`}>Voir +</Link>
+        </Button>
         {/* Share button */}
         <ShareButton id={id} name={name} />
-        <Button size="sm" variant="outline" onClick={onMap}>
-        <MapPinned />
+        {/* Map button */}
+        <Button size="sm" variant="outline" className="cursor-pointer" onClick={onMap}>
+          <MapPinned />
         </Button>
       </CardFooter>
       {category && category.length > 0 && (
         <CardAction className="p-1 flex  flex-wrap gap-1">
           {(Array.isArray(category) ? category : [category]).map((cat) => (
-            <Badge key={cat} variant="outline" className='border border-gray-400 '>
+            <Badge key={cat} variant="outline" className="border border-gray-400 ">
               {toTitleCase(cat)}
             </Badge>
           ))}

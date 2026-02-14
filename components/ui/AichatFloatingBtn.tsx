@@ -5,6 +5,7 @@ import { Button } from './button';
 import { useSidebar } from './sidebar';
 import { BotMessageSquare } from 'lucide-react';
 import { useOrg } from '@/app/context/OrgContext';
+import { BotMessageSquareIcon } from './bot-message-square';
 
 export function AichatFloatingBtn() {
   const { toggleSidebar, state } = useSidebar();
@@ -76,18 +77,23 @@ animate-bounce        relative
       )}
 
       {/* Button */}
-      <Button
-        size="icon-lg"
-        onClick={handleClick}
-        className="
-          h-15 w-15 rounded-full
-          shadow-lg
-          flex items-center justify-center
-        "
-        aria-label="Ouvrir le Chat"
-      >
-       <BotMessageSquare className="size-6" />
-      </Button>
+     <button
+  type="button"
+  onClick={handleClick}
+  aria-label="Ouvrir le Chat"
+  className="
+    h-15 w-15 rounded-full
+    shadow-lg
+    flex items-center justify-center
+    bg-primary
+    border border-border
+    hover:scale-105
+    transition
+    text-white
+  "
+>
+  <BotMessageSquareIcon className="size-9 force-animate" />
+</button>
     </div>
   );
 }

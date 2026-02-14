@@ -56,6 +56,43 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
   }
+/* 1. Kill the banner frame and any associated menu frames */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+.goog-te-menu-frame,
+iframe.goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* 2. Prevent Google from pushing your layout down */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+html {
+    top: 0 !important;
+    position: relative !important; /* Prevents jumping */
+}
+
+/* 3. Hide the 'Show Original' popup when hovering over translated text */
+/* Aggressively hide all Google UI elements */
+/* 2. Push the Banner to the Bottom */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame {
+    top: auto !important; /* Remove from top */
+    bottom: 0 !important; /* Pin to bottom */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+    display: block !important; /* Ensures it stays visible if you want it */
+}
+
+/* 4. Remove the blue highlight on translated text */
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
 
   .dark {
     --sidebar: oklch(0.205 0 0);

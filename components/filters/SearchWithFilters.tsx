@@ -76,7 +76,7 @@ export default function SearchWithFilters({
     <div className="flex w-full px-4 ">
       <Input
         onKeyDown={handleKeyDown} // Listen for the Enter key
-        className="rounded-r-none flex-1"
+        className="rounded-r-none flex-1 cursor-text"
         value={query}
         placeholder="Chercher un organisme..."
         onChange={(e) => setQuery(e.target.value)}
@@ -84,7 +84,7 @@ export default function SearchWithFilters({
 
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button className="rounded-l-none flex gap-1">
+          <Button className="rounded-l-none flex gap-1 hover:scale-101 cursor-pointer">
             <SlidersHorizontal />
             Filtres
             <ChevronDown className="h-4 w-4" />

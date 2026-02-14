@@ -52,7 +52,7 @@ export function AppSidebar() {
                       }}
                     >
                       <button
-                        className={`flex items-center gap-2 text-left font-medium md:mt-2 transition-all duration-300 relative
+                        className={`flex cursor-pointer items-center gap-2 text-left font-medium md:mt-2 transition-all ease-in-out duration-300 relative
                           ${
                             activeTab === item.key
                               ? 'font-extrabold text-primary underline decoration-6 underline-offset-3 ease-in-out'

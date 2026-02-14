@@ -6,9 +6,9 @@ import {
   NavigationMenuViewport,
 } from '@/components/ui/navigation-menu';
 import logo from '@/public/assets/logo.png';
-import { Facebook, Instagram, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import GoogleTranslate from '../ui/GoogleTranslate';
 
 export function Header() {
   return (
@@ -21,17 +21,6 @@ export function Header() {
   to-rose-300
   "
       >
-        {/* <div className="flex items-center  justify-between h-4  px-4 align md:max-w-[65dvw] mx-auto">
-          <div className="flex items-center gap-2">
-            <Mail  size={15}  color="white" />
-            <p className="text-white font-bold text-xs">rifa@rifalberta.com</p>
-          </div>
-          <div className="flex  items-center gap-2 ">
-            <Facebook size={15} color="white" />
-            <Instagram size={15} color="white" />
-          </div>
-        </div>
-        <div /> */}
       </div>
       <header className="sticky top-0 z-50 bg-white   shadow-sm ">
         <div className="md:max-w-[70dvw] font-extrabold text text-xl  mx-auto px-4  flex items-center justify-between">
@@ -49,12 +38,13 @@ export function Header() {
 
               {/* About */}
               <NavigationMenuItem>
-                <NavigationMenuLink href="/Àpropos">À propos</NavigationMenuLink>
+                <NavigationMenuLink className='whitespace-nowrap' href="/Àpropos">À propos</NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
 
             {/* Optional viewport for animations */}
             <NavigationMenuViewport />
+            <GoogleTranslate/>
           </NavigationMenu>
         </div>
       </header>
