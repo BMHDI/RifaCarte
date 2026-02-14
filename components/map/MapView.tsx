@@ -16,6 +16,8 @@ import { ViewState } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { ShareButton } from '../ui/ShareButton';
 import { Spinner } from '../ui/spinner';
+import dynamic from 'next/dynamic';
+
 
 export function MapView() {
   const router = useRouter();

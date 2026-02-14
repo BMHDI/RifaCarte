@@ -95,11 +95,13 @@ export function ChatBox() {
     const currentInput = input;
 
 // 1. LOG TO ANALYTICS (Move this to a helper if needed)
-  trackEvent('chat_message_sent', { 
-    category: 'interaction', 
-    label: currentInput.substring(0, 100), // Increased length for better visibility
-    session_id: sessionId // Pass the session ID to link stats
-  });
+ trackEvent('chat_message_sent', { 
+  category: 'interaction', 
+  label: currentInput.substring(0, 100),
+  session_id: sessionId,
+  value: 1, // ✅ ADD THIS
+  message_length: currentInput.length // (optional, very useful)
+});
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -161,13 +163,11 @@ export function ChatBox() {
     if (res.ok) {
       setFormSent(true);
       // Ensure it's tracked after the success
-      trackEvent('form_submitted', { 
-        category: 'conversion',
-        message: (formData.message),
-        status: (formData.status),
-        address: (formData.address)
-
-      });
+  trackEvent('form_submitted', { 
+  category: 'conversion',
+  status: formData.status,
+  value: 10 // ✅ example: form = high value
+});
     } else {
       trackEvent('form_error', { category: 'error' }); // Track failures too!
       alert("Une erreur est survenue lors de l'envoi.");

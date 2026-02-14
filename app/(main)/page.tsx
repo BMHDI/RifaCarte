@@ -1,7 +1,7 @@
 import { MapView } from '@/components/map/MapView';
 import { MobileSidebarButton } from '@/components/ui/MobileSidebarButton';
 import { AichatFloatingBtn } from '@/components/ui/AichatFloatingBtn';
-import GoogleTranslate from '@/components/ui/GoogleTranslate';
+import LazyMap from '@/components/map/lazyMap';
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         <AichatFloatingBtn />
         <MobileSidebarButton />
      
-      <MapView />
+      <LazyMap />
     </>
   );
 }
