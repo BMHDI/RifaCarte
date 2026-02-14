@@ -3,13 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Loader2, RotateCcw, Send, Sparkles, UserCheck, CheckCircle2 } from 'lucide-react';
 import { trackEvent } from '@/app/googleAnalytics';
 import { supabase } from '@/lib/db';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { MessageSquareMoreIcon } from '../ui/message-square-more';
 import { BotMessageSquareIcon } from '../ui/bot-message-square';
 
 type Message = {
@@ -96,8 +94,12 @@ export function ChatBox() {
     const userMessage: Message = { role: 'user', content: input };
     const currentInput = input;
 
-    trackEvent('chat_message_sent', { category: 'interaction', label: currentInput.slice(0, 50) });
-
+// 1. LOG TO ANALYTICS (Move this to a helper if needed)
+  trackEvent('chat_message_sent', { 
+    category: 'interaction', 
+    label: currentInput.substring(0, 100), // Increased length for better visibility
+    session_id: sessionId // Pass the session ID to link stats
+  });
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -146,28 +148,36 @@ export function ChatBox() {
 
   // 2. Mettez à jour handleFormSubmit
   const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  e.preventDefault();
+  setIsLoading(true);
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setFormSent(true);
+      // Ensure it's tracked after the success
+      trackEvent('form_submitted', { 
+        category: 'conversion',
+        message: (formData.message),
+        status: (formData.status),
+        address: (formData.address)
+
       });
-
-      if (res.ok) {
-        setFormSent(true);
-        trackEvent('form_submitted', { category: 'conversion' });
-      } else {
-        alert("Une erreur est survenue lors de l'envoi.");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+    } else {
+      trackEvent('form_error', { category: 'error' }); // Track failures too!
+      alert("Une erreur est survenue lors de l'envoi.");
     }
-  };
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="flex flex-col h-[80vh] bg-white overflow-hidden">

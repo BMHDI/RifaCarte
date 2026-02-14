@@ -81,7 +81,7 @@ export function OrgSearch() {
         <div className="flex flex-col top-0 z-10 ">
           {selectedCategories.length > 0 || selectedCities.length > 0 || activeRegion ? (
             <>
-              <div className="flex justify-center py-2 shadow-sm">
+              <div className="flex justify-center py-2">
                 <Button
                   onClick={resetAllFilters}
                   className="text-sm font-medium cursor-pointer  flex items-center gap-0 h-6 shadow-md hover:scale-101"
