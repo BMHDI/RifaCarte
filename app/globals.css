@@ -56,36 +56,32 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
   }
-/* 1. Kill the banner frame and any associated menu frames */
-.goog-te-banner-frame.skiptranslate,
+/* NUCLEAR HIDE: Targets the elements even if Google tries to force them visible */
+html[style], 
+html {
+    top: 0 !important;
+    margin-top: 0 !important;
+}
+
+body[style],
+body {
+    top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Specific selector for the production iframe */
+iframe.goog-te-banner-frame,
 .goog-te-banner-frame,
-.goog-te-menu-frame,
-iframe.goog-te-banner-frame {
+.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+iframe[id*='google_translate'] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-}
-
-/* 2. Prevent Google from pushing your layout down */
-body {
-    top: 0 !important;
-    position: static !important;
-}
-
-html {
-    top: 0 !important;
-    position: relative !important; /* Prevents jumping */
-}
-
-/* 3. Hide the 'Show Original' popup when hovering over translated text */
-/* Aggressively hide all Google UI elements */
-/* 2. Push the Banner to the Bottom */
-.goog-te-banner-frame.skiptranslate,
-.goog-te-banner-frame {
-    top: auto !important; /* Remove from top */
-    bottom: 0 !important; /* Pin to bottom */
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
-    display: block !important; /* Ensures it stays visible if you want it */
+    height: 0 !important;
+    width: 0 !important;
+    pointer-events: none !important;
 }
 
 /* 4. Remove the blue highlight on translated text */
