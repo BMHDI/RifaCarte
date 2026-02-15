@@ -26,8 +26,13 @@ export function Header() {
         <div className="md:max-w-[70dvw] font-extrabold text text-xl  mx-auto px-4  flex items-center justify-between">
           {/* Logo / Title */}
           <Link href="https://rifalberta.com/" target="_blank" rel="noopener noreferrer">
-            <Image src={logo} alt="Logo" className="h-20 w-auto cursor-pointer" />
-          </Link>
+<Image 
+  src={logo} 
+  alt="Logo" 
+  className="h-20 w-auto cursor-pointer" 
+  priority  // <-- this tells Next.js to load immediately
+  fetchPriority="high" // optional, browser hint
+/>          </Link>
           {/* Navigation Menu */}
           <NavigationMenu>
             <NavigationMenuList className="flex space-x-2">
