@@ -1,6 +1,6 @@
 'use client';
 
-import Map, { NavigationControl, Marker, Popup, Source, Layer } from 'react-map-gl/mapbox';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import organizations from '@/lib/org.json';
@@ -8,7 +8,7 @@ import { MapPin } from 'lucide-react';
 import francophoneRegions from '@/lib/francophone-regions.json';
 import { regionFill, regionBorder } from '@/lib/mapstyles';
 import { useOrg } from '@/app/context/OrgContext';
-import { MapRef } from 'react-map-gl/mapbox';
+import { Layer, MapRef, Marker, NavigationControl, Popup, Source } from 'react-map-gl/mapbox';
 import { Button } from '../ui/button';
 import { useSidebar } from '../ui/sidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -16,8 +16,13 @@ import { ViewState } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { ShareButton } from '../ui/ShareButton';
 import { Spinner } from '../ui/spinner';
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
+// DYNAMIC IMPORT: Map loads only client-side
+const Map = dynamic(
+  () => import("react-map-gl/mapbox").then((mod) => mod.Map),
+  { ssr: false, loading: () => <Spinner className="h-12 w-12 m-auto" /> }
+);
 
 export function MapView() {
   const router = useRouter();
@@ -74,37 +79,39 @@ export function MapView() {
 
   // Determine which markers to show
   // ---- Filter markers based on active region ----
-  const markersToShow = useMemo(() => {
-    if (!activeRegion) return allMarkers;
-    return allMarkers.filter(
-      (m) => m.org.region?.trim().toLowerCase() === activeRegion.trim().toLowerCase()
-    );
-  }, [activeRegion, allMarkers]);
+ // Memoized pins per region for fitBounds & rendering
+const regionPins = useMemo(() => {
+  const map: Record<string, typeof allMarkers> = {};
+  allMarkers.forEach((m) => {
+    const key = m.org.region?.toLowerCase() ?? "unknown";
+    if (!map[key]) map[key] = [];
+    map[key].push(m);
+  });
+  return map;
+}, [allMarkers]);
+
+const markersToShow = useMemo(() => {
+  if (!activeRegion) return [];
+  return regionPins[activeRegion.toLowerCase()] || [];
+}, [activeRegion, regionPins]);
 
   // ---- Fly to region when activeRegion changes ----
-  useEffect(() => {
-    if (!activeRegion || !mapRef.current) return;
+ useEffect(() => {
+  if (!activeRegion || !mapRef.current) return;
+  const pins = regionPins[activeRegion.toLowerCase()];
+  if (!pins || pins.length === 0) return;
 
-    // Get all pins in this region
-    const pins = allMarkers.filter(
-      (m) => m.org.region?.trim().toLowerCase() === activeRegion?.trim().toLowerCase()
-    );
+  const lats = pins.map((p) => p.location.lat);
+  const lngs = pins.map((p) => p.location.lng);
 
-    const lats = pins.map((p) => p.location.lat);
-    const lngs = pins.map((p) => p.location.lng);
-    const north = Math.max(...lats);
-    const south = Math.min(...lats);
-    const east = Math.max(...lngs);
-    const west = Math.min(...lngs);
-
-    mapRef.current.fitBounds(
-      [
-        [west, south],
-        [east, north],
-      ],
-      { padding: 80 }
-    );
-  }, [activeRegion, allMarkers]);
+  mapRef.current.fitBounds(
+    [
+      [Math.min(...lngs), Math.min(...lats)],
+      [Math.max(...lngs), Math.max(...lats)],
+    ],
+    { padding: 80, duration: 300 }
+  );
+}, [activeRegion, regionPins]);
 
   return (
     <div style={{ width: '100dvw', height: '100dvh', overflow: 'hidden' }}>
@@ -175,89 +182,73 @@ export function MapView() {
         })}
 
         {/* Render org markers */}
-        {activeRegion &&
-          markersToShow.map(({ org, location }, i) => (
-            <Marker
-              key={`org-${org.id}-${i}`}
-              longitude={location.lng!}
-              latitude={location.lat!}
-              anchor="bottom"
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                setSelectedOrg({ org, location });
-              }}
-            >
-              <MapPin
-                size={selectedOrg?.location === location ? 30 : 24}
-                className={
-                  selectedOrg?.location === location
-                    ? 'text-blue-600'
-                    : 'text-red-500 hover:scale-110 transition-transform cursor-pointer'
-                }
-                fill="currentColor"
-              />
-            </Marker>
-          ))}
+        {mapLoaded && activeRegion &&
+  markersToShow.map(({ org, location }, i) => (
+    <Marker
+      key={`org-${org.id}-${i}`}
+      longitude={location.lng!}
+      latitude={location.lat!}
+      anchor="bottom"
+      onClick={(e) => {
+        e.originalEvent.stopPropagation();
+        setSelectedOrg({ org, location });
+      }}
+    >
+      <MapPin
+        size={selectedOrg?.location === location ? 30 : 24}
+        className={
+          selectedOrg?.location === location
+            ? 'text-blue-600'
+            : 'text-red-500 hover:scale-110 transition-transform cursor-pointer'
+        }
+        fill="currentColor"
+      />
+    </Marker>
+  ))}
 
-        {/* Popup for selected org */}
-        {selectedOrg?.location && (
-          <Popup
-            longitude={selectedOrg.location.lng}
-            latitude={selectedOrg.location.lat}
-            anchor="top"
-            offset={10}
-            closeOnClick={false}
-            onClose={() => {
-              setSelectedOrg(null);
-
-              // Zoom out when closing popup
-              setViewState((prev: ViewState) => ({
-                ...prev,
-                zoom: activeRegion ? 7 : 6, // adjust levels as you like
-                transitionDuration: 900,
-                transitionInterpolator: undefined,
-              }));
-            }}
-          >
-            <div className=" rounded-xl px-4 py-3 max-w-xs ">
-              {/* Name */}
-              <h3 className="text-sm font-semibold text-gray-900 leading-tight">
-                {selectedOrg.org?.name ?? 'Unknown'}
-              </h3>
-
-              {/* Category */}
-              {selectedOrg.org?.category && (
-                <p className="text-xs text-gray-500 mt-0.5">{selectedOrg.org.category}</p>
-              )}
-
-              {/* Address */}
-              {selectedOrg.location.address && (
-                <p className="text-xs text-gray-600 mt-1 line-clamp-2">
-                  📍 {selectedOrg.location.address}
-                </p>
-              )}
-
-              {/* Phone */}
-              {selectedOrg.org?.contact?.phone && (
-                <p className="text-xs text-gray-600 mt-1">📞 {selectedOrg.org.contact.phone}</p>
-              )}
-
-              {/* Actions */}
-              <div className="flex items-center justify-end gap-2 mt-2">
-                {/* Details */}
-                <Button
-                  onClick={() => router.push(`/${selectedOrg.org?.id}?region=${activeRegion}`)}
-                  className="text-xs hover:underline"
-                >
-                  Voir +
-                </Button>
-
-                {/* Share */}
-                <ShareButton id={selectedOrg.org?.id ?? ''} name={selectedOrg.org?.name ?? ''} />
-              </div>
-            </div>
-          </Popup>
-        )}
+        {/* Popup for selected org ONLY when mapLoaded */}
+{mapLoaded && selectedOrg?.location && (
+  <Popup
+    longitude={selectedOrg.location.lng}
+    latitude={selectedOrg.location.lat}
+    anchor="top"
+    offset={10}
+    closeOnClick={false}
+    onClose={() => {
+      setSelectedOrg(null);
+      setViewState((prev: ViewState) => ({
+        ...prev,
+        zoom: activeRegion ? 7 : 6,
+        transitionDuration: 300,
+        transitionInterpolator: undefined,
+      }));
+    }}
+  >
+    <div className="rounded-xl px-4 py-3 max-w-xs">
+      <h3 className="text-sm font-semibold text-gray-900 leading-tight">
+        {selectedOrg.org?.name ?? 'Unknown'}
+      </h3>
+      {selectedOrg.org?.category && (
+        <p className="text-xs text-gray-500 mt-0.5">{selectedOrg.org.category}</p>
+      )}
+      {selectedOrg.location.address && (
+        <p className="text-xs text-gray-600 mt-1 line-clamp-2">📍 {selectedOrg.location.address}</p>
+      )}
+      {selectedOrg.org?.contact?.phone && (
+        <p className="text-xs text-gray-600 mt-1">📞 {selectedOrg.org.contact.phone}</p>
+      )}
+      <div className="flex items-center justify-end gap-2 mt-2">
+        <Button
+          onClick={() => router.push(`/${selectedOrg.org?.id}?region=${activeRegion}`)}
+          className="text-xs hover:underline"
+        >
+          Voir +
+        </Button>
+        <ShareButton id={selectedOrg.org?.id ?? ''} name={selectedOrg.org?.name ?? ''} />
+      </div>
+    </div>
+  </Popup>
+)}
       </Map>
     </div>
   );
