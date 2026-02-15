@@ -12,25 +12,21 @@ declare global {
 
 const GoogleTranslate = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState("fr"); // default to French
+  const [currentLang, setCurrentLang] = useState("fr"); // default French
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  // Always reset to French on refresh
+  // Always reset cookie to French on refresh
   useEffect(() => {
-    document.cookie = "googtrans=/fr/fr; path=/"; // reset cookie
-    setCurrentLang("fr");
+    document.cookie = "googtrans=/fr/fr; path=/";
   }, []);
 
-  // Watchdog to hide Google banner
+  // Watchdog: hide Google banner & handle outside click
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      if (document.documentElement.style.top !== "0px") {
-        document.documentElement.style.setProperty("top", "0px", "important");
-      }
-      if (document.body.style.top !== "0px") {
-        document.body.style.setProperty("top", "0px", "important");
-      }
+      document.documentElement.style.setProperty("top", "0px", "important");
+      document.body.style.setProperty("top", "0px", "important");
+
       const banner = document.querySelector(".goog-te-banner-frame") as HTMLElement;
       if (banner) {
         banner.style.display = "none";
@@ -72,7 +68,6 @@ const GoogleTranslate = () => {
       document.body.appendChild(script);
 
       window.googleTranslateElementInit = () => {
-        // Always start in French
         document.cookie = "googtrans=/fr/fr; path=/";
         new window.google.translate.TranslateElement(
           { pageLanguage: "fr", includedLanguages: "en,fr,ar", autoDisplay: false },
@@ -90,11 +85,7 @@ const GoogleTranslate = () => {
       <div id="google_translate_element" style={{ display: "none" }} />
 
       {/* Main Button */}
-      <Button
-        onClick={handleButtonClick}
-        className="font-extrabold capitalize cursor-pointer"
-        variant={"ghost"}
-      >
+      <Button onClick={handleButtonClick} className="font-extrabold capitalize cursor-pointer" variant="ghost">
         {currentLang}
       </Button>
 
