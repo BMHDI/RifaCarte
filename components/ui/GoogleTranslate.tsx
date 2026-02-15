@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./button";
 
 declare global {
@@ -16,12 +16,7 @@ const GoogleTranslate = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  // Always reset cookie to French on refresh
-  useEffect(() => {
-    document.cookie = "googtrans=/fr/fr; path=/";
-  }, []);
-
-  // Watchdog: hide Google banner & handle outside click
+  // Hide Google banner & handle outside clicks
   useEffect(() => {
     const observer = new MutationObserver(() => {
       document.documentElement.style.setProperty("top", "0px", "important");
@@ -48,16 +43,7 @@ const GoogleTranslate = () => {
     };
   }, []);
 
-  const handleLanguageChange = (lang: string) => {
-    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event("change"));
-      setCurrentLang(lang);
-      setIsOpen(false);
-    }
-  };
-
+  // Load Google Translate script on button click
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
 
@@ -68,14 +54,28 @@ const GoogleTranslate = () => {
       document.body.appendChild(script);
 
       window.googleTranslateElementInit = () => {
-        document.cookie = "googtrans=/fr/fr; path=/";
         new window.google.translate.TranslateElement(
-          { pageLanguage: "fr", includedLanguages: "en,fr,ar", autoDisplay: false },
+          {
+            pageLanguage: "fr", // always start in French
+            includedLanguages: "fr,en,ar",
+            autoDisplay: false,
+          },
           "google_translate_element"
         );
       };
 
       setScriptLoaded(true);
+    }
+  };
+
+  // Handle language change dynamically
+  const handleLanguageChange = (lang: string) => {
+    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      setCurrentLang(lang);
+      setIsOpen(false);
     }
   };
 
