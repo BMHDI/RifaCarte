@@ -115,11 +115,11 @@ const markersToShow = useMemo(() => {
 
   return (
     <div style={{ width: '100dvw', height: '100dvh', overflow: 'hidden' }}>
-       {!mapLoaded && (
+       {/* {!mapLoaded && (
     <div className="absolute inset-0 flex items-center bg-gray-100 justify-center z-2">
           <Spinner className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-18 w-18" />
     </div>
-  )}
+  )} */}
       <Map
         minZoom={4}
         maxZoom={15}
