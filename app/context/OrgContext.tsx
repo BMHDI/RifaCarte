@@ -2,13 +2,19 @@
 
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { SelectedOrg, OrgContextType, Org } from '@/types/types';
+import { fetchFilteredOrgs } from '@/lib/db'; // your Supabase functions
 
 const OrgContext = createContext<OrgContextType | null>(null);
 
 export function OrgProvider({ children }: { children: React.ReactNode }) {
-  // ✅ neutral defaults for SSR
+  // Map instance
   const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null);
 
+  // --- NEW: all organizations lazy-loaded ---
+  const [allOrgs, setAllOrgs] = useState<Org[] | null>(null); // null = not loaded yet
+  const [loadingOrgs, setLoadingOrgs] = useState(false);       // loading state
+
+  // --- Filters & user selections ---
   const [savedOrgs, setSavedOrgs] = useState<Org[]>([]);
   const [query, setQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -17,44 +23,19 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'search' | 'ai' | 'Favorites'>('search');
 
+  // --- Map view defaults ---
   const getDefaultView = () => {
-    if (typeof window === 'undefined') {
-      return {
-        longitude: -114.0719,
-        latitude: 53.0447,
-        zoom: 3,
-      };
-    }
-
+    if (typeof window === 'undefined') return { longitude: -114.0719, latitude: 53.0447, zoom: 3 };
     const w = window.innerWidth;
-
-    if (w >= 1024) {
-      // laptop / desktop
-      return {
-        longitude: -114.0719,
-        latitude: 54.0447,
-        zoom: 5,
-      };
-    }
-
-    // mobile / tablet
-    return {
-      longitude: -114.0719,
-      latitude: 53.0447,
-      zoom: 4,
-    };
+    if (w >= 1024) return { longitude: -114.0719, latitude: 54.0447, zoom: 5 }; // desktop
+    return { longitude: -114.0719, latitude: 53.0447, zoom: 4 }; // mobile/tablet
   };
 
-  const DEFAULT_VIEW = {
-    longitude: -114.0719, // Calgary-ish center of Alberta
-    latitude: 53.0447,
-    zoom: 4,
-  };
+  const DEFAULT_VIEW = { longitude: -114.0719, latitude: 53.0447, zoom: 4 };
   const [viewState, setViewState] = useState(() => getDefaultView());
-
   const resetMapView = () => setViewState(DEFAULT_VIEW);
 
-  // ✅ hydrate from localStorage AFTER mount (client only)
+  // --- Hydrate from localStorage AFTER mount ---
   useEffect(() => {
     try {
       const rawSaved = localStorage.getItem('savedOrgs');
@@ -68,51 +49,32 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
 
       const cities = localStorage.getItem('selectedCities');
       if (cities) setSelectedCities(JSON.parse(cities));
+
+      const region = localStorage.getItem('activeRegion');
+      if (region) setActiveRegion(region);
     } catch (e) {
       console.error('Failed to load from localStorage', e);
     }
   }, []);
 
-  // ✅ sync OUT to localStorage
-  useEffect(() => {
-    localStorage.setItem('savedOrgs', JSON.stringify(savedOrgs));
-  }, [savedOrgs]);
+  // --- Sync OUT to localStorage ---
+  useEffect(() => { localStorage.setItem('savedOrgs', JSON.stringify(savedOrgs)); }, [savedOrgs]);
+  useEffect(() => { localStorage.setItem('query', query); }, [query]);
+  useEffect(() => { localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories)); }, [selectedCategories]);
+  useEffect(() => { localStorage.setItem('selectedCities', JSON.stringify(selectedCities)); }, [selectedCities]);
+  useEffect(() => { if (activeRegion !== null) localStorage.setItem('activeRegion', activeRegion); }, [activeRegion]);
 
-  useEffect(() => {
-    localStorage.setItem('query', query);
-  }, [query]);
-
-  useEffect(() => {
-    localStorage.setItem('selectedCategories', JSON.stringify(selectedCategories));
-  }, [selectedCategories]);
-
-  useEffect(() => {
-    localStorage.setItem('selectedCities', JSON.stringify(selectedCities));
-  }, [selectedCities]);
-  //
-  // actions
+  // --- Actions ---
   const toggleSavedOrg = (org: Org) => {
-    setSavedOrgs((prev) =>
-      prev.some((o) => o.id === org.id) ? prev.filter((o) => o.id !== org.id) : [...prev, org]
+    setSavedOrgs(prev =>
+      prev.some(o => o.id === org.id)
+        ? prev.filter(o => o.id !== org.id)
+        : [...prev, org]
     );
   };
 
-  const savedOrgIds = useMemo(() => new Set(savedOrgs.map((o) => o.id)), [savedOrgs]);
-  //helper local activew region
+  const savedOrgIds = useMemo(() => new Set(savedOrgs.map(o => o.id)), [savedOrgs]);
   const isSaved = (orgId: string) => savedOrgIds.has(orgId);
-  useEffect(() => {
-    try {
-      const storedRegion = localStorage.getItem('activeRegion');
-      if (storedRegion) setActiveRegion(storedRegion);
-    } catch (e) {
-      console.error('Failed to load activeRegion from localStorage', e);
-    }
-  }, []);
-  useEffect(() => {
-    if (activeRegion !== null) {
-      localStorage.setItem('activeRegion', activeRegion);
-    }
-  }, [activeRegion]);
 
   const resetAllFilters = () => {
     setQuery('');
@@ -121,36 +83,57 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
     setSelectedOrg(null);
     setActiveRegion?.(null);
     resetMapView();
-    localStorage.removeItem('activeRegion'); // ✅ zoom + center reset
+    localStorage.removeItem('activeRegion');
   };
 
-  // const clearSavedOrgs = () => setSavedOrgs([]);
+  // --- Lazy load all organizations (Supabase) AFTER first paint ---
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      setLoadingOrgs(true);
+      try {
+        const data = await fetchFilteredOrgs({}); // fetch all orgs
+        setAllOrgs(data);
+      } catch (e) {
+        console.error('Failed to load organizations', e);
+      } finally {
+        setLoadingOrgs(false);
+      }
+    }, 50); // small delay to allow initial render
 
+    return () => clearTimeout(timer);
+  }, []);
+
+  // --- Context value ---
   return (
     <OrgContext.Provider
       value={{
-        selectedOrg,
-        setSelectedOrg,
+        mapInstance,
+        setMapInstance,
+        viewState,
+        setViewState,
+        resetMapView,
+
+        savedOrgs,
+        toggleSavedOrg,
+        isSaved,
+
         query,
         setQuery,
         selectedCategories,
         setSelectedCategories,
         selectedCities,
         setSelectedCities,
-        savedOrgs,
-        toggleSavedOrg,
-        isSaved,
+        selectedOrg,
+        setSelectedOrg,
         activeRegion,
         setActiveRegion,
-        resetAllFilters,
-        // clearSavedOrgs,
-        resetMapView,
-        viewState,
-        setViewState,
-        mapInstance,
-        setMapInstance,
         activeTab,
         setActiveTab,
+        resetAllFilters,
+
+        // NEW
+        allOrgs,
+        loadingOrgs,
       }}
     >
       {children}
@@ -158,17 +141,9 @@ export function OrgProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// --- Hook to consume the context ---
 export const useOrg = () => {
   const ctx = useContext(OrgContext);
   if (!ctx) throw new Error('useOrg must be used inside OrgProvider');
   return ctx;
 };
-/**
-
- * Hook to access the OrgContext.
-
- * It will throw an error if it's not used inside OrgProvider.
-
- * @returns {OrgContextType} The OrgContext value
-
- */
